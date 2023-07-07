@@ -7,12 +7,10 @@
     <groupId>org.project</groupId>
     <artifactId>masada</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
 
-    <properties>
-        <java.version>20</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <modules>
+        <module>parent</module>
+    </modules>
 
 </project>

@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /gate
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: artemis-core
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=masada
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
