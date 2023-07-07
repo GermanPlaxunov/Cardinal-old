@@ -1,0 +1,5 @@
+### Add new job
+POST http://localhost:8080/gate/saveNewJob
+Content-Type: application/x-www-form-urlencoded
+
+name=QUARTZ_ANALYZE_BTC&interval=5000&stock=BTC
