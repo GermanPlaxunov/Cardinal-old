@@ -1,5 +1,6 @@
 package org.project.core.config;
 
+import org.project.core.client.MlFeignClient;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.database.repository.MarketDealRepository;
@@ -13,7 +14,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableFeignClients(clients = {
-        MarketFeignClient.class
+        MarketFeignClient.class,
+        MlFeignClient.class
 })
 @EnableJpaRepositories(basePackageClasses = {
         MarketDealRepository.class
