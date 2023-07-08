@@ -14,6 +14,6 @@ public interface CoreFeignClient extends CoreClient {
     @PostMapping(path = "/startProcess",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    void startProcess(URI uri, String stock);
+    void startProcess(String stock);
 
 }

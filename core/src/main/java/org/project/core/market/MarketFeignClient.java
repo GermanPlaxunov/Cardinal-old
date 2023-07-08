@@ -1,49 +1,34 @@
-package org.project.market.rest;
+package org.project.core.market;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.project.market.database.service.interfaces.StockService;
-import org.project.market.mapper.StockMapper;
 import org.project.model.MarketStock;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.WebUtils;
 
 import java.time.LocalDateTime;
 
-@Slf4j
-@RestController
-@RequiredArgsConstructor
-public class MarketController {
+@FeignClient(name = "market-client", url = "http://localhost:8080")
+public interface MarketFeignClient extends MarketClient {
 
-    private final StockService stockService;
-    private final StockMapper stockMapper;
-
+    @Override
     @PostMapping(path = "/getNextStock",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    public MarketStock getNextStock(@RequestParam(name = "stockName") String stockName,
-                                    @RequestParam(name = "prevStockDate") LocalDateTime prevStockDate) {
-        var next = stockService.findNext(stockName, prevStockDate);
-        return stockMapper.map(next);
-    }
+    MarketStock getNextStock(@RequestParam(name = "stockName") String stockName,
+                             @RequestParam(name = "prevStockDate") LocalDateTime prevStockDate);
 
+    @Override
     @PostMapping(path = "/openLongPosition",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    public Long openLongPosition(@RequestParam(name = "stockName") String stockName,
-                                 @RequestParam(name = "amountCurr") Double amountCurr) {
+    Long openLongPosition(@RequestParam(name = "stockName") String stockName,
+                          @RequestParam(name = "amountCurr") Double amountCurr);
 
-        return 0L;
-    }
-
+    @Override
     @PostMapping(path = "/openLongPosition",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    public void closeLongPosition(@RequestParam(name = "stockName") String stockName) {
-
-    }
-
+    void closeLongPosition(@RequestParam(name = "stockName") String stockName);
 }

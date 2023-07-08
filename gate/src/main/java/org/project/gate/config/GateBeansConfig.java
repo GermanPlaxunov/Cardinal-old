@@ -7,7 +7,6 @@ import org.project.gate.database.service.classes.JobServiceImpl;
 import org.project.gate.database.service.interfaces.JobService;
 import org.project.gate.job.ScheduledJob;
 import org.project.gate.job.ScheduledJobExecutor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +21,9 @@ public class GateBeansConfig {
 
     @Bean
     public ScheduledJobExecutor scheduledJobExecutor(JobService jobService,
-                                                     CoreClient coreClient,
-                                                     @Value("${masada.core.url}") String url) {
+                                                     CoreClient coreClient) {
         return new ScheduledJobExecutor(jobService,
-                coreClient,
-                url);
+                coreClient);
     }
 
     @Bean

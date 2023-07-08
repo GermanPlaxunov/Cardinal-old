@@ -11,11 +11,10 @@ public class ScheduledJobExecutor {
 
     private final JobService jobService;
     private final CoreClient coreClient;
-    private final String url;
 
     public void execute() {
         var job = jobService.findByStockName("BTC");
-        coreClient.startProcess(URI.create(url), job.getStockName());
+        coreClient.startProcess(job.getStockName());
     }
 
 }

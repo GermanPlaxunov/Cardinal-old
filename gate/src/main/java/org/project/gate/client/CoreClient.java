@@ -4,6 +4,6 @@ import java.net.URI;
 
 public interface CoreClient {
 
-    void startProcess(URI uri, String stock);
+    void startProcess(String stock);
 
 }
