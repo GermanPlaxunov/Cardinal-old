@@ -5,5 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def check(request):
     message = request.GET['message']
-    print(f"Message is: {message}")
-    return HttpResponse(f"Received message: {message}")
+    username = request.GET['username']
+    response = f"{username} send message: {message}"
+    return HttpResponse(response)

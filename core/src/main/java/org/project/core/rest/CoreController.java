@@ -30,7 +30,7 @@ public class CoreController {
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
     public void callMl(@RequestBody MlRequest message) {
-        var response = mlFeignClient.check(message.getMessage());
+        var response = mlFeignClient.check(message.getUsername(), message.getMessage());
         log.info("Response from ML: {}", response);
     }
 

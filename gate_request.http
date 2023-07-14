@@ -14,5 +14,6 @@ POST http://localhost:8081/core/callMl
 Content-Type: application/json
 
 {
+  "username": "German",
   "message": "Hello, Masada (JSON)"
 }
