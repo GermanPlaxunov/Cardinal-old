@@ -1,7 +1,7 @@
 package org.project.core.core.process.deal;
 
 import lombok.RequiredArgsConstructor;
-import org.project.core.market.MarketClient;
+import org.project.core.client.market.MarketClient;
 
 @RequiredArgsConstructor
 public class DealMaker {

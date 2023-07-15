@@ -6,7 +6,7 @@ import org.project.core.core.process.deal.DealMaker;
 import org.project.core.database.repository.MarketDealRepository;
 import org.project.core.database.service.classes.MarketDealServiceImpl;
 import org.project.core.database.service.interfaces.MarketDealService;
-import org.project.core.market.MarketFeignClient;
+import org.project.core.client.market.MarketFeignClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

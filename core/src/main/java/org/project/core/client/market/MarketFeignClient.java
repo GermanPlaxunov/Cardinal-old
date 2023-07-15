@@ -1,4 +1,4 @@
-package org.project.core.market;
+package org.project.core.client.market;
 
 import org.project.model.MarketStock;
 import org.springframework.cloud.openfeign.FeignClient;
