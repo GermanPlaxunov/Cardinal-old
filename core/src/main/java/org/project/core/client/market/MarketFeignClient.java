@@ -9,7 +9,7 @@ import org.springframework.web.util.WebUtils;
 
 import java.time.LocalDateTime;
 
-@FeignClient(name = "market-client", url = "http://localhost:8080")
+@FeignClient(name = "market-client", url = "http://localhost:8082/market")
 public interface MarketFeignClient extends MarketClient {
 
     @Override

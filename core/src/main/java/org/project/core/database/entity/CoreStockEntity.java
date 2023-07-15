@@ -1,4 +1,4 @@
-package org.project.market.database.entity;
+package org.project.core.database.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "MARKET_STOCK_ENTITY")
-public class StockEntity {
+@Table(name = "CORE_STOCK_ENTITY")
+public class CoreStockEntity {
 
     @Id
     @Column(name = "ID")
@@ -30,5 +30,4 @@ public class StockEntity {
     private Double volumeUsd;
     @Column(name = "DATE")
     private LocalDateTime date;
-
 }

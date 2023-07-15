@@ -13,7 +13,7 @@ public class ScheduledJobExecutor {
     private final CoreClient coreClient;
 
     public void execute() {
-        var job = jobService.findByStockName("BTC");
+        var job = jobService.findByStockName("BTC/USD");
         coreClient.startProcess(job.getStockName());
     }
 

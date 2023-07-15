@@ -27,6 +27,7 @@ public class MarketController {
     public MarketStock getNextStock(@RequestParam(name = "stockName") String stockName,
                                     @RequestParam(name = "prevStockDate") LocalDateTime prevStockDate) {
         var next = stockService.findNext(stockName, prevStockDate);
+        log.info("Next provided stock: {}", next);
         return stockMapper.map(next);
     }
 
@@ -39,7 +40,7 @@ public class MarketController {
         return 0L;
     }
 
-    @PostMapping(path = "/openLongPosition",
+    @PostMapping(path = "/closeLongPosition",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
     public void closeLongPosition(@RequestParam(name = "stockName") String stockName) {
