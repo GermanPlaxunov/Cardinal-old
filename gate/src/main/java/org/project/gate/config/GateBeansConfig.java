@@ -5,8 +5,8 @@ import org.project.gate.client.CoreFeignClient;
 import org.project.gate.database.repository.JobRepository;
 import org.project.gate.database.service.classes.JobServiceImpl;
 import org.project.gate.database.service.interfaces.JobService;
-import org.project.gate.job.SimpleJobService;
-import org.springframework.beans.factory.annotation.Value;
+import org.project.gate.job.ScheduledJob;
+import org.project.gate.job.ScheduledJobExecutor;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +20,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class GateBeansConfig {
 
     @Bean
-    public SimpleJobService simpleJobService(CoreClient coreClient,
-                                             @Value("${masada.core.url}") String url) {
-        return new SimpleJobService(coreClient, url);
+    public ScheduledJobExecutor scheduledJobExecutor(JobService jobService,
+                                                     CoreClient coreClient) {
+        return new ScheduledJobExecutor(jobService,
+                coreClient);
+    }
+
+    @Bean
+    public ScheduledJob scheduledJob(ScheduledJobExecutor scheduledJobExecutor) {
+        return new ScheduledJob(scheduledJobExecutor);
     }
 
     @Bean

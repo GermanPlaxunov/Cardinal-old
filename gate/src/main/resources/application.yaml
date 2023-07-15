@@ -3,10 +3,6 @@ server:
   servlet:
     context-path: /gate
 
-masada:
-  core:
-    url: ${MASADA_CORE_URL:http://localhost:8081/core}
-
 spring:
   main:
     allow-bean-definition-overriding: true

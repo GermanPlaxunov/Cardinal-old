@@ -1,6 +1,6 @@
 package org.project.gate.config;
 
-import org.project.gate.job.SimpleJob;
+import org.project.gate.job.ScheduledJob;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
@@ -16,9 +16,9 @@ public class QuartzConfig {
     @Bean
     public JobDetail jobDetail() {
         return JobBuilder.newJob()
-                .ofType(SimpleJob.class)
-                .withIdentity("Quartz_job")
-                .withDescription("Test job")
+                .ofType(ScheduledJob.class)
+                .withIdentity("Quartz_main_job")
+                .withDescription("Main job")
                 .storeDurably()
                 .build();
     }
@@ -27,9 +27,11 @@ public class QuartzConfig {
     public Trigger trigger(JobDetail job) {
         return TriggerBuilder.newTrigger()
                 .forJob(job)
-                .withIdentity("Quartz_trigger")
-                .withDescription("Simple trigger")
-                .withSchedule(simpleSchedule().repeatForever().withIntervalInSeconds(5))
+                .withIdentity("Quartz_main_trigger")
+                .withDescription("Trigger to launch price analyze")
+                .withSchedule(simpleSchedule()
+                        .repeatForever()
+                        .withIntervalInSeconds(5))
                 .build();
     }
 
