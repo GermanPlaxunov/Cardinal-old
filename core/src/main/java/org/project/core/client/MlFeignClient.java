@@ -10,10 +10,10 @@ import org.springframework.web.util.WebUtils;
 public interface MlFeignClient extends MlClient {
 
     @Override
-    @PostMapping(path = "/analyze",
+    @PostMapping(path = "/analyze/",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    void analyze(@RequestParam(name = "dateFrom") String dateFrom,
-                 @RequestParam(name = "dateTo") String dateTo,
-                 @RequestParam(name = "symbol") String symbol);
+    String analyze(@RequestParam(name = "dateFrom") String dateFrom,
+                   @RequestParam(name = "dateTo") String dateTo,
+                   @RequestParam(name = "symbol") String symbol);
 }

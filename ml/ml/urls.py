@@ -21,6 +21,5 @@ from masadaML import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('ml/check/', views.check),
-    re_path('analyze/', views.process_price_history)
+    re_path('analyze/', views.analyze_price_history)
 ]

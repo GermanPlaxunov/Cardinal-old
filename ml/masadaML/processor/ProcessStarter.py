@@ -7,4 +7,5 @@ def start_analyze(symbol, from_date, to_date):
                                 to_date=to_date,
                                 symbol=symbol)
     dataframe = pd.DataFrame(dataset)
-    print(dataframe.keys())
+    print(dataframe)
+    return dataframe.size

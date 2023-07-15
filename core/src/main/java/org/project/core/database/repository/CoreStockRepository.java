@@ -15,4 +15,6 @@ public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long
 
     Optional<CoreStockEntity> findFirstBySymbolOrderByDateDesc(String symbol);
 
+    int countBySymbol(String symbol);
+
 }

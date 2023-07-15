@@ -1,5 +1,6 @@
 package org.project.core.config;
 
+import org.project.core.client.MlClient;
 import org.project.core.client.MlFeignClient;
 import org.project.core.client.market.MarketClient;
 import org.project.core.client.market.MarketFeignClient;
@@ -35,8 +36,12 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(MarketDataProvider marketDataProvider) {
-        return new ProcessStarter(marketDataProvider);
+    public ProcessStarter processStarter(MarketDataProvider marketDataProvider,
+                                         CoreStockService coreStockService,
+                                         MlClient mlClient) {
+        return new ProcessStarter(marketDataProvider,
+                coreStockService,
+                mlClient);
     }
 
     @Bean

@@ -31,7 +31,7 @@ public class QuartzConfig {
                 .withDescription("Trigger to launch price analyze")
                 .withSchedule(simpleSchedule()
                         .repeatForever()
-                        .withIntervalInSeconds(5))
+                        .withIntervalInSeconds(1))
                 .build();
     }
 

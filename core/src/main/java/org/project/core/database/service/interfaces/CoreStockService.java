@@ -13,4 +13,6 @@ public interface CoreStockService {
 
     CoreStockEntity findLastStock(String symbol);
 
+    int countBySymbol(String symbol);
+
 }

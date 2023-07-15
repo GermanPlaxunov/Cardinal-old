@@ -30,4 +30,9 @@ public class CoreStockServiceImpl implements CoreStockService {
                 .filter(Objects::nonNull)
                 .orElse(null);
     }
+
+    @Override
+    public int countBySymbol(String symbol) {
+        return repository.countBySymbol(symbol);
+    }
 }
