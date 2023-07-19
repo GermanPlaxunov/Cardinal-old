@@ -1,32 +1,25 @@
 package org.project.core.config;
 
-import org.project.core.client.MlClient;
 import org.project.core.client.MlFeignClient;
 import org.project.core.client.market.MarketClient;
 import org.project.core.client.market.MarketFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
-import org.project.core.database.repository.CoreStockRepository;
-import org.project.core.database.repository.MarketDealRepository;
-import org.project.core.database.service.classes.CoreStockServiceImpl;
-import org.project.core.database.service.classes.MarketDealServiceImpl;
+import org.project.core.core.process.strategy.PriceDiffStrategyProcess;
+import org.project.core.core.process.strategy.diff.DiffSignalCalculator;
 import org.project.core.database.service.interfaces.CoreStockService;
-import org.project.core.database.service.interfaces.MarketDealService;
+import org.project.core.database.service.interfaces.PriceDiffSignalService;
+import org.project.core.mapper.PriceDiffSignalMapper;
 import org.project.core.mapper.StockMapper;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableFeignClients(clients = {
         MarketFeignClient.class,
         MlFeignClient.class
-})
-@EnableJpaRepositories(basePackageClasses = {
-        MarketDealRepository.class,
-        CoreStockRepository.class
 })
 public class CoreBeansConfig {
 
@@ -36,22 +29,10 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(MarketDataProvider marketDataProvider,
-                                         CoreStockService coreStockService,
-                                         MlClient mlClient) {
-        return new ProcessStarter(marketDataProvider,
-                coreStockService,
-                mlClient);
-    }
-
-    @Bean
-    public MarketDealService marketDealService(MarketDealRepository marketDealRepository) {
-        return new MarketDealServiceImpl(marketDealRepository);
-    }
-
-    @Bean
-    public CoreStockService coreStockService(CoreStockRepository repository) {
-        return new CoreStockServiceImpl(repository);
+    public ProcessStarter processStarter(PriceDiffStrategyProcess priceDiffStrategyProcess,
+                                         MarketDataProvider marketDataProvider) {
+        return new ProcessStarter(priceDiffStrategyProcess,
+                marketDataProvider);
     }
 
     @Bean
@@ -61,6 +42,20 @@ public class CoreBeansConfig {
         return new MarketDataProvider(coreStockService,
                 marketClient,
                 stockMapper);
+    }
+
+    @Bean
+    public DiffSignalCalculator diffSignalCalculator(PriceDiffSignalService priceDiffSignalService,
+                                                     PriceDiffSignalMapper priceDiffSignalMapper,
+                                                     CoreStockService coreStockService) {
+        return new DiffSignalCalculator(priceDiffSignalService,
+                priceDiffSignalMapper,
+                coreStockService);
+    }
+
+    @Bean
+    public PriceDiffStrategyProcess priceDiffStrategyProcess(PriceDiffSignalService priceDiffSignalService) {
+        return new PriceDiffStrategyProcess(priceDiffSignalService);
     }
 
 }

@@ -9,12 +9,9 @@ import java.util.Optional;
 
 public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long> {
 
-    List<CoreStockEntity> findAllBySymbolAndDateBetween(String symbol,
-                                                        LocalDateTime from,
-                                                        LocalDateTime to);
-
     Optional<CoreStockEntity> findFirstBySymbolOrderByDateDesc(String symbol);
 
-    int countBySymbol(String symbol);
+    Optional<CoreStockEntity> findFirstBySymbolAndDateLessThanOrderByDateDesc(String symbol,
+                                                                              LocalDateTime date);
 
 }

@@ -4,20 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.project.core.database.entity.CoreStockEntity;
 import org.project.core.database.repository.CoreStockRepository;
 import org.project.core.database.service.interfaces.CoreStockService;
+import org.project.model.MarketStock;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
 public class CoreStockServiceImpl implements CoreStockService {
 
     private final CoreStockRepository repository;
-
-    @Override
-    public List<CoreStockEntity> findAllInPerion(String symbol, LocalDateTime from, LocalDateTime to) {
-        return repository.findAllBySymbolAndDateBetween(symbol, from, to);
-    }
 
     @Override
     public void save(CoreStockEntity entity) {
@@ -32,7 +26,11 @@ public class CoreStockServiceImpl implements CoreStockService {
     }
 
     @Override
-    public int countBySymbol(String symbol) {
-        return repository.countBySymbol(symbol);
+    public CoreStockEntity findPrevStock(MarketStock currStock) {
+        var symbol = currStock.getSymbol();
+        var date = currStock.getDate();
+        return repository.findFirstBySymbolAndDateLessThanOrderByDateDesc(symbol, date)
+                .orElse(null);
     }
+
 }
