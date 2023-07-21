@@ -16,6 +16,18 @@ public class DiffSignalCalculator {
     private final PriceDiffSignalMapper priceDiffSignalMapper;
     private final CoreStockService coreStockService;
 
+    public DiffSignal createInitialSignal(MarketStock stock) {
+        var signal = new DiffSignal()
+                .setSymbol(stock.getSymbol())
+                .setPrevPrice(0.0)
+                .setCurrPrice(stock.getClose())
+                .setDiff(0.0)
+                .setPriceDiffSignal(0)
+                .setPositionSignal(0);
+        saveSignal(signal);
+        return signal;
+    }
+
     public DiffSignal createDiffSignal(MarketStock stock) {
         var prevSignal = priceDiffSignalService.findPrevSignal(stock);
         var prevStock = coreStockService.findPrevStock(stock);

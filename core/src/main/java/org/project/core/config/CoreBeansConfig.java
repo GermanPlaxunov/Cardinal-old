@@ -12,6 +12,7 @@ import org.project.core.database.service.interfaces.CoreStockService;
 import org.project.core.database.service.interfaces.PriceDiffSignalService;
 import org.project.core.mapper.PriceDiffSignalMapper;
 import org.project.core.mapper.StockMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,8 +55,14 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public PriceDiffStrategyProcess priceDiffStrategyProcess(PriceDiffSignalService priceDiffSignalService) {
-        return new PriceDiffStrategyProcess(priceDiffSignalService);
+    public PriceDiffStrategyProcess priceDiffStrategyProcess(PriceDiffSignalService priceDiffSignalService,
+                                                             DiffSignalCalculator diffSignalCalculator,
+                                                             DealMaker dealMaker,
+                                                             @Value("${core.trading.position.amount}") Double positionAmount) {
+        return new PriceDiffStrategyProcess(priceDiffSignalService,
+                diffSignalCalculator,
+                positionAmount,
+                dealMaker);
     }
 
 }
