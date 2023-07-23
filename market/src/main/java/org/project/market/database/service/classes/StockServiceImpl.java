@@ -46,4 +46,10 @@ public class StockServiceImpl implements StockService {
                 .filter(Objects::nonNull)
                 .orElse(null);
     }
+
+    @Override
+    public StockEntity findById(Long id) {
+        return stockRepository.findById(id)
+                .orElse(null);
+    }
 }

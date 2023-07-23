@@ -15,4 +15,10 @@ public class LastProvidedStockServiceImpl implements LastProvidedStockService {
         return lastProvidedStockRepository.findBySymbol(symbol)
                 .orElse(null);
     }
+
+    @Override
+    public void update(Long stockId, String symbol) {
+        lastProvidedStockRepository.update(stockId, symbol);
+    }
+
 }

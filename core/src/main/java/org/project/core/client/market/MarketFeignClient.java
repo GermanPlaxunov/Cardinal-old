@@ -23,7 +23,7 @@ public interface MarketFeignClient extends MarketClient {
     @PostMapping(path = "/openLongPosition",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    Long openLongPosition(@RequestParam(name = "stockName") String stockName,
+    void openLongPosition(@RequestParam(name = "stockName") String stockName,
                           @RequestParam(name = "amountCurr") Double amountCurr);
 
     @Override

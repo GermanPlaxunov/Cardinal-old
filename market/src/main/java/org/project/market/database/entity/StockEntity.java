@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "MARKET_STOCK_ENTITY")
+@Table(name = "MARKET_STOCK",
+        indexes = @Index(name = "MARKET_STOCK_DATE_IDX", columnList = "DATE"))
 public class StockEntity {
 
     @Id
@@ -30,5 +31,4 @@ public class StockEntity {
     private Double volumeUsd;
     @Column(name = "DATE")
     private LocalDateTime date;
-
 }

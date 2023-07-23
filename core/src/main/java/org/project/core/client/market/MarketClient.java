@@ -8,7 +8,7 @@ public interface MarketClient {
 
     MarketStock getNextStock(String stockName, LocalDateTime prevStockDate);
 
-    Long openLongPosition(String stockName, Double amountCurr);
+    void openLongPosition(String stockName, Double amountCurr);
 
     void closeLongPosition(String stockName);
 

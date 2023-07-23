@@ -6,4 +6,6 @@ public interface LastProvidedStockService {
 
     LastProvidedStockEntity find(String symbol);
 
+    void update(Long stockId, String symbol);
+
 }

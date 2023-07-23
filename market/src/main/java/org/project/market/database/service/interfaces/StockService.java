@@ -17,4 +17,6 @@ public interface StockService {
 
     StockEntity findNext(String stockName, LocalDateTime lastStockDate);
 
+    StockEntity findById(Long id);
+
 }
