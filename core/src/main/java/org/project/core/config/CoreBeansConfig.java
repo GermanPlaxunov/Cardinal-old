@@ -1,8 +1,7 @@
 package org.project.core.config;
 
-import org.project.core.client.MlFeignClient;
-import org.project.core.client.market.MarketClient;
-import org.project.core.client.market.MarketFeignClient;
+import org.project.core.client.MarketClient;
+import org.project.core.client.MarketFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
@@ -19,14 +18,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableFeignClients(clients = {
-        MarketFeignClient.class,
-        MlFeignClient.class
+        MarketFeignClient.class
 })
 public class CoreBeansConfig {
 
     @Bean
-    public DealMaker dealMaker(MarketFeignClient marketFeignClient) {
-        return new DealMaker(marketFeignClient);
+    public DealMaker dealMaker(MarketClient marketClient) {
+        return new DealMaker(marketClient);
     }
 
     @Bean

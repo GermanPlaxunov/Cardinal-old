@@ -17,4 +17,6 @@ public class AccountEntity {
     private String accountId;
     @Column(name = "BALANCE")
     private Double balance;
+    @Column(name = "OPEN_POSITION_CNT")
+    private Integer openPositionCount;
 }

@@ -23,14 +23,13 @@ public class PriceDiffStrategyProcess {
         } else {
             var signal = diffSignalCalculator.createDiffSignal(marketStock);
             makeDealAccordingSignal(signal, marketStock, positionAmount);
-
         }
     }
 
     private void makeDealAccordingSignal(DiffSignal signal, MarketStock stock, Double amount) {
         log.info("Price diff: {}, signal: {}", signal.getDiff(), signal.getPositionSignal());
         if (signal.getPositionSignal() == 1) {
-            dealMaker.openLongPosition(stock.getSymbol(), amount, signal.getCurrPrice());
+            dealMaker.openLongPosition(stock.getSymbol(), amount);
         }
         if (signal.getPositionSignal() == -1) {
             dealMaker.closeLongPosition(stock.getSymbol());

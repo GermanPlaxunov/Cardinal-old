@@ -6,5 +6,7 @@ public interface AccountService {
 
     AccountEntity findById(String id);
 
-    void updateBalance(String id, Double change);
+    void updateAccount(String id, Double change, Integer openPositions);
+
+    Boolean isAnyOpenPosition(String accountId);
 }

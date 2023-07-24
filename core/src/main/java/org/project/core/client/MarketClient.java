@@ -1,15 +1,14 @@
-package org.project.core.client.market;
+package org.project.core.client;
 
 import org.project.model.MarketStock;
 
-import java.time.LocalDateTime;
-
 public interface MarketClient {
 
-    MarketStock getNextStock(String stockName, LocalDateTime prevStockDate);
+    MarketStock getNextStock(String stockName);
 
     void openLongPosition(String stockName, Double amountCurr);
 
     void closeLongPosition(String stockName);
 
+    Boolean isNewDealAllowed(String symbol);
 }

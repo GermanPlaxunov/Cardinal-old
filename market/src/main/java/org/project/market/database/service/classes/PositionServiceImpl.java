@@ -20,6 +20,6 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public void save(PositionEntity entity) {
-        repository.save(entity);
+        repository.saveAndFlush(entity);
     }
 }

@@ -7,6 +7,7 @@ import org.project.core.database.service.interfaces.PriceDiffSignalService;
 import org.project.model.MarketStock;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class PriceDiffSignalServiceImpl implements PriceDiffSignalService {
@@ -25,14 +26,17 @@ public class PriceDiffSignalServiceImpl implements PriceDiffSignalService {
 
     @Override
     public void save(PriceDiffSignalEntity entity) {
-        repository.save(entity);
+        repository.saveAndFlush(entity);
     }
 
     @Override
     public PriceDiffSignalEntity findPrevSignal(MarketStock stock) {
         var symbol = stock.getSymbol();
         var date = stock.getDate();
-        return repository.findFirstBySymbolAndDateLessThanOrderByDateDesc(symbol, date)
+        return repository.findPrevSignal(symbol, date)
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
                 .orElse(null);
     }
 }

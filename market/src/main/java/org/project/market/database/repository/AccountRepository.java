@@ -13,9 +13,11 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
     Optional<AccountEntity> findByAccountId(String accountId);
 
     @Modifying
-    @Query("update AccountEntity acc set acc.balance = acc.balance + :change " +
+    @Query("update AccountEntity acc set acc.balance = acc.balance + :change, " +
+            "acc.openPositionCount = :openPositions " +
             "where acc.accountId = :accountId")
     void updateAccountEntitiesByAccountId(@Param("change") Double change,
-                                          @Param("accountId") String accountId);
+                                          @Param("accountId") String accountId,
+                                          @Param("openPositions") Integer openPositions);
 
 }

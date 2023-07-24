@@ -20,7 +20,7 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
 
     @Override
     public void save(ProcessParamsEntity entity) {
-        repository.save(entity);
+        repository.saveAndFlush(entity);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         param.setStringValue(strVal)
                 .setNumberValue(numberVal)
                 .setDateValue(dateVal);
-        repository.save(param);
+        repository.saveAndFlush(param);
     }
 }

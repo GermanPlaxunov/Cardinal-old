@@ -15,7 +15,7 @@ public class CoreStockServiceImpl implements CoreStockService {
 
     @Override
     public void save(CoreStockEntity entity) {
-        repository.save(entity);
+        repository.saveAndFlush(entity);
     }
 
     @Override

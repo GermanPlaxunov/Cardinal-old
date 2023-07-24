@@ -67,9 +67,11 @@ public class MarketConfig {
     @Bean
     public MarketService marketService(LastProvidedStockService lastProvidedStockService,
                                        PositionProcessor positionProcessor,
+                                       AccountService accountService,
                                        StockService stockService) {
         return new MarketService(lastProvidedStockService,
                 positionProcessor,
+                accountService,
                 stockService);
     }
 

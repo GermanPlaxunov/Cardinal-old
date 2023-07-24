@@ -8,6 +8,8 @@ import org.project.core.mapper.PriceDiffSignalMapper;
 import org.project.model.DiffSignal;
 import org.project.model.MarketStock;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @RequiredArgsConstructor
 public class DiffSignalCalculator {
@@ -23,7 +25,8 @@ public class DiffSignalCalculator {
                 .setCurrPrice(stock.getClose())
                 .setDiff(0.0)
                 .setPriceDiffSignal(0)
-                .setPositionSignal(0);
+                .setPositionSignal(0)
+                .setDate(LocalDateTime.of(2010, 1, 1, 1, 1, 1));
         saveSignal(signal);
         return signal;
     }
@@ -40,7 +43,8 @@ public class DiffSignalCalculator {
                 .setCurrPrice(stock.getClose())
                 .setDiff(diff)
                 .setPriceDiffSignal(priceDiffSignal)
-                .setPositionSignal(posSig);
+                .setPositionSignal(posSig)
+                .setDate(stock.getDate());
         saveSignal(signal);
         return signal;
     }

@@ -3,6 +3,8 @@ package org.project.market.database.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "LAST_PROVIDED_STOCK")
@@ -16,4 +18,6 @@ public class LastProvidedStockEntity {
     private String symbol;
     @Column(name = "STOCK_ID")
     private Long stockId;
+    @Column(name = "STOCK_DATE")
+    private LocalDateTime stockDate;
 }

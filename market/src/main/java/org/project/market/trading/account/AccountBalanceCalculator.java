@@ -15,7 +15,7 @@ public class AccountBalanceCalculator {
         if (isOpening) {
             change *= (-1);
         }
-        accountService.updateBalance(accountId, change);
+        accountService.updateAccount(accountId, change, isOpening ? 1 : 0);
         return change;
     }
 
