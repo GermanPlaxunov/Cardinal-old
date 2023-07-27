@@ -3,8 +3,8 @@ package org.project.core.core.market;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.client.MarketClient;
-import org.project.core.database.service.interfaces.CoreStockService;
 import org.project.core.mapper.StockMapper;
+import org.project.data.services.interfaces.CoreStockService;
 import org.project.model.MarketStock;
 
 @Slf4j

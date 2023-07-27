@@ -2,7 +2,7 @@ package org.project.core.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.project.core.database.entity.PriceDiffSignalEntity;
+import org.project.data.entities.PriceDiffSignalEntity;
 import org.project.model.DiffSignal;
 
 @Mapper(componentModel = "spring")

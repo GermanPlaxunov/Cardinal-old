@@ -54,6 +54,11 @@
             <artifactId>model</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.project</groupId>
+            <artifactId>data</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

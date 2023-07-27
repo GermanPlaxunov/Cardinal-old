@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.strategy.diff.DiffSignalCalculator;
-import org.project.core.database.service.interfaces.PriceDiffSignalService;
+import org.project.data.services.interfaces.PriceDiffSignalService;
 import org.project.model.DiffSignal;
 import org.project.model.MarketStock;
 

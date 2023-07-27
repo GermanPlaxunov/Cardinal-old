@@ -1,38 +1,35 @@
 package org.project.core.config;
 
-import org.project.core.database.repository.CoreStockRepository;
-import org.project.core.database.repository.PriceDiffSignalRepository;
-import org.project.core.database.repository.ProcessParamsRepository;
-import org.project.core.database.service.classes.CoreStockServiceImpl;
-import org.project.core.database.service.classes.PriceDiffSignalServiceImpl;
-import org.project.core.database.service.classes.ProcessParamsServiceImpl;
-import org.project.core.database.service.interfaces.CoreStockService;
-import org.project.core.database.service.interfaces.PriceDiffSignalService;
-import org.project.core.database.service.interfaces.ProcessParamsService;
+import org.project.data.repositories.CoreStockRepository;
+import org.project.data.repositories.PriceDiffSignalRepository;
+import org.project.data.repositories.ProcessParamsRepository;
+import org.project.data.services.classes.CoreStockServiceImpl;
+import org.project.data.services.classes.PriceDiffSignalServiceImpl;
+import org.project.data.services.classes.ProcessParamsServiceImpl;
+import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.PriceDiffSignalService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = {
-        CoreStockRepository.class, PriceDiffSignalRepository.class,
-        ProcessParamsRepository.class
-})
+@EnableJpaRepositories(basePackages = "org.project.data.repositories")
 public class CoreDaoConfig {
 
     @Bean
-    public CoreStockService coreStockService(CoreStockRepository repository) {
-        return new CoreStockServiceImpl(repository);
+    public CoreStockService coreStockService(CoreStockRepository coreStockRepository) {
+        return new CoreStockServiceImpl(coreStockRepository);
     }
 
     @Bean
-    public PriceDiffSignalService priceDiffSignalService(PriceDiffSignalRepository repository) {
-        return new PriceDiffSignalServiceImpl(repository);
+    public PriceDiffSignalService priceDiffSignalService(PriceDiffSignalRepository priceDiffSignalRepository) {
+        return new PriceDiffSignalServiceImpl(priceDiffSignalRepository);
     }
 
     @Bean
-    public ProcessParamsService processParamsService(ProcessParamsRepository repository) {
-        return new ProcessParamsServiceImpl(repository);
+    public ProcessParamsService processParamsService(ProcessParamsRepository processParamsRepository) {
+        return new ProcessParamsServiceImpl(processParamsRepository);
     }
 
 }

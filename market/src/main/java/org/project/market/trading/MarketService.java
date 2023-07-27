@@ -2,10 +2,10 @@ package org.project.market.trading;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.market.database.entity.StockEntity;
-import org.project.market.database.service.interfaces.AccountService;
-import org.project.market.database.service.interfaces.LastProvidedStockService;
-import org.project.market.database.service.interfaces.StockService;
+import org.project.data.entities.MarketStockEntity;
+import org.project.data.services.interfaces.AccountService;
+import org.project.data.services.interfaces.LastProvidedStockService;
+import org.project.data.services.interfaces.MarketStockService;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +15,9 @@ public class MarketService {
     private final LastProvidedStockService lastProvidedStockService;
     private final PositionProcessor positionProcessor;
     private final AccountService accountService;
-    private final StockService stockService;
+    private final MarketStockService stockService;
 
-    public StockEntity getNextStock(String symbol) {
+    public MarketStockEntity getNextStock(String symbol) {
         var lastStockData = lastProvidedStockService.find(symbol);
         LocalDateTime prevStockDate = LocalDateTime.of(2000, 1, 1, 1, 1, 1, 1);
         var isInitial = lastStockData == null;

@@ -2,9 +2,9 @@ package org.project.market.trading;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.market.database.entity.PositionEntity;
-import org.project.market.database.service.interfaces.AccountService;
-import org.project.market.database.service.interfaces.PositionService;
+import org.project.data.entities.PositionEntity;
+import org.project.data.services.interfaces.AccountService;
+import org.project.data.services.interfaces.PositionService;
 import org.project.market.trading.account.AccountBalanceCalculator;
 
 import java.time.LocalDateTime;

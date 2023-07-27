@@ -1,17 +1,17 @@
 package org.project.market.config;
 
-import org.project.market.database.repository.AccountRepository;
-import org.project.market.database.repository.LastProvidedStockRepository;
-import org.project.market.database.repository.PositionRepository;
-import org.project.market.database.repository.StockRepository;
-import org.project.market.database.service.classes.AccountServiceImpl;
-import org.project.market.database.service.classes.LastProvidedStockServiceImpl;
-import org.project.market.database.service.classes.PositionServiceImpl;
-import org.project.market.database.service.classes.StockServiceImpl;
-import org.project.market.database.service.interfaces.AccountService;
-import org.project.market.database.service.interfaces.LastProvidedStockService;
-import org.project.market.database.service.interfaces.PositionService;
-import org.project.market.database.service.interfaces.StockService;
+import org.project.data.repositories.AccountRepository;
+import org.project.data.repositories.LastProvidedStockRepository;
+import org.project.data.repositories.MarketStockRepository;
+import org.project.data.repositories.PositionRepository;
+import org.project.data.services.classes.AccountServiceImpl;
+import org.project.data.services.classes.LastProvidedStockServiceImpl;
+import org.project.data.services.classes.MarketStockServiceImpl;
+import org.project.data.services.classes.PositionServiceImpl;
+import org.project.data.services.interfaces.AccountService;
+import org.project.data.services.interfaces.LastProvidedStockService;
+import org.project.data.services.interfaces.MarketStockService;
+import org.project.data.services.interfaces.PositionService;
 import org.project.market.trading.MarketService;
 import org.project.market.trading.PositionProcessor;
 import org.project.market.trading.account.AccountBalanceCalculator;
@@ -21,15 +21,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = {
-        StockRepository.class, LastProvidedStockRepository.class,
-        AccountRepository.class
-})
+@EnableJpaRepositories(basePackages = "org.project.data.repositories")
 public class MarketConfig {
 
     @Bean
-    public StockService stockService(StockRepository stockRepository) {
-        return new StockServiceImpl(stockRepository);
+    public MarketStockService stockService(MarketStockRepository marketStockRepository) {
+        return new MarketStockServiceImpl(marketStockRepository);
     }
 
     @Bean
@@ -68,11 +65,11 @@ public class MarketConfig {
     public MarketService marketService(LastProvidedStockService lastProvidedStockService,
                                        PositionProcessor positionProcessor,
                                        AccountService accountService,
-                                       StockService stockService) {
+                                       MarketStockService marketStockService) {
         return new MarketService(lastProvidedStockService,
                 positionProcessor,
                 accountService,
-                stockService);
+                marketStockService);
     }
 
 }

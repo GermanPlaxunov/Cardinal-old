@@ -2,7 +2,7 @@ package org.project.market.trading.account;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.market.database.service.interfaces.AccountService;
+import org.project.data.services.interfaces.AccountService;
 
 @Slf4j
 @RequiredArgsConstructor

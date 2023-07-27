@@ -1,10 +1,8 @@
 package org.project.gate.job;
 
 import lombok.RequiredArgsConstructor;
+import org.project.data.services.interfaces.JobService;
 import org.project.gate.client.CoreClient;
-import org.project.gate.database.service.interfaces.JobService;
-
-import java.net.URI;
 
 @RequiredArgsConstructor
 public class ScheduledJobExecutor {

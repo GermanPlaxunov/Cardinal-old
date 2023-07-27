@@ -2,9 +2,9 @@ package org.project.core.core.process.strategy.diff;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.core.database.service.interfaces.CoreStockService;
-import org.project.core.database.service.interfaces.PriceDiffSignalService;
 import org.project.core.mapper.PriceDiffSignalMapper;
+import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.PriceDiffSignalService;
 import org.project.model.DiffSignal;
 import org.project.model.MarketStock;
 
