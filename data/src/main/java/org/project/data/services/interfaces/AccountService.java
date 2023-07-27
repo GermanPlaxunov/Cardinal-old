@@ -6,7 +6,9 @@ public interface AccountService {
 
     AccountEntity findById(String id);
 
-    void updateAccount(String id, Double change, Integer openPositions);
+    void updateAccount(String accountId, Double change, Integer openPositions);
 
     Boolean isAnyOpenPosition(String accountId);
+
+    AccountEntity findActiveAccount();
 }

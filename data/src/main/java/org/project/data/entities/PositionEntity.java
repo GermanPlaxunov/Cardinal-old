@@ -29,6 +29,9 @@ public class PositionEntity {
     private Double closePrice;
     @Column(name = "PROFIT")
     private Double profit;
+    /**
+     * Account balance before opening position.
+     */
     @Column(name = "ACCOUNT_BALANCE")
     private Double accountBalance;
     @Column(name = "OPEN_DATE")

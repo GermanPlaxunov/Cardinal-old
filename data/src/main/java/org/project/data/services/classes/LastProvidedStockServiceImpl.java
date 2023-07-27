@@ -21,6 +21,15 @@ public class LastProvidedStockServiceImpl implements LastProvidedStockService {
     }
 
     @Override
+    public void init(String symbol, Long stockId, LocalDateTime stockDate) {
+        var entity = new LastProvidedStockEntity()
+                .setSymbol(symbol)
+                .setStockId(stockId)
+                .setStockDate(stockDate);
+        lastProvidedStockRepository.saveAndFlush(entity);
+    }
+
+    @Override
     @Transactional
     public void update(Long stockId, String symbol, LocalDateTime stockDate) {
         lastProvidedStockRepository.update(stockId, stockDate, symbol);
@@ -34,6 +43,11 @@ public class LastProvidedStockServiceImpl implements LastProvidedStockService {
                 .setSymbol(symbol)
                 .setStockDate(stockDate);
         lastProvidedStockRepository.saveAndFlush(entity);
+    }
+
+    @Override
+    public boolean exists(String symbol) {
+        return lastProvidedStockRepository.existsBySymbol(symbol);
     }
 
 }

@@ -10,4 +10,6 @@ public interface MarketStockRepository extends JpaRepository<MarketStockEntity, 
 
     Optional<MarketStockEntity> findTopBySymbolAndDateGreaterThanOrderByDateAsc(String symbol, LocalDateTime lastStockDate);
 
+    Optional<MarketStockEntity> findTopBySymbolOrderByDateAsc(String symbol);
+
 }

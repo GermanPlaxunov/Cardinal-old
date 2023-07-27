@@ -12,15 +12,17 @@ import org.project.data.services.interfaces.AccountService;
 import org.project.data.services.interfaces.LastProvidedStockService;
 import org.project.data.services.interfaces.MarketStockService;
 import org.project.data.services.interfaces.PositionService;
-import org.project.market.trading.MarketService;
-import org.project.market.trading.PositionProcessor;
-import org.project.market.trading.account.AccountBalanceCalculator;
+import org.project.market.process.MarketService;
+import org.project.market.process.account.AccountProcessor;
+import org.project.market.process.position.PositionProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
+@EntityScan(basePackages = "org.project.data.entities")
 @EnableJpaRepositories(basePackages = "org.project.data.repositories")
 public class MarketConfig {
 
@@ -40,22 +42,6 @@ public class MarketConfig {
     }
 
     @Bean
-    public PositionProcessor positionProcessor(AccountBalanceCalculator accountBalanceCalculator,
-                                               PositionService positionService,
-                                               AccountService accountService,
-                                               @Value("${market.account.id}") String accountId) {
-        return new PositionProcessor(accountBalanceCalculator,
-                positionService,
-                accountService,
-                accountId);
-    }
-
-    @Bean
-    public AccountBalanceCalculator accountBalanceCalculator(AccountService accountService) {
-        return new AccountBalanceCalculator(accountService);
-    }
-
-    @Bean
     public PositionService positionService(PositionRepository repository,
                                            @Value("${market.account.id}") String accountId) {
         return new PositionServiceImpl(repository, accountId);
@@ -63,13 +49,31 @@ public class MarketConfig {
 
     @Bean
     public MarketService marketService(LastProvidedStockService lastProvidedStockService,
+                                       MarketStockService marketStockService,
                                        PositionProcessor positionProcessor,
-                                       AccountService accountService,
-                                       MarketStockService marketStockService) {
+                                       AccountProcessor accountProcessor) {
         return new MarketService(lastProvidedStockService,
+                marketStockService,
                 positionProcessor,
-                accountService,
-                marketStockService);
+                accountProcessor);
+    }
+
+    @Bean
+    public PositionProcessor positionProcessor(LastProvidedStockService lastProvidedStockService,
+                                               MarketStockService marketStockService,
+                                               PositionService positionService,
+                                               AccountService accountService) {
+        return new PositionProcessor(lastProvidedStockService,
+                marketStockService,
+                positionService,
+                accountService);
+    }
+
+    @Bean
+    public AccountProcessor accountProcessor(PositionService positionService,
+                                             AccountService accountService) {
+        return new AccountProcessor(positionService,
+                accountService);
     }
 
 }

@@ -20,4 +20,6 @@ public interface LastProvidedStockRepository extends JpaRepository<LastProvidedS
                 @Param("stockDate") LocalDateTime stockDate,
                 @Param("symbol") String symbol);
 
+    boolean existsBySymbol(String symbol);
+
 }

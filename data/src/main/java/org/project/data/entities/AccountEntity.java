@@ -19,5 +19,7 @@ public class AccountEntity {
     private Double balance;
     @Column(name = "OPEN_POSITION_CNT")
     private Integer openPositionCount;
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
 
 }

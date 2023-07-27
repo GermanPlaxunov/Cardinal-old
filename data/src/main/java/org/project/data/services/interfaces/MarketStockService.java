@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 
 public interface MarketStockService {
 
-    MarketStockEntity findNext(String stockName, LocalDateTime lastStockDate);
+    MarketStockEntity findFirst(String symbol);
+
+    MarketStockEntity findNext(String symbol, LocalDateTime lastStockDate);
 
     MarketStockEntity findById(Long id);
 
