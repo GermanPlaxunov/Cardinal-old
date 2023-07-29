@@ -3,6 +3,11 @@ server:
   servlet:
     context-path: /core
 
+core:
+  trading:
+    position:
+      amount: ${POSITION_AMOUNT:3}
+
 spring:
   main:
     allow-bean-definition-overriding: true

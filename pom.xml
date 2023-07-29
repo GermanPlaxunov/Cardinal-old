@@ -15,6 +15,7 @@
         <module>core</module>
         <module>model</module>
         <module>market</module>
+        <module>data</module>
     </modules>
 
 </project>

@@ -1,0 +1,645 @@
+POST http://localhost:8082/market/closeLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T225912.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T225910.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T225909.200.json
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T225901.200.json
+
+###
+
+POST http://localhost:8082/market/closeLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T225653.200.json
+
+###
+
+POST http://localhost:8082/market/closeLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+###
+
+POST http://localhost:8082/market/closeLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+<> 2023-07-29T223949.500.json
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+<> 2023-07-29T214130.500.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T214017.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-29T214015.200.json
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T180759.200.json
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+<> 2023-07-28T180452.500.json
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+<> 2023-07-28T180354.500.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T180351.200.json
+
+###
+
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+<> 2023-07-28T180201.500.json
+
+###
+
+POST https://httpbin.org/post
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD&amountCurr=1.0
+
+<> 2023-07-28T180147.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022445.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022436-1.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022436.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022435.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022434.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022433-1.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022433.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022432.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022430.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022309.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022306.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022305.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022304.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022303.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T022257.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T021450.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T021431.200.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T020603.500.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T020525.415.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/json
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC/USD
+
+<> 2023-07-28T020515.400.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/json
+Content-Length: 28
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "stockName": "BTC/USD"
+}
+
+<> 2023-07-28T020502.400.json
+
+###
+
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+stockName=BTC%2FUSD
+
+<> 2023-07-28T020425.415.json
+
+###
+
+POST http://localhost:8081/core/callMl
+Content-Type: application/json
+Content-Length: 63
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "German",
+  "message": "Hello, Masada (JSON)"
+}
+
+<> 2023-07-15T130045.500.json
+
+###
+
+POST http://localhost:8081/core/callMl
+Content-Type: application/json
+Content-Length: 63
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "German",
+  "message": "Hello, Masada (JSON)"
+}
+
+###
+
+POST http://localhost:8081/core/callMl
+Content-Type: application/json
+Content-Length: 63
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "German",
+  "message": "Hello, Masada (JSON)"
+}
+
+<> 2023-07-15T005307.500.json
+
+###
+
+POST http://localhost:8081/core/callMl
+Content-Type: application/json
+Content-Length: 63
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "username": "German",
+  "message": "Hello, Masada (JSON)"
+}
+
+<> 2023-07-15T005013.500.json
+
+###
+

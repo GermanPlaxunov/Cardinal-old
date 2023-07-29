@@ -1,0 +1,19 @@
+###Get next stock
+POST http://localhost:8082/market/getNextStock
+Content-Type: application/x-www-form-urlencoded
+
+stockName=BTC/USD
+
+
+###Open long position
+POST http://localhost:8082/market/openLongPosition
+Content-Type: application/x-www-form-urlencoded
+
+stockName=BTC/USD&amountCurr=1.0
+
+
+###Close long position
+POST http://localhost:8082/market/closeLongPosition
+Content-Type: application/x-www-form-urlencoded
+
+stockName=BTC/USD

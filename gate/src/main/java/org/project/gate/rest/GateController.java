@@ -2,7 +2,7 @@ package org.project.gate.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.gate.database.service.interfaces.JobService;
+import org.project.data.services.interfaces.JobService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
