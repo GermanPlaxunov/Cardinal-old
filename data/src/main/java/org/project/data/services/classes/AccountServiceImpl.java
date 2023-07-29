@@ -38,6 +38,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void updateAccount(AccountEntity account, Double change, Integer openPositions) {
+        var balance = account.getBalance();
+        account.setBalance(balance + change)
+                .setOpenPositionCount(openPositions);
+        accountRepository.saveAndFlush(account);
+    }
+
+    @Override
     public Boolean isAnyOpenPosition(String accountId) {
         return accountRepository.findByAccountId(accountId)
                 .orElse(null)

@@ -32,12 +32,13 @@ public class MarketService {
     }
 
     public void openLongPosition(String symbol, Double amountCurr) {
-        positionProcessor.createPosition(symbol, amountCurr);
-        accountProcessor.updateAccount(symbol, true);
+        positionProcessor.openPosition(symbol, amountCurr);
+        accountProcessor.updateAccountAfterOpeningPosition(symbol, true);
     }
 
     public void closeLongPosition(String symbol) {
-
+        positionProcessor.closePosition(symbol);
+        accountProcessor.updateAccountAfterClosingPosition(symbol);
     }
 
 }

@@ -6,6 +6,8 @@ public interface PositionService {
 
     PositionEntity findOpenPosition(String symbol);
 
+    PositionEntity findLatestClosedPosition(String symbol);
+
     void save(PositionEntity entity);
 
 }

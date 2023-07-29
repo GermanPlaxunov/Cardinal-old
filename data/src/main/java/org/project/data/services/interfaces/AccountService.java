@@ -8,6 +8,8 @@ public interface AccountService {
 
     void updateAccount(String accountId, Double change, Integer openPositions);
 
+    void updateAccount(AccountEntity account, Double profit, Integer openPositions);
+
     Boolean isAnyOpenPosition(String accountId);
 
     AccountEntity findActiveAccount();
