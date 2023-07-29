@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=masada
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=libra
     username: ${POSTGRES_USERNAME:postgres}
     password: ${POSTGRES_PASSWORD:root}
     driver-class-name: org.postgresql.Driver

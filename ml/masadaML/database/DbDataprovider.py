@@ -10,7 +10,7 @@ def prepare_string_param(param):
 def get_price_history_from_db(from_date, to_date, symbol):
     connection = get_connection()
     cursor = connection.cursor()
-    query = f'select t.* from masada.core_stock t ' \
+    query = f'select t.* from libra.core_stock t ' \
             f'where t.symbol = {prepare_string_param(symbol)} ' \
             f'and t.date between {prepare_string_param(from_date)} ' \
             f'and {prepare_string_param(to_date)}'
@@ -23,7 +23,7 @@ def get_known_period_dates(symbol):
     connection = get_connection()
     cursor = connection.cursor()
     query = f'select min(t.date) as date_from, max(t.date) as date_to ' \
-            f'from masada.core_stock t ' \
+            f'from libra.core_stock t ' \
             f'where t.symbol = {prepare_string_param(symbol)}'
     cursor.execute(query)
     result = cursor.fetchall()
