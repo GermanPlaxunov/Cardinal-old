@@ -5,6 +5,7 @@ import org.project.core.client.MarketFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.PriceDiffStrategyProcess;
 import org.project.core.core.process.strategy.diff.DiffSignalCalculator;
 import org.project.core.mapper.PriceDiffSignalMapper;
@@ -61,6 +62,36 @@ public class CoreBeansConfig {
                 diffSignalCalculator,
                 positionAmount,
                 dealMaker);
+    }
+
+    @Bean
+    public AbsolutePriceOscillator absolutePriceOscillator(ExponentialMovingAverage exponentialMovingAverage) {
+        return new AbsolutePriceOscillator(exponentialMovingAverage);
+    }
+
+    @Bean
+    public BollingerBands bollingerBands(ExponentialMovingAverage exponentialMovingAverage) {
+        return new BollingerBands(exponentialMovingAverage);
+    }
+
+    @Bean
+    public ExponentialMovingAverage exponentialMovingAverage() {
+        return new ExponentialMovingAverage();
+    }
+
+    @Bean
+    public RelativeStrengthIndicator relativeStrengthIndicator() {
+        return new RelativeStrengthIndicator();
+    }
+
+    @Bean
+    public SimpleMovingAverage simpleMovingAverage() {
+        return new SimpleMovingAverage();
+    }
+
+    @Bean
+    public StandardDerivatives standardDerivatives(SimpleMovingAverage simpleMovingAverage) {
+        return new StandardDerivatives(simpleMovingAverage);
     }
 
 }
