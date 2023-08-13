@@ -1,9 +1,11 @@
 package org.project.core.core.process.indicators;
 
+import lombok.extern.slf4j.Slf4j;
 import org.project.data.entities.CoreStockEntity;
 
 import java.util.List;
 
+@Slf4j
 public class ExponentialMovingAverage extends AbstractIndicator {
 
     /**
@@ -11,22 +13,20 @@ public class ExponentialMovingAverage extends AbstractIndicator {
      * history equally, it places more weight on the most recent price observation and less weight
      * on the older price observations.
      *
-     * @param depth             - amount of points
      * @param coreStockEntities - list of all points ordered by date
      * @return ema
      */
-    public Double calculateEma(Integer depth, List<CoreStockEntity> coreStockEntities) {
-        if (coreStockEntities.size() > 20) {
-            if (depth == 0 || depth < 0) {
-                var prices = getPrices(coreStockEntities, depth);
-                Double ema = prices.get(0);
-                for (var i = 1; i < depth; i++) {
-                    ema = getEma(prices.get(i), ema, depth);
-                }
-                return ema;
-            }
+    public Double calculateEma(List<CoreStockEntity> coreStockEntities) {
+        var symbol = coreStockEntities.get(0).getSymbol();
+        log.info("Start calculating EMA for {}", symbol);
+        var depth = coreStockEntities.size();
+        var prices = getPrices(coreStockEntities);
+        Double ema = prices.get(0);
+        for (var i = 1; i < depth; i++) {
+            ema = getEma(prices.get(i), ema, depth);
         }
-        return null;
+        log.info("EMA for {} is {}", symbol, ema);
+        return ema;
     }
 
     private Double getEma(Double currentPrice, Double oldEma, Integer N) {

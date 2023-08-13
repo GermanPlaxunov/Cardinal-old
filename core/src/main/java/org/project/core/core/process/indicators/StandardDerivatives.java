@@ -12,15 +12,17 @@ public class StandardDerivatives {
 
     private final SimpleMovingAverage simpleMovingAverage;
 
-    public Double calculateStd(Integer depth, List<CoreStockEntity> coreStockEntities) {
+    public Double calculateStd(List<CoreStockEntity> coreStockEntities) {
         var symbol = coreStockEntities.get(0).getSymbol();
-        var SMA = simpleMovingAverage.calculateSma(depth, coreStockEntities);
+        log.info("Start calculating STD for {}", symbol);
+        var depth = coreStockEntities.size();
+        var SMA = simpleMovingAverage.calculateSma(coreStockEntities);
         var summ = 0.0;
         for (var i = 0; i < coreStockEntities.size(); i++) {
             summ += Math.pow((coreStockEntities.get(i).getClose() - SMA), 2);
         }
         var std = Math.sqrt(summ / depth);
-        log.info("Standard derivative for {} = {}", symbol, std);
+        log.info("STD for {} is {}", symbol, std);
         return std;
     }
 

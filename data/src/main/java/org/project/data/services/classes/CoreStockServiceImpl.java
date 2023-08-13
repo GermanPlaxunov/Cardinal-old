@@ -6,6 +6,7 @@ import org.project.data.repositories.CoreStockRepository;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.model.MarketStock;
 
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -31,6 +32,15 @@ public class CoreStockServiceImpl implements CoreStockService {
         var date = currStock.getDate();
         return repository.findFirstBySymbolAndDateLessThanOrderByDateDesc(symbol, date)
                 .orElse(null);
+    }
+
+    @Override
+    public List<CoreStockEntity> findCache(String symbol, Long cacheSeconds) {
+        var newDate = repository.findFirstBySymbolOrderByDateDesc(symbol)
+                .map(CoreStockEntity::getDate)
+                .map(date -> date.plusSeconds(cacheSeconds))
+                .orElse(null);
+        return repository.findAllBySymbolAndDateGreaterThanOrderByDateAsc(symbol, newDate);
     }
 
 }

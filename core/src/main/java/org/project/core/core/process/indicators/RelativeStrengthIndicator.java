@@ -21,18 +21,17 @@ public class RelativeStrengthIndicator extends AbstractIndicator {
      * relative to the losses, or if there have been many more losses relative to the gains.
      * RSI values over 50% indicate an uptrend, while RSI values below 50% indicate a downtrend.
      *
-     * @param depth             - amount of points.
      * @param coreStockEntities - list of all points.
      * @return rsi
      */
-    private Rsi calculateRsi(Integer depth, List<CoreStockEntity> coreStockEntities) {
+    public Rsi calculateRsi(List<CoreStockEntity> coreStockEntities) {
         var symbol = coreStockEntities.get(0).getSymbol();
-        log.info("Start calculating RSA for {} and depth {}", symbol, depth);
-        var prices = getPrices(coreStockEntities, depth);
+        log.info("Start calculating RSI for {}", symbol);
+        var prices = getPrices(coreStockEntities);
         var rsi = getTotalGainAndLosses(prices);
         var relativeStrength = getRelativeStrength(rsi);
         rsi.setRsi(calculateRsi(relativeStrength));
-        log.info("RSI for {} and depth {} = {}", symbol, depth, rsi.getRsi());
+        log.info("RSI for {} is {}", symbol, rsi.getRsi());
         return rsi;
     }
 

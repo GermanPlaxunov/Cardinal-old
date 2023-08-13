@@ -4,6 +4,7 @@ import org.project.data.entities.CoreStockEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long> {
@@ -13,4 +14,6 @@ public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long
     Optional<CoreStockEntity> findFirstBySymbolAndDateLessThanOrderByDateDesc(String symbol,
                                                                               LocalDateTime date);
 
+    List<CoreStockEntity> findAllBySymbolAndDateGreaterThanOrderByDateAsc(String symbol,
+                                                                          LocalDateTime date);
 }

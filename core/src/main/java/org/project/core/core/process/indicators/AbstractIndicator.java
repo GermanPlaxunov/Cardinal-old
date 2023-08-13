@@ -7,10 +7,9 @@ import java.util.Objects;
 
 public abstract class AbstractIndicator {
 
-    protected List<Double> getPrices(List<CoreStockEntity> coreStockEntities, Integer limit) {
+    protected List<Double> getPrices(List<CoreStockEntity> coreStockEntities) {
         return coreStockEntities.stream()
                 .filter(Objects::nonNull)
-                .limit(limit)
                 .map(CoreStockEntity::getClose)
                 .toList();
     }
