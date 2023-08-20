@@ -12,4 +12,5 @@ public interface PositionRepository extends JpaRepository<PositionEntity, Long> 
 
     Optional<PositionEntity> findFirstBySymbolAndCloseDateIsNotNullOrderByCloseDateDesc(String symbol);
 
+    Integer countBySymbolAndIsOpen(String symbol, boolean isOpen);
 }

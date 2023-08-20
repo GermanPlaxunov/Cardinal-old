@@ -3,16 +3,18 @@ package org.project.core.config;
 import org.project.core.client.MarketClient;
 import org.project.core.client.MarketFeignClient;
 import org.project.core.core.market.MarketDataProvider;
+import org.project.core.core.process.IndicatorsCollector;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.*;
-import org.project.core.core.process.strategy.PriceDiffStrategyProcess;
-import org.project.core.core.process.strategy.diff.DiffSignalCalculator;
-import org.project.core.mapper.PriceDiffSignalMapper;
+import org.project.core.core.process.indicators.cache.BtcCacheDepthProvider;
+import org.project.core.core.process.indicators.cache.CacheDepthProvider;
+import org.project.core.core.process.strategy.BasicStrategy;
+import org.project.core.core.process.strategy.basic.FixProfitProvider;
+import org.project.core.core.process.strategy.basic.StopLossProvider;
 import org.project.core.mapper.StockMapper;
 import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.PriceDiffSignalService;
-import org.springframework.beans.factory.annotation.Value;
+import org.project.data.services.interfaces.PositionService;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +31,31 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(PriceDiffStrategyProcess priceDiffStrategyProcess,
-                                         MarketDataProvider marketDataProvider) {
-        return new ProcessStarter(priceDiffStrategyProcess,
-                marketDataProvider);
+    public ProcessStarter processStarter(CacheDepthProvider cacheDepthProvider,
+                                         IndicatorsCollector indicatorsCollector,
+                                         MarketDataProvider marketDataProvider,
+                                         BasicStrategy basicStrategy) {
+        return new ProcessStarter(cacheDepthProvider,
+                indicatorsCollector,
+                marketDataProvider,
+                basicStrategy);
+    }
+
+    @Bean
+    public IndicatorsCollector indicatorsCollector(AbsolutePriceOscillator absolutePriceOscillator,
+                                                   ExponentialMovingAverage exponentialMovingAverage,
+                                                   RelativeStrengthIndicator relativeStrengthIndicator,
+                                                   SimpleMovingAverage simpleMovingAverage,
+                                                   StandardDerivatives standardDerivatives,
+                                                   BollingerBands bollingerBands,
+                                                   CoreStockService coreStockService) {
+        return new IndicatorsCollector(absolutePriceOscillator,
+                exponentialMovingAverage,
+                relativeStrengthIndicator,
+                simpleMovingAverage,
+                standardDerivatives,
+                bollingerBands,
+                coreStockService);
     }
 
     @Bean
@@ -45,53 +68,28 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DiffSignalCalculator diffSignalCalculator(PriceDiffSignalService priceDiffSignalService,
-                                                     PriceDiffSignalMapper priceDiffSignalMapper,
-                                                     CoreStockService coreStockService) {
-        return new DiffSignalCalculator(priceDiffSignalService,
-                priceDiffSignalMapper,
-                coreStockService);
+    public StopLossProvider stopLossProvider() {
+        return new StopLossProvider();
     }
 
     @Bean
-    public PriceDiffStrategyProcess priceDiffStrategyProcess(PriceDiffSignalService priceDiffSignalService,
-                                                             DiffSignalCalculator diffSignalCalculator,
-                                                             DealMaker dealMaker,
-                                                             @Value("${core.trading.position.amount}") Double positionAmount) {
-        return new PriceDiffStrategyProcess(priceDiffSignalService,
-                diffSignalCalculator,
-                positionAmount,
-                dealMaker);
+    public FixProfitProvider fixProfitProvider() {
+        return new FixProfitProvider();
     }
 
     @Bean
-    public AbsolutePriceOscillator absolutePriceOscillator(ExponentialMovingAverage exponentialMovingAverage) {
-        return new AbsolutePriceOscillator(exponentialMovingAverage);
+    public BasicStrategy basicStrategy(FixProfitProvider fixProfitProvider,
+                                       StopLossProvider stopLossProvider,
+                                       CoreStockService coreStockService,
+                                       PositionService positionService) {
+        return new BasicStrategy(fixProfitProvider,
+                stopLossProvider,
+                coreStockService,
+                positionService);
     }
 
     @Bean
-    public BollingerBands bollingerBands(ExponentialMovingAverage exponentialMovingAverage) {
-        return new BollingerBands(exponentialMovingAverage);
+    public CacheDepthProvider btcCacheDepthProvider() {
+        return new BtcCacheDepthProvider();
     }
-
-    @Bean
-    public ExponentialMovingAverage exponentialMovingAverage() {
-        return new ExponentialMovingAverage();
-    }
-
-    @Bean
-    public RelativeStrengthIndicator relativeStrengthIndicator() {
-        return new RelativeStrengthIndicator();
-    }
-
-    @Bean
-    public SimpleMovingAverage simpleMovingAverage() {
-        return new SimpleMovingAverage();
-    }
-
-    @Bean
-    public StandardDerivatives standardDerivatives(SimpleMovingAverage simpleMovingAverage) {
-        return new StandardDerivatives(simpleMovingAverage);
-    }
-
 }

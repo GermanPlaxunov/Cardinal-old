@@ -6,6 +6,7 @@ import org.project.data.repositories.CoreStockRepository;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.model.MarketStock;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,9 +28,7 @@ public class CoreStockServiceImpl implements CoreStockService {
     }
 
     @Override
-    public CoreStockEntity findPrevStock(MarketStock currStock) {
-        var symbol = currStock.getSymbol();
-        var date = currStock.getDate();
+    public CoreStockEntity findPrevStock(String symbol, LocalDateTime date) {
         return repository.findFirstBySymbolAndDateLessThanOrderByDateDesc(symbol, date)
                 .orElse(null);
     }

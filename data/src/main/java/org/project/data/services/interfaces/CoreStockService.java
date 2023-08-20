@@ -3,6 +3,7 @@ package org.project.data.services.interfaces;
 import org.project.data.entities.CoreStockEntity;
 import org.project.model.MarketStock;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CoreStockService {
@@ -11,7 +12,7 @@ public interface CoreStockService {
 
     CoreStockEntity findLastStock(String symbol);
 
-    CoreStockEntity findPrevStock(MarketStock currStock);
+    CoreStockEntity findPrevStock(String symbol, LocalDateTime date);
 
     List<CoreStockEntity> findCache(String symbol, Long cacheSeconds);
 }
