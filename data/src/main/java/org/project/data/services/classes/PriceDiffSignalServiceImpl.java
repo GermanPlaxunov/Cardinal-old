@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.project.data.entities.PriceDiffSignalEntity;
 import org.project.data.repositories.PriceDiffSignalRepository;
 import org.project.data.services.interfaces.PriceDiffSignalService;
-import org.project.model.MarketStock;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 public class PriceDiffSignalServiceImpl implements PriceDiffSignalService {
@@ -30,13 +29,8 @@ public class PriceDiffSignalServiceImpl implements PriceDiffSignalService {
     }
 
     @Override
-    public PriceDiffSignalEntity findPrevSignal(MarketStock stock) {
-        var symbol = stock.getSymbol();
-        var date = stock.getDate();
-        return repository.findPrevSignal(symbol, date)
-                .stream()
-                .filter(Objects::nonNull)
-                .findFirst()
+    public PriceDiffSignalEntity findPrevSignal(String symbol) {
+        return repository.findTopBySymbolOrderByDateDesc(symbol)
                 .orElse(null);
     }
 }

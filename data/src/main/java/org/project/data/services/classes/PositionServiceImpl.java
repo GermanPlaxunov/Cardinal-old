@@ -32,4 +32,5 @@ public class PositionServiceImpl implements PositionService {
     public void save(PositionEntity entity) {
         positionRepository.saveAndFlush(entity);
     }
+
 }

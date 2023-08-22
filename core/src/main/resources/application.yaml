@@ -4,9 +4,9 @@ server:
     context-path: /core
 
 core:
-  trading:
-    position:
-      amount: ${POSITION_AMOUNT:3}
+  account:
+    id: 9b6afcd3-8126-4ca9-a871-e66f409e1d68
+
 
 spring:
   main:
@@ -17,7 +17,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=masada
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=libra
     username: ${POSTGRES_USERNAME:postgres}
     password: ${POSTGRES_PASSWORD:root}
     driver-class-name: org.postgresql.Driver

@@ -5,11 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.market.mapper.StockMapper;
 import org.project.market.process.MarketService;
 import org.project.model.MarketStock;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.WebUtils;
 
 @Slf4j
 @RestController
