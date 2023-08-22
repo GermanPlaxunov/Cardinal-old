@@ -89,7 +89,7 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public CacheDepthProvider btcCacheDepthProvider() {
-        return new BtcCacheDepthProvider();
+    public CacheDepthProvider btcCacheDepthProvider(CoreStockService coreStockService) {
+        return new BtcCacheDepthProvider(coreStockService);
     }
 }

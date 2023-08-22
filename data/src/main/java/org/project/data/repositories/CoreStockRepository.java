@@ -16,4 +16,6 @@ public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long
 
     List<CoreStockEntity> findAllBySymbolAndDateGreaterThanOrderByDateAsc(String symbol,
                                                                           LocalDateTime date);
+
+    Long countBySymbol(String symbol);
 }

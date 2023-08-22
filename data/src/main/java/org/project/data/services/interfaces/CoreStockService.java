@@ -15,4 +15,6 @@ public interface CoreStockService {
     CoreStockEntity findPrevStock(String symbol, LocalDateTime date);
 
     List<CoreStockEntity> findCache(String symbol, Long cacheSeconds);
+
+    Long count(String symbol);
 }

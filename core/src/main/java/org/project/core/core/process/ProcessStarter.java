@@ -17,10 +17,18 @@ public class ProcessStarter {
 
     public void startProcess(String symbol) {
         var next = marketDataProvider.getNextDataPoint(symbol);
-        var cacheDepth = btcCacheDepthProvider.getCacheDepth(symbol);
-        var processVars = indicatorsCollector.collect(symbol, cacheDepth);
-        var basicStrategyResult = basicStrategy.startProcess(next);
-        processVars.setBasicStrategyResult(basicStrategyResult);
+        if (checkCache(symbol)) {
+            var cacheDepth = btcCacheDepthProvider.getCacheDepth(symbol);
+            var processVars = indicatorsCollector.collect(symbol, cacheDepth);
+            var basicStrategyResult = basicStrategy.startProcess(next);
+            processVars.setBasicStrategyResult(basicStrategyResult);
+        } else {
+            log.info("Not enough cache data for {}", symbol);
+        }
+    }
+
+    private boolean checkCache(String symbol) {
+        return btcCacheDepthProvider.isCacheAvailable(symbol);
     }
 
 }

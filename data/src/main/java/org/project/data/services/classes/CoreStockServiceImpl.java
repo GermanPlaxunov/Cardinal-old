@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.repositories.CoreStockRepository;
 import org.project.data.services.interfaces.CoreStockService;
-import org.project.model.MarketStock;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,9 +36,14 @@ public class CoreStockServiceImpl implements CoreStockService {
     public List<CoreStockEntity> findCache(String symbol, Long cacheSeconds) {
         var newDate = repository.findFirstBySymbolOrderByDateDesc(symbol)
                 .map(CoreStockEntity::getDate)
-                .map(date -> date.plusSeconds(cacheSeconds))
+                .map(date -> date.minusSeconds(cacheSeconds))
                 .orElse(null);
         return repository.findAllBySymbolAndDateGreaterThanOrderByDateAsc(symbol, newDate);
+    }
+
+    @Override
+    public Long count(String symbol) {
+        return repository.countBySymbol(symbol);
     }
 
 }

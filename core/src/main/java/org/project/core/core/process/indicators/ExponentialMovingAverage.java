@@ -21,16 +21,16 @@ public class ExponentialMovingAverage extends AbstractIndicator {
         log.info("Start calculating EMA for {}", symbol);
         var depth = coreStockEntities.size();
         var prices = getPrices(coreStockEntities);
-        Double ema = prices.get(0);
+        var ema = prices.get(0);
+        var ny = getNy(depth);
         for (var i = 1; i < depth; i++) {
-            ema = getEma(prices.get(i), ema, depth);
+            ema = getEma(prices.get(i), ema, ny);
         }
         log.info("EMA for {} is {}", symbol, ema);
         return ema;
     }
 
-    private Double getEma(Double currentPrice, Double oldEma, Integer N) {
-        var ny = getNy(N);
+    private Double getEma(Double currentPrice, Double oldEma, Double ny) {
         return (currentPrice - oldEma) * ny + oldEma;
     }
 

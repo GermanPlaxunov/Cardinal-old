@@ -4,4 +4,6 @@ public interface CacheDepthProvider {
 
     Long getCacheDepth(String symbol);
 
+    Boolean isCacheAvailable(String symbol);
+
 }
