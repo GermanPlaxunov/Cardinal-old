@@ -1,8 +1,7 @@
-package org.project.core.core.process;
+package org.project.core.core.process.indicators;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.data.services.interfaces.CoreStockService;
 
@@ -10,6 +9,7 @@ import org.project.data.services.interfaces.CoreStockService;
 @RequiredArgsConstructor
 public class IndicatorsCollector {
 
+    private final IndicatorsSaver indicatorsSaver;
     private final AbsolutePriceOscillator absolutePriceOscillator;
     private final ExponentialMovingAverage exponentialMovingAverage;
     private final RelativeStrengthIndicator relativeStrengthIndicator;
@@ -27,13 +27,15 @@ public class IndicatorsCollector {
         var sma = simpleMovingAverage.calculateSma(stocks);
         var std = standardDerivatives.calculateStd(stocks);
         var bband = bollingerBands.calculateBband(stocks);
-        return new ProcessVars()
+        var processVars = new ProcessVars()
                 .setApo(apo)
                 .setEma(ema)
                 .setRsi(rsi)
                 .setSma(sma)
                 .setStd(std)
                 .setBband(bband);
+        indicatorsSaver.saveAllIndicators(processVars);
+        return processVars;
     }
 
 }

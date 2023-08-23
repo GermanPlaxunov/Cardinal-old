@@ -4,6 +4,8 @@ import lombok.Data;
 import org.project.core.core.process.indicators.model.Bband;
 import org.project.core.core.process.indicators.model.Rsi;
 
+import java.time.LocalDateTime;
+
 @Data
 public class ProcessVars {
 
@@ -18,4 +20,6 @@ public class ProcessVars {
     private Double sma;
     private Double std;
     private BasicStrategyResult basicStrategyResult;
+    private Long depth;
+    private LocalDateTime date;
 }

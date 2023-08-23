@@ -3,6 +3,7 @@ package org.project.core.core.process;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.market.MarketDataProvider;
+import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.core.core.process.indicators.cache.CacheDepthProvider;
 import org.project.core.core.process.strategy.BasicStrategy;
 

@@ -3,7 +3,6 @@ package org.project.core.config;
 import org.project.core.client.MarketClient;
 import org.project.core.client.MarketFeignClient;
 import org.project.core.core.market.MarketDataProvider;
-import org.project.core.core.process.IndicatorsCollector;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.*;
@@ -15,6 +14,7 @@ import org.project.core.core.process.strategy.basic.StopLossProvider;
 import org.project.core.mapper.StockMapper;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
+import org.project.data.services.interfaces.indicators.*;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,20 +42,38 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public IndicatorsCollector indicatorsCollector(AbsolutePriceOscillator absolutePriceOscillator,
+    public IndicatorsCollector indicatorsCollector(IndicatorsSaver indicatorsSaver,
+                                                   AbsolutePriceOscillator absolutePriceOscillator,
                                                    ExponentialMovingAverage exponentialMovingAverage,
                                                    RelativeStrengthIndicator relativeStrengthIndicator,
                                                    SimpleMovingAverage simpleMovingAverage,
                                                    StandardDerivatives standardDerivatives,
                                                    BollingerBands bollingerBands,
                                                    CoreStockService coreStockService) {
-        return new IndicatorsCollector(absolutePriceOscillator,
+        return new IndicatorsCollector(indicatorsSaver,
+                absolutePriceOscillator,
                 exponentialMovingAverage,
                 relativeStrengthIndicator,
                 simpleMovingAverage,
                 standardDerivatives,
                 bollingerBands,
                 coreStockService);
+    }
+
+    @Bean
+    public IndicatorsSaver indicatorsSaver(
+            AbsolutePriceOscillatorService absolutePriceOscillatorService,
+            BollingerBandsService bollingerBandsService,
+            ExponentialMovingAverageService exponentialMovingAverageService,
+            RelativeStrengthIndicatorService relativeStrengthIndicatorService,
+            SimpleMovingAverageService simpleMovingAverageService,
+            StandardDerivativesService standardDerivativesService) {
+        return new IndicatorsSaver(absolutePriceOscillatorService,
+                bollingerBandsService,
+                exponentialMovingAverageService,
+                relativeStrengthIndicatorService,
+                simpleMovingAverageService,
+                standardDerivativesService);
     }
 
     @Bean
