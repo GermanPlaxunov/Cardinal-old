@@ -16,17 +16,16 @@ public class BasicStrategy {
 
     private final FixProfitProvider fixProfitProvider;
     private final StopLossProvider stopLossProvider;
-    private final CoreStockService coreStockService;
     private final PositionService positionService;
 
     public BasicStrategyResult startProcess(MarketStock stock) {
         var symbol = stock.getSymbol();
-        BasicStrategyResult result = null;
+        BasicStrategyResult result;
         var openPosition = positionService.findOpenPosition(symbol);
         if (openPosition != null) {
             result = verifyOpenPosition(openPosition, stock);
         } else {
-            // Тут должна быть логика открытия позиции
+            result = createOpenPositionSignal(openPosition, stock);
         }
         return result;
     }
@@ -41,7 +40,20 @@ public class BasicStrategy {
                 .setStopLossPrice(stopLossProvider.getStopLossPrice(position.getOpenPrice()))
                 .setCurrentPrice(stock.getClose())
                 .setOpenPositionsCount(1)
-                .setClosePositionSignal(closeFlg);
+                .setClosePositionSignal(closeFlg)
+                .setOpenPositionSignal(false);
+    }
+
+    private BasicStrategyResult createOpenPositionSignal(PositionEntity position, MarketStock stock) {
+        var symbol = position.getSymbol();
+        return new BasicStrategyResult()
+                .setSymbol(symbol)
+                .setAmount(1.0)
+                .setFixProfitPrice(fixProfitProvider.getFixProfitPrice(position.getOpenPrice()))
+                .setStopLossPrice(stopLossProvider.getStopLossPrice(position.getOpenPrice()))
+                .setCurrentPrice(stock.getClose())
+                .setOpenPositionSignal(true)
+                .setClosePositionSignal(false);
     }
 
     private boolean getClosePositionFlg(Double openPositionPrice, Double currentPrice) {

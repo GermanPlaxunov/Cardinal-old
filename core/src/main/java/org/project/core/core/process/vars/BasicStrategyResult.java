@@ -13,4 +13,5 @@ public class BasicStrategyResult {
     private Double currentPrice;
     private Integer openPositionsCount;
     private Boolean closePositionSignal;
+    private Boolean openPositionSignal;
 }

@@ -10,4 +10,6 @@ public interface PositionService {
 
     void save(PositionEntity entity);
 
+    boolean ifOpenPosition(String symbol);
+
 }
