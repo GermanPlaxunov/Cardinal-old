@@ -1,24 +1,29 @@
 package org.project.core.core.ml.neural;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import static org.project.core.core.MathUtils.meanSquareLoss;
 
+@Slf4j
 public class BasicNeuralNetwork {
 
     private List<Neuron> neurons;
+    private String name;
 
-    public BasicNeuralNetwork() {
+    public BasicNeuralNetwork(String name) {
+        this.name = name;
         var random = new Random();
-        neurons = new ArrayList<>(){{
-           add(new BasicNeuron(random));
-           add(new BasicNeuron(random));
-           add(new BasicNeuron(random));
-           add(new BasicNeuron(random));
-           add(new BasicNeuron(random));
-           add(new BasicNeuron(random));
+        neurons = new ArrayList<>() {{
+            add(new BasicNeuron(random));
+            add(new BasicNeuron(random));
+            add(new BasicNeuron(random));
+            add(new BasicNeuron(random));
+            add(new BasicNeuron(random));
+            add(new BasicNeuron(random));
         }};
     }
 
@@ -35,11 +40,11 @@ public class BasicNeuralNetwork {
         );
     }
 
-    public void train(List<List<Double>> data, List<Double> answers) {
+    public void train(List<List<Double>> data, List<Double> answers, Integer epochs) {
         Double bestEpochLoss = null;
-        for (var epoch = 0; epoch < 1000; epoch++) {
+        for (var epoch = 0; epoch < epochs; epoch++) {
             // adapt neuron
-            var epochNeuron = neurons.get(epoch % 6);
+            var epochNeuron = neurons.get(epoch % neurons.size());
             epochNeuron.mutate();
 
             var predictions = new ArrayList<Double>();
@@ -60,7 +65,7 @@ public class BasicNeuralNetwork {
                 }
             }
             if (epoch % 100 == 0) {
-                System.out.println(String.format("Epoch: %s | bestEpochLoss: %.15f | thisEpochLoss: %.15f", epoch, bestEpochLoss, thisEpochLoss));
+                log.debug("Epoch: {} | bestEpochLoss: {} | thisEpochLoss: {}", epoch, bestEpochLoss, thisEpochLoss);
             }
         }
     }

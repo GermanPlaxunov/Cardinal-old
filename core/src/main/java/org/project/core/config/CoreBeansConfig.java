@@ -5,6 +5,7 @@ import org.project.core.client.MarketFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.indicators.cache.BtcCacheDepthProvider;
 import org.project.core.core.process.indicators.cache.CacheDepthProvider;
@@ -31,11 +32,20 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(CacheDepthProvider cacheDepthProvider,
+    public DecisionMakingCenter decisionMakingCenter(PositionService positionService,
+                                                     DealMaker dealMaker) {
+        return new DecisionMakingCenter(positionService,
+                dealMaker);
+    }
+
+    @Bean
+    public ProcessStarter processStarter(DecisionMakingCenter decisionMakingCenter,
+                                         CacheDepthProvider cacheDepthProvider,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
                                          BasicStrategy basicStrategy) {
-        return new ProcessStarter(cacheDepthProvider,
+        return new ProcessStarter(decisionMakingCenter,
+                cacheDepthProvider,
                 indicatorsCollector,
                 marketDataProvider,
                 basicStrategy);
@@ -98,11 +108,9 @@ public class CoreBeansConfig {
     @Bean
     public BasicStrategy basicStrategy(FixProfitProvider fixProfitProvider,
                                        StopLossProvider stopLossProvider,
-                                       CoreStockService coreStockService,
                                        PositionService positionService) {
         return new BasicStrategy(fixProfitProvider,
                 stopLossProvider,
-                coreStockService,
                 positionService);
     }
 

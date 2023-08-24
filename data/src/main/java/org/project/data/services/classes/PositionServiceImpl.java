@@ -33,4 +33,9 @@ public class PositionServiceImpl implements PositionService {
         positionRepository.saveAndFlush(entity);
     }
 
+    @Override
+    public boolean ifOpenPosition(String symbol) {
+        return positionRepository.countBySymbolAndIsOpen(symbol, true) > 0;
+    }
+
 }
