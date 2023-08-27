@@ -18,4 +18,8 @@ public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long
                                                                           LocalDateTime date);
 
     Long countBySymbol(String symbol);
+
+    List<CoreStockEntity> findAllBySymbolAndDateBetween(String symbol,
+                                                        LocalDateTime from,
+                                                        LocalDateTime to);
 }

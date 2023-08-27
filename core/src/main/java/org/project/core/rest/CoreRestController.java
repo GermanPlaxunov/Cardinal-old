@@ -19,8 +19,13 @@ public class CoreRestController implements CoreController {
     @PostMapping(path = "/startProcess",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    public void startProcess(@RequestParam(name = "stock") String stock) {
-        processStarter.startProcess(stock);
+    public void startProcess(@RequestParam(name = "stock") String symbol) {
+        processStarter.startProcess(symbol);
+    }
+
+    @Override
+    public void trainNeuralNetworks(String symbol) {
+
     }
 
 }

@@ -1,19 +1,23 @@
-package org.project.core.core.ml.neural;
+package org.project.core.core.process.neural.model;
 
+import lombok.Getter;
 import org.project.core.core.MathUtils;
 
 import java.util.Random;
 
-public class BasicNeuron implements Neuron {
+public class SimpleNeuron {
+    @Getter
     private Double bias;
+    @Getter
     private Double weight1;
+    @Getter
     private Double weight2;
     private Double oldBias;
     private Double oldWeight1;
     private Double oldWeight2;
     private Random random;
 
-    public BasicNeuron(Random random) {
+    public SimpleNeuron(Random random) {
         this.random = random;
         bias = random.nextDouble(-1, 1);
         weight1 = random.nextDouble(-1, 1);
@@ -27,13 +31,11 @@ public class BasicNeuron implements Neuron {
         return (weight1 * input1) + (weight2 * input2) + bias;
     }
 
-    @Override
     public Double compute(Double input1, Double input2) {
         var preActivation = preActivation(input1, input2);
         return MathUtils.sigmoid(preActivation);
     }
 
-    @Override
     public void mutate() {
         var propertyToChange = random.nextInt(0, 3);
         var changeFactor = random.nextDouble(-1, 1);
@@ -44,15 +46,13 @@ public class BasicNeuron implements Neuron {
         }
     }
 
-    @Override
-    public void forget(){
+    public void forget() {
         bias = oldBias;
         weight1 = oldWeight1;
         weight2 = oldWeight2;
     }
 
-    @Override
-    public void remember(){
+    public void remember() {
         oldBias = bias;
         oldWeight1 = weight1;
         oldWeight2 = weight2;

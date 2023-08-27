@@ -46,4 +46,9 @@ public class CoreStockServiceImpl implements CoreStockService {
         return repository.countBySymbol(symbol);
     }
 
+    @Override
+    public List<CoreStockEntity> findAllInPeriod(String symbol, LocalDateTime from, LocalDateTime to) {
+        return repository.findAllBySymbolAndDateBetween(symbol, from, to);
+    }
+
 }

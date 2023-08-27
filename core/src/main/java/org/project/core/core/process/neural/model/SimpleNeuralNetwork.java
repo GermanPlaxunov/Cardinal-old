@@ -1,6 +1,7 @@
-package org.project.core.core.ml.neural;
+package org.project.core.core.process.neural.model;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
+import org.project.core.core.process.neural.model.SimpleNeuron;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,22 +9,22 @@ import java.util.Random;
 
 import static org.project.core.core.MathUtils.meanSquareLoss;
 
-@Slf4j
-public class BasicNeuralNetwork {
+@Data
+public class SimpleNeuralNetwork {
 
-    private List<Neuron> neurons;
+    private List<SimpleNeuron> neurons;
     private String name;
 
-    public BasicNeuralNetwork(String name) {
+    public SimpleNeuralNetwork(String name) {
         this.name = name;
         var random = new Random();
         neurons = new ArrayList<>() {{
-            add(new BasicNeuron(random));
-            add(new BasicNeuron(random));
-            add(new BasicNeuron(random));
-            add(new BasicNeuron(random));
-            add(new BasicNeuron(random));
-            add(new BasicNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
         }};
     }
 
@@ -43,7 +44,6 @@ public class BasicNeuralNetwork {
     public void train(List<List<Double>> data, List<Double> answers, Integer epochs) {
         Double bestEpochLoss = null;
         for (var epoch = 0; epoch < epochs; epoch++) {
-            // adapt neuron
             var epochNeuron = neurons.get(epoch % neurons.size());
             epochNeuron.mutate();
 
@@ -63,9 +63,6 @@ public class BasicNeuralNetwork {
                 } else {
                     epochNeuron.forget();
                 }
-            }
-            if (epoch % 100 == 0) {
-                log.debug("Epoch: {} | bestEpochLoss: {} | thisEpochLoss: {}", epoch, bestEpochLoss, thisEpochLoss);
             }
         }
     }

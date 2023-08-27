@@ -17,4 +17,8 @@ public interface CoreStockService {
     List<CoreStockEntity> findCache(String symbol, Long cacheSeconds);
 
     Long count(String symbol);
+
+    List<CoreStockEntity> findAllInPeriod(String symbol,
+                                          LocalDateTime from,
+                                          LocalDateTime to);
 }
