@@ -10,5 +10,6 @@ public interface RelativeStrengthIndicatorService extends AbstractIndicatorServi
     List<RelativeStrengthIndicatorEntity> findAllInPeriod(String symbol,
                                                           LocalDateTime from,
                                                           LocalDateTime to);
+    RelativeStrengthIndicatorEntity findLast(String symbol);
 
 }

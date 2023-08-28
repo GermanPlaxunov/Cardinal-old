@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface RelativeStrengthIndicatorRepository extends JpaRepository<RelativeStrengthIndicatorEntity, Long> {
 
@@ -13,5 +14,7 @@ public interface RelativeStrengthIndicatorRepository extends JpaRepository<Relat
     List<RelativeStrengthIndicatorEntity> findAllBySymbolAndDateBetween(String symbol,
                                                                         LocalDateTime from,
                                                                         LocalDateTime to);
+
+    Optional<RelativeStrengthIndicatorEntity> findTopBySymbolOrderByDateDesc(String symbol);
 
 }

@@ -16,6 +16,7 @@
         <module>model</module>
         <module>market</module>
         <module>data</module>
+        <module>neural</module>
     </modules>
 
 </project>

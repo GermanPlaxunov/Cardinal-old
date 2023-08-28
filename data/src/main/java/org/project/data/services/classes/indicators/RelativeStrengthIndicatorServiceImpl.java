@@ -36,4 +36,10 @@ public class RelativeStrengthIndicatorServiceImpl implements RelativeStrengthInd
                 .filter(Objects::nonNull)
                 .toList();
     }
+
+    @Override
+    public RelativeStrengthIndicatorEntity findLast(String symbol) {
+        return repository.findTopBySymbolOrderByDateDesc(symbol)
+                .orElse(null);
+    }
 }

@@ -6,7 +6,7 @@ import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.model.neural.training.TrainParams;
-import org.project.neural.process.network.NetworkProvider;
+import org.project.neural.process.network.NetworkStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,11 @@ public class NetworkRsiTrainer {
 
     private final RelativeStrengthIndicatorService relativeStrengthIndicatorService;
     private final CoreStockService coreStockService;
-    private final NetworkProvider networkProvider;
+    private final NetworkStore networkStore;
 
     public void train(TrainParams params) {
         var networkName = "RSI->".concat(params.getSymbol());
-        var network = networkProvider.get(networkName);
+        var network = networkStore.get(networkName);
         var symbol = params.getSymbol();
         var from = params.getDateFrom();
         var to = params.getDateTo();
