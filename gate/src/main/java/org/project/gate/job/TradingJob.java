@@ -6,12 +6,12 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 @RequiredArgsConstructor
-public class ScheduledJob implements Job {
+public class TradingJob implements Job {
 
-    private final ScheduledJobExecutor scheduledJobExecutor;
+    private final ScheduledJobExecutor executor;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        scheduledJobExecutor.execute();
+        executor.trade();
     }
 }
