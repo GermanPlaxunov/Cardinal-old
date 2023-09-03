@@ -25,7 +25,7 @@ public class MarketService {
             lastProvidedStockService.update(nextStock.getId(), symbol, nextStock.getDate());
         } else {
             var firstStock = marketStockService.findFirst(symbol);
-            lastProvidedStockService.init(symbol, firstStock.getId(), firstStock.getDate());
+            lastProvidedStockService.save(firstStock.getId(), symbol, firstStock.getDate());
             nextStock = firstStock;
         }
         return nextStock;

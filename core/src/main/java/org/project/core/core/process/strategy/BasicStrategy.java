@@ -6,7 +6,6 @@ import org.project.core.core.process.strategy.basic.FixProfitProvider;
 import org.project.core.core.process.strategy.basic.StopLossProvider;
 import org.project.core.core.process.vars.BasicStrategyResult;
 import org.project.data.entities.PositionEntity;
-import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
 import org.project.model.MarketStock;
 
@@ -25,7 +24,7 @@ public class BasicStrategy {
         if (openPosition != null) {
             result = verifyOpenPosition(openPosition, stock);
         } else {
-            result = createOpenPositionSignal(openPosition, stock);
+            result = createOpenPositionSignal(symbol, stock.getClose());
         }
         return result;
     }
@@ -44,14 +43,14 @@ public class BasicStrategy {
                 .setOpenPositionSignal(false);
     }
 
-    private BasicStrategyResult createOpenPositionSignal(PositionEntity position, MarketStock stock) {
-        var symbol = position.getSymbol();
+    private BasicStrategyResult createOpenPositionSignal(String symbol, Double price) {
         return new BasicStrategyResult()
                 .setSymbol(symbol)
                 .setAmount(1.0)
-                .setFixProfitPrice(fixProfitProvider.getFixProfitPrice(position.getOpenPrice()))
-                .setStopLossPrice(stopLossProvider.getStopLossPrice(position.getOpenPrice()))
-                .setCurrentPrice(stock.getClose())
+                .setFixProfitPrice(fixProfitProvider.getFixProfitPrice(price))
+                .setStopLossPrice(stopLossProvider.getStopLossPrice(price))
+                .setCurrentPrice(price)
+                .setOpenPositionsCount(0)
                 .setOpenPositionSignal(true)
                 .setClosePositionSignal(false);
     }

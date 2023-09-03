@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
-import java.net.URI;
-
 @FeignClient(name = "core-client", url = "http://localhost:8081/core")
 public interface CoreFeignClient extends CoreClient {
 
@@ -15,6 +13,6 @@ public interface CoreFeignClient extends CoreClient {
     @PostMapping(path = "/startProcess",
             consumes = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8",
             produces = MediaType.APPLICATION_JSON_VALUE + WebUtils.CONTENT_TYPE_CHARSET_PREFIX + "UTF-8")
-    void startProcess(@RequestParam(name = "stock") String stock);
+    void startProcess(@RequestParam(name = "symbol") String stock);
 
 }

@@ -1,0 +1,12 @@
+###Predict
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+
+symbol=BTC/USD
+
+
+###Train model
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+
+symbol=BTC/USD
