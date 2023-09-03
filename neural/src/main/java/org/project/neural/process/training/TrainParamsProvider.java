@@ -14,27 +14,34 @@ public class TrainParamsProvider {
     private final CoreStockService coreStockService;
 
     public TrainParams getTrainParams(String symbol) {
-        var dataset = coreStockService.findCache(symbol, 600L);
+        var dataset = coreStockService.findCache(symbol, 3600L);
         return new TrainParams()
                 .setSymbol(symbol)
                 .setDateTo(getDateTo(dataset))
-                .setDateFrom(getDateFrom(dataset));
+                .setDateFrom(getDateFrom(dataset))
+                .setPrices(getPrices(dataset));
     }
 
     private LocalDateTime getDateTo(List<CoreStockEntity> stocks) {
+        var size = stocks.size();
         return stocks.stream()
                 .map(CoreStockEntity::getDate)
+                .skip(size-1)
                 .findFirst()
                 .orElse(null);
     }
 
     private LocalDateTime getDateFrom(List<CoreStockEntity> stocks) {
-        var size = stocks.size();
         return stocks.stream()
-                .skip(size - 1)
                 .map(CoreStockEntity::getDate)
                 .findFirst()
                 .orElse(null);
+    }
+
+    private List<Double> getPrices(List<CoreStockEntity> stocks) {
+        return stocks.stream()
+                .map(CoreStockEntity::getClose)
+                .toList();
     }
 
 }

@@ -27,8 +27,10 @@ import org.springframework.context.annotation.Configuration;
 public class CoreBeansConfig {
 
     @Bean
-    public DealMaker dealMaker(MarketClient marketClient) {
-        return new DealMaker(marketClient);
+    public DealMaker dealMaker(PositionService positionService,
+                               MarketClient marketClient) {
+        return new DealMaker(positionService,
+                marketClient);
     }
 
     @Bean

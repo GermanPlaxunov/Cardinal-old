@@ -9,11 +9,11 @@ public class BtcCacheDepthProvider implements CacheDepthProvider {
     private final CoreStockService coreStockService;
 
     public Long getCacheDepth(String symbol) {
-        return 600L;
+        return 30L;
     }
 
     public Boolean isCacheAvailable(String symbol) {
-        return coreStockService.count(symbol) > 600L;
+        return coreStockService.count(symbol) > 30L;
     }
 
 }

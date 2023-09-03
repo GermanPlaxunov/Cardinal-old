@@ -10,5 +10,4 @@ public interface MarketClient {
 
     void closeLongPosition(String stockName);
 
-    Boolean isNewDealAllowed(String symbol);
 }

@@ -57,7 +57,7 @@ public class QuartzConfig {
                 .withDescription("Trigger to launch model training analyze")
                 .withSchedule(simpleSchedule()
                         .repeatForever()
-                        .withIntervalInSeconds(5))
+                        .withIntervalInSeconds(100000))
                 .build();
     }
 

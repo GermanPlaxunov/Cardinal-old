@@ -24,10 +24,9 @@ public class NetworkRsiTrainer {
         var symbol = params.getSymbol();
         var from = params.getDateFrom();
         var to = params.getDateTo();
-        var stocks = coreStockService.findAllInPeriod(symbol, from, to);
         var indicators = relativeStrengthIndicatorService.findAllInPeriod(symbol, from, to);
         var data = prepareData(indicators);
-        var answers = getAnswersWithOffset(stocks, 1);
+        var answers = getAnswersWithOffset(params.getPrices(), 1);
         network.train(data, answers, 1000);
     }
 
@@ -44,13 +43,12 @@ public class NetworkRsiTrainer {
      * In purpose to get the affect of present values
      * on price in the future.
      *
-     * @param stocks
+     * @param prices - the list of stock`s price.
+     * @param offsetSize - the offset size.
      */
-    private List<Double> getAnswersWithOffset(List<CoreStockEntity> stocks, Integer offsetSize) {
-        stocks.remove(offsetSize);
-        return stocks.stream()
-                .map(CoreStockEntity::getClose)
-                .toList();
+    private List<Double> getAnswersWithOffset(List<Double> prices, Integer offsetSize) {
+        prices.remove(offsetSize);
+        return prices;
     }
 
 }

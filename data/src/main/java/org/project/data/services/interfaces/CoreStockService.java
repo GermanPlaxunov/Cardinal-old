@@ -10,15 +10,7 @@ public interface CoreStockService {
 
     void save(CoreStockEntity entity);
 
-    CoreStockEntity findLastStock(String symbol);
-
-    CoreStockEntity findPrevStock(String symbol, LocalDateTime date);
-
     List<CoreStockEntity> findCache(String symbol, Long cacheSeconds);
 
     Long count(String symbol);
-
-    List<CoreStockEntity> findAllInPeriod(String symbol,
-                                          LocalDateTime from,
-                                          LocalDateTime to);
 }
