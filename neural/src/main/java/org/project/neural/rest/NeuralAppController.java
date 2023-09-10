@@ -1,4 +1,4 @@
-package org.project.neural.process.rest;
+package org.project.neural.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

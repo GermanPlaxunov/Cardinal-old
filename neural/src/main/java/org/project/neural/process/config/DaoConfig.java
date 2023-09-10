@@ -3,12 +3,15 @@ package org.project.neural.process.config;
 import org.project.data.repositories.CoreStockRepository;
 import org.project.data.repositories.ProcessParamsRepository;
 import org.project.data.repositories.indicators.RelativeStrengthIndicatorRepository;
+import org.project.data.repositories.neural.NeuralNetworkRepository;
 import org.project.data.services.classes.CoreStockServiceImpl;
 import org.project.data.services.classes.ProcessParamsServiceImpl;
 import org.project.data.services.classes.indicators.RelativeStrengthIndicatorServiceImpl;
+import org.project.data.services.classes.neural.NeuralNetworkServiceImpl;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
+import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +36,11 @@ public class DaoConfig {
     @Bean
     public ProcessParamsService processParamsService(ProcessParamsRepository repository) {
         return new ProcessParamsServiceImpl(repository);
+    }
+
+    @Bean
+    public NeuralNetworkService neuralNetworkService(NeuralNetworkRepository repository) {
+        return new NeuralNetworkServiceImpl(repository);
     }
 
 }
