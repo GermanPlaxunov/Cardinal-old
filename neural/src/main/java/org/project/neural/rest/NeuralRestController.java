@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class NeuralAppController implements NeuralController {
+public class NeuralRestController implements NeuralController {
 
     private final NeuralProcessStarter neuralProcessStarter;
 

@@ -13,27 +13,36 @@ public class DecisionMakingCenter {
     private final PositionService positionService;
     private final DealMaker dealMaker;
 
+    /**
+     * Checking if there is any open positions and if it is, verifying it
+     * whether it should be closed or not.
+     *
+     * @param processVars - a set of indicators and useful values.
+     */
     public void start(ProcessVars processVars) {
         log.trace("DecisionMakingCenter.start");
         var symbol = processVars.getSymbol();
         if (positionService.ifOpenPosition(symbol)) {
-            log.info("Checking if current {} positioin should be closed.", symbol);
-            // проверка на то, можно ли послать сигнал закрытия сделки
+            log.info("Check if open {} position should be closed", symbol);
             var closeSignal = shouldPositionBeClosed(processVars);
-            if(closeSignal) {
+            if (closeSignal) {
                 dealMaker.closeLongPosition(symbol);
             }
         } else {
             log.info("Checking if new {} position should be open.", symbol);
-            // проверка на снижение цены с момента закрытия последней сделки
-            // или на вероятность выхода из коридора
             var openPosition = shouldPositionBeOpen(processVars);
-            if(openPosition) {
+            if (openPosition) {
                 dealMaker.openLongPosition(symbol, 1.0);
             }
         }
     }
 
+    /**
+     * Start of verifying of open position.
+     *
+     * @param processVars
+     * @return
+     */
     private boolean shouldPositionBeClosed(ProcessVars processVars) {
         var basic = processVars.getBasicStrategyResult();
         if (basic.getClosePositionSignal()) {
@@ -43,6 +52,12 @@ public class DecisionMakingCenter {
         }
     }
 
+    /**
+     * Check if new position should be closed.
+     *
+     * @param processVars
+     * @return
+     */
     private boolean shouldPositionBeOpen(ProcessVars processVars) {
         var basic = processVars.getBasicStrategyResult();
         if (basic.getOpenPositionsCount() == 0) {
