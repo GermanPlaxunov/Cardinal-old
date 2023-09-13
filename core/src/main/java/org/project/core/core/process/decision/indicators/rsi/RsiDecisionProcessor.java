@@ -12,10 +12,8 @@ public class RsiDecisionProcessor extends AbstractDecisionProcessor {
 
     @Override
     public Double analyze(ProcessVars processVars) {
-        //Тут всякая логика включая вызов neural
         var symbol = processVars.getSymbol();
         var neuralResult = neuralClient.predict(symbol);
-
         return null;
     }
 

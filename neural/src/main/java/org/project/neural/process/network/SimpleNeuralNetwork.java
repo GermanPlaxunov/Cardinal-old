@@ -74,6 +74,11 @@ public class SimpleNeuralNetwork {
         }
     }
 
+    /**
+     * Log only when epoch loss is improved.
+     *
+     * @param loss - new best epoch loss.
+     */
     private void logTrainResult(Double loss) {
         log.info("New best epoch loss = {} for symbol BTC/USD", loss);
     }

@@ -1,12 +1,8 @@
 package org.project.neural.process.training;
 
 import lombok.RequiredArgsConstructor;
-import org.project.data.entities.CoreStockEntity;
 import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
-import org.project.data.entities.neural.NeuralNetworkEntity;
-import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
-import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.model.neural.training.TrainParams;
 import org.project.neural.process.network.NetworkStore;
 
@@ -27,7 +23,7 @@ public class NetworkRsiTrainer {
         var indicators = relativeStrengthIndicatorService.findAllInPeriod(symbol, from, to);
         var data = prepareData(indicators);
         var answers = getAnswersWithOffset(params.getPrices(), data.size());
-        network.train(data, answers, 5000);
+        network.train(data, answers, 10000);
         networkStore.updateNetwork(TYPE, symbol, network);
     }
 
@@ -38,17 +34,21 @@ public class NetworkRsiTrainer {
     }
 
     /**
-     * In purpose to get the affect of present values
-     * on price in the future.
+     * Should return the price change over each period.
      *
-     * @param prices - the list of stock`s price.
+     * @param prices     - the list of stock`s price.
      * @param sizeOfData - the size of Rsi list.
      */
     private List<Double> getAnswersWithOffset(List<Double> prices, Integer sizeOfData) {
         var offset = prices.size() - sizeOfData;
-        return prices.stream()
-                .skip(offset)
+        var offsetPrices = prices.stream()
+                .skip(offset - 1)
                 .toList();
+        var changes = new ArrayList<Double>();
+        for (var i = 1; i < offsetPrices.size(); i++) {
+            changes.add(offsetPrices.get(i) - offsetPrices.get(i - 1));
+        }
+        return changes;
     }
 
 }
