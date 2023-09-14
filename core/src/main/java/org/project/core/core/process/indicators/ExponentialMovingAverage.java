@@ -18,7 +18,7 @@ public class ExponentialMovingAverage extends AbstractIndicator {
      */
     public Double calculateEma(List<CoreStockEntity> coreStockEntities) {
         var symbol = coreStockEntities.get(0).getSymbol();
-        log.info("Start calculating EMA for {}", symbol);
+        log.debug("Start calculating EMA for {}", symbol);
         var depth = coreStockEntities.size();
         var prices = getPrices(coreStockEntities);
         var ema = prices.get(0);
@@ -26,7 +26,7 @@ public class ExponentialMovingAverage extends AbstractIndicator {
         for (var i = 1; i < depth; i++) {
             ema = getEma(prices.get(i), ema, ny);
         }
-        log.info("EMA for {} is {}", symbol, ema);
+        log.debug("EMA for {} is {}", symbol, ema);
         return ema;
     }
 

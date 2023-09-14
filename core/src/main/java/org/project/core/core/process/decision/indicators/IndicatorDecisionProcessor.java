@@ -4,6 +4,8 @@ import org.project.core.core.process.vars.ProcessVars;
 
 public interface IndicatorDecisionProcessor {
 
-    Double analyze(ProcessVars processVars);
+    Long shouldPositionBeClosed(ProcessVars processVars);
+
+    Long shouldPositionBeOpen(ProcessVars processVars);
 
 }

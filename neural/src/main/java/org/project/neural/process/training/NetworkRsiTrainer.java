@@ -23,7 +23,7 @@ public class NetworkRsiTrainer {
         var indicators = relativeStrengthIndicatorService.findAllInPeriod(symbol, from, to);
         var data = prepareData(indicators);
         var answers = getAnswersWithOffset(params.getPrices(), data.size());
-        network.train(data, answers, 10000);
+        network.train(data, answers, 1000); //Вынести в параметры кол-во эпох
         networkStore.updateNetwork(TYPE, symbol, network);
     }
 

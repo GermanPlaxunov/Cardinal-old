@@ -38,9 +38,11 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DecisionMakingCenter decisionMakingCenter(PositionService positionService,
+    public DecisionMakingCenter decisionMakingCenter(RsiDecisionProcessor rsiDecisionProcessor,
+                                                     PositionService positionService,
                                                      DealMaker dealMaker) {
-        return new DecisionMakingCenter(positionService,
+        return new DecisionMakingCenter(rsiDecisionProcessor,
+                positionService,
                 dealMaker);
     }
 
@@ -126,8 +128,10 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public RsiDecisionProcessor rsiDecisionProcessor(NeuralClient neuralClient) {
-        return new RsiDecisionProcessor(neuralClient);
+    public RsiDecisionProcessor rsiDecisionProcessor(PositionService positionService,
+                                                     NeuralClient neuralClient) {
+        return new RsiDecisionProcessor(positionService,
+                neuralClient);
     }
 
     @Bean

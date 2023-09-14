@@ -3,6 +3,7 @@ package org.project.core.core.process.decision;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.decision.indicators.rsi.RsiDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.data.services.interfaces.PositionService;
 
@@ -10,6 +11,7 @@ import org.project.data.services.interfaces.PositionService;
 @RequiredArgsConstructor
 public class DecisionMakingCenter {
 
+    private final RsiDecisionProcessor rsiDecisionProcessor;
     private final PositionService positionService;
     private final DealMaker dealMaker;
 
@@ -37,34 +39,12 @@ public class DecisionMakingCenter {
         }
     }
 
-    /**
-     * Start of verifying of open position.
-     *
-     * @param processVars
-     * @return
-     */
     private boolean shouldPositionBeClosed(ProcessVars processVars) {
-        var basic = processVars.getBasicStrategyResult();
-        if (basic.getClosePositionSignal()) {
-            return true;
-        } else {
-            return false;
-        }
+        return rsiDecisionProcessor.shouldPositionBeClosed(processVars) > 0;
     }
 
-    /**
-     * Check if new position should be closed.
-     *
-     * @param processVars
-     * @return
-     */
     private boolean shouldPositionBeOpen(ProcessVars processVars) {
-        var basic = processVars.getBasicStrategyResult();
-        if (basic.getOpenPositionsCount() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return rsiDecisionProcessor.shouldPositionBeOpen(processVars) > 0;
     }
 
 }

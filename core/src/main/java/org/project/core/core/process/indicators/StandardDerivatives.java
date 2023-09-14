@@ -14,7 +14,7 @@ public class StandardDerivatives {
 
     public Double calculateStd(List<CoreStockEntity> coreStockEntities) {
         var symbol = coreStockEntities.get(0).getSymbol();
-        log.info("Start calculating STD for {}", symbol);
+        log.debug("Start calculating STD for {}", symbol);
         var depth = coreStockEntities.size();
         var SMA = simpleMovingAverage.calculateSma(coreStockEntities);
         var summ = 0.0;
@@ -22,7 +22,7 @@ public class StandardDerivatives {
             summ += Math.pow((coreStockEntities.get(i).getClose() - SMA), 2);
         }
         var std = Math.sqrt(summ / depth);
-        log.info("STD for {} is {}", symbol, std);
+        log.debug("STD for {} is {}", symbol, std);
         return std;
     }
 

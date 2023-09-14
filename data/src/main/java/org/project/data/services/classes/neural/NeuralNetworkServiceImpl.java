@@ -16,7 +16,9 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
 
     @Override
     public void save(String symbol, String name, String vector) {
-        repository.saveAndFlush(new NeuralNetworkEntity()
+        var network = repository.findAllByName(name)
+                .orElse(new NeuralNetworkEntity());
+        repository.saveAndFlush(network
                 .setSymbol(symbol)
                 .setName(name)
                 .setVector(vector)
