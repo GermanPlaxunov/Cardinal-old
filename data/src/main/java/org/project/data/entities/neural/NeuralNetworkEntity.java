@@ -2,6 +2,7 @@ package org.project.data.entities.neural;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 
@@ -18,10 +19,9 @@ public class NeuralNetworkEntity {
     private String name;
     @Column(name = "SYMBOL")
     private String symbol;
-    @Column(name = "START_DATASET")
-    private LocalDateTime startDataset;
-    @Column(name = "END_DATASET")
-    private LocalDateTime endDataset;
+    @Column(name = "TRAIN_DATE")
+    private LocalDateTime trainDate;
+    @Lob
     @Column(name = "VECTOR")
     private String vector;
 

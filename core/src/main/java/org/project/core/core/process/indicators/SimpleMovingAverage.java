@@ -16,13 +16,13 @@ public class SimpleMovingAverage extends AbstractIndicator {
      */
     public Double calculateSma(List<CoreStockEntity> coreStockEntities) {
         var symbol = coreStockEntities.get(0).getSymbol();
-        log.info("Start calculating SMA for {}", symbol);
+        log.debug("Start calculating SMA for {}", symbol);
         var depth = coreStockEntities.size();
         var prices = getPrices(coreStockEntities);
         var summ = prices.stream()
                 .reduce(0.0, Double::sum);
         var sma = summ / depth;
-        log.info("SMA for {} is {}", symbol, sma);
+        log.debug("SMA for {} is {}", symbol, sma);
         return sma;
     }
 

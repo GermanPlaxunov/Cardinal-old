@@ -1,4 +1,4 @@
-package org.project.neural.process.rest;
+package org.project.neural.rest;
 
 public interface NeuralController {
 

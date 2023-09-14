@@ -5,6 +5,7 @@ import org.project.data.entities.neural.NeuralNetworkEntity;
 import org.project.data.repositories.neural.NeuralNetworkRepository;
 import org.project.data.services.interfaces.neural.NeuralNetworkService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,8 +15,14 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
     private final NeuralNetworkRepository repository;
 
     @Override
-    public void save(NeuralNetworkEntity entity) {
-        repository.save(entity);
+    public void save(String symbol, String name, String vector) {
+        var network = repository.findAllByName(name)
+                .orElse(new NeuralNetworkEntity());
+        repository.saveAndFlush(network
+                .setSymbol(symbol)
+                .setName(name)
+                .setVector(vector)
+                .setTrainDate(LocalDateTime.now()));
     }
 
     @Override
@@ -24,5 +31,10 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
                 .stream()
                 .filter(Objects::nonNull)
                 .toList();
+    }
+
+    @Override
+    public List<NeuralNetworkEntity> findAll() {
+        return repository.findAll();
     }
 }

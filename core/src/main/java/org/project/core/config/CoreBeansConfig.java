@@ -2,10 +2,14 @@ package org.project.core.config;
 
 import org.project.core.client.MarketClient;
 import org.project.core.client.MarketFeignClient;
+import org.project.core.client.NeuralClient;
+import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionMakingCenter;
+import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
+import org.project.core.core.process.decision.indicators.rsi.RsiDecisionProcessor;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.indicators.cache.BtcCacheDepthProvider;
 import org.project.core.core.process.indicators.cache.CacheDepthProvider;
@@ -22,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableFeignClients(clients = {
-        MarketFeignClient.class
+        MarketFeignClient.class, NeuralFeignClient.class
 })
 public class CoreBeansConfig {
 
@@ -34,9 +38,11 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DecisionMakingCenter decisionMakingCenter(PositionService positionService,
+    public DecisionMakingCenter decisionMakingCenter(RsiDecisionProcessor rsiDecisionProcessor,
+                                                     PositionService positionService,
                                                      DealMaker dealMaker) {
-        return new DecisionMakingCenter(positionService,
+        return new DecisionMakingCenter(rsiDecisionProcessor,
+                positionService,
                 dealMaker);
     }
 
@@ -119,5 +125,17 @@ public class CoreBeansConfig {
     @Bean
     public CacheDepthProvider btcCacheDepthProvider(CoreStockService coreStockService) {
         return new BtcCacheDepthProvider(coreStockService);
+    }
+
+    @Bean
+    public RsiDecisionProcessor rsiDecisionProcessor(PositionService positionService,
+                                                     NeuralClient neuralClient) {
+        return new RsiDecisionProcessor(positionService,
+                neuralClient);
+    }
+
+    @Bean
+    public DecisionProcessorsStore decisionProcessorsStore(RsiDecisionProcessor rsiDecisionProcessor) {
+        return new DecisionProcessorsStore(rsiDecisionProcessor);
     }
 }

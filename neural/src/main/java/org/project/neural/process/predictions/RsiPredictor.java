@@ -11,7 +11,7 @@ public class RsiPredictor implements Predictor {
     private final NetworkStore networkStore;
 
     public Double predict(String symbol) {
-        var network = networkStore.get("RSI->" + symbol);
+        var network = networkStore.get("RSI", symbol);
         var rsi = relativeStrengthIndicatorService.findLast(symbol);
         var result = network.predict(rsi.getGainSumm(), rsi.getLossSumm()); //Возможно надо будет заменить на отношение Gain к Loss
         return result;

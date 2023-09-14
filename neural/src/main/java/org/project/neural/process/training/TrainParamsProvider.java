@@ -14,7 +14,7 @@ public class TrainParamsProvider {
     private final CoreStockService coreStockService;
 
     public TrainParams getTrainParams(String symbol) {
-        var dataset = coreStockService.findCache(symbol, 3600L);
+        var dataset = coreStockService.findCache(symbol, 86400L);
         return new TrainParams()
                 .setSymbol(symbol)
                 .setDateTo(getDateTo(dataset))

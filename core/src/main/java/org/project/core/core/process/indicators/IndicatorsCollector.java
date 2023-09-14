@@ -23,24 +23,28 @@ public class IndicatorsCollector {
     private final CoreStockService coreStockService;
 
     public ProcessVars collect(String symbol, Long cacheSeconds) {
+        ProcessVars processVars = null;
         var stocks = coreStockService.findCache(symbol, cacheSeconds);
-        log.info("Amount of stocks to collect indexes: {}", stocks.size());
-        var apo = absolutePriceOscillator.calculateApo(stocks);
-        var ema = exponentialMovingAverage.calculateEma(stocks);
-        var rsi = relativeStrengthIndicator.calculateRsi(stocks);
-        var sma = simpleMovingAverage.calculateSma(stocks);
-        var std = standardDerivatives.calculateStd(stocks);
-        var bband = bollingerBands.calculateBband(stocks);
-        var processVars = new ProcessVars()
-                .setSymbol(symbol)
-                .setDate(getIndicatorDate(stocks))
-                .setApo(apo)
-                .setEma(ema)
-                .setRsi(rsi)
-                .setSma(sma)
-                .setStd(std)
-                .setBband(bband);
-        indicatorsSaver.saveAllIndicators(processVars);
+        if(stocks.size() > 5) {
+            log.info("Amount of stocks to collect indexes: {}", stocks.size());
+            var apo = absolutePriceOscillator.calculateApo(stocks);
+            var ema = exponentialMovingAverage.calculateEma(stocks);
+            var rsi = relativeStrengthIndicator.calculateRsi(stocks);
+            var sma = simpleMovingAverage.calculateSma(stocks);
+            var std = standardDerivatives.calculateStd(stocks);
+            var bband = bollingerBands.calculateBband(stocks);
+            processVars = new ProcessVars()
+                    .setSymbol(symbol)
+                    .setDate(getIndicatorDate(stocks))
+                    .setApo(apo)
+                    .setEma(ema)
+                    .setRsi(rsi)
+                    .setSma(sma)
+                    .setStd(std)
+                    .setBband(bband)
+                    .setDepth(cacheSeconds);
+            indicatorsSaver.saveAllIndicators(processVars);
+        }
         return processVars;
     }
 

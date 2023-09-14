@@ -14,4 +14,5 @@ public class Rsi {
     private List<Double> lossList;
     private Double relativeStrength;
     private Double rsi;
+    private Integer depth;
 }

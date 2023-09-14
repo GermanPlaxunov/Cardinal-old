@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface NeuralNetworkService {
 
-    void save(NeuralNetworkEntity entity);
+    void save(String symbol, String name, String vector);
 
     List<NeuralNetworkEntity> findAllBySymbol(String symbol);
+
+    List<NeuralNetworkEntity> findAll();
 
 }

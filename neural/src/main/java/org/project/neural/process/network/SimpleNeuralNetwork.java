@@ -1,6 +1,7 @@
 package org.project.neural.process.network;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,16 @@ import java.util.Random;
 import static org.project.neural.process.Utils.meanSquareLoss;
 
 @Data
+@Slf4j
 public class SimpleNeuralNetwork {
 
     private List<SimpleNeuron> neurons;
     private String name;
+
+    public SimpleNeuralNetwork(String name, List<SimpleNeuron> neurons) {
+        this.name = name;
+        this.neurons = neurons;
+    }
 
     public SimpleNeuralNetwork(String name) {
         this.name = name;
@@ -59,10 +66,21 @@ public class SimpleNeuralNetwork {
                 if (thisEpochLoss < bestEpochLoss) {
                     bestEpochLoss = thisEpochLoss;
                     epochNeuron.remember();
+                    logTrainResult(bestEpochLoss);
                 } else {
                     epochNeuron.forget();
                 }
             }
         }
     }
+
+    /**
+     * Log only when epoch loss is improved.
+     *
+     * @param loss - new best epoch loss.
+     */
+    private void logTrainResult(Double loss) {
+        log.info("New best epoch loss = {} for symbol BTC/USD", loss);
+    }
+
 }

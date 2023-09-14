@@ -22,13 +22,13 @@ public class AbsolutePriceOscillator {
      */
     public Double calculateApo(List<CoreStockEntity> coreStockEntities) {
         var symbol = coreStockEntities.get(0).getSymbol();
-        log.info("Start calculating APO for {}", symbol);
+        log.debug("Start calculating APO for {}", symbol);
         var fastTermStocks = coreStockEntities.stream()
                 .skip(coreStockEntities.size() / 2)
                 .toList();
         var emaFast = exponentialMovingAverage.calculateEma(fastTermStocks);
         var emaSlow = exponentialMovingAverage.calculateEma(coreStockEntities);
-        log.info("EMA_FAST: {}, EMA_SLOW: {}", emaFast, emaSlow);
+        log.debug("EMA_FAST: {}, EMA_SLOW: {}", emaFast, emaSlow);
         return emaFast - emaSlow;
     }
 
