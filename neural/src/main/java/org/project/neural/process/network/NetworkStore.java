@@ -1,24 +1,34 @@
 package org.project.neural.process.network;
 
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.neural.process.training.NetworkVectorProcessor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
+@Slf4j
 public class NetworkStore {
     private final NetworkVectorProcessor networkVectorProcessor;
     private final NeuralNetworkService neuralNetworkService;
     private final Map<String, SimpleNeuralNetwork> networks;
+    private final NetworkDao networkDao;
 
     public NetworkStore(NetworkVectorProcessor networkVectorProcessor,
-                        NeuralNetworkService neuralNetworkService) {
+                        NeuralNetworkService neuralNetworkService,
+                        NetworkDao networkDao) {
         this.networkVectorProcessor = networkVectorProcessor;
         this.neuralNetworkService = neuralNetworkService;
+        this.networkDao = networkDao;
         networks = new HashMap<>();
-        networks.put("RSI->BTC/USD", new SimpleNeuralNetwork("RSI->BTC/USD"));
+        loadNetworkFromDb();
+    }
+
+    private void loadNetworkFromDb() {
+        for(var network : networkDao.loadAllNetworks()) {
+            log.info("Load Neural Network from database: {}", network.getName());
+            networks.put(network.getName(), network);
+        }
     }
 
     public void updateNetwork(String type, String symbol, SimpleNeuralNetwork network) {

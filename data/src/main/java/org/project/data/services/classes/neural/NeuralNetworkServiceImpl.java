@@ -32,4 +32,9 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
                 .filter(Objects::nonNull)
                 .toList();
     }
+
+    @Override
+    public List<NeuralNetworkEntity> findAll() {
+        return repository.findAll();
+    }
 }

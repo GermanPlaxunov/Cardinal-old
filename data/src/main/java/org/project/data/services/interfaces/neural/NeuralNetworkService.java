@@ -10,4 +10,6 @@ public interface NeuralNetworkService {
 
     List<NeuralNetworkEntity> findAllBySymbol(String symbol);
 
+    List<NeuralNetworkEntity> findAll();
+
 }
