@@ -126,16 +126,4 @@ public class CoreBeansConfig {
     public CacheDepthProvider btcCacheDepthProvider(CoreStockService coreStockService) {
         return new BtcCacheDepthProvider(coreStockService);
     }
-
-    @Bean
-    public RsiDecisionProcessor rsiDecisionProcessor(PositionService positionService,
-                                                     NeuralClient neuralClient) {
-        return new RsiDecisionProcessor(positionService,
-                neuralClient);
-    }
-
-    @Bean
-    public DecisionProcessorsStore decisionProcessorsStore(RsiDecisionProcessor rsiDecisionProcessor) {
-        return new DecisionProcessorsStore(rsiDecisionProcessor);
-    }
 }
