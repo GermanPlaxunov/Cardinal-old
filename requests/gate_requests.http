@@ -1,0 +1,10 @@
+### Add process params
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+
+{
+    "name": "TEST",
+    "numberValue": 1,
+    "stringValue": "test",
+    "dateValue": null
+}

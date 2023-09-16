@@ -38,10 +38,10 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DecisionMakingCenter decisionMakingCenter(RsiDecisionProcessor rsiDecisionProcessor,
+    public DecisionMakingCenter decisionMakingCenter(DecisionProcessorsStore decisionProcessorsStore,
                                                      PositionService positionService,
                                                      DealMaker dealMaker) {
-        return new DecisionMakingCenter(rsiDecisionProcessor,
+        return new DecisionMakingCenter(decisionProcessorsStore,
                 positionService,
                 dealMaker);
     }
