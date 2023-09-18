@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.indicators.IndicatorsCollector;
-import org.project.core.core.process.indicators.cache.CacheDepthProvider;
+import org.project.core.core.process.params.cache.CacheDepthProvider;
+import org.project.core.core.process.params.ActionType;
 import org.project.core.core.process.strategy.BasicStrategy;
 
 @Slf4j
@@ -13,15 +14,15 @@ import org.project.core.core.process.strategy.BasicStrategy;
 public class ProcessStarter {
 
     private final DecisionMakingCenter decisionMakingCenter;
-    private final CacheDepthProvider btcCacheDepthProvider;
     private final IndicatorsCollector indicatorsCollector;
     private final MarketDataProvider marketDataProvider;
+    private final CacheDepthProvider cacheDepthProvider;
     private final BasicStrategy basicStrategy;
 
     public void startProcess(String symbol) {
         var next = marketDataProvider.getNextDataPoint(symbol);
-        if (checkCache(symbol)) {
-            var cacheDepth = btcCacheDepthProvider.getCacheDepth(symbol);
+        if (cacheDepthProvider.isCacheAvailable(symbol, ActionType.ACTION_TYPE_TRADE)) {
+            var cacheDepth = cacheDepthProvider.getCacheDepth(symbol, ActionType.ACTION_TYPE_TRADE);
             var processVars = indicatorsCollector.collect(symbol, cacheDepth);
             var basicStrategyResult = basicStrategy.startProcess(next);
             processVars.setBasicStrategyResult(basicStrategyResult);
@@ -29,10 +30,6 @@ public class ProcessStarter {
         } else {
             log.info("Not enough cache data for {}", symbol);
         }
-    }
-
-    private boolean checkCache(String symbol) {
-        return btcCacheDepthProvider.isCacheAvailable(symbol);
     }
 
 }
