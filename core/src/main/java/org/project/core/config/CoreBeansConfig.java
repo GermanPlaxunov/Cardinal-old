@@ -9,6 +9,7 @@ import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.indicators.*;
+import org.project.core.core.process.params.cache.CacheDepthMapper;
 import org.project.core.core.process.params.cache.CacheDepthProvider;
 import org.project.core.core.process.params.cache.CacheDepthProviderImpl;
 import org.project.core.core.process.strategy.BasicStrategy;
@@ -59,23 +60,26 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public IndicatorsCollector indicatorsCollector(IndicatorsSaver indicatorsSaver,
-                                                   AbsolutePriceOscillator absolutePriceOscillator,
+    public IndicatorsCollector indicatorsCollector(RelativeStrengthIndicator relativeStrengthIndicator,
                                                    ExponentialMovingAverage exponentialMovingAverage,
-                                                   RelativeStrengthIndicator relativeStrengthIndicator,
+                                                   AbsolutePriceOscillator absolutePriceOscillator,
                                                    SimpleMovingAverage simpleMovingAverage,
                                                    StandardDerivatives standardDerivatives,
-                                                   BollingerBands bollingerBands,
-                                                   CoreStockService coreStockService) {
-        return new IndicatorsCollector(indicatorsSaver,
-                absolutePriceOscillator,
+                                                   CacheDepthProvider cacheDepthProvider,
+                                                   CoreStockService coreStockService,
+                                                   IndicatorsSaver indicatorsSaver,
+                                                   BollingerBands bollingerBands) {
+        return new IndicatorsCollector(relativeStrengthIndicator,
                 exponentialMovingAverage,
-                relativeStrengthIndicator,
+                absolutePriceOscillator,
                 simpleMovingAverage,
                 standardDerivatives,
-                bollingerBands,
-                coreStockService);
+                cacheDepthProvider,
+                coreStockService,
+                indicatorsSaver,
+                bollingerBands);
     }
+
 
     @Bean
     public IndicatorsSaver indicatorsSaver(
@@ -122,9 +126,16 @@ public class CoreBeansConfig {
     }
 
     @Bean
+    public CacheDepthMapper cacheDepthMapper() {
+        return new CacheDepthMapper();
+    }
+
+    @Bean
     public CacheDepthProvider cacheDepthProvider(ProcessParamsService processParamsService,
+                                                 CacheDepthMapper cacheDepthMapper,
                                                  CoreStockService coreStockService) {
         return new CacheDepthProviderImpl(processParamsService,
+                cacheDepthMapper,
                 coreStockService);
     }
 

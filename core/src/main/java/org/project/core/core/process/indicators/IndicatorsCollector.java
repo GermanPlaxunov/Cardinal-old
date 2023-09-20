@@ -2,6 +2,7 @@ package org.project.core.core.process.indicators;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.project.core.core.process.params.cache.CacheDepthProvider;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.CoreStockService;
@@ -13,19 +14,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IndicatorsCollector {
 
-    private final IndicatorsSaver indicatorsSaver;
-    private final AbsolutePriceOscillator absolutePriceOscillator;
-    private final ExponentialMovingAverage exponentialMovingAverage;
     private final RelativeStrengthIndicator relativeStrengthIndicator;
+    private final ExponentialMovingAverage exponentialMovingAverage;
+    private final AbsolutePriceOscillator absolutePriceOscillator;
     private final SimpleMovingAverage simpleMovingAverage;
     private final StandardDerivatives standardDerivatives;
-    private final BollingerBands bollingerBands;
+    private final CacheDepthProvider cacheDepthProvider;
     private final CoreStockService coreStockService;
+    private final IndicatorsSaver indicatorsSaver;
+    private final BollingerBands bollingerBands;
 
-    public ProcessVars collect(String symbol, Long cacheSeconds) {
+    public ProcessVars collect(String symbol) {
         ProcessVars processVars = null;
-        var stocks = coreStockService.findCache(symbol, cacheSeconds);
-        if(stocks.size() > 5) {
+        var depths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
+        var stocks = coreStockService.findCache(symbol, depths.getDefaultDepth());
+        if (stocks.size() > 5) {
             log.info("Amount of stocks to collect indexes: {}", stocks.size());
             var apo = absolutePriceOscillator.calculateApo(stocks);
             var ema = exponentialMovingAverage.calculateEma(stocks);
@@ -42,7 +45,7 @@ public class IndicatorsCollector {
                     .setSma(sma)
                     .setStd(std)
                     .setBband(bband)
-                    .setDepth(cacheSeconds);
+                    .setDepth(depths.getDefaultDepth());
             indicatorsSaver.saveAllIndicators(processVars);
         }
         return processVars;
