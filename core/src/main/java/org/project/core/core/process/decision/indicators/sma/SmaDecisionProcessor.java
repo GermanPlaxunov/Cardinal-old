@@ -8,15 +8,22 @@ import org.project.core.core.process.vars.ProcessVars;
 @RequiredArgsConstructor
 public class SmaDecisionProcessor implements IndicatorDecisionProcessor {
 
+    private final SmaPredictionProcessor smaPredictionProcessor;
     private final NeuralClient neuralClient;
 
     @Override
     public Long shouldPositionBeClosed(ProcessVars processVars) {
-        return null;
+        var symbol = processVars.getSymbol();
+        var priceChangePrediction = neuralClient.predict(symbol);
+        var score = smaPredictionProcessor.checkToCloseCurrentPosition(priceChangePrediction);
+        return score;
     }
 
     @Override
     public Long shouldPositionBeOpen(ProcessVars processVars) {
-        return null;
+        var symbol = processVars.getSymbol();
+        var priceChangePrediction = neuralClient.predict(symbol);
+        var score = smaPredictionProcessor.checkToOpenNewPosition(priceChangePrediction);
+        return score;
     }
 }

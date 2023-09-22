@@ -8,15 +8,22 @@ import org.project.core.core.process.vars.ProcessVars;
 @RequiredArgsConstructor
 public class StdDerivsDecisionProcessor implements IndicatorDecisionProcessor {
 
+    private final StdPredictionProcessor stdPredictionProcessor;
     private final NeuralClient neuralClient;
 
     @Override
     public Long shouldPositionBeClosed(ProcessVars processVars) {
-        return null;
+        var symbol = processVars.getSymbol();
+        var priceChangePrediction = neuralClient.predict(symbol);
+        var score = stdPredictionProcessor.checkToCloseCurrentPosition(priceChangePrediction);
+        return score;
     }
 
     @Override
     public Long shouldPositionBeOpen(ProcessVars processVars) {
-        return null;
+        var symbol = processVars.getSymbol();
+        var priceChangePrediction = neuralClient.predict(symbol);
+        var score = stdPredictionProcessor.checkToOpenNewPosition(priceChangePrediction);
+        return score;
     }
 }
