@@ -25,4 +25,10 @@ public class BollingerBandsServiceImpl implements BollingerBandsService {
     public void save(BollingerBandsEntity entity) {
         repository.saveAndFlush(entity);
     }
+
+    @Override
+    public BollingerBandsEntity findLast(String symbol) {
+        return repository.findTopBySymbolOrderByDateDesc(symbol)
+                .orElse(null);
+    }
 }

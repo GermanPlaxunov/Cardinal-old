@@ -2,7 +2,7 @@ package org.project.neural.process;
 
 import lombok.RequiredArgsConstructor;
 import org.project.model.Indicators;
-import org.project.neural.process.predictions.RsiPredictor;
+import org.project.neural.process.predictions.predictors.RsiPredictor;
 import org.project.neural.process.training.NetworkRsiTrainer;
 import org.project.neural.process.training.TrainParamsProvider;
 

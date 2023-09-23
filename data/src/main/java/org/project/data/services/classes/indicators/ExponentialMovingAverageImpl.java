@@ -25,4 +25,10 @@ public class ExponentialMovingAverageImpl implements ExponentialMovingAverageSer
     public void save(ExponentialMovingAverageEntity entity) {
         repository.saveAndFlush(entity);
     }
+
+    @Override
+    public ExponentialMovingAverageEntity findLast(String symbol) {
+        return repository.findTopBySymbolOrderByDateDesc(symbol)
+                .orElse(null);
+    }
 }

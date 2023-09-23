@@ -2,15 +2,15 @@ package org.project.neural.process.config;
 
 import org.project.data.repositories.CoreStockRepository;
 import org.project.data.repositories.ProcessParamsRepository;
-import org.project.data.repositories.indicators.RelativeStrengthIndicatorRepository;
+import org.project.data.repositories.indicators.*;
 import org.project.data.repositories.neural.NeuralNetworkRepository;
 import org.project.data.services.classes.CoreStockServiceImpl;
 import org.project.data.services.classes.ProcessParamsServiceImpl;
-import org.project.data.services.classes.indicators.RelativeStrengthIndicatorServiceImpl;
+import org.project.data.services.classes.indicators.*;
 import org.project.data.services.classes.neural.NeuralNetworkServiceImpl;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
+import org.project.data.services.interfaces.indicators.*;
 import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +41,35 @@ public class DaoConfig {
     @Bean
     public NeuralNetworkService neuralNetworkService(NeuralNetworkRepository repository) {
         return new NeuralNetworkServiceImpl(repository);
+    }
+
+    @Bean
+    public AbsolutePriceOscillatorService absolutePriceOscillatorService(
+            AbsolutePriceOscillatorRepository absolutePriceOscillatorRepository) {
+        return new AbsolutePriceOscillatorServiceImpl(absolutePriceOscillatorRepository);
+    }
+
+    @Bean
+    public BollingerBandsService bollingerBandsService(BollingerBandsRepository bollingerBandsRepository) {
+        return new BollingerBandsServiceImpl(bollingerBandsRepository);
+    }
+
+    @Bean
+    public ExponentialMovingAverageService exponentialMovingAverageService(
+            ExponentialMovingAverageRepository exponentialMovingAverageRepository) {
+        return new ExponentialMovingAverageImpl(exponentialMovingAverageRepository);
+    }
+
+    @Bean
+    public SimpleMovingAverageService simpleMovingAverageService(
+            SimpleMovingAverageRepository simpleMovingAverageRepository) {
+        return new SimpleMovingAverageServiceImpl(simpleMovingAverageRepository);
+    }
+
+    @Bean
+    public StandardDerivativesService standardDerivativesService(
+            StandardDerivativesRepository standardDerivativesRepository) {
+        return new StandardDerivativesServiceImpl(standardDerivativesRepository);
     }
 
 }
