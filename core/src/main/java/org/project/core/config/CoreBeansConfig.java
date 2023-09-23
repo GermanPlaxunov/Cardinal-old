@@ -2,23 +2,23 @@ package org.project.core.config;
 
 import org.project.core.client.MarketClient;
 import org.project.core.client.MarketFeignClient;
-import org.project.core.client.NeuralClient;
 import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
-import org.project.core.core.process.decision.indicators.rsi.RsiDecisionProcessor;
 import org.project.core.core.process.indicators.*;
-import org.project.core.core.process.indicators.cache.BtcCacheDepthProvider;
-import org.project.core.core.process.indicators.cache.CacheDepthProvider;
+import org.project.core.core.process.params.cache.CacheDepthMapper;
+import org.project.core.core.process.params.cache.CacheDepthProvider;
+import org.project.core.core.process.params.cache.CacheDepthProviderImpl;
 import org.project.core.core.process.strategy.BasicStrategy;
 import org.project.core.core.process.strategy.basic.FixProfitProvider;
 import org.project.core.core.process.strategy.basic.StopLossProvider;
 import org.project.core.mapper.StockMapper;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.*;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -38,45 +38,48 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DecisionMakingCenter decisionMakingCenter(RsiDecisionProcessor rsiDecisionProcessor,
+    public DecisionMakingCenter decisionMakingCenter(DecisionProcessorsStore decisionProcessorsStore,
                                                      PositionService positionService,
                                                      DealMaker dealMaker) {
-        return new DecisionMakingCenter(rsiDecisionProcessor,
+        return new DecisionMakingCenter(decisionProcessorsStore,
                 positionService,
                 dealMaker);
     }
 
     @Bean
     public ProcessStarter processStarter(DecisionMakingCenter decisionMakingCenter,
-                                         CacheDepthProvider cacheDepthProvider,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
+                                         CacheDepthProvider cacheDepthProvider,
                                          BasicStrategy basicStrategy) {
         return new ProcessStarter(decisionMakingCenter,
-                cacheDepthProvider,
                 indicatorsCollector,
                 marketDataProvider,
+                cacheDepthProvider,
                 basicStrategy);
     }
 
     @Bean
-    public IndicatorsCollector indicatorsCollector(IndicatorsSaver indicatorsSaver,
-                                                   AbsolutePriceOscillator absolutePriceOscillator,
+    public IndicatorsCollector indicatorsCollector(RelativeStrengthIndicator relativeStrengthIndicator,
                                                    ExponentialMovingAverage exponentialMovingAverage,
-                                                   RelativeStrengthIndicator relativeStrengthIndicator,
+                                                   AbsolutePriceOscillator absolutePriceOscillator,
                                                    SimpleMovingAverage simpleMovingAverage,
                                                    StandardDerivatives standardDerivatives,
-                                                   BollingerBands bollingerBands,
-                                                   CoreStockService coreStockService) {
-        return new IndicatorsCollector(indicatorsSaver,
-                absolutePriceOscillator,
+                                                   CacheDepthProvider cacheDepthProvider,
+                                                   CoreStockService coreStockService,
+                                                   IndicatorsSaver indicatorsSaver,
+                                                   BollingerBands bollingerBands) {
+        return new IndicatorsCollector(relativeStrengthIndicator,
                 exponentialMovingAverage,
-                relativeStrengthIndicator,
+                absolutePriceOscillator,
                 simpleMovingAverage,
                 standardDerivatives,
-                bollingerBands,
-                coreStockService);
+                cacheDepthProvider,
+                coreStockService,
+                indicatorsSaver,
+                bollingerBands);
     }
+
 
     @Bean
     public IndicatorsSaver indicatorsSaver(
@@ -123,19 +126,17 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public CacheDepthProvider btcCacheDepthProvider(CoreStockService coreStockService) {
-        return new BtcCacheDepthProvider(coreStockService);
+    public CacheDepthMapper cacheDepthMapper() {
+        return new CacheDepthMapper();
     }
 
     @Bean
-    public RsiDecisionProcessor rsiDecisionProcessor(PositionService positionService,
-                                                     NeuralClient neuralClient) {
-        return new RsiDecisionProcessor(positionService,
-                neuralClient);
+    public CacheDepthProvider cacheDepthProvider(ProcessParamsService processParamsService,
+                                                 CacheDepthMapper cacheDepthMapper,
+                                                 CoreStockService coreStockService) {
+        return new CacheDepthProviderImpl(processParamsService,
+                cacheDepthMapper,
+                coreStockService);
     }
 
-    @Bean
-    public DecisionProcessorsStore decisionProcessorsStore(RsiDecisionProcessor rsiDecisionProcessor) {
-        return new DecisionProcessorsStore(rsiDecisionProcessor);
-    }
 }

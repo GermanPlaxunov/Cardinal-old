@@ -2,6 +2,7 @@ package org.project.neural.process.network;
 
 import lombok.extern.slf4j.Slf4j;
 import org.project.data.services.interfaces.neural.NeuralNetworkService;
+import org.project.model.Indicators;
 import org.project.neural.process.training.NetworkVectorProcessor;
 
 import java.util.HashMap;
@@ -38,13 +39,25 @@ public class NetworkStore {
         networks.put(name, network);
     }
 
-    public SimpleNeuralNetwork get(String type, String symbol) {
-        var name = getNetworkName(type, symbol);
-        return networks.get(name);
+    public SimpleNeuralNetwork get(Indicators indicator, String symbol) {
+        var name = getNetworkName(indicator.name(), symbol);
+        return getOrCreateNew(name);
+    }
+
+    private SimpleNeuralNetwork getOrCreateNew(String name) {
+        SimpleNeuralNetwork network;
+        if(networks.containsKey(name)) {
+            network = networks.get(name);
+        } else {
+            network = new SimpleNeuralNetwork(name);
+            networks.put(name, network);
+        }
+        return network;
     }
 
     private String getNetworkName(String type, String symbol) {
-        return type.concat("->").concat(symbol);
+        return type.concat("->")
+                .concat(symbol);
     }
 
 }

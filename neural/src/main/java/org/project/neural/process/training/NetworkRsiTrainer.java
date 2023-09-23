@@ -3,6 +3,7 @@ package org.project.neural.process.training;
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
+import org.project.model.Indicators;
 import org.project.model.neural.training.TrainParams;
 import org.project.neural.process.network.NetworkStore;
 
@@ -16,7 +17,7 @@ public class NetworkRsiTrainer {
     private final NetworkStore networkStore;
 
     public void train(TrainParams params) {
-        var network = networkStore.get(TYPE, params.getSymbol());
+        var network = networkStore.get(Indicators.RSI, params.getSymbol());
         var symbol = params.getSymbol();
         var from = params.getDateFrom();
         var to = params.getDateTo();

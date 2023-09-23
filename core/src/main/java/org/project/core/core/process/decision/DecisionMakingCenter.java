@@ -3,15 +3,17 @@ package org.project.core.core.process.decision;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.decision.indicators.rsi.RsiDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.data.services.interfaces.PositionService;
+import org.project.model.IndicatorType;
 
 @Slf4j
 @RequiredArgsConstructor
 public class DecisionMakingCenter {
 
-    private final RsiDecisionProcessor rsiDecisionProcessor;
+    private final DecisionProcessorsStore decisionProcessorsStore;
     private final PositionService positionService;
     private final DealMaker dealMaker;
 
@@ -40,11 +42,13 @@ public class DecisionMakingCenter {
     }
 
     private boolean shouldPositionBeClosed(ProcessVars processVars) {
-        return rsiDecisionProcessor.shouldPositionBeClosed(processVars) > 0;
+        var processor = decisionProcessorsStore.get(IndicatorType.INDICATOR_TYPE_RSI);
+        return processor.shouldPositionBeClosed(processVars) > 0;
     }
 
     private boolean shouldPositionBeOpen(ProcessVars processVars) {
-        return rsiDecisionProcessor.shouldPositionBeOpen(processVars) > 0;
+        var processor = decisionProcessorsStore.get(IndicatorType.INDICATOR_TYPE_RSI);
+        return processor.shouldPositionBeOpen(processVars) > 0;
     }
 
 }

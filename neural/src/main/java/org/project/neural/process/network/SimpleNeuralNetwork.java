@@ -31,18 +31,34 @@ public class SimpleNeuralNetwork {
             add(new SimpleNeuron(random));
             add(new SimpleNeuron(random));
             add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
+            add(new SimpleNeuron(random));
         }};
     }
 
     public Double predict(Double input1, Double input2) {
-        return neurons.get(5).compute(
-                neurons.get(4).compute(
-                        neurons.get(2).compute(input1, input2),
-                        neurons.get(1).compute(input1, input2)
+        return neurons.get(9).compute(
+                neurons.get(7).compute(
+                        neurons.get(4).compute(
+                                neurons.get(0).compute(input1, input2),
+                                neurons.get(1).compute(input1, input2)
+                        ),
+                        neurons.get(5).compute(
+                                neurons.get(1).compute(input1, input2),
+                                neurons.get(2).compute(input1, input2)
+                        )
                 ),
-                neurons.get(3).compute(
-                        neurons.get(1).compute(input1, input2),
-                        neurons.get(0).compute(input1, input2)
+                neurons.get(8).compute(
+                        neurons.get(5).compute(
+                                neurons.get(1).compute(input1, input2),
+                                neurons.get(2).compute(input1, input2)
+                        ),
+                        neurons.get(6).compute(
+                                neurons.get(2).compute(input1, input2),
+                                neurons.get(3).compute(input1, input2)
+                        )
                 )
         );
     }

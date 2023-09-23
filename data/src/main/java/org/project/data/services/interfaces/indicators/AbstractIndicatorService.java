@@ -8,4 +8,5 @@ public interface AbstractIndicatorService<T> {
 
     void save(T entity);
 
+    T findLast(String symbol);
 }

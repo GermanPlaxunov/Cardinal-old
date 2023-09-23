@@ -25,4 +25,9 @@ public class StandardDerivativesServiceImpl implements StandardDerivativesServic
     public void save(StandardDerivativesEntity entity) {
         repository.saveAndFlush(entity);
     }
+
+    @Override
+    public StandardDerivativesEntity findLast(String symbol) {
+        return null;
+    }
 }

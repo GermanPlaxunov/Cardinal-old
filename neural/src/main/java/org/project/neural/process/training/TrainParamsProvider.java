@@ -3,6 +3,7 @@ package org.project.neural.process.training;
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.model.Indicators;
 import org.project.model.neural.training.TrainParams;
 
 import java.time.LocalDateTime;

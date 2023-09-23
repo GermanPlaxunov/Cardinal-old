@@ -6,6 +6,8 @@ import org.project.data.repositories.ProcessParamsRepository;
 import org.project.data.services.interfaces.ProcessParamsService;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class ProcessParamsServiceImpl implements ProcessParamsService {
@@ -30,5 +32,13 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .setNumberValue(numberVal)
                 .setDateValue(dateVal);
         repository.saveAndFlush(param);
+    }
+
+    @Override
+    public List<ProcessParamsEntity> findAllByNames(List<String> names) {
+        return repository.findAllByNameIn(names)
+                .stream()
+                .filter(Objects::nonNull)
+                .toList();
     }
 }

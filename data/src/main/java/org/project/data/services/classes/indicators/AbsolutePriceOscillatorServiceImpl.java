@@ -7,6 +7,7 @@ import org.project.data.services.interfaces.indicators.AbsolutePriceOscillatorSe
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class AbsolutePriceOscillatorServiceImpl implements AbsolutePriceOscillatorService {
@@ -24,5 +25,11 @@ public class AbsolutePriceOscillatorServiceImpl implements AbsolutePriceOscillat
     @Override
     public void save(AbsolutePriceOscillatorEntity entity) {
         repository.saveAndFlush(entity);
+    }
+
+    @Override
+    public AbsolutePriceOscillatorEntity findLast(String symbol) {
+        return repository.findTopBySymbolOrderByDateDesc(symbol)
+                .orElse(null);
     }
 }

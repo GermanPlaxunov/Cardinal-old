@@ -25,4 +25,10 @@ public class SimpleMovingAverageServiceImpl implements SimpleMovingAverageServic
     public void save(SimpleMovingAverageEntity entity) {
         repository.saveAndFlush(entity);
     }
+
+    @Override
+    public SimpleMovingAverageEntity findLast(String symbol) {
+        return repository.findTopBySymbolOrderByDateDesc(symbol)
+                .orElse(null);
+    }
 }
