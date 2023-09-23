@@ -1,7 +1,7 @@
 package org.project.core.core.process.params.cache;
 
-import org.project.core.core.process.indicators.Indicators;
 import org.project.data.entities.ProcessParamsEntity;
+import org.project.model.Indicators;
 
 import java.util.List;
 
@@ -10,17 +10,17 @@ public class CacheDepthMapper {
     public CacheDepths map(List<ProcessParamsEntity> params) {
         var result = new CacheDepths();
         for (var param : params) {
-            if(isApo(param))
+            if (isApo(param))
                 result.setApoDepth(param.getNumberValue().longValue());
-            if(isBband(param))
+            if (isBband(param))
                 result.setBbandDepth(param.getNumberValue().longValue());
-            if(isEma(param))
+            if (isEma(param))
                 result.setEmaDepth(param.getNumberValue().longValue());
-            if(isRsi(param))
+            if (isRsi(param))
                 result.setRsiDepth(param.getNumberValue().longValue());
-            if(isSma(param))
+            if (isSma(param))
                 result.setSmaDepth(param.getNumberValue().longValue());
-            if(isStd(param))
+            if (isStd(param))
                 result.setStdDepth(param.getNumberValue().longValue());
         }
         return result;

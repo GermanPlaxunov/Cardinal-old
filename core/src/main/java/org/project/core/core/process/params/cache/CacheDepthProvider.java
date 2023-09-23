@@ -1,6 +1,6 @@
 package org.project.core.core.process.params.cache;
 
-import org.project.core.core.process.indicators.Indicators;
+import org.project.model.Indicators;
 
 public interface CacheDepthProvider {
 

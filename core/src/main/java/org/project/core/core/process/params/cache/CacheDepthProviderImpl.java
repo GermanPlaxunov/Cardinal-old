@@ -1,10 +1,10 @@
 package org.project.core.core.process.params.cache;
 
 import lombok.RequiredArgsConstructor;
-import org.project.core.core.process.indicators.Indicators;
 import org.project.data.entities.ProcessParamsEntity;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
+import org.project.model.Indicators;
 
 import java.util.Arrays;
 import java.util.Optional;

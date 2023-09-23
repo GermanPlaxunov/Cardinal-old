@@ -1,4 +1,4 @@
-package org.project.core.core.process.indicators;
+package org.project.model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +21,13 @@ public enum Indicators {
         return Arrays.stream(Indicators.values())
                 .map(Indicators::name)
                 .toList();
+    }
+
+    public static Indicators getFromName(String name) {
+        return Arrays.stream(Indicators.values())
+                .filter(val -> val.name.equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 
 }

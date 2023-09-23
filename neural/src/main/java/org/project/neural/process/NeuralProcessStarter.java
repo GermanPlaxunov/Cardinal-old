@@ -1,6 +1,7 @@
 package org.project.neural.process;
 
 import lombok.RequiredArgsConstructor;
+import org.project.model.Indicators;
 import org.project.neural.process.predictions.RsiPredictor;
 import org.project.neural.process.training.NetworkRsiTrainer;
 import org.project.neural.process.training.TrainParamsProvider;
@@ -16,7 +17,20 @@ public class NeuralProcessStarter {
         networkRsiTrainer.train(params);
     }
 
-    public Double predict(String symbol) {
-        return rsiPredictor.predict(symbol);
+    public Double predict(String symbol, String indicatorName) {
+        var indicator = Indicators.getFromName(indicatorName);
+        var prediction = switch (indicator) {
+            case APO -> stubPrediction();
+            case BBAND -> stubPrediction();
+            case EMA -> stubPrediction();
+            case RSI -> rsiPredictor.predict(symbol);
+            case SMA -> stubPrediction();
+            case STD -> stubPrediction();
+        };
+        return prediction;
+    }
+
+    private Double stubPrediction() {
+        return 0.0;
     }
 }
