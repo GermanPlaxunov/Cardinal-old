@@ -6,13 +6,13 @@ import org.project.data.services.interfaces.indicators.RelativeStrengthIndicator
 import org.project.model.Indicators;
 import org.project.model.neural.training.TrainParams;
 import org.project.neural.process.network.NetworkStore;
-import org.project.neural.process.training.Trainer;
+import org.project.neural.process.training.NetworkTrainer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class NetworkRsiTrainer implements Trainer {
+public class NetworkRsiTrainer implements NetworkTrainer {
 
     private final RelativeStrengthIndicatorService relativeStrengthIndicatorService;
     private final NetworkStore networkStore;
@@ -30,6 +30,7 @@ public class NetworkRsiTrainer implements Trainer {
         networkStore.updateNetwork(Indicators.RSI, symbol, network);
     }
 
+    //Изменить Gain и Loss на их соотношение и что-то еще.
     private List<List<Double>> prepareData(List<RelativeStrengthIndicatorEntity> indicators) {
         return indicators.stream()
                 .map(rsi -> List.of(rsi.getGainSumm(), rsi.getLossSumm()))

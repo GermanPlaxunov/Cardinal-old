@@ -7,7 +7,6 @@ import org.project.neural.process.NeuralProcessStarter;
 import org.project.neural.process.network.NetworkDao;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.predictions.PredictorsStore;
-import org.project.neural.process.predictions.predictors.RsiPredictor;
 import org.project.neural.process.training.NetworkVectorProcessor;
 import org.project.neural.process.training.TrainParamsProvider;
 import org.project.neural.process.training.TrainersStore;
@@ -33,14 +32,6 @@ public class NeuralBeansConfig {
     }
 
     @Bean
-    public NetworkRsiTrainer networkRsiTrainer(
-            RelativeStrengthIndicatorService relativeStrengthIndicatorService,
-            NetworkStore networkStore) {
-        return new NetworkRsiTrainer(relativeStrengthIndicatorService,
-                networkStore);
-    }
-
-    @Bean
     public NeuralProcessStarter neuralProcessStarter(TrainParamsProvider trainParamsProvider,
                                                      PredictorsStore predictorsStore,
                                                      TrainersStore trainersStore) {
@@ -60,10 +51,4 @@ public class NeuralBeansConfig {
         return new NetworkDao(networkVectorProcessor,
                 neuralNetworkService);
     }
-
-    @Bean
-    public TrainersStore trainersStore(NetworkRsiTrainer networkRsiTrainer) {
-        return new TrainersStore(networkRsiTrainer);
-    }
-
 }
