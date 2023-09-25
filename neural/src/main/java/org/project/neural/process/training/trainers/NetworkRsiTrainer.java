@@ -1,4 +1,4 @@
-package org.project.neural.process.training;
+package org.project.neural.process.training.trainers;
 
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
@@ -6,16 +6,18 @@ import org.project.data.services.interfaces.indicators.RelativeStrengthIndicator
 import org.project.model.Indicators;
 import org.project.model.neural.training.TrainParams;
 import org.project.neural.process.network.NetworkStore;
+import org.project.neural.process.training.Trainer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class NetworkRsiTrainer {
-    private final String TYPE = "RSI";
+public class NetworkRsiTrainer implements Trainer {
+
     private final RelativeStrengthIndicatorService relativeStrengthIndicatorService;
     private final NetworkStore networkStore;
 
+    @Override
     public void train(TrainParams params) {
         var network = networkStore.get(Indicators.RSI, params.getSymbol());
         var symbol = params.getSymbol();
@@ -24,8 +26,8 @@ public class NetworkRsiTrainer {
         var indicators = relativeStrengthIndicatorService.findAllInPeriod(symbol, from, to);
         var data = prepareData(indicators);
         var answers = getAnswersWithOffset(params.getPrices(), data.size());
-        network.train(data, answers, 1000); //Вынести в параметры кол-во эпох
-        networkStore.updateNetwork(TYPE, symbol, network);
+        network.train(data, answers, 1000); //TODO: Вынести в параметры кол-во эпох
+        networkStore.updateNetwork(Indicators.RSI, symbol, network);
     }
 
     private List<List<Double>> prepareData(List<RelativeStrengthIndicatorEntity> indicators) {

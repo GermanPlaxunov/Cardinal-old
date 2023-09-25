@@ -6,10 +6,12 @@ import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.neural.process.NeuralProcessStarter;
 import org.project.neural.process.network.NetworkDao;
 import org.project.neural.process.network.NetworkStore;
+import org.project.neural.process.predictions.PredictorsStore;
 import org.project.neural.process.predictions.predictors.RsiPredictor;
-import org.project.neural.process.training.NetworkRsiTrainer;
 import org.project.neural.process.training.NetworkVectorProcessor;
 import org.project.neural.process.training.TrainParamsProvider;
+import org.project.neural.process.training.TrainersStore;
+import org.project.neural.process.training.trainers.NetworkRsiTrainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -40,11 +42,11 @@ public class NeuralBeansConfig {
 
     @Bean
     public NeuralProcessStarter neuralProcessStarter(TrainParamsProvider trainParamsProvider,
-                                                     NetworkRsiTrainer networkRsiTrainer,
-                                                     RsiPredictor rsiPredictor) {
+                                                     PredictorsStore predictorsStore,
+                                                     TrainersStore trainersStore) {
         return new NeuralProcessStarter(trainParamsProvider,
-                networkRsiTrainer,
-                rsiPredictor);
+                predictorsStore,
+                trainersStore);
     }
 
     @Bean
@@ -57,6 +59,11 @@ public class NeuralBeansConfig {
                                  NeuralNetworkService neuralNetworkService) {
         return new NetworkDao(networkVectorProcessor,
                 neuralNetworkService);
+    }
+
+    @Bean
+    public TrainersStore trainersStore(NetworkRsiTrainer networkRsiTrainer) {
+        return new TrainersStore(networkRsiTrainer);
     }
 
 }

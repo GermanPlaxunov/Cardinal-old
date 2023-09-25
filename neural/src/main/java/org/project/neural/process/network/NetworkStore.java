@@ -32,8 +32,8 @@ public class NetworkStore {
         }
     }
 
-    public void updateNetwork(String type, String symbol, SimpleNeuralNetwork network) {
-        var name = getNetworkName(type, symbol);
+    public void updateNetwork(Indicators indicator, String symbol, SimpleNeuralNetwork network) {
+        var name = getNetworkName(indicator.name(), symbol);
         var vector = networkVectorProcessor.getVector(network);
         neuralNetworkService.save(symbol, name, vector);
         networks.put(name, network);

@@ -2,12 +2,28 @@ package org.project.neural.process.config;
 
 import org.project.data.services.interfaces.indicators.*;
 import org.project.neural.process.network.NetworkStore;
+import org.project.neural.process.predictions.PredictorsStore;
 import org.project.neural.process.predictions.predictors.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class PredictionConfig {
+
+    @Bean
+    public PredictorsStore predictorsStore(ApoPredictor apoPredictor,
+                                           BbandPredictor bbandPredictor,
+                                           EmaPredictor emaPredictor,
+                                           RsiPredictor rsiPredictor,
+                                           SmaPredictor smaPredictor,
+                                           StdPredictor stdPredictor) {
+        return new PredictorsStore(apoPredictor,
+                bbandPredictor,
+                emaPredictor,
+                rsiPredictor,
+                smaPredictor,
+                stdPredictor);
+    }
 
     @Bean
     public ApoPredictor apoPredictor(AbsolutePriceOscillatorService absolutePriceOscillatorService,
