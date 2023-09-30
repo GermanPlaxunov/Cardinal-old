@@ -1,0 +1,112 @@
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 114
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_STD_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 114
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_SMA_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 114
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_EMA_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 116
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_BBAND_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 114
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_APO_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 114
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_RSI_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 94
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "TEST",
+    "numberValue": 1,
+    "stringValue": "test",
+    "dateValue": null
+}
+
+###
+

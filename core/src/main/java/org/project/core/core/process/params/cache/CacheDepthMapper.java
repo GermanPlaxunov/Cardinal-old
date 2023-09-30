@@ -9,6 +9,7 @@ public class CacheDepthMapper {
 
     public CacheDepths map(List<ProcessParamsEntity> params) {
         var result = new CacheDepths();
+        result.setMaxDepth(getMaxDepth(params));
         for (var param : params) {
             if (isApo(param))
                 result.setApoDepth(param.getNumberValue().longValue());
@@ -24,6 +25,14 @@ public class CacheDepthMapper {
                 result.setStdDepth(param.getNumberValue().longValue());
         }
         return result;
+    }
+
+    private Long getMaxDepth(List<ProcessParamsEntity> params) {
+        return params.stream()
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .max(Long::compare)
+                .orElse(0L);
     }
 
     private boolean isApo(ProcessParamsEntity param) {

@@ -27,7 +27,7 @@ public class IndicatorsCollector {
     public ProcessVars collect(String symbol) {
         ProcessVars processVars = null;
         var depths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
-        var stocks = coreStockService.findCache(symbol, depths.getDefaultDepth());
+        var stocks = coreStockService.findCache(symbol, depths.getMaxDepth());
         if (stocks.size() > 5) {
             log.info("Amount of stocks to collect indexes: {}", stocks.size());
             var apo = absolutePriceOscillator.calculateApo(stocks);
@@ -45,7 +45,7 @@ public class IndicatorsCollector {
                     .setSma(sma)
                     .setStd(std)
                     .setBband(bband)
-                    .setDepth(depths.getDefaultDepth());
+                    .setDepth(depths.getMaxDepth());
             indicatorsSaver.saveAllIndicators(processVars);
         }
         return processVars;
