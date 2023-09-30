@@ -18,7 +18,7 @@ class AbsolutePriceOscillatorTest extends AbstractIndicatorTest {
     @Test
     void calculateApo() {
         var stocksSlow = getStocks(5);
-        var apo = absolutePriceOscillator.calculateApo(stocksSlow);
+        var apo = absolutePriceOscillator.calculateApo(stocksSlow, 5L);
         assertEquals(0.8858024691358111, apo);
     }
 }

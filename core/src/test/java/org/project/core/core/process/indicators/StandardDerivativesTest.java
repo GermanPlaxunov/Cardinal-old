@@ -18,7 +18,7 @@ class StandardDerivativesTest extends AbstractIndicatorTest {
     @Test
     void calculateStd() {
         var stocks = getStocks(5);
-        var std = standardDerivatives.calculateStd(stocks);
+        var std = standardDerivatives.calculateStd(stocks, 5L);
         assertEquals(2.4166091947189146, std);
     }
 }

@@ -28,14 +28,14 @@ public class IndicatorsCollector {
         ProcessVars processVars = null;
         var depths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
         var stocks = coreStockService.findCache(symbol, depths.getMaxDepth());
-        if (stocks.size() > 5) {
+        if (stocks.size() > 10) {
             log.info("Amount of stocks to collect indexes: {}", stocks.size());
-            var apo = absolutePriceOscillator.calculateApo(stocks);
-            var ema = exponentialMovingAverage.calculateEma(stocks);
-            var rsi = relativeStrengthIndicator.calculateRsi(stocks);
-            var sma = simpleMovingAverage.calculateSma(stocks);
-            var std = standardDerivatives.calculateStd(stocks);
-            var bband = bollingerBands.calculateBband(stocks);
+            var apo = absolutePriceOscillator.calculateApo(stocks, depths.getApoDepth());
+            var ema = exponentialMovingAverage.calculateEma(stocks, depths.getEmaDepth());
+            var rsi = relativeStrengthIndicator.calculateRsi(stocks, depths.getRsiDepth());
+            var sma = simpleMovingAverage.calculateSma(stocks, depths.getSmaDepth());
+            var std = standardDerivatives.calculateStd(stocks, depths.getStdDepth());
+            var bband = bollingerBands.calculateBband(stocks, depths.getBbandDepth());
             processVars = new ProcessVars()
                     .setSymbol(symbol)
                     .setDate(getIndicatorDate(stocks))

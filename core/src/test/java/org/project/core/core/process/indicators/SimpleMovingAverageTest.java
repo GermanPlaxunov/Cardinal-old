@@ -17,7 +17,7 @@ class SimpleMovingAverageTest extends AbstractIndicatorTest {
     @Test
     void calculateSma() {
         var stocks = getStocks(5);
-        var sma = simpleMovingAverage.calculateSma(stocks);
+        var sma = simpleMovingAverage.calculateSma(stocks, 5L);
         assertEquals(100.4, sma);
     }
 }
