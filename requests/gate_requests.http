@@ -3,8 +3,8 @@ POST http://localhost:8080/gate/addProcessParam
 Content-Type: application/json
 
 {
-    "name": "TEST",
-    "numberValue": 1,
-    "stringValue": "test",
+    "name": "BTC/USD_STD_CACHE_DEPTH",
+    "numberValue": 1000,
+    "stringValue": null,
     "dateValue": null
 }

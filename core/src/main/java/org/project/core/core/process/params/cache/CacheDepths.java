@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CacheDepths {
 
-    private Long defaultDepth;
+    private Long maxDepth;
     private Long apoDepth;
     private Long bbandDepth;
     private Long emaDepth;
