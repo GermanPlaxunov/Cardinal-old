@@ -18,7 +18,7 @@ class BollingerBandsTest extends AbstractIndicatorTest {
     @Test
     void calculateBband() {
         var stocks = getStocks(10);
-        var bband = bollingerBands.calculateBband(stocks);
+        var bband = bollingerBands.calculateBband(stocks, 10L);
         assertEquals(88.41746050246414, bband.getLower());
         assertEquals(99.04760631519879, bband.getMiddle());
         assertEquals(109.67775212793345, bband.getUpper());

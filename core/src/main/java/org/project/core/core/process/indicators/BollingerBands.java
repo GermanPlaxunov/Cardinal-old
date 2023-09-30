@@ -23,12 +23,14 @@ public class BollingerBands extends AbstractIndicator {
      * @param coreStockEntities - list of points
      * @return bband
      */
-    public Bband calculateBband(List<CoreStockEntity> coreStockEntities) {
+    public Bband calculateBband(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
         var symbol = coreStockEntities.get(0).getSymbol();
+        var stocks = getCachedStocks(coreStockEntities, cacheDepth);
         log.debug("Start calculating BBAND for: {}", symbol);
-        var prices = getPrices(coreStockEntities);
-        var std = MathUtils.standardDeviation(prices);
-        var middle = exponentialMovingAverage.calculateEma(coreStockEntities);
+        var std = MathUtils.standardDeviation(stocks.stream()
+                .map(CoreStockEntity::getClose)
+                .toList());
+        var middle = exponentialMovingAverage.calculateEma(coreStockEntities, cacheDepth);
         var upper = middle + STDEV_FACTOR * std;
         var lower = middle - STDEV_FACTOR * std;
         log.debug("BBAND for {} UPPER: {}, MIDDLE: {}, LOWER: {}", symbol, upper, middle, lower);

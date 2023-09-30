@@ -24,10 +24,11 @@ public class RelativeStrengthIndicator extends AbstractIndicator {
      * @param coreStockEntities - list of all points.
      * @return rsi
      */
-    public Rsi calculateRsi(List<CoreStockEntity> coreStockEntities) {
+    public Rsi calculateRsi(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
         var symbol = coreStockEntities.get(0).getSymbol();
         log.info("Start calculating RSI for {}", symbol);
-        var prices = getPrices(coreStockEntities);
+        var stocks = getCachedStocks(coreStockEntities, cacheDepth);
+        var prices = getPrices(stocks);
         var rsi = getTotalGainAndLosses(prices);
         var relativeStrength = getRelativeStrength(rsi);
         rsi.setRsi(calculateRsi(relativeStrength));
@@ -68,5 +69,4 @@ public class RelativeStrengthIndicator extends AbstractIndicator {
     private Double absoluteLossOverPeriod(Double currClosePrice, Double previousPrice) {
         return Math.max(0.0, previousPrice - currClosePrice);
     }
-
 }
