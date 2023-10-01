@@ -8,7 +8,7 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
-public class AbsolutePriceOscillator {
+public class AbsolutePriceOscillator extends AbstractIndicator {
 
     private final ExponentialMovingAverage exponentialMovingAverage;
 
@@ -20,14 +20,12 @@ public class AbsolutePriceOscillator {
      * @param coreStockEntities - list of points ordered by date
      * @return apo
      */
-    public Double calculateApo(List<CoreStockEntity> coreStockEntities) {
+    public Double calculateApo(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
         var symbol = coreStockEntities.get(0).getSymbol();
         log.debug("Start calculating APO for {}", symbol);
-        var fastTermStocks = coreStockEntities.stream()
-                .skip(coreStockEntities.size() / 2)
-                .toList();
-        var emaFast = exponentialMovingAverage.calculateEma(fastTermStocks);
-        var emaSlow = exponentialMovingAverage.calculateEma(coreStockEntities);
+        var shortTermCacheDepth = cacheDepth / 2;
+        var emaFast = exponentialMovingAverage.calculateEma(coreStockEntities, shortTermCacheDepth);
+        var emaSlow = exponentialMovingAverage.calculateEma(coreStockEntities, cacheDepth);
         log.debug("EMA_FAST: {}, EMA_SLOW: {}", emaFast, emaSlow);
         return emaFast - emaSlow;
     }

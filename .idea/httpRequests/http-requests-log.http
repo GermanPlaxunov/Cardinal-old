@@ -1,3 +1,105 @@
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD
+
+<> 2023-10-01T115715.500.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD&indicator=RSI
+
+<> 2023-10-01T115500.200.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD&indicator=RSI
+
+<> 2023-10-01T115438.200.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 32
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD+indicator%3DRSI
+
+<> 2023-10-01T115310.400.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD
+
+<> 2023-10-01T115052.400.json
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD
+
+<> 2023-10-01T114033.500.json
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC%2FUSD
+
+<> 2023-10-01T113544.500.json
+
+###
+
 POST http://localhost:8080/gate/addProcessParam
 Content-Type: application/json
 Content-Length: 114

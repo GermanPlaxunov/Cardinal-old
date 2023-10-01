@@ -3,6 +3,7 @@ package org.project.core.core.process.params.cache;
 import org.project.data.entities.ProcessParamsEntity;
 import org.project.model.Indicators;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class CacheDepthMapper {
@@ -10,6 +11,7 @@ public class CacheDepthMapper {
     public CacheDepths map(List<ProcessParamsEntity> params) {
         var result = new CacheDepths();
         result.setMaxDepth(getMaxDepth(params));
+        result.setMinDepth(getMinDepth(params));
         for (var param : params) {
             if (isApo(param))
                 result.setApoDepth(param.getNumberValue().longValue());
@@ -31,8 +33,17 @@ public class CacheDepthMapper {
         return params.stream()
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .max(Long::compare)
+                .max(Comparator.naturalOrder())
                 .orElse(0L);
+    }
+
+    private Long getMinDepth(List<ProcessParamsEntity> params) {
+        return params.stream()
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .min(Comparator.naturalOrder())
+                .orElse(0L);
+
     }
 
     private boolean isApo(ProcessParamsEntity param) {

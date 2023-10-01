@@ -9,6 +9,7 @@ public interface NeuralFeignClient extends NeuralClient {
 
     @Override
     @PostMapping(path = "/predict")
-    Double predict(@RequestParam(name = "symbol") String symbol);
+    Double predict(@RequestParam(name = "symbol") String symbol,
+                   @RequestParam(name = "indicator") String indicator);
 
 }
