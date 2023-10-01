@@ -8,7 +8,7 @@ def get_apo_query():
     return query
 
 def get_bband_query():
-    query = "select * from libra.bband;"
+    query = "select * from libra.bbands;"
     return query
 
 def get_ema_query():
