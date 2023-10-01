@@ -1,6 +1,7 @@
 package org.project.neural.process.training.trainers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.model.Indicators;
@@ -11,6 +12,7 @@ import org.project.neural.process.training.NetworkTrainer;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 public class NetworkRsiTrainer implements NetworkTrainer {
 
@@ -19,8 +21,9 @@ public class NetworkRsiTrainer implements NetworkTrainer {
 
     @Override
     public void train(TrainParams params) {
-        var network = networkStore.get(Indicators.RSI, params.getSymbol());
         var symbol = params.getSymbol();
+        log.info("Start training RSI network for {}", symbol);
+        var network = networkStore.get(Indicators.RSI, params.getSymbol());
         var from = params.getDateFrom();
         var to = params.getDateTo();
         var indicators = relativeStrengthIndicatorService.findAllInPeriod(symbol, from, to);

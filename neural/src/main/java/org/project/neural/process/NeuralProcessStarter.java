@@ -1,11 +1,13 @@
 package org.project.neural.process;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.project.model.Indicators;
 import org.project.neural.process.predictions.PredictorsStore;
 import org.project.neural.process.training.TrainParamsProvider;
 import org.project.neural.process.training.TrainersStore;
 
+@Slf4j
 @RequiredArgsConstructor
 public class NeuralProcessStarter {
     private final TrainParamsProvider trainParamsProvider;
