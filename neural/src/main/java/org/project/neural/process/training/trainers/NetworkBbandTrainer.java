@@ -1,11 +1,13 @@
 package org.project.neural.process.training.trainers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.project.data.services.interfaces.indicators.BollingerBandsService;
 import org.project.model.neural.training.TrainParams;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.training.NetworkTrainer;
 
+@Slf4j
 @RequiredArgsConstructor
 public class NetworkBbandTrainer implements NetworkTrainer {
 
@@ -14,6 +16,7 @@ public class NetworkBbandTrainer implements NetworkTrainer {
 
     @Override
     public void train(TrainParams params) {
-
+        var symbol = params.getSymbol();
+        log.info("Start training BBAND network for {}", symbol);
     }
 }
