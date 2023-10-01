@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.project.core.client.NeuralClient;
 import org.project.core.core.process.decision.indicators.IndicatorDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
+import org.project.model.Indicators;
 
 @RequiredArgsConstructor
 public class RsiDecisionProcessor implements IndicatorDecisionProcessor {
@@ -14,7 +15,7 @@ public class RsiDecisionProcessor implements IndicatorDecisionProcessor {
     @Override
     public Long shouldPositionBeClosed(ProcessVars processVars) {
         var symbol = processVars.getSymbol();
-        var priceChangePrediction = neuralClient.predict(symbol);
+        var priceChangePrediction = neuralClient.predict(symbol, Indicators.RSI.name());
         var score = rsiPredictionProcessor.checkToCloseCurrentPosition(priceChangePrediction);
         return score;
     }
@@ -22,7 +23,7 @@ public class RsiDecisionProcessor implements IndicatorDecisionProcessor {
     @Override
     public Long shouldPositionBeOpen(ProcessVars processVars) {
         var symbol = processVars.getSymbol();
-        var priceChangePrediction = neuralClient.predict(symbol);
+        var priceChangePrediction = neuralClient.predict(symbol, Indicators.RSI.name());
         var score = rsiPredictionProcessor.checkToOpenNewPosition(priceChangePrediction);
         return score;
     }
