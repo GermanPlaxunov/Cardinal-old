@@ -1,31 +1,22 @@
-package org.project.core.config;
+package org.project.data.config;
 
-import org.project.data.repositories.CoreStockRepository;
-import org.project.data.repositories.PositionRepository;
-import org.project.data.repositories.PriceDiffSignalRepository;
-import org.project.data.repositories.ProcessParamsRepository;
+import org.project.data.repositories.*;
 import org.project.data.repositories.indicators.*;
-import org.project.data.services.classes.CoreStockServiceImpl;
-import org.project.data.services.classes.PositionServiceImpl;
-import org.project.data.services.classes.PriceDiffSignalServiceImpl;
-import org.project.data.services.classes.ProcessParamsServiceImpl;
+import org.project.data.repositories.neural.NeuralNetworkRepository;
+import org.project.data.services.classes.*;
 import org.project.data.services.classes.indicators.*;
-import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.PositionService;
-import org.project.data.services.interfaces.PriceDiffSignalService;
-import org.project.data.services.interfaces.ProcessParamsService;
+import org.project.data.services.classes.neural.NeuralNetworkServiceImpl;
+import org.project.data.services.interfaces.*;
 import org.project.data.services.interfaces.indicators.*;
+import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EntityScan(basePackages = "org.project.data.entities")
 @EnableJpaRepositories(basePackages = "org.project.data.repositories")
-public class CoreDaoConfig {
-
+public class DataBeansConfig {
     @Bean
     public CoreStockService coreStockService(CoreStockRepository coreStockRepository) {
         return new CoreStockServiceImpl(coreStockRepository);
@@ -43,7 +34,7 @@ public class CoreDaoConfig {
 
     @Bean
     public PositionService positionService(PositionRepository positionRepository,
-                                           @Value("${core.account.id") String accountId) {
+                                           @Value("9b6afcd3-8126-4ca9-a871-e66f409e1d68") String accountId) {
         return new PositionServiceImpl(positionRepository, accountId);
     }
 
@@ -76,4 +67,25 @@ public class CoreDaoConfig {
     public StandardDerivativesService standardDerivativesService(StandardDerivativesRepository repository) {
         return new StandardDerivativesServiceImpl(repository);
     }
+
+    @Bean
+    public NeuralNetworkService neuralNetworkService(NeuralNetworkRepository neuralNetworkRepository) {
+        return new NeuralNetworkServiceImpl(neuralNetworkRepository);
+    }
+
+    @Bean
+    public LastProvidedStockService lastProvidedStockService(LastProvidedStockRepository lastProvidedStockRepository) {
+        return new LastProvidedStockServiceImpl(lastProvidedStockRepository);
+    }
+
+    @Bean
+    public MarketStockService marketStockService(MarketStockRepository marketStockRepository) {
+        return new MarketStockServiceImpl(marketStockRepository);
+    }
+
+    @Bean
+    public JobService jobService(JobRepository jobRepository) {
+        return new JobServiceImpl(jobRepository);
+    }
+
 }

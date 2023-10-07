@@ -1,5 +1,6 @@
 package org.project.neural.process.config;
 
+import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.data.services.interfaces.neural.NeuralNetworkService;
@@ -11,10 +12,14 @@ import org.project.neural.process.training.NetworkVectorProcessor;
 import org.project.neural.process.training.TrainParamsProvider;
 import org.project.neural.process.training.TrainersStore;
 import org.project.neural.process.training.trainers.NetworkRsiTrainer;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
+@Import(DataBeansConfig.class)
+@EntityScan(basePackages = "org.project.data.entities")
 public class NeuralBeansConfig {
 
     @Bean

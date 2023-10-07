@@ -1,5 +1,6 @@
 package org.project.market.config;
 
+import org.project.data.config.DataBeansConfig;
 import org.project.data.repositories.AccountRepository;
 import org.project.data.repositories.LastProvidedStockRepository;
 import org.project.data.repositories.MarketStockRepository;
@@ -19,22 +20,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
+@Import(DataBeansConfig.class)
 @EntityScan(basePackages = "org.project.data.entities")
 @EnableJpaRepositories(basePackages = "org.project.data.repositories")
 public class MarketConfig {
-
-    @Bean
-    public MarketStockService stockService(MarketStockRepository marketStockRepository) {
-        return new MarketStockServiceImpl(marketStockRepository);
-    }
-
-    @Bean
-    public LastProvidedStockService lastProvidedStockService(LastProvidedStockRepository repository) {
-        return new LastProvidedStockServiceImpl(repository);
-    }
 
     @Bean
     public AccountService accountService(AccountRepository repository) {
