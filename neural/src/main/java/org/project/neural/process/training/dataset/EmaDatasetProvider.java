@@ -1,6 +1,7 @@
 package org.project.neural.process.training.dataset;
 
 import lombok.RequiredArgsConstructor;
+import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.indicators.ExponentialMovingAverageService;
 
@@ -19,10 +20,11 @@ public class EmaDatasetProvider implements DatasetProvider {
      * ep - EMA to price attitude for each period;
      *
      * @param symbol - the name of the stock.
+     * @param stocks - the list of stocks.
      * @return dataset.
      */
     @Override
-    public List<Map<String, Double>> getData(String symbol) {
+    public List<Map<String, Double>> getData(String symbol, List<CoreStockEntity> stocks) {
         return null;
     }
 }

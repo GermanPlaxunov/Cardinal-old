@@ -1,8 +1,13 @@
 package org.project.neural.process.config;
 
+import org.project.data.entities.indicators.AbsolutePriceOscillatorEntity;
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.*;
 import org.project.neural.process.training.dataset.*;
+import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
+import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
+import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,10 +31,16 @@ public class DatasetProvidersConfig {
 
     @Bean
     public ApoDatasetProvider apoDatasetProvider(
+            IndicatorSplitter<AbsolutePriceOscillatorEntity> indicatorSplitter,
             AbsolutePriceOscillatorService absolutePriceOscillatorService,
-            CoreStockService coreStockService) {
-        return new ApoDatasetProvider(absolutePriceOscillatorService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new ApoDatasetProvider(indicatorSplitter,
+                absolutePriceOscillatorService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
     }
 
     @Bean
@@ -70,6 +81,11 @@ public class DatasetProvidersConfig {
             CoreStockService coreStockService) {
         return new StdDatasetProvider(standardDerivativesService,
                 coreStockService);
+    }
+
+    @Bean
+    public PriceChangeCalculator priceChangeCalculator() {
+        return new PriceChangeCalculator();
     }
 
 }

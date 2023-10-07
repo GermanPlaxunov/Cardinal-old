@@ -16,8 +16,10 @@ public class NeuralProcessStarter {
 
     public void train(String symbol) {
         var params = trainParamsProvider.getTrainParams(symbol);
-        trainersStore.get(Indicators.RSI)
-                .train(params);
+        for(var indicator : Indicators.values()) {
+            var trainer = trainersStore.get(indicator);
+            trainer.train(params);
+        }
     }
 
     public Double predict(String symbol, String indicatorName) {
@@ -25,9 +27,5 @@ public class NeuralProcessStarter {
         var prediction = predictorsStore.get(indicator)
                 .predict(symbol);
         return prediction;
-    }
-
-    private Double stubPrediction() {
-        return 0.0;
     }
 }
