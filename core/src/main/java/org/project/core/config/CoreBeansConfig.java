@@ -9,25 +9,30 @@ import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.indicators.*;
-import org.project.core.core.process.params.cache.CacheDepthMapper;
-import org.project.core.core.process.params.cache.CacheDepthProvider;
-import org.project.core.core.process.params.cache.CacheDepthProviderImpl;
+import org.project.data.cache.CacheDepthMapper;
+import org.project.data.cache.CacheDepthProvider;
+import org.project.data.cache.CacheDepthProviderImpl;
 import org.project.core.core.process.strategy.BasicStrategy;
 import org.project.core.core.process.strategy.basic.FixProfitProvider;
 import org.project.core.core.process.strategy.basic.StopLossProvider;
 import org.project.core.mapper.StockMapper;
+import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.*;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
+@Import(DataBeansConfig.class)
 @EnableFeignClients(clients = {
         MarketFeignClient.class, NeuralFeignClient.class
 })
+@EntityScan(basePackages = "org.project.data.entities")
 public class CoreBeansConfig {
 
     @Bean

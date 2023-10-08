@@ -17,4 +17,7 @@ public interface RelativeStrengthIndicatorRepository extends JpaRepository<Relat
 
     Optional<RelativeStrengthIndicatorEntity> findTopBySymbolOrderByDateDesc(String symbol);
 
+    List<RelativeStrengthIndicatorEntity> findAllBySymbolAndDateGreaterThanOrderByDateAsc(String symbol,
+                                                                                          LocalDateTime date);
+
 }

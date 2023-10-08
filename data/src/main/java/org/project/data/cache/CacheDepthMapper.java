@@ -1,4 +1,4 @@
-package org.project.core.core.process.params.cache;
+package org.project.data.cache;
 
 import org.project.data.entities.ProcessParamsEntity;
 import org.project.model.Indicators;

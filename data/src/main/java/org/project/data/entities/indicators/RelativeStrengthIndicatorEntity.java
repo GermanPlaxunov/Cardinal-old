@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "RSI")
-public class RelativeStrengthIndicatorEntity {
+public class RelativeStrengthIndicatorEntity implements IndicatorDate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,4 +26,10 @@ public class RelativeStrengthIndicatorEntity {
     private Double gainSumm;
     @Column(name = "LOSS_SUMM")
     private Double lossSumm;
+
+    @Override
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
 }

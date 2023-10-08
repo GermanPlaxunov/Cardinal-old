@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "STD_DERIVS")
-public class StandardDerivativesEntity {
+public class StandardDerivativesEntity implements IndicatorDate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,5 +22,10 @@ public class StandardDerivativesEntity {
     private Double value;
     @Column(name = "DEPTH")
     private Long depth;
+
+    @Override
+    public LocalDateTime getDate() {
+        return this.date;
+    }
 
 }

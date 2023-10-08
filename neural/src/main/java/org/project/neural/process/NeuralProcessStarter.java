@@ -1,11 +1,13 @@
 package org.project.neural.process;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.project.model.Indicators;
 import org.project.neural.process.predictions.PredictorsStore;
 import org.project.neural.process.training.TrainParamsProvider;
 import org.project.neural.process.training.TrainersStore;
 
+@Slf4j
 @RequiredArgsConstructor
 public class NeuralProcessStarter {
     private final TrainParamsProvider trainParamsProvider;
@@ -14,8 +16,10 @@ public class NeuralProcessStarter {
 
     public void train(String symbol) {
         var params = trainParamsProvider.getTrainParams(symbol);
-        trainersStore.get(Indicators.RSI)
-                .train(params);
+        for(var indicator : Indicators.values()) {
+            var trainer = trainersStore.get(indicator);
+            trainer.train(params);
+        }
     }
 
     public Double predict(String symbol, String indicatorName) {
@@ -23,9 +27,5 @@ public class NeuralProcessStarter {
         var prediction = predictorsStore.get(indicator)
                 .predict(symbol);
         return prediction;
-    }
-
-    private Double stubPrediction() {
-        return 0.0;
     }
 }

@@ -3,8 +3,7 @@ package org.project.neural.process.training;
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.CoreStockService;
-import org.project.model.Indicators;
-import org.project.model.neural.training.TrainParams;
+import org.project.neural.process.training.training.TrainParams;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +14,8 @@ public class TrainParamsProvider {
     private final CoreStockService coreStockService;
 
     public TrainParams getTrainParams(String symbol) {
-        var dataset = coreStockService.findCache(symbol, 86400L);
+        var cacheDepth = 86400L; //TODO: to params
+        var dataset = coreStockService.findCache(symbol, cacheDepth);
         return new TrainParams()
                 .setSymbol(symbol)
                 .setDateTo(getDateTo(dataset))

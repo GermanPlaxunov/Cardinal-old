@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "APO")
-public class AbsolutePriceOscillatorEntity {
+public class AbsolutePriceOscillatorEntity implements IndicatorDate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,4 +22,10 @@ public class AbsolutePriceOscillatorEntity {
     private Long depth;
     @Column(name = "DATE")
     private LocalDateTime date;
+
+    @Override
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
 }

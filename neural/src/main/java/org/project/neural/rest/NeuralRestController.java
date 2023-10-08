@@ -18,7 +18,9 @@ public class NeuralRestController implements NeuralController {
     @PostMapping(path = "/predict")
     public Double predict(@RequestParam(name = "symbol") String symbol,
                           @RequestParam(name = "indicator") String indicator) {
-        return neuralProcessStarter.predict(symbol, indicator);
+        var prediction = neuralProcessStarter.predict(symbol, indicator);
+        log.info("Prediction for {} {} = {}", symbol, indicator, prediction);
+        return prediction;
     }
 
     @Override
