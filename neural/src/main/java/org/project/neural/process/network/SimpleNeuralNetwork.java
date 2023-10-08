@@ -63,7 +63,7 @@ public class SimpleNeuralNetwork {
         );
     }
 
-    public void train(List<List<Double>> data, List<Double> answers, Integer epochs) {
+    public void train(List<List<Double>> data, List<Double> answers, Long epochs) {
         Double bestEpochLoss = null;
         for (var epoch = 0; epoch < epochs; epoch++) {
             var epochNeuron = neurons.get(epoch % neurons.size());

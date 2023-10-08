@@ -20,7 +20,8 @@ public class TrainParamsProvider {
                 .setSymbol(symbol)
                 .setDateTo(getDateTo(dataset))
                 .setDateFrom(getDateFrom(dataset))
-                .setPrices(getPrices(dataset));
+                .setPrices(getPrices(dataset))
+                .setEpochs(1000L);
     }
 
     private LocalDateTime getDateTo(List<CoreStockEntity> stocks) {
