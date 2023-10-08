@@ -25,7 +25,7 @@ public class BbandDatasetProvider implements DatasetProvider {
      * @return dataset.
      */
     @Override
-    public List<Map<String, Double>> getData(String symbol, List<CoreStockEntity> stocks) {
+    public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
         return null;
     }
 }

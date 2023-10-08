@@ -3,7 +3,6 @@ package org.project.neural.process.training.dataset;
 import org.project.data.entities.CoreStockEntity;
 
 import java.util.List;
-import java.util.Map;
 
 public interface DatasetProvider {
 
@@ -14,6 +13,6 @@ public interface DatasetProvider {
      * @param symbol
      * @return dataset
      */
-    List<Map<String, Double>> getData(String symbol, List<CoreStockEntity> stocks);
+    List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks);
 
 }

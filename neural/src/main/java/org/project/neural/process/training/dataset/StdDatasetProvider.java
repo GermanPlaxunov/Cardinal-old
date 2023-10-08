@@ -6,7 +6,6 @@ import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.indicators.StandardDerivativesService;
 
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 public class StdDatasetProvider implements DatasetProvider {
@@ -24,7 +23,7 @@ public class StdDatasetProvider implements DatasetProvider {
      * @return dataset.
      */
     @Override
-    public List<Map<String, Double>> getData(String symbol, List<CoreStockEntity> stocks) {
+    public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
         return null;
     }
 }

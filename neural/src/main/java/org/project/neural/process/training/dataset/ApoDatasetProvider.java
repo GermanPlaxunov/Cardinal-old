@@ -11,7 +11,6 @@ import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
 import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class ApoDatasetProvider implements DatasetProvider {
      * @return dataset.
      */
     @Override
-    public List<Map<String, Double>> getData(String symbol, List<CoreStockEntity> stocks) {
+    public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
         var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.APO);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.APO);
         var allIndicators = absolutePriceOscillatorService.findCache(symbol, cacheDepthSeconds);
@@ -51,15 +50,15 @@ public class ApoDatasetProvider implements DatasetProvider {
      * @param priceChange - list of price deltas.
      * @return list of maps with data.
      */
-    private List<Map<String, Double>> map(List<AbsolutePriceOscillatorEntity> apos,
+    private List<List<Double>> map(List<AbsolutePriceOscillatorEntity> apos,
                                           List<Double> priceChange) {
         var counter = Math.min(apos.size(), priceChange.size());
-        var result = new ArrayList<Map<String, Double>>();
+        var result = new ArrayList<List<Double>>();
         for (var i = 0; i < counter; i++) {
-            var map = new HashMap<String, Double>();
-            map.put("APO", apos.get(i).getValue());
-            map.put("priceChange", priceChange.get(i));
-            result.add(map);
+            var point = new ArrayList<Double>();
+            point.add(apos.get(i).getValue());
+            point.add(priceChange.get(i));
+            result.add(point);
         }
         return result;
     }
