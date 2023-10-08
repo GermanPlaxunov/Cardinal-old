@@ -1,4 +1,4 @@
-package org.project.core.core.process.params.cache;
+package org.project.data.cache;
 
 import lombok.RequiredArgsConstructor;
 import org.project.data.services.interfaces.CoreStockService;

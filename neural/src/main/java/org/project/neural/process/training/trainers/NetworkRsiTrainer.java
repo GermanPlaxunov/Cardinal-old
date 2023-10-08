@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.model.Indicators;
-import org.project.model.neural.training.TrainParams;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.training.NetworkTrainer;
+import org.project.neural.process.training.training.TrainParams;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.indicators.IndicatorsCollector;
-import org.project.core.core.process.params.cache.CacheDepthProvider;
+import org.project.data.cache.CacheDepthProvider;
 import org.project.core.core.process.strategy.BasicStrategy;
 
 @Slf4j

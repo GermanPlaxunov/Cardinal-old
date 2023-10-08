@@ -1,8 +1,13 @@
 package org.project.neural.process.config;
 
+import org.project.data.entities.indicators.*;
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.*;
 import org.project.neural.process.training.dataset.*;
+import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
+import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
+import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,50 +31,91 @@ public class DatasetProvidersConfig {
 
     @Bean
     public ApoDatasetProvider apoDatasetProvider(
+            IndicatorSplitter<AbsolutePriceOscillatorEntity> indicatorSplitter,
             AbsolutePriceOscillatorService absolutePriceOscillatorService,
-            CoreStockService coreStockService) {
-        return new ApoDatasetProvider(absolutePriceOscillatorService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new ApoDatasetProvider(indicatorSplitter,
+                absolutePriceOscillatorService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
     }
 
     @Bean
     public BbandDatasetProvider bbandDatasetProvider(
+            IndicatorSplitter<BollingerBandsEntity> indicatorSplitter,
             BollingerBandsService bollingerBandsService,
-            CoreStockService coreStockService) {
-        return new BbandDatasetProvider(bollingerBandsService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new BbandDatasetProvider(indicatorSplitter,
+                bollingerBandsService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
     }
 
     @Bean
     public EmaDatasetProvider emaDatasetProvider(
+            IndicatorSplitter<ExponentialMovingAverageEntity> indicatorSplitter,
             ExponentialMovingAverageService exponentialMovingAverageService,
-            CoreStockService coreStockService) {
-        return new EmaDatasetProvider(exponentialMovingAverageService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new EmaDatasetProvider(indicatorSplitter,
+                exponentialMovingAverageService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
     }
 
     @Bean
     public RsiDatasetProvider rsiDatasetProvider(
+            IndicatorSplitter<RelativeStrengthIndicatorEntity> indicatorSplitter,
             RelativeStrengthIndicatorService relativeStrengthIndicatorService,
-            CoreStockService coreStockService) {
-        return new RsiDatasetProvider(relativeStrengthIndicatorService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new RsiDatasetProvider(indicatorSplitter,
+                relativeStrengthIndicatorService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
     }
 
     @Bean
     public SmaDatasetProvider smaDatasetProvider(
+            IndicatorSplitter<SimpleMovingAverageEntity> indicatorSplitter,
             SimpleMovingAverageService simpleMovingAverageService,
-            CoreStockService coreStockService) {
-        return new SmaDatasetProvider(simpleMovingAverageService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new SmaDatasetProvider(indicatorSplitter,
+                simpleMovingAverageService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
     }
 
     @Bean
     public StdDatasetProvider stdDatasetProvider(
+            IndicatorSplitter<StandardDerivativesEntity> indicatorSplitter,
             StandardDerivativesService standardDerivativesService,
-            CoreStockService coreStockService) {
-        return new StdDatasetProvider(standardDerivativesService,
-                coreStockService);
+            PriceChangeCalculator priceChangeCalculator,
+            ProcessParamsService processParamsService,
+            CoreStocksSplitter coreStocksSplitter) {
+        return new StdDatasetProvider(indicatorSplitter,
+                standardDerivativesService,
+                priceChangeCalculator,
+                processParamsService,
+                coreStocksSplitter);
+    }
+
+    @Bean
+    public PriceChangeCalculator priceChangeCalculator() {
+        return new PriceChangeCalculator();
     }
 
 }

@@ -31,4 +31,15 @@ public class ExponentialMovingAverageImpl implements ExponentialMovingAverageSer
         return repository.findTopBySymbolOrderByDateDesc(symbol)
                 .orElse(null);
     }
+
+    @Override
+    public List<ExponentialMovingAverageEntity> findCache(String symbol, Long cacheDepthSeconds) {
+        var earliestDate = findLast(symbol)
+                .getDate()
+                .minusSeconds(cacheDepthSeconds);
+        return repository.findAllBySymbolAndDateGreaterThanOrderByDateAsc(symbol, earliestDate)
+                .stream()
+                .filter(Objects::nonNull)
+                .toList();
+    }
 }
