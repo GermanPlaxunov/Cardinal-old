@@ -4,6 +4,7 @@ import org.project.data.services.interfaces.indicators.*;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.training.TrainersStore;
 import org.project.neural.process.training.dataset.ApoDatasetProvider;
+import org.project.neural.process.training.dataset.DatasetProviders;
 import org.project.neural.process.training.trainers.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,17 +29,17 @@ public class TrainersConfig {
 
     @Bean
     public NetworkApoTrainer networkApoTrainer(
-            ApoDatasetProvider apoDatasetProvider,
+            DatasetProviders datasetProviders,
             NetworkStore networkStore) {
-        return new NetworkApoTrainer(apoDatasetProvider,
+        return new NetworkApoTrainer(datasetProviders,
                 networkStore);
     }
 
     @Bean
     public NetworkBbandTrainer networkBbandTrainer(
-            BollingerBandsService bollingerBandsService,
+            DatasetProviders datasetProviders,
             NetworkStore networkStore) {
-        return new NetworkBbandTrainer(bollingerBandsService,
+        return new NetworkBbandTrainer(datasetProviders,
                 networkStore);
     }
 

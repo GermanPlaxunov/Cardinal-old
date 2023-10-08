@@ -12,7 +12,6 @@ import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 public class ApoDatasetProvider implements DatasetProvider {
@@ -24,7 +23,7 @@ public class ApoDatasetProvider implements DatasetProvider {
     private final CoreStocksSplitter coreStocksSplitter;
 
     /**
-     * Should provide a list of Maps. Each entry for APO contains:
+     * Should provide a list of Lists. Each list for APO contains:
      * priceChange - the price delta comparing previous datapoint;
      * apo - absolute price oscillator for each period;
      *
@@ -51,7 +50,7 @@ public class ApoDatasetProvider implements DatasetProvider {
      * @return list of maps with data.
      */
     private List<List<Double>> map(List<AbsolutePriceOscillatorEntity> apos,
-                                          List<Double> priceChange) {
+                                   List<Double> priceChange) {
         var counter = Math.min(apos.size(), priceChange.size());
         var result = new ArrayList<List<Double>>();
         for (var i = 0; i < counter; i++) {
