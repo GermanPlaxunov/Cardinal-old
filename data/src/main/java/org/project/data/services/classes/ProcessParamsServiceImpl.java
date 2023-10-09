@@ -45,6 +45,38 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .longValue();
     }
 
+    @Override
+    public Long getVerifyDatasetDepth(String symbol, Indicators indicator) {
+        var name = getVerifyDatasetParamName(symbol, indicator);
+        return repository.findByName(name)
+                .orElse(null)
+                .getNumberValue()
+                .longValue();
+    }
+
+    @Override
+    public Long getStepBackSeconds(String symbol, Indicators indicator) {
+        var name = getStepBackSecondsParamName(symbol, indicator);
+        return repository.findByName(name)
+                .orElse(null)
+                .getNumberValue()
+                .longValue();
+    }
+
+    private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
+        return symbol.toUpperCase()
+                .concat("_")
+                .concat(indicator.name().toUpperCase())
+                .concat("_STEP_BACK");
+    }
+
+    private String getVerifyDatasetParamName(String symbol, Indicators indicator) {
+        return symbol.toUpperCase()
+                .concat("_")
+                .concat(indicator.name().toUpperCase())
+                .concat("_VERIFY_DATASET_DEPTH");
+    }
+
     private String getTrainIntervalName(String symbol, Indicators indicator) {
         return symbol.toUpperCase()
                 .concat("_")

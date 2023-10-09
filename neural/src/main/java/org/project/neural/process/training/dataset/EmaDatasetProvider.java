@@ -37,7 +37,7 @@ public class EmaDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.EMA);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.EMA);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.EMA);
         var allIndicators = exponentialMovingAverageService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);

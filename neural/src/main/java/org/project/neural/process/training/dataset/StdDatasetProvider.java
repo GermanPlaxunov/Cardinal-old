@@ -33,7 +33,7 @@ public class StdDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.STD);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.STD);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.STD);
         var allIndicators = standardDerivativesService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);

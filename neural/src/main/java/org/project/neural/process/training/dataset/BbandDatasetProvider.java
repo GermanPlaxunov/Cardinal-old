@@ -34,7 +34,7 @@ public class BbandDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.BBAND);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.BBAND);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.BBAND);
         var allIndicators = bollingerBandsService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);

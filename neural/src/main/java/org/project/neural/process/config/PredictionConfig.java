@@ -1,5 +1,7 @@
 package org.project.neural.process.config;
 
+import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.*;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.predictions.PredictorsStore;
@@ -27,8 +29,12 @@ public class PredictionConfig {
 
     @Bean
     public ApoPredictor apoPredictor(AbsolutePriceOscillatorService absolutePriceOscillatorService,
+                                     ProcessParamsService processParamsService,
+                                     CoreStockService coreStockService,
                                      NetworkStore networkStore) {
         return new ApoPredictor(absolutePriceOscillatorService,
+                processParamsService,
+                coreStockService,
                 networkStore);
     }
 

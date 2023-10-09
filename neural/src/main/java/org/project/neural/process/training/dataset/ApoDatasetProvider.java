@@ -33,7 +33,7 @@ public class ApoDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.APO);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.APO);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.APO);
         var allIndicators = absolutePriceOscillatorService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
