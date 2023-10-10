@@ -15,4 +15,7 @@ public interface ProcessParamsService {
 
     Long getTrainCacheDepth(String symbol, Indicators indicator);
 
+    Long getVerifyDatasetDepth(String symbol, Indicators indicator);
+
+    Long getStepBackSeconds(String symbol, Indicators indicator);
 }

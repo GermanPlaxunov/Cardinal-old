@@ -16,7 +16,8 @@ public class NeuralProcessStarter {
 
     public void train(String symbol) {
         var params = trainParamsProvider.getTrainParams(symbol);
-        for(var indicator : Indicators.values()) {
+        for (var indicator : Indicators.values()) {
+            log.info("Start training {} network for {}", indicator.name(), symbol);
             var trainer = trainersStore.get(indicator);
             trainer.train(params);
         }

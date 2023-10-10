@@ -33,7 +33,7 @@ public class SmaDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.SMA);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.SMA);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.SMA);
         var allIndicators = simpleMovingAverageService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);

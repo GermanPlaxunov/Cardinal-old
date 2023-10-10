@@ -5,6 +5,7 @@ import org.project.data.entities.CoreStockEntity;
 import org.project.data.repositories.CoreStockRepository;
 import org.project.data.services.interfaces.CoreStockService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,8 +28,16 @@ public class CoreStockServiceImpl implements CoreStockService {
     }
 
     @Override
-    public Long count(String symbol) {
-        return repository.countBySymbol(symbol);
+    public CoreStockEntity findLast(String symbol) {
+        return repository.findFirstBySymbolOrderByDateDesc(symbol)
+                .orElse(null);
+    }
+
+    @Override
+    public CoreStockEntity findPrevious(String symbol, LocalDateTime lastDate, Long stepBackSeconds) {
+        var date = lastDate.minusSeconds(stepBackSeconds);
+        return repository.findFirstBySymbolAndDateLessThanOrderByDateDesc(symbol, date)
+                .orElse(null);
     }
 
 }
