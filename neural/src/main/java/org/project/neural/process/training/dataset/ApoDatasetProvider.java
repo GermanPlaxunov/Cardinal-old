@@ -55,8 +55,8 @@ public class ApoDatasetProvider implements DatasetProvider {
         var result = new ArrayList<List<Double>>();
         for (var i = 0; i < counter; i++) {
             var point = new ArrayList<Double>();
-            point.add(apos.get(i).getValue());
             point.add(priceChange.get(i));
+            point.add(apos.get(i).getValue());
             result.add(point);
         }
         return result;

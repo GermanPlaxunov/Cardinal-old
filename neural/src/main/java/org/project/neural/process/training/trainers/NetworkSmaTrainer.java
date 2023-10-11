@@ -23,7 +23,7 @@ public class NetworkSmaTrainer extends AbstractTrainer implements NetworkTrainer
         var datasetProvider = datasetProviders.get(Indicators.SMA);
         var network = networkStore.get(Indicators.SMA, symbol);
         var dataset = datasetProvider.getData(symbol, stocks);
-        var answers = extractAnswers(dataset);
+        var answers = datasetProvider.extractAnswers(dataset);
         var epochs = params.getEpochs();
         removeLastElement(dataset);
         network.train(dataset, answers, epochs);
