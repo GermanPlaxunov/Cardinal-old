@@ -56,8 +56,8 @@ public class RsiDatasetProvider implements DatasetProvider {
         var result = new ArrayList<List<Double>>();
         for (var i = 0; i < counter; i++) {
             var point = new ArrayList<Double>();
-            point.add(getGl(rsis.get(i)));
             point.add(priceChange.get(i));
+            point.add(getGl(rsis.get(i)));
             result.add(point);
         }
         return result;

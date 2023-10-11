@@ -23,7 +23,7 @@ public class NetworkStdTrainer extends AbstractTrainer implements NetworkTrainer
         var datasetProvider = datasetProviders.get(Indicators.STD);
         var network = networkStore.get(Indicators.STD, symbol);
         var dataset = datasetProvider.getData(symbol, stocks);
-        var answers = extractAnswers(dataset);
+        var answers = datasetProvider.extractAnswers(dataset);
         var epochs = params.getEpochs();
         removeLastElement(dataset);
         network.train(dataset, answers, epochs);
