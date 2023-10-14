@@ -1,4 +1,4 @@
-package org.project.neural.process.config;
+package org.project.neural.config;
 
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.training.TrainersStore;

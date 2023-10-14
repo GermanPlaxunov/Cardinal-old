@@ -1,5 +1,8 @@
-package org.project.neural.process.config;
+package org.project.neural.config;
 
+import org.project.data.cache.CacheDepthMapper;
+import org.project.data.cache.CacheDepthProvider;
+import org.project.data.cache.CacheDepthProviderImpl;
 import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
@@ -51,8 +54,10 @@ public class NeuralBeansConfig {
     }
 
     @Bean
-    public TrainParamsProvider trainParamsProvider(CoreStockService coreStockService) {
-        return new TrainParamsProvider(coreStockService);
+    public TrainParamsProvider trainParamsProvider(CacheDepthProvider cacheDepthProvider,
+                                                   CoreStockService coreStockService) {
+        return new TrainParamsProvider(cacheDepthProvider,
+                coreStockService);
     }
 
     @Bean
@@ -82,5 +87,4 @@ public class NeuralBeansConfig {
                 datasetProviders,
                 networkStore);
     }
-
 }

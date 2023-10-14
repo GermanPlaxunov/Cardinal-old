@@ -1,4 +1,4 @@
-package org.project.neural.process.config;
+package org.project.neural.config;
 
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;

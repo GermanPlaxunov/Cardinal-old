@@ -1,5 +1,8 @@
 package org.project.data.config;
 
+import org.project.data.cache.CacheDepthMapper;
+import org.project.data.cache.CacheDepthProvider;
+import org.project.data.cache.CacheDepthProviderImpl;
 import org.project.data.repositories.*;
 import org.project.data.repositories.indicators.*;
 import org.project.data.repositories.neural.NeuralNetworkRepository;
@@ -86,6 +89,20 @@ public class DataBeansConfig {
     @Bean
     public JobService jobService(JobRepository jobRepository) {
         return new JobServiceImpl(jobRepository);
+    }
+
+    @Bean
+    public CacheDepthProvider cacheDepthProvider(ProcessParamsService processParamsService,
+                                                 CacheDepthMapper cacheDepthMapper,
+                                                 CoreStockService coreStockService) {
+        return new CacheDepthProviderImpl(processParamsService,
+                cacheDepthMapper,
+                coreStockService);
+    }
+
+    @Bean
+    public CacheDepthMapper cacheDepthMapper() {
+        return new CacheDepthMapper();
     }
 
 }

@@ -4,6 +4,7 @@ import org.project.neural.process.network.SimpleNeuralNetwork;
 import org.project.neural.process.network.SimpleNeuron;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class NetworkVectorProcessor {
     private final String NAME_DIVIDER = "<=>";
@@ -22,9 +23,10 @@ public class NetworkVectorProcessor {
 
     public SimpleNeuralNetwork buildNetworkFromVector(String vector) {
         var name = vector.split(NAME_DIVIDER)[0];
+        var random = new Random();
         var neurons = Arrays.stream(vector.split(NAME_DIVIDER)[1]
                         .split(END))
-                .map(nVector -> buildNeuronFromVector(nVector))
+                .map(nVector -> buildNeuronFromVector(nVector, random))
                 .toList();
         return new SimpleNeuralNetwork(name, neurons);
     }
@@ -40,12 +42,12 @@ public class NetworkVectorProcessor {
                 .toString();
     }
 
-    private SimpleNeuron buildNeuronFromVector(String vector) {
+    private SimpleNeuron buildNeuronFromVector(String vector, Random random) {
         var data = vector.split(DIVIDER);
         var bias = Double.parseDouble(data[0]);
         var weight1 = Double.parseDouble(data[1]);
         var weight2 = Double.parseDouble(data[2]);
-        return new SimpleNeuron(bias, weight1, weight2);
+        return new SimpleNeuron(bias, weight1, weight2, random);
     }
 
 }
