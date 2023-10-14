@@ -15,4 +15,5 @@ public class TrainParams {
     private List<Double> prices;
     private Indicators indicator;
     private List<CoreStockEntity> stocks;
+    private Long epochs;
 }

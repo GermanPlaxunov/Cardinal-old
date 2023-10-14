@@ -1,8 +1,10 @@
 package org.project.neural.process.training;
 
 import lombok.RequiredArgsConstructor;
+import org.project.data.cache.CacheDepthProvider;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.neural.process.training.training.TrainParams;
 
 import java.time.LocalDateTime;
@@ -11,23 +13,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrainParamsProvider {
 
+    private final CacheDepthProvider cacheDepthProvider;
     private final CoreStockService coreStockService;
 
     public TrainParams getTrainParams(String symbol) {
-        var cacheDepth = 86400L; //TODO: to params
-        var dataset = coreStockService.findCache(symbol, cacheDepth);
+        var cacheDepths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
+        var maxDepth = cacheDepths.getMaxDepth();
+        var stocks = coreStockService.findCache(symbol, maxDepth);
         return new TrainParams()
                 .setSymbol(symbol)
-                .setDateTo(getDateTo(dataset))
-                .setDateFrom(getDateFrom(dataset))
-                .setPrices(getPrices(dataset));
+                .setDateTo(getDateTo(stocks))//TODO: Can be removed
+                .setDateFrom(getDateFrom(stocks))//TODO: Can be removed
+                .setPrices(getPrices(stocks))//TODO: can be removed
+                .setStocks(stocks)
+                .setEpochs(1000L);//TODO: Can be removed.
     }
 
     private LocalDateTime getDateTo(List<CoreStockEntity> stocks) {
         var size = stocks.size();
         return stocks.stream()
                 .map(CoreStockEntity::getDate)
-                .skip(size-1)
+                .skip(size - 1)
                 .findFirst()
                 .orElse(null);
     }

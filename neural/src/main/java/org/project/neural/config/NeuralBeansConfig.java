@@ -1,7 +1,11 @@
-package org.project.neural.process.config;
+package org.project.neural.config;
 
+import org.project.data.cache.CacheDepthMapper;
+import org.project.data.cache.CacheDepthProvider;
+import org.project.data.cache.CacheDepthProviderImpl;
 import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.neural.process.NeuralProcessStarter;
 import org.project.neural.process.network.NetworkDao;
@@ -10,8 +14,10 @@ import org.project.neural.process.predictions.PredictorsStore;
 import org.project.neural.process.training.NetworkVectorProcessor;
 import org.project.neural.process.training.TrainParamsProvider;
 import org.project.neural.process.training.TrainersStore;
+import org.project.neural.process.training.dataset.DatasetProviders;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
+import org.project.neural.process.training.verification.NeuralNetworkTesting;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,17 +43,21 @@ public class NeuralBeansConfig {
     }
 
     @Bean
-    public NeuralProcessStarter neuralProcessStarter(TrainParamsProvider trainParamsProvider,
+    public NeuralProcessStarter neuralProcessStarter(NeuralNetworkTesting neuralNetworkTesting,
+                                                     TrainParamsProvider trainParamsProvider,
                                                      PredictorsStore predictorsStore,
                                                      TrainersStore trainersStore) {
-        return new NeuralProcessStarter(trainParamsProvider,
+        return new NeuralProcessStarter(neuralNetworkTesting,
+                trainParamsProvider,
                 predictorsStore,
                 trainersStore);
     }
 
     @Bean
-    public TrainParamsProvider trainParamsProvider(CoreStockService coreStockService) {
-        return new TrainParamsProvider(coreStockService);
+    public TrainParamsProvider trainParamsProvider(CacheDepthProvider cacheDepthProvider,
+                                                   CoreStockService coreStockService) {
+        return new TrainParamsProvider(cacheDepthProvider,
+                coreStockService);
     }
 
     @Bean
@@ -67,4 +77,14 @@ public class NeuralBeansConfig {
         return new PriceChangeCalculator();
     }
 
+    @Bean
+    public NeuralNetworkTesting neuralNetworkTesting(ProcessParamsService processParamsService,
+                                                     CoreStockService coreStockService,
+                                                     DatasetProviders datasetProviders,
+                                                     NetworkStore networkStore) {
+        return new NeuralNetworkTesting(processParamsService,
+                coreStockService,
+                datasetProviders,
+                networkStore);
+    }
 }

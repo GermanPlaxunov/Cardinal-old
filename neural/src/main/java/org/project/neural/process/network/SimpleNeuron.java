@@ -18,13 +18,14 @@ public class SimpleNeuron {
     private Double oldWeight2;
     private Random random;
 
-    public SimpleNeuron(Double bias, Double weight1, Double weight2) {
+    public SimpleNeuron(Double bias, Double weight1, Double weight2, Random random) {
         this.bias = bias;
         this.weight1 = weight1;
         this.weight2 = weight2;
         this.oldBias = bias;
         this.oldWeight1 = weight1;
         this.oldWeight2 = weight2;
+        this.random = random;
     }
 
     public SimpleNeuron(Random random) {

@@ -1,5 +1,6 @@
 package org.project.data.services.classes.neural;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.neural.NeuralNetworkEntity;
 import org.project.data.repositories.neural.NeuralNetworkRepository;
@@ -15,6 +16,7 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
     private final NeuralNetworkRepository repository;
 
     @Override
+    @Transactional
     public void save(String symbol, String name, String vector) {
         var network = repository.findAllByName(name)
                 .orElse(new NeuralNetworkEntity());
@@ -26,6 +28,7 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
     }
 
     @Override
+    @Transactional
     public List<NeuralNetworkEntity> findAllBySymbol(String symbol) {
         return repository.findAllBySymbol(symbol)
                 .stream()
@@ -34,6 +37,7 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
     }
 
     @Override
+    @Transactional
     public List<NeuralNetworkEntity> findAll() {
         return repository.findAll();
     }

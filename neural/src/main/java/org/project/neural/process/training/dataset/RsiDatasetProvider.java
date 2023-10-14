@@ -34,7 +34,7 @@ public class RsiDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.RSI);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.RSI);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.RSI);
         var allIndicators = relativeStrengthIndicatorService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
@@ -56,8 +56,8 @@ public class RsiDatasetProvider implements DatasetProvider {
         var result = new ArrayList<List<Double>>();
         for (var i = 0; i < counter; i++) {
             var point = new ArrayList<Double>();
-            point.add(getGl(rsis.get(i)));
             point.add(priceChange.get(i));
+            point.add(getGl(rsis.get(i)));
             result.add(point);
         }
         return result;

@@ -33,7 +33,7 @@ public class StdDatasetProvider implements DatasetProvider {
      */
     @Override
     public List<List<Double>> getData(String symbol, List<CoreStockEntity> stocks) {
-        var cacheDepthSeconds = processParamsService.getTrainInterval(symbol, Indicators.STD);
+        var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.STD);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.STD);
         var allIndicators = standardDerivativesService.findCache(symbol, cacheDepthSeconds);
         var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
@@ -47,7 +47,7 @@ public class StdDatasetProvider implements DatasetProvider {
      *
      * @param stds        - list of STD points.
      * @param priceChange - list of price deltas.
-     * @return list of maps with data.
+     * @return list of lists with data.
      */
     private List<List<Double>> map(List<StandardDerivativesEntity> stds,
                                    List<Double> priceChange) {
@@ -55,8 +55,8 @@ public class StdDatasetProvider implements DatasetProvider {
         var result = new ArrayList<List<Double>>();
         for (var i = 1; i < counter; i++) {
             var point = new ArrayList<Double>();
-            point.add(getStdChange(stds.get(i - 1), stds.get(i)));
             point.add(priceChange.get(i - 1));
+            point.add(getStdChange(stds.get(i - 1), stds.get(i)));
             result.add(point);
         }
         return result;

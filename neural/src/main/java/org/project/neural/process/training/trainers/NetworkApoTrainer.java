@@ -8,11 +8,9 @@ import org.project.neural.process.training.NetworkTrainer;
 import org.project.neural.process.training.dataset.DatasetProviders;
 import org.project.neural.process.training.training.TrainParams;
 
-import java.util.List;
-
 @Slf4j
 @RequiredArgsConstructor
-public class NetworkApoTrainer implements NetworkTrainer {
+public class NetworkApoTrainer extends AbstractTrainer implements NetworkTrainer {
 
     private final DatasetProviders datasetProviders;
     private final NetworkStore networkStore;
@@ -21,5 +19,15 @@ public class NetworkApoTrainer implements NetworkTrainer {
     public void train(TrainParams params) {
         var symbol = params.getSymbol();
         log.info("Start training APO network for {}", symbol);
+        var stocks = params.getStocks();
+        var datasetProvider = datasetProviders.get(Indicators.APO);
+        var network = networkStore.get(Indicators.APO, symbol);
+        var dataset = datasetProvider.getData(symbol, stocks);
+        var answers = datasetProvider.extractAnswers(dataset);
+        var epochs = params.getEpochs();
+        removeLastElement(dataset);
+        network.train(dataset, answers, epochs);
+        networkStore.updateNetwork(Indicators.APO, symbol, network);
     }
+
 }
