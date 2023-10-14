@@ -40,17 +40,18 @@ public class NetworkStore {
     }
 
     public SimpleNeuralNetwork get(Indicators indicator, String symbol) {
-        var name = getNetworkName(indicator.name(), symbol);
-        return getOrCreateNew(name);
+        return getOrCreateNew(symbol, indicator);
     }
 
-    private SimpleNeuralNetwork getOrCreateNew(String name) {
+    private SimpleNeuralNetwork getOrCreateNew(String symbol, Indicators indicator) {
+        var name = getNetworkName(indicator.name(), symbol);
         SimpleNeuralNetwork network;
         if(networks.containsKey(name)) {
             network = networks.get(name);
         } else {
             network = new SimpleNeuralNetwork(name);
             networks.put(name, network);
+            updateNetwork(indicator, symbol, network);
         }
         return network;
     }

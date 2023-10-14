@@ -37,6 +37,14 @@ public class CoreStocksSplitter {
         }
     }
 
+    /**
+     * Checks if current stock is fit as edge of interval.
+     *
+     * @param stocks  - list of stocks.
+     * @param current - checking stock.
+     * @param stepDate - edge date of the step.
+     * @return true if current should be added to the list.
+     */
     private boolean checkDate(List<CoreStockEntity> stocks, Integer current, LocalDateTime stepDate) {
         var currentDate = stocks.get(current).getDate();
         var prevDate = stocks.get(current - 1).getDate();
