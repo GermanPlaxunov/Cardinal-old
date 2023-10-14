@@ -59,7 +59,7 @@ public class IndicatorsSaver {
     }
 
     private void saveRsi(String symbol, Long depth, Double rsi, LocalDateTime date, Double gainSum, Double lossSum) {
-        relativeStrengthIndicatorService.save(new RelativeStrengthIndicatorEntity()
+        relativeStrengthIndicatorService.save(new RelativeStrengthEntityDataItem()
                 .setSymbol(symbol)
                 .setDepth(depth)
                 .setRsi(rsi)

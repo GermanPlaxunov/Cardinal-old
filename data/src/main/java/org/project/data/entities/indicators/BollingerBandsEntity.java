@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "BBANDS")
-public class BollingerBandsEntity implements IndicatorDate {
+public class BollingerBandsEntity implements DateDataItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -76,14 +76,14 @@ public class TestDataProvider {
         return emas;
     }
 
-    public static List<RelativeStrengthIndicatorEntity> getRsiList(int size) {
-        var rsis = new ArrayList<RelativeStrengthIndicatorEntity>();
+    public static List<RelativeStrengthEntityDataItem> getRsiList(int size) {
+        var rsis = new ArrayList<RelativeStrengthEntityDataItem>();
         var date = LocalDateTime.of(START_DATE, START_TIME);
         var gains = 100.0;
         var losses = 100.0;
         var rsi = gains / losses;
         for (var i = 0; i < size; i++) {
-            rsis.add(new RelativeStrengthIndicatorEntity()
+            rsis.add(new RelativeStrengthEntityDataItem()
                     .setRsi(rsi)
                     .setGainSumm(gains)
                     .setLossSumm(losses)

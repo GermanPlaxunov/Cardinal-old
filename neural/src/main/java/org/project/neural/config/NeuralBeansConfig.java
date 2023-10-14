@@ -1,8 +1,6 @@
 package org.project.neural.config;
 
-import org.project.data.cache.CacheDepthMapper;
 import org.project.data.cache.CacheDepthProvider;
-import org.project.data.cache.CacheDepthProviderImpl;
 import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
@@ -16,7 +14,7 @@ import org.project.neural.process.training.TrainParamsProvider;
 import org.project.neural.process.training.TrainersStore;
 import org.project.neural.process.training.dataset.DatasetProviders;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
+import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
 import org.project.neural.process.training.verification.NeuralNetworkTesting;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -68,11 +66,6 @@ public class NeuralBeansConfig {
     }
 
     @Bean
-    public CoreStocksSplitter coreStocksSplitter() {
-        return new CoreStocksSplitter();
-    }
-
-    @Bean
     public PriceChangeCalculator priceChangeCalculator() {
         return new PriceChangeCalculator();
     }
@@ -86,5 +79,10 @@ public class NeuralBeansConfig {
                 coreStockService,
                 datasetProviders,
                 networkStore);
+    }
+
+    @Bean
+    public DataDateSplitter dataDateSplitter() {
+        return new DataDateSplitter();
     }
 }

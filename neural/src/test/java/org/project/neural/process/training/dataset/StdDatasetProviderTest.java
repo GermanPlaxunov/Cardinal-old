@@ -2,15 +2,11 @@ package org.project.neural.process.training.dataset;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.SimpleMovingAverageEntity;
 import org.project.data.entities.indicators.StandardDerivativesEntity;
 import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.SimpleMovingAverageService;
 import org.project.data.services.interfaces.indicators.StandardDerivativesService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

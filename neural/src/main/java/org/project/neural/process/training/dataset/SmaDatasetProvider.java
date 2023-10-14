@@ -7,8 +7,7 @@ import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.SimpleMovingAverageService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
+import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SmaDatasetProvider implements DatasetProvider {
 
-    private final IndicatorSplitter<SimpleMovingAverageEntity> indicatorSplitter;
     private final SimpleMovingAverageService simpleMovingAverageService;
     private final PriceChangeCalculator priceChangeCalculator;
     private final ProcessParamsService processParamsService;
-    private final CoreStocksSplitter coreStocksSplitter;
+    private final DataDateSplitter dataDateSplitter;
 
     /**
      * Should provide a list of Maps. Each entry for SMA contains:
@@ -36,8 +34,8 @@ public class SmaDatasetProvider implements DatasetProvider {
         var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.SMA);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.SMA);
         var allIndicators = simpleMovingAverageService.findCache(symbol, cacheDepthSeconds);
-        var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
-        var filteredStocks = coreStocksSplitter.split(stocks, intervalSeconds);
+        var indicators = dataDateSplitter.split(allIndicators, intervalSeconds);
+        var filteredStocks = dataDateSplitter.split(stocks, intervalSeconds);
         var priceChanges = priceChangeCalculator.getPriceChanges(filteredStocks);
         return map(indicators, priceChanges, filteredStocks);
     }

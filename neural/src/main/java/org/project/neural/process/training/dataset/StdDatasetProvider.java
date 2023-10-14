@@ -7,8 +7,7 @@ import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.StandardDerivativesService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
+import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StdDatasetProvider implements DatasetProvider {
 
-    private final IndicatorSplitter<StandardDerivativesEntity> indicatorSplitter;
     private final StandardDerivativesService standardDerivativesService;
     private final PriceChangeCalculator priceChangeCalculator;
     private final ProcessParamsService processParamsService;
-    private final CoreStocksSplitter coreStocksSplitter;
+    private final DataDateSplitter dataDateSplitter;
 
     /**
      * Should provide a list of Maps. Each entry for STD contains:
@@ -36,8 +34,8 @@ public class StdDatasetProvider implements DatasetProvider {
         var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.STD);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.STD);
         var allIndicators = standardDerivativesService.findCache(symbol, cacheDepthSeconds);
-        var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
-        var filteredStocks = coreStocksSplitter.split(stocks, intervalSeconds);
+        var indicators = dataDateSplitter.split(allIndicators, intervalSeconds);
+        var filteredStocks = dataDateSplitter.split(stocks, intervalSeconds);
         var priceChanges = priceChangeCalculator.getPriceChanges(filteredStocks);
         return map(indicators, priceChanges);
     }

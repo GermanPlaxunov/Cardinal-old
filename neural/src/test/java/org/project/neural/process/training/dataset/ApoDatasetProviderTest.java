@@ -7,8 +7,6 @@ import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.AbsolutePriceOscillatorService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

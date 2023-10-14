@@ -2,15 +2,11 @@ package org.project.neural.process.training.dataset;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.ExponentialMovingAverageEntity;
-import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
+import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
 import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.ExponentialMovingAverageService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -21,7 +17,7 @@ import static org.mockito.Mockito.when;
 class RsiDatasetProviderTest {
 
     private static String symbol = "BTC/USD";
-    private static IndicatorSplitter<RelativeStrengthIndicatorEntity> splitter;
+    private static IndicatorSplitter<RelativeStrengthEntityDataItem> splitter;
     private static RelativeStrengthIndicatorService relativeStrengthIndicatorService;
     private static PriceChangeCalculator priceChangeCalculator;
     private static ProcessParamsService processParamsService;
