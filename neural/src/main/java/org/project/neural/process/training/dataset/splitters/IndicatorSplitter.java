@@ -5,6 +5,7 @@ import org.project.data.entities.indicators.IndicatorDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class IndicatorSplitter<T extends IndicatorDate> {
@@ -31,6 +32,7 @@ public class IndicatorSplitter<T extends IndicatorDate> {
                     stepDate = stepDate.minusSeconds(intervalSeconds);
                 }
             }
+            Collections.reverse(filteredList);
             return filteredList;
         } else {
             //If splitting can not be applied returns original list
