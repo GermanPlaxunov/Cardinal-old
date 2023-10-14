@@ -2,29 +2,23 @@ package org.project.neural.process.training.dataset;
 
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
-import org.project.data.entities.indicators.AbsolutePriceOscillatorEntity;
 import org.project.data.entities.indicators.ExponentialMovingAverageEntity;
-import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.AbsolutePriceOscillatorService;
 import org.project.data.services.interfaces.indicators.ExponentialMovingAverageService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
+import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 public class EmaDatasetProvider implements DatasetProvider {
 
-    private final IndicatorSplitter<ExponentialMovingAverageEntity> indicatorSplitter;
     private final ExponentialMovingAverageService exponentialMovingAverageService;
     private final PriceChangeCalculator priceChangeCalculator;
     private final ProcessParamsService processParamsService;
-    private final CoreStocksSplitter coreStocksSplitter;
+    private final DataDateSplitter dataDateSplitter;
 
     /**
      * Should provide a list of Lists. Each list for EMA contains:
@@ -40,8 +34,8 @@ public class EmaDatasetProvider implements DatasetProvider {
         var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.EMA);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.EMA);
         var allIndicators = exponentialMovingAverageService.findCache(symbol, cacheDepthSeconds);
-        var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
-        var filteredStocks = coreStocksSplitter.split(stocks, intervalSeconds);
+        var indicators = dataDateSplitter.split(allIndicators, intervalSeconds);
+        var filteredStocks = dataDateSplitter.split(stocks, intervalSeconds);
         var priceChanges = priceChangeCalculator.getPriceChanges(filteredStocks);
         return map(indicators, priceChanges);
     }

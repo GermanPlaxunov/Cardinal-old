@@ -2,14 +2,12 @@ package org.project.neural.process.training.dataset;
 
 import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
-import org.project.data.entities.indicators.ExponentialMovingAverageEntity;
-import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
+import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
+import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RsiDatasetProvider implements DatasetProvider {
 
-    private final IndicatorSplitter<RelativeStrengthIndicatorEntity> indicatorSplitter;
     private final RelativeStrengthIndicatorService relativeStrengthIndicatorService;
     private final PriceChangeCalculator priceChangeCalculator;
     private final ProcessParamsService processParamsService;
-    private final CoreStocksSplitter coreStocksSplitter;
+    private final DataDateSplitter dataDateSplitter;
 
     /**
      * Should provide a list of lists. Each list for RSI contains:
@@ -37,8 +34,8 @@ public class RsiDatasetProvider implements DatasetProvider {
         var cacheDepthSeconds = processParamsService.getTrainCacheDepth(symbol, Indicators.RSI);
         var intervalSeconds = processParamsService.getTrainInterval(symbol, Indicators.RSI);
         var allIndicators = relativeStrengthIndicatorService.findCache(symbol, cacheDepthSeconds);
-        var indicators = indicatorSplitter.split(allIndicators, intervalSeconds);
-        var filteredStocks = coreStocksSplitter.split(stocks, intervalSeconds);
+        var indicators = dataDateSplitter.split(allIndicators, intervalSeconds);
+        var filteredStocks = dataDateSplitter.split(stocks, intervalSeconds);
         var priceChanges = priceChangeCalculator.getPriceChanges(filteredStocks);
         return map(indicators, priceChanges);
     }
@@ -50,7 +47,7 @@ public class RsiDatasetProvider implements DatasetProvider {
      * @param priceChange - list of price deltas.
      * @return list of maps with data.
      */
-    private List<List<Double>> map(List<RelativeStrengthIndicatorEntity> rsis,
+    private List<List<Double>> map(List<RelativeStrengthEntityDataItem> rsis,
                                    List<Double> priceChange) {
         var counter = Math.min(rsis.size(), priceChange.size());
         var result = new ArrayList<List<Double>>();
@@ -69,7 +66,7 @@ public class RsiDatasetProvider implements DatasetProvider {
      * @param rsi - relative strength indicator point.
      * @return the gain/loss attitude.
      */
-    private Double getGl(RelativeStrengthIndicatorEntity rsi) {
+    private Double getGl(RelativeStrengthEntityDataItem rsi) {
         return rsi.getGainSumm() / rsi.getLossSumm();
     }
 

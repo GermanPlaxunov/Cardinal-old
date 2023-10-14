@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "RSI")
-public class RelativeStrengthIndicatorEntity implements IndicatorDate {
+public class RelativeStrengthEntityDataItem implements DateDataItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

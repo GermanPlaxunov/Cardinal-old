@@ -1,7 +1,7 @@
 package org.project.data.services.classes.indicators;
 
 import lombok.RequiredArgsConstructor;
-import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
+import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
 import org.project.data.repositories.indicators.RelativeStrengthIndicatorRepository;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
 
@@ -15,7 +15,7 @@ public class RelativeStrengthIndicatorServiceImpl implements RelativeStrengthInd
     private final RelativeStrengthIndicatorRepository repository;
 
     @Override
-    public List<RelativeStrengthIndicatorEntity> findAllBySymbol(String symbol) {
+    public List<RelativeStrengthEntityDataItem> findAllBySymbol(String symbol) {
         return repository.findAllBySymbol(symbol)
                 .stream()
                 .filter(Objects::nonNull)
@@ -23,14 +23,14 @@ public class RelativeStrengthIndicatorServiceImpl implements RelativeStrengthInd
     }
 
     @Override
-    public void save(RelativeStrengthIndicatorEntity entity) {
+    public void save(RelativeStrengthEntityDataItem entity) {
         repository.saveAndFlush(entity);
     }
 
     @Override
-    public List<RelativeStrengthIndicatorEntity> findAllInPeriod(String symbol,
-                                                                 LocalDateTime from,
-                                                                 LocalDateTime to) {
+    public List<RelativeStrengthEntityDataItem> findAllInPeriod(String symbol,
+                                                                LocalDateTime from,
+                                                                LocalDateTime to) {
         return repository.findAllBySymbolAndDateBetween(symbol, from, to)
                 .stream()
                 .filter(Objects::nonNull)
@@ -38,13 +38,13 @@ public class RelativeStrengthIndicatorServiceImpl implements RelativeStrengthInd
     }
 
     @Override
-    public RelativeStrengthIndicatorEntity findLast(String symbol) {
+    public RelativeStrengthEntityDataItem findLast(String symbol) {
         return repository.findTopBySymbolOrderByDateDesc(symbol)
                 .orElse(null);
     }
 
     @Override
-    public List<RelativeStrengthIndicatorEntity> findCache(String symbol, Long cacheDepthSeconds) {
+    public List<RelativeStrengthEntityDataItem> findCache(String symbol, Long cacheDepthSeconds) {
         var earliestDate = findLast(symbol)
                 .getDate()
                 .minusSeconds(cacheDepthSeconds);

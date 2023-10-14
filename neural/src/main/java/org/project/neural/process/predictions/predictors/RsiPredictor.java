@@ -1,6 +1,6 @@
 package org.project.neural.process.predictions.predictors;
 
-import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
+import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
@@ -30,7 +30,7 @@ public class RsiPredictor extends AbstractPredictor implements Predictor {
         return result;
     }
 
-    private Double getGl(RelativeStrengthIndicatorEntity rsi) {
+    private Double getGl(RelativeStrengthEntityDataItem rsi) {
         return rsi.getGainSumm() / rsi.getLossSumm();
     }
 

@@ -2,15 +2,12 @@ package org.project.neural.process.training.dataset;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.AbsolutePriceOscillatorEntity;
 import org.project.data.entities.indicators.BollingerBandsEntity;
 import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.AbsolutePriceOscillatorService;
 import org.project.data.services.interfaces.indicators.BollingerBandsService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
-import org.project.neural.process.training.dataset.splitters.CoreStocksSplitter;
-import org.project.neural.process.training.dataset.splitters.IndicatorSplitter;
+import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,22 +17,20 @@ import static org.mockito.Mockito.when;
 
 class BbandDatasetProviderTest {
     private static String symbol = "BTC/USD";
-    private static IndicatorSplitter<BollingerBandsEntity> splitter;
     private static BollingerBandsService bollingerBandsService;
     private static PriceChangeCalculator priceChangeCalculator;
     private static ProcessParamsService processParamsService;
-    private static CoreStocksSplitter coreStocksSplitter;
+    private static DataDateSplitter dataDateSplitter;
     private static BbandDatasetProvider bbandDatasetProvider;
 
     @BeforeAll
     public static void setUp() {
-        splitter = new IndicatorSplitter<>();
+        dataDateSplitter = new DataDateSplitter();
         priceChangeCalculator = new PriceChangeCalculator();
-        coreStocksSplitter = new CoreStocksSplitter();
         bollingerBandsService = mock(BollingerBandsService.class);
         processParamsService = mock(ProcessParamsService.class);
-        bbandDatasetProvider = new BbandDatasetProvider(splitter, bollingerBandsService,
-                priceChangeCalculator, processParamsService, coreStocksSplitter);
+        bbandDatasetProvider = new BbandDatasetProvider(bollingerBandsService,
+                priceChangeCalculator, processParamsService, dataDateSplitter);
         when(bollingerBandsService.findCache(eq(symbol), eq(1000L)))
                 .thenReturn(TestDataProvider.getBbandList(100));
         when(processParamsService.getTrainInterval(eq(symbol), any()))

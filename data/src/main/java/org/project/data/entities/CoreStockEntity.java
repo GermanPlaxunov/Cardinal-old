@@ -2,13 +2,14 @@ package org.project.data.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.project.data.entities.indicators.DateDataItem;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "CORE_STOCK")
-public class CoreStockEntity {
+public class CoreStockEntity implements DateDataItem {
 
     @Id
     @Column(name = "ID")
