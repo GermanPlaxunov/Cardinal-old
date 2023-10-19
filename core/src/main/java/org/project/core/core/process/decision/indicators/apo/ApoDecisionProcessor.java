@@ -12,6 +12,14 @@ public class ApoDecisionProcessor implements IndicatorDecisionProcessor {
     private final ApoPredictionProcessor apoPredictionProcessor;
     private final NeuralClient neuralClient;
 
+    /**
+     * Returns a score in favor of closing current
+     * position according to current APO indicator
+     * value.
+     *
+     * @param processVars - process data.
+     * @return score
+     */
     @Override
     public Long shouldPositionBeClosed(ProcessVars processVars) {
         var symbol = processVars.getSymbol();
@@ -20,6 +28,14 @@ public class ApoDecisionProcessor implements IndicatorDecisionProcessor {
         return score;
     }
 
+    /**
+     * Returns a score in favor of opening new
+     * position according to current APO indicator
+     * value.
+     *
+     * @param processVars - process data.
+     * @return score
+     */
     @Override
     public Long shouldPositionBeOpen(ProcessVars processVars) {
         var symbol = processVars.getSymbol();
