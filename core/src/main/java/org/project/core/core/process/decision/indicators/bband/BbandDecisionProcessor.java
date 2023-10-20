@@ -2,12 +2,12 @@ package org.project.core.core.process.decision.indicators.bband;
 
 import lombok.RequiredArgsConstructor;
 import org.project.core.client.NeuralClient;
-import org.project.core.core.process.decision.indicators.IndicatorDecisionProcessor;
+import org.project.core.core.process.decision.indicators.AbstractDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.model.Indicators;
 
 @RequiredArgsConstructor
-public class BbandDecisionProcessor implements IndicatorDecisionProcessor {
+public class BbandDecisionProcessor extends AbstractDecisionProcessor {
 
     private final BbandPredictionProcessor bbandPredictionProcessor;
     private final NeuralClient neuralClient;
