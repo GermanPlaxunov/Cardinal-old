@@ -2,6 +2,7 @@ package org.project.neural.process.network;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.project.model.Indicators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,17 +64,29 @@ public class SimpleNeuralNetwork {
         );
     }
 
-    public void train(List<List<Double>> data, List<Double> answers, Long epochs) {
+    public Double getMeanSquaredLoss(List<List<Double>> data, List<Double> answers) {
+        var predictions = new ArrayList<Double>();
+        for (int i = 0; i < data.size(); i++) {
+            predictions.add(i, predict(data.get(i).get(0), data.get(i).get(1)));
+        }
+        return meanSquareLoss(answers, predictions);
+    }
+
+    /**
+     * Method to train neural network on dataset.
+     *
+     * @param data - dataset.
+     * @param answers - prepared answers.
+     * @param epochs - amount of epochs.
+     */
+    public void train(String symbol, List<List<Double>> data, List<Double> answers, Long epochs) {
+        var beforeTrainingMSL = getMeanSquaredLoss(data, answers);
         Double bestEpochLoss = null;
         for (var epoch = 0; epoch < epochs; epoch++) {
             var epochNeuron = neurons.get(epoch % neurons.size());
             epochNeuron.mutate();
 
-            var predictions = new ArrayList<Double>();
-            for (int i = 0; i < data.size(); i++) {
-                predictions.add(i, predict(data.get(i).get(0), data.get(i).get(1)));
-            }
-            var thisEpochLoss = meanSquareLoss(answers, predictions);
+            var thisEpochLoss = getMeanSquaredLoss(data, answers);
 
             if (bestEpochLoss == null) {
                 bestEpochLoss = thisEpochLoss;
@@ -82,21 +95,12 @@ public class SimpleNeuralNetwork {
                 if (thisEpochLoss < bestEpochLoss) {
                     bestEpochLoss = thisEpochLoss;
                     epochNeuron.remember();
-                    logTrainResult(bestEpochLoss);
                 } else {
                     epochNeuron.forget();
                 }
             }
         }
+        var afterTrainingMSL = getMeanSquaredLoss(data, answers);
+        log.info("{} - {} Network loss decrement: {}", symbol, Indicators.APO.name(), beforeTrainingMSL - afterTrainingMSL);
     }
-
-    /**
-     * Log only when epoch loss is improved.
-     *
-     * @param loss - new best epoch loss.
-     */
-    private void logTrainResult(Double loss) {
-        log.info("New best epoch loss = {} for symbol BTC/USD", loss);
-    }
-
 }
