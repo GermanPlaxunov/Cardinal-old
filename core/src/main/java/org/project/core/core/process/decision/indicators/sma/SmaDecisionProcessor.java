@@ -2,12 +2,12 @@ package org.project.core.core.process.decision.indicators.sma;
 
 import lombok.RequiredArgsConstructor;
 import org.project.core.client.NeuralClient;
-import org.project.core.core.process.decision.indicators.IndicatorDecisionProcessor;
+import org.project.core.core.process.decision.indicators.AbstractDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.model.Indicators;
 
 @RequiredArgsConstructor
-public class SmaDecisionProcessor implements IndicatorDecisionProcessor {
+public class SmaDecisionProcessor extends AbstractDecisionProcessor {
 
     private final SmaPredictionProcessor smaPredictionProcessor;
     private final NeuralClient neuralClient;

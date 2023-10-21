@@ -15,4 +15,6 @@ public interface CoreStockService {
 
     CoreStockEntity findPrevious(String symbol, LocalDateTime lastDate, Long stepBackSeconds);
 
+    CoreStockEntity findById(Long id);
+
 }

@@ -2,12 +2,12 @@ package org.project.core.core.process.decision.indicators.std;
 
 import lombok.RequiredArgsConstructor;
 import org.project.core.client.NeuralClient;
-import org.project.core.core.process.decision.indicators.IndicatorDecisionProcessor;
+import org.project.core.core.process.decision.indicators.AbstractDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.model.Indicators;
 
 @RequiredArgsConstructor
-public class StdDerivsDecisionProcessor implements IndicatorDecisionProcessor {
+public class StdDerivsDecisionProcessor extends AbstractDecisionProcessor {
 
     private final StdPredictionProcessor stdPredictionProcessor;
     private final NeuralClient neuralClient;

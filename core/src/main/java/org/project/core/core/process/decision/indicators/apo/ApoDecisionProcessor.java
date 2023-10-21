@@ -2,12 +2,12 @@ package org.project.core.core.process.decision.indicators.apo;
 
 import lombok.RequiredArgsConstructor;
 import org.project.core.client.NeuralClient;
-import org.project.core.core.process.decision.indicators.IndicatorDecisionProcessor;
+import org.project.core.core.process.decision.indicators.AbstractDecisionProcessor;
 import org.project.core.core.process.vars.ProcessVars;
 import org.project.model.Indicators;
 
 @RequiredArgsConstructor
-public class ApoDecisionProcessor implements IndicatorDecisionProcessor {
+public class ApoDecisionProcessor extends AbstractDecisionProcessor {
 
     private final ApoPredictionProcessor apoPredictionProcessor;
     private final NeuralClient neuralClient;
