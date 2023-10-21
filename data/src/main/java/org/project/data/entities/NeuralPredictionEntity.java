@@ -13,20 +13,28 @@ public class NeuralPredictionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "ID",
+            columnDefinition = "Column Id")
     private Long id;
-    @Column(name = "SYMBOL")
+    @Column(name = "SYMBOL",
+            columnDefinition = "The name of the stock")
     private String symbol;
-    @Column(name = "INDICATOR_NAME")
+    @Column(name = "INDICATOR_NAME",
+            columnDefinition = "The name of the indicator")
     private String indicatorName;
-    @Column(name = "INDICATOR_VALUE")
+    @Column(name = "INDICATOR_VALUE",
+            columnDefinition = "The current value of the indicator")
     private Double indicatorValue;
-    @Column(name = "CURRENT_PRICE")
+    @Column(name = "CURRENT_PRICE",
+            columnDefinition = "The current price of the stock")
     private Double currentPrice;
-    @Column(name = "PRICE_DELTA")
+    @Column(name = "PRICE_DELTA",
+            columnDefinition = "The difference between current and previous price")
     private Double priceDelta;
-    @Column(name = "PRICE_CHANGE_PREDICTION")
+    @Column(name = "PRICE_CHANGE_PREDICTION",
+            columnDefinition = "The prediction of price change for the next stock data item")
     private Double priceChangePrediction;
-    @Column(name = "DATE")
+    @Column(name = "DATE",
+            columnDefinition = "The date of current stock")
     private LocalDateTime date;
 }

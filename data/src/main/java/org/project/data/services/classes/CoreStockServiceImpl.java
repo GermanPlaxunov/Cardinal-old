@@ -40,4 +40,10 @@ public class CoreStockServiceImpl implements CoreStockService {
                 .orElse(null);
     }
 
+    @Override
+    public CoreStockEntity findById(Long id) {
+        return repository.findById(id)
+                .orElse(null);
+    }
+
 }

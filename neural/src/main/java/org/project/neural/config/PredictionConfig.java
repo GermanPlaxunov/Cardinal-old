@@ -1,6 +1,8 @@
 package org.project.neural.config;
 
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.LastProvidedStockService;
+import org.project.data.services.interfaces.NeuralPredictionService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.*;
 import org.project.neural.process.network.NetworkStore;
@@ -29,21 +31,29 @@ public class PredictionConfig {
 
     @Bean
     public ApoPredictor apoPredictor(AbsolutePriceOscillatorService absolutePriceOscillatorService,
+                                     LastProvidedStockService lastProvidedStockService,
+                                     NeuralPredictionService neuralPredictionService,
                                      ProcessParamsService processParamsService,
                                      CoreStockService coreStockService,
                                      NetworkStore networkStore) {
         return new ApoPredictor(absolutePriceOscillatorService,
+                lastProvidedStockService,
+                neuralPredictionService,
                 processParamsService,
                 coreStockService,
                 networkStore);
     }
 
     @Bean
-    public BbandPredictor bbandPredictor(BollingerBandsService bollingerBandsService,
+    public BbandPredictor bbandPredictor(LastProvidedStockService lastProvidedStockService,
+                                         NeuralPredictionService neuralPredictionService,
+                                         BollingerBandsService bollingerBandsService,
                                          ProcessParamsService processParamsService,
                                          CoreStockService coreStockService,
                                          NetworkStore networkStore) {
-        return new BbandPredictor(bollingerBandsService,
+        return new BbandPredictor(lastProvidedStockService,
+                neuralPredictionService,
+                bollingerBandsService,
                 processParamsService,
                 coreStockService,
                 networkStore);
@@ -51,10 +61,14 @@ public class PredictionConfig {
 
     @Bean
     public EmaPredictor emaPredictor(ExponentialMovingAverageService exponentialMovingAverageService,
+                                     LastProvidedStockService lastProvidedStockService,
+                                     NeuralPredictionService neuralPredictionService,
                                      ProcessParamsService processParamsService,
                                      CoreStockService coreStockService,
                                      NetworkStore networkStore) {
         return new EmaPredictor(exponentialMovingAverageService,
+                lastProvidedStockService,
+                neuralPredictionService,
                 processParamsService,
                 coreStockService,
                 networkStore);
@@ -62,10 +76,14 @@ public class PredictionConfig {
 
     @Bean
     public RsiPredictor rsiPredictor(RelativeStrengthIndicatorService relativeStrengthIndicatorService,
+                                     LastProvidedStockService lastProvidedStockService,
+                                     NeuralPredictionService neuralPredictionService,
                                      ProcessParamsService processParamsService,
                                      CoreStockService coreStockService,
                                      NetworkStore networkStore) {
         return new RsiPredictor(relativeStrengthIndicatorService,
+                lastProvidedStockService,
+                neuralPredictionService,
                 processParamsService,
                 coreStockService,
                 networkStore);
@@ -73,10 +91,14 @@ public class PredictionConfig {
 
     @Bean
     public SmaPredictor smaPredictor(SimpleMovingAverageService simpleMovingAverageService,
+                                     LastProvidedStockService lastProvidedStockService,
+                                     NeuralPredictionService neuralPredictionService,
                                      ProcessParamsService processParamsService,
                                      CoreStockService coreStockService,
                                      NetworkStore networkStore) {
         return new SmaPredictor(simpleMovingAverageService,
+                lastProvidedStockService,
+                neuralPredictionService,
                 processParamsService,
                 coreStockService,
                 networkStore);
@@ -84,10 +106,14 @@ public class PredictionConfig {
 
     @Bean
     public StdPredictor stdPredictor(StandardDerivativesService standardDerivativesService,
+                                     LastProvidedStockService lastProvidedStockService,
+                                     NeuralPredictionService neuralPredictionService,
                                      ProcessParamsService processParamsService,
                                      CoreStockService coreStockService,
                                      NetworkStore networkStore) {
         return new StdPredictor(standardDerivativesService,
+                lastProvidedStockService,
+                neuralPredictionService,
                 processParamsService,
                 coreStockService,
                 networkStore);
