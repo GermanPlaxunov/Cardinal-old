@@ -28,39 +28,47 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
     }
 
     @Override
+    public Long getProcessCacheDepth(String symbol) {
+        return repository.findByName(symbol.toUpperCase().concat("_CACHE_DEPTH"))
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(0L);
+    }
+
+    @Override
     public Long getTrainInterval(String symbol, Indicators indicator) {
         var paramName = getTrainIntervalName(symbol, indicator);
         return repository.findByName(paramName)
-                .orElse(null)
-                .getNumberValue()
-                .longValue();
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(0L);
     }
 
     @Override
     public Long getTrainCacheDepth(String symbol, Indicators indicator) {
         var name = getTrainCacheDepthName(symbol, indicator);
         return repository.findByName(name)
-                .orElse(null)
-                .getNumberValue()
-                .longValue();
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(0L);
     }
 
     @Override
     public Long getVerifyDatasetDepth(String symbol, Indicators indicator) {
         var name = getVerifyDatasetParamName(symbol, indicator);
         return repository.findByName(name)
-                .orElse(null)
-                .getNumberValue()
-                .longValue();
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(0L);
     }
 
     @Override
     public Long getStepBackSeconds(String symbol, Indicators indicator) {
         var name = getStepBackSecondsParamName(symbol, indicator);
         return repository.findByName(name)
-                .orElse(null)
-                .getNumberValue()
-                .longValue();
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(0L);
     }
 
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {

@@ -1,7 +1,6 @@
 package org.project.neural.process.predictions.predictors;
 
 import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.LastProvidedStockService;
 import org.project.data.services.interfaces.NeuralPredictionService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.BollingerBandsService;
@@ -14,14 +13,13 @@ public class BbandPredictor extends AbstractPredictor implements Predictor {
     private final BollingerBandsService bollingerBandsService;
     private final NetworkStore networkStore;
 
-    public BbandPredictor(LastProvidedStockService lastProvidedStockService,
-                          NeuralPredictionService neuralPredictionService,
+    public BbandPredictor(NeuralPredictionService neuralPredictionService,
                           BollingerBandsService bollingerBandsService,
                           ProcessParamsService processParamsService,
                           CoreStockService coreStockService,
                           NetworkStore networkStore) {
-        super(lastProvidedStockService, neuralPredictionService,
-                processParamsService, coreStockService);
+        super(neuralPredictionService, processParamsService,
+                coreStockService);
         this.bollingerBandsService = bollingerBandsService;
         this.networkStore = networkStore;
     }

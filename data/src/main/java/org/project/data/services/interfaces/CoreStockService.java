@@ -17,4 +17,6 @@ public interface CoreStockService {
 
     CoreStockEntity findById(Long id);
 
+    boolean checkCacheExists(String symbol);
+
 }

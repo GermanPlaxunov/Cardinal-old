@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.repositories.CoreStockRepository;
 import org.project.data.services.interfaces.CoreStockService;
+import org.project.data.services.interfaces.ProcessParamsService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CoreStockServiceImpl implements CoreStockService {
 
+    private final ProcessParamsService processParamsService;
     private final CoreStockRepository repository;
 
     @Override
@@ -44,6 +46,19 @@ public class CoreStockServiceImpl implements CoreStockService {
     public CoreStockEntity findById(Long id) {
         return repository.findById(id)
                 .orElse(null);
+    }
+
+    @Override
+    public boolean checkCacheExists(String symbol) {
+        var cacheDepth = processParamsService.getProcessCacheDepth(symbol);
+        var lastDate = repository.findFirstBySymbolOrderByDateDesc(symbol)
+                .map(CoreStockEntity::getDate)
+                .map(date -> date.minusSeconds(cacheDepth))
+                .orElse(null);
+        if (lastDate == null) {
+            return false;
+        }
+        return repository.existsBySymbolAndDateLessThan(symbol, lastDate);
     }
 
 }

@@ -11,6 +11,8 @@ public interface ProcessParamsService {
 
     List<ProcessParamsEntity> findAllByNames(List<String> names);
 
+    Long getProcessCacheDepth(String symbol);
+
     Long getTrainInterval(String symbol, Indicators indicator);
 
     Long getTrainCacheDepth(String symbol, Indicators indicator);

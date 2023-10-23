@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.entities.NeuralPredictionEntity;
 import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.LastProvidedStockService;
 import org.project.data.services.interfaces.NeuralPredictionService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
@@ -12,7 +11,6 @@ import org.project.model.Indicators;
 @RequiredArgsConstructor
 public class AbstractPredictor {
 
-    private final LastProvidedStockService lastProvidedStockService;
     private final NeuralPredictionService neuralPredictionService;
     private final ProcessParamsService processParamsService;
     private final CoreStockService coreStockService;
@@ -35,22 +33,20 @@ public class AbstractPredictor {
     /**
      * Save predicted price change in Database.
      *
-     * @param symbol - the name of the stock.
-     * @param indicator - the name of the indicator.
-     * @param indicatorValue - the value of the indicator.
+     * @param symbol                - the name of the stock.
+     * @param indicator             - the name of the indicator.
+     * @param indicatorValue        - the value of the indicator.
      * @param priceChangePrediction - predicted value.
      */
     protected void savePrediction(String symbol, Indicators indicator, Double indicatorValue,
                                   Double priceChangePrediction) {
-        var lastStockId = lastProvidedStockService.find(symbol)
-                .getStockId();
-        var lastStock = coreStockService.findById(lastStockId);
+        var lastStock = coreStockService.findLast(symbol);
         neuralPredictionService.save(new NeuralPredictionEntity()
                 .setSymbol(symbol)
                 .setIndicatorName(indicator.name())
                 .setIndicatorValue(indicatorValue)
                 .setCurrentPrice(lastStock.getClose())
-                .setPriceDelta(getPriceDelta(lastStock))
+                .setPrevToCurrPriceDelta(getPriceDelta(lastStock))
                 .setPriceChangePrediction(priceChangePrediction)
                 .setDate(lastStock.getDate()));
     }

@@ -22,8 +22,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class DataBeansConfig {
 
     @Bean
-    public CoreStockService coreStockService(CoreStockRepository coreStockRepository) {
-        return new CoreStockServiceImpl(coreStockRepository);
+    public CoreStockService coreStockService(ProcessParamsService processParamsService,
+                                             CoreStockRepository coreStockRepository) {
+        return new CoreStockServiceImpl(processParamsService,
+                coreStockRepository);
     }
 
     @Bean

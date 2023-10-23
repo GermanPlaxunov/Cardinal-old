@@ -7,6 +7,7 @@ import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.data.cache.CacheDepthProvider;
 import org.project.core.core.process.strategy.BasicStrategy;
+import org.project.data.services.interfaces.CoreStockService;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -15,12 +16,12 @@ public class ProcessStarter {
     private final DecisionMakingCenter decisionMakingCenter;
     private final IndicatorsCollector indicatorsCollector;
     private final MarketDataProvider marketDataProvider;
-    private final CacheDepthProvider cacheDepthProvider;
+    private final CoreStockService coreStockService;
     private final BasicStrategy basicStrategy;
 
     public void startProcess(String symbol) {
         var next = marketDataProvider.getNextDataPoint(symbol);
-        if (cacheDepthProvider.isCacheAvailable(symbol)) {
+        if (coreStockService.checkCacheExists(symbol)) {
             var processVars = indicatorsCollector.collect(symbol);
             var basicStrategyResult = basicStrategy.startProcess(next);
             processVars.setBasicStrategyResult(basicStrategyResult);

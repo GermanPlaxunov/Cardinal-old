@@ -14,6 +14,8 @@ public interface CoreStockRepository extends JpaRepository<CoreStockEntity, Long
     Optional<CoreStockEntity> findFirstBySymbolAndDateLessThanOrderByDateDesc(String symbol,
                                                                               LocalDateTime date);
 
+    boolean existsBySymbolAndDateLessThan(String symbol, LocalDateTime date);
+
     List<CoreStockEntity> findAllBySymbolAndDateGreaterThanOrderByDateAsc(String symbol,
                                                                           LocalDateTime date);
 
