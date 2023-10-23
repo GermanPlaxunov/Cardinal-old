@@ -16,7 +16,7 @@ public class CacheDepthProviderImpl implements CacheDepthProvider {
 
     @Override
     public Boolean isCacheAvailable(String symbol) {
-        return coreStockService.findCache(symbol, 3000L)
+        return coreStockService.findCache(symbol, 5000L)
                 .stream()
                 .count() > 0;
     }

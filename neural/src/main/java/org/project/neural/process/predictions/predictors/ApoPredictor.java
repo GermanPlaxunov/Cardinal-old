@@ -16,13 +16,12 @@ public class ApoPredictor extends AbstractPredictor implements Predictor {
     private final NetworkStore networkStore;
 
     public ApoPredictor(AbsolutePriceOscillatorService absolutePriceOscillatorService,
-                        LastProvidedStockService lastProvidedStockService,
                         NeuralPredictionService neuralPredictionService,
                         ProcessParamsService processParamsService,
                         CoreStockService coreStockService,
                         NetworkStore networkStore) {
-        super(lastProvidedStockService, neuralPredictionService,
-                processParamsService, coreStockService);
+        super(neuralPredictionService, processParamsService,
+                coreStockService);
         this.absolutePriceOscillatorService = absolutePriceOscillatorService;
         this.neuralPredictionService = neuralPredictionService;
         this.networkStore = networkStore;

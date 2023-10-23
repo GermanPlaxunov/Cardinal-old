@@ -2,7 +2,6 @@ package org.project.neural.process.predictions.predictors;
 
 import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
 import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.LastProvidedStockService;
 import org.project.data.services.interfaces.NeuralPredictionService;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
@@ -16,13 +15,12 @@ public class RsiPredictor extends AbstractPredictor implements Predictor {
     private final NetworkStore networkStore;
 
     public RsiPredictor(RelativeStrengthIndicatorService relativeStrengthIndicatorService,
-                        LastProvidedStockService lastProvidedStockService,
                         NeuralPredictionService neuralPredictionService,
                         ProcessParamsService processParamsService,
                         CoreStockService coreStockService,
                         NetworkStore networkStore) {
-        super(lastProvidedStockService, neuralPredictionService,
-                processParamsService, coreStockService);
+        super(neuralPredictionService, processParamsService,
+                coreStockService);
         this.relativeStrengthIndicatorService = relativeStrengthIndicatorService;
         this.networkStore = networkStore;
     }
