@@ -1,23 +1,23 @@
 package org.project.data.repositories.indicators;
 
-import org.project.data.entities.indicators.RelativeStrengthIndicatorEntity;
+import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface RelativeStrengthIndicatorRepository extends JpaRepository<RelativeStrengthIndicatorEntity, Long> {
+public interface RelativeStrengthIndicatorRepository extends JpaRepository<RelativeStrengthEntityDataItem, Long> {
 
-    List<RelativeStrengthIndicatorEntity> findAllBySymbol(String symbol);
+    List<RelativeStrengthEntityDataItem> findAllBySymbol(String symbol);
 
-    List<RelativeStrengthIndicatorEntity> findAllBySymbolAndDateBetween(String symbol,
-                                                                        LocalDateTime from,
-                                                                        LocalDateTime to);
+    List<RelativeStrengthEntityDataItem> findAllBySymbolAndDateBetween(String symbol,
+                                                                       LocalDateTime from,
+                                                                       LocalDateTime to);
 
-    Optional<RelativeStrengthIndicatorEntity> findTopBySymbolOrderByDateDesc(String symbol);
+    Optional<RelativeStrengthEntityDataItem> findTopBySymbolOrderByDateDesc(String symbol);
 
-    List<RelativeStrengthIndicatorEntity> findAllBySymbolAndDateGreaterThanOrderByDateAsc(String symbol,
-                                                                                          LocalDateTime date);
+    List<RelativeStrengthEntityDataItem> findAllBySymbolAndDateGreaterThanOrderByDateAsc(String symbol,
+                                                                                         LocalDateTime date);
 
 }

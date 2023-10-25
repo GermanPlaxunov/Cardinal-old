@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "EMA")
-public class ExponentialMovingAverageEntity implements IndicatorDate {
+public class ExponentialMovingAverageEntity implements DateDataItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

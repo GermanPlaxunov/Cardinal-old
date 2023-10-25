@@ -55,12 +55,12 @@ public class CoreBeansConfig {
     public ProcessStarter processStarter(DecisionMakingCenter decisionMakingCenter,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
-                                         CacheDepthProvider cacheDepthProvider,
+                                         CoreStockService coreStockService,
                                          BasicStrategy basicStrategy) {
         return new ProcessStarter(decisionMakingCenter,
                 indicatorsCollector,
                 marketDataProvider,
-                cacheDepthProvider,
+                coreStockService,
                 basicStrategy);
     }
 

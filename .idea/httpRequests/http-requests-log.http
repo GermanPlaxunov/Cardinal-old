@@ -1,3 +1,260 @@
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+<> 2023-10-23T201649.500.json
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+<> 2023-10-23T201529.500.json
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 110
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_CACHE_DEPTH",
+    "numberValue": 5000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+<> 2023-10-23T192142.500.json
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+<> 2023-10-22T011946.500.json
+
+###
+
+POST http://localhost:8081/core/startProcess
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+<> 2023-10-22T011843.500.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 28
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD&indicator=RSI
+
+<> 2023-10-22T011315.500.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 28
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD&indicator=RSI
+
+<> 2023-10-22T011044.500.json
+
+###
+
+POST http://localhost:8083/neural/predict
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD &
+indicator=RSI
+
+<> 2023-10-22T011016.400.json
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+#0.6932937162536151
+
+<> 2023-10-19T222059.500.json
+
+###
+
+POST http://localhost:8083/neural/train
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+symbol=BTC/USD
+
+###
+
 POST http://localhost:8081/core/startProcess
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 16

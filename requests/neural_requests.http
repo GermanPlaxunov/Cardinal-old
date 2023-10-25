@@ -2,8 +2,7 @@
 POST http://localhost:8083/neural/predict
 Content-Type: application/x-www-form-urlencoded
 
-symbol=BTC/USD &
-indicator=RSI
+symbol=BTC/USD&indicator=RSI
 
 
 ###Train model

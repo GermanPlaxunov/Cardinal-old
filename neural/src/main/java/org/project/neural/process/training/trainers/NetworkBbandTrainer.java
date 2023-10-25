@@ -26,7 +26,7 @@ public class NetworkBbandTrainer extends AbstractTrainer implements NetworkTrain
         var answers = datasetProvider.extractAnswers(dataset);
         var epochs = params.getEpochs();
         removeLastElement(dataset);
-        network.train(dataset, answers, epochs);
+        network.train(symbol, dataset, answers, epochs);
         networkStore.updateNetwork(Indicators.BBAND, symbol, network);
     }
 }

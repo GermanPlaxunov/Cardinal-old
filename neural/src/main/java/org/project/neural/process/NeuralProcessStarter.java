@@ -11,6 +11,7 @@ import org.project.neural.process.training.verification.NeuralNetworkTesting;
 @Slf4j
 @RequiredArgsConstructor
 public class NeuralProcessStarter {
+
     private final NeuralNetworkTesting neuralNetworkTesting;
     private final TrainParamsProvider trainParamsProvider;
     private final PredictorsStore predictorsStore;

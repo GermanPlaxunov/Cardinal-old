@@ -20,9 +20,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories(basePackages = "org.project.data.repositories")
 public class DataBeansConfig {
+
     @Bean
-    public CoreStockService coreStockService(CoreStockRepository coreStockRepository) {
-        return new CoreStockServiceImpl(coreStockRepository);
+    public CoreStockService coreStockService(ProcessParamsService processParamsService,
+                                             CoreStockRepository coreStockRepository) {
+        return new CoreStockServiceImpl(processParamsService,
+                coreStockRepository);
     }
 
     @Bean
@@ -103,6 +106,11 @@ public class DataBeansConfig {
     @Bean
     public CacheDepthMapper cacheDepthMapper() {
         return new CacheDepthMapper();
+    }
+
+    @Bean
+    public NeuralPredictionService neuralPredictionService(NeuralPredictionRepository repository) {
+        return new NeuralPredictionServiceImpl(repository);
     }
 
 }

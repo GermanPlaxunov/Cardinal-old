@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "STD_DERIVS")
-public class StandardDerivativesEntity implements IndicatorDate {
+public class StandardDerivativesEntity implements DateDataItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
