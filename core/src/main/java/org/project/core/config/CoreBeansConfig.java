@@ -9,6 +9,7 @@ import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.indicators.*;
+import org.project.core.core.process.strategy.MainStrategy;
 import org.project.data.cache.CacheDepthMapper;
 import org.project.data.cache.CacheDepthProvider;
 import org.project.data.cache.CacheDepthProviderImpl;
@@ -142,6 +143,11 @@ public class CoreBeansConfig {
         return new CacheDepthProviderImpl(processParamsService,
                 cacheDepthMapper,
                 coreStockService);
+    }
+
+    @Bean
+    public MainStrategy mainStrategy() {
+        return new MainStrategy();
     }
 
 }
