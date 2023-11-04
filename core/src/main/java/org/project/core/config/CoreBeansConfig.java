@@ -10,13 +10,10 @@ import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
+import org.project.core.mapper.StockMapper;
 import org.project.data.cache.CacheDepthMapper;
 import org.project.data.cache.CacheDepthProvider;
 import org.project.data.cache.CacheDepthProviderImpl;
-import org.project.core.core.process.strategy.BasicStrategy;
-import org.project.core.core.process.strategy.basic.FixProfitProvider;
-import org.project.core.core.process.strategy.basic.StopLossProvider;
-import org.project.core.mapper.StockMapper;
 import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
@@ -56,13 +53,11 @@ public class CoreBeansConfig {
     public ProcessStarter processStarter(DecisionMakingCenter decisionMakingCenter,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
-                                         CoreStockService coreStockService,
-                                         BasicStrategy basicStrategy) {
+                                         CoreStockService coreStockService) {
         return new ProcessStarter(decisionMakingCenter,
                 indicatorsCollector,
                 marketDataProvider,
-                coreStockService,
-                basicStrategy);
+                coreStockService);
     }
 
     @Bean
@@ -110,25 +105,6 @@ public class CoreBeansConfig {
         return new MarketDataProvider(coreStockService,
                 marketClient,
                 stockMapper);
-    }
-
-    @Bean
-    public StopLossProvider stopLossProvider() {
-        return new StopLossProvider();
-    }
-
-    @Bean
-    public FixProfitProvider fixProfitProvider() {
-        return new FixProfitProvider();
-    }
-
-    @Bean
-    public BasicStrategy basicStrategy(FixProfitProvider fixProfitProvider,
-                                       StopLossProvider stopLossProvider,
-                                       PositionService positionService) {
-        return new BasicStrategy(fixProfitProvider,
-                stopLossProvider,
-                positionService);
     }
 
     @Bean

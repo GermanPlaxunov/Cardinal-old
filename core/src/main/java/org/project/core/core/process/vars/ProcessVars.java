@@ -20,7 +20,6 @@ public class ProcessVars {
     private Double ema;
     private Double sma;
     private Double std;
-    private BasicStrategyResult basicStrategyResult;
     private Long depth;
     private LocalDateTime date;
     private Map<String, Double> priceChangePredictions;

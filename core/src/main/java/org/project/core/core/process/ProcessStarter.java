@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.decision.DecisionMakingCenter;
 import org.project.core.core.process.indicators.IndicatorsCollector;
-import org.project.data.cache.CacheDepthProvider;
-import org.project.core.core.process.strategy.BasicStrategy;
 import org.project.data.services.interfaces.CoreStockService;
 
 @Slf4j
@@ -17,14 +15,11 @@ public class ProcessStarter {
     private final IndicatorsCollector indicatorsCollector;
     private final MarketDataProvider marketDataProvider;
     private final CoreStockService coreStockService;
-    private final BasicStrategy basicStrategy;
 
     public void startProcess(String symbol) {
         var next = marketDataProvider.getNextDataPoint(symbol);
         if (coreStockService.checkCacheExists(symbol)) {
             var processVars = indicatorsCollector.collect(symbol);
-            var basicStrategyResult = basicStrategy.startProcess(next);
-            processVars.setBasicStrategyResult(basicStrategyResult);
             decisionMakingCenter.start(processVars);
         } else {
             log.info("Not enough cache data for {}", symbol);
