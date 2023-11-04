@@ -71,6 +71,14 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .orElse(0L);
     }
 
+    @Override
+    public Double getMaxAccountBalanceShareToOpenNewPosition(String symbol) {
+        var name = getMaxAccountBalanceShareToOpenNewPositionName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .orElse(0.0);
+    }
+
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
         return symbol.toUpperCase()
                 .concat("_")
@@ -98,4 +106,10 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .concat(indicator.name().toUpperCase())
                 .concat("_TRAIN_CACHE_DEPTH");
     }
+
+    private String getMaxAccountBalanceShareToOpenNewPositionName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_MAX_ACCOUNT_BALANCE_SHARE_FOR_OPEN");
+    }
+
 }

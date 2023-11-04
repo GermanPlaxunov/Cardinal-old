@@ -34,10 +34,8 @@ import org.springframework.context.annotation.Import;
 public class CoreBeansConfig {
 
     @Bean
-    public DealMaker dealMaker(PositionService positionService,
-                               MarketClient marketClient) {
-        return new DealMaker(positionService,
-                marketClient);
+    public DealMaker dealMaker(MarketClient marketClient) {
+        return new DealMaker(marketClient);
     }
 
     @Bean
@@ -50,14 +48,18 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(DecisionMakingCenter decisionMakingCenter,
-                                         IndicatorsCollector indicatorsCollector,
+    public ProcessStarter processStarter(IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
-                                         CoreStockService coreStockService) {
-        return new ProcessStarter(decisionMakingCenter,
-                indicatorsCollector,
+                                         CoreStockService coreStockService,
+                                         PositionService positionService,
+                                         MainStrategy mainStrategy,
+                                         DealMaker dealMaker) {
+        return new ProcessStarter(indicatorsCollector,
                 marketDataProvider,
-                coreStockService);
+                coreStockService,
+                positionService,
+                mainStrategy,
+                dealMaker);
     }
 
     @Bean
