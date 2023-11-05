@@ -5,17 +5,16 @@ import org.project.core.client.MarketFeignClient;
 import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
+import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
+import org.project.core.core.process.data.trend.StocksDivider;
+import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
-import org.project.core.core.process.decision.DecisionMakingCenter;
-import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.indicators.*;
+import org.project.core.core.process.strategy.MainStrategy;
+import org.project.core.mapper.StockMapper;
 import org.project.data.cache.CacheDepthMapper;
 import org.project.data.cache.CacheDepthProvider;
 import org.project.data.cache.CacheDepthProviderImpl;
-import org.project.core.core.process.strategy.BasicStrategy;
-import org.project.core.core.process.strategy.basic.FixProfitProvider;
-import org.project.core.core.process.strategy.basic.StopLossProvider;
-import org.project.core.mapper.StockMapper;
 import org.project.data.config.DataBeansConfig;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
@@ -36,32 +35,39 @@ import org.springframework.context.annotation.Import;
 public class CoreBeansConfig {
 
     @Bean
-    public DealMaker dealMaker(PositionService positionService,
-                               MarketClient marketClient) {
-        return new DealMaker(positionService,
-                marketClient);
+    public DealMaker dealMaker(MarketClient marketClient) {
+        return new DealMaker(marketClient);
     }
 
     @Bean
-    public DecisionMakingCenter decisionMakingCenter(DecisionProcessorsStore decisionProcessorsStore,
-                                                     PositionService positionService,
-                                                     DealMaker dealMaker) {
-        return new DecisionMakingCenter(decisionProcessorsStore,
+    public ProcessStarter processStarter(IndicatorsCollector indicatorsCollector,
+                                         MarketDataProvider marketDataProvider,
+                                         CoreStockService coreStockService,
+                                         PositionService positionService,
+                                         TrendProvider trendProvider,
+                                         MainStrategy mainStrategy,
+                                         DealMaker dealMaker) {
+        return new ProcessStarter(indicatorsCollector,
+                marketDataProvider,
+                coreStockService,
                 positionService,
+                trendProvider,
+                mainStrategy,
                 dealMaker);
     }
 
     @Bean
-    public ProcessStarter processStarter(DecisionMakingCenter decisionMakingCenter,
-                                         IndicatorsCollector indicatorsCollector,
-                                         MarketDataProvider marketDataProvider,
-                                         CoreStockService coreStockService,
-                                         BasicStrategy basicStrategy) {
-        return new ProcessStarter(decisionMakingCenter,
-                indicatorsCollector,
-                marketDataProvider,
+    public TrendProvider trendProvider(ProcessParamsService processParamsService,
+                                       CoreStockService coreStockService,
+                                       StocksDivider stocksDivider) {
+        return new AveragePriceTrendProvider(processParamsService,
                 coreStockService,
-                basicStrategy);
+                stocksDivider);
+    }
+
+    @Bean
+    public StocksDivider stocksDivider(ProcessParamsService processParamsService) {
+        return new StocksDivider(processParamsService);
     }
 
     @Bean
@@ -112,25 +118,6 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public StopLossProvider stopLossProvider() {
-        return new StopLossProvider();
-    }
-
-    @Bean
-    public FixProfitProvider fixProfitProvider() {
-        return new FixProfitProvider();
-    }
-
-    @Bean
-    public BasicStrategy basicStrategy(FixProfitProvider fixProfitProvider,
-                                       StopLossProvider stopLossProvider,
-                                       PositionService positionService) {
-        return new BasicStrategy(fixProfitProvider,
-                stopLossProvider,
-                positionService);
-    }
-
-    @Bean
     public CacheDepthMapper cacheDepthMapper() {
         return new CacheDepthMapper();
     }
@@ -142,6 +129,11 @@ public class CoreBeansConfig {
         return new CacheDepthProviderImpl(processParamsService,
                 cacheDepthMapper,
                 coreStockService);
+    }
+
+    @Bean
+    public MainStrategy mainStrategy() {
+        return new MainStrategy();
     }
 
 }

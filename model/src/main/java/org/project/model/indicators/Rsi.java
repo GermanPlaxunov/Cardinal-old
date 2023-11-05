@@ -1,4 +1,4 @@
-package org.project.core.core.process.indicators.model;
+package org.project.model.indicators;
 
 import lombok.Data;
 

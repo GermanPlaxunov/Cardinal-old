@@ -10,6 +10,12 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/indicators/pom.xml" />
+        <option value="$PROJECT_DIR$/trading/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="PWA">
     <option name="enabled" value="true" />

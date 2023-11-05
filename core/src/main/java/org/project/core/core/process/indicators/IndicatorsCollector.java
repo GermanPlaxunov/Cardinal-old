@@ -3,7 +3,7 @@ package org.project.core.core.process.indicators;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.data.cache.CacheDepthProvider;
-import org.project.core.core.process.vars.ProcessVars;
+import org.project.model.ProcessVars;
 import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.CoreStockService;
 
