@@ -3,10 +3,11 @@ package org.project.core.core.process;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.market.MarketDataProvider;
+import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
-import org.project.core.core.process.vars.ProcessVars;
+import org.project.model.ProcessVars;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
 
@@ -18,6 +19,7 @@ public class ProcessStarter {
     private final MarketDataProvider marketDataProvider;
     private final CoreStockService coreStockService;
     private final PositionService positionService;
+    private final TrendProvider trendProvider;
     private final MainStrategy mainStrategy;
     private final DealMaker dealMaker;
 
@@ -33,6 +35,8 @@ public class ProcessStarter {
         log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
             var processVars = indicatorsCollector.collect(symbol);
+            var trendData = trendProvider.getTrend(symbol);
+            processVars.setTrendData(trendData);
             launchStrategy(processVars);
         } else {
             log.info("Not enough cache data for {}", symbol);

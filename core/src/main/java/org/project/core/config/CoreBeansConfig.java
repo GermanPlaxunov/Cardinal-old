@@ -5,9 +5,10 @@ import org.project.core.client.MarketFeignClient;
 import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
+import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
+import org.project.core.core.process.data.trend.StocksDivider;
+import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
-import org.project.core.core.process.decision.DecisionMakingCenter;
-import org.project.core.core.process.decision.indicators.DecisionProcessorsStore;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
@@ -39,27 +40,34 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DecisionMakingCenter decisionMakingCenter(DecisionProcessorsStore decisionProcessorsStore,
-                                                     PositionService positionService,
-                                                     DealMaker dealMaker) {
-        return new DecisionMakingCenter(decisionProcessorsStore,
-                positionService,
-                dealMaker);
-    }
-
-    @Bean
     public ProcessStarter processStarter(IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
                                          CoreStockService coreStockService,
                                          PositionService positionService,
+                                         TrendProvider trendProvider,
                                          MainStrategy mainStrategy,
                                          DealMaker dealMaker) {
         return new ProcessStarter(indicatorsCollector,
                 marketDataProvider,
                 coreStockService,
                 positionService,
+                trendProvider,
                 mainStrategy,
                 dealMaker);
+    }
+
+    @Bean
+    public TrendProvider trendProvider(ProcessParamsService processParamsService,
+                                       CoreStockService coreStockService,
+                                       StocksDivider stocksDivider) {
+        return new AveragePriceTrendProvider(processParamsService,
+                coreStockService,
+                stocksDivider);
+    }
+
+    @Bean
+    public StocksDivider stocksDivider(ProcessParamsService processParamsService) {
+        return new StocksDivider(processParamsService);
     }
 
     @Bean

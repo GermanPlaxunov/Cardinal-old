@@ -32,7 +32,7 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return repository.findByName(symbol.toUpperCase().concat("_CACHE_DEPTH"))
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .orElse(0L);
+                .orElse(null);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return repository.findByName(paramName)
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .orElse(0L);
+                .orElse(null);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return repository.findByName(name)
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .orElse(0L);
+                .orElse(null);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return repository.findByName(name)
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .orElse(0L);
+                .orElse(null);
     }
 
     @Override
@@ -68,7 +68,25 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return repository.findByName(name)
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .orElse(0L);
+                .orElse(null);
+    }
+
+    @Override
+    public Long getShortTrendCacheDepth(String symbol) {
+        var name = getShortTrendCacheDepthName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(null);
+    }
+
+    @Override
+    public Long getNumberOfPeriodsToFindTrend(String symbol) {
+        var name = getNumberOfPeriodsToFindTrendName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(null);
     }
 
     @Override
@@ -76,7 +94,7 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         var name = getMaxAccountBalanceShareToOpenNewPositionName(symbol);
         return repository.findByName(name)
                 .map(ProcessParamsEntity::getNumberValue)
-                .orElse(0.0);
+                .orElse(null);
     }
 
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
@@ -105,6 +123,16 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .concat("_")
                 .concat(indicator.name().toUpperCase())
                 .concat("_TRAIN_CACHE_DEPTH");
+    }
+
+    private String getShortTrendCacheDepthName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_SHORT_TREND_CACHE_DEPTH");
+    }
+
+    private String getNumberOfPeriodsToFindTrendName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_NUMBER_OF_PERIODS_TO_FIND_TREND");
     }
 
     private String getMaxAccountBalanceShareToOpenNewPositionName(String symbol) {

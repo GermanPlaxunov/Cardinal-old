@@ -1,4 +1,4 @@
-package org.project.core.core.process.strategy;
+package org.project.model.strategy;
 
 import lombok.Data;
 
