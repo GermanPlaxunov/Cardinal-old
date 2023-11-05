@@ -20,10 +20,4 @@ public interface ProcessParamsService {
     Long getVerifyDatasetDepth(String symbol, Indicators indicator);
 
     Long getStepBackSeconds(String symbol, Indicators indicator);
-
-    Long getShortTrendCacheDepth(String symbol);
-
-    Long getNumberOfPeriodsToFindTrend(String symbol);
-
-    Double getMaxAccountBalanceShareToOpenNewPosition(String symbol);
 }
