@@ -7,6 +7,7 @@ import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
+import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.model.ProcessVars;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
@@ -15,6 +16,7 @@ import org.project.data.services.interfaces.PositionService;
 @RequiredArgsConstructor
 public class ProcessStarter {
 
+    private final ProcessParamsService processParamsService;
     private final IndicatorsCollector indicatorsCollector;
     private final MarketDataProvider marketDataProvider;
     private final CoreStockService coreStockService;
@@ -34,9 +36,10 @@ public class ProcessStarter {
         var next = marketDataProvider.getNextDataPoint(symbol);
         log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
-            var processVars = indicatorsCollector.collect(symbol);
-            var trendData = trendProvider.getTrend(symbol);
-            processVars.setTrendData(trendData);
+            var cacheDepth = processParamsService.getMaximumCacheDepth(symbol);
+            var stocks = coreStockService.findCache(symbol, cacheDepth);
+            var processVars = indicatorsCollector.collect(symbol, stocks);
+            processVars.setTrendData(trendProvider.getTrend(symbol, stocks));
             launchStrategy(processVars);
         } else {
             log.info("Not enough cache data for {}", symbol);

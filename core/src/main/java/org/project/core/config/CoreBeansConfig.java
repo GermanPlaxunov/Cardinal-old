@@ -40,14 +40,16 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(IndicatorsCollector indicatorsCollector,
+    public ProcessStarter processStarter(ProcessParamsService processParamsService,
+                                         IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
                                          CoreStockService coreStockService,
                                          PositionService positionService,
                                          TrendProvider trendProvider,
                                          MainStrategy mainStrategy,
                                          DealMaker dealMaker) {
-        return new ProcessStarter(indicatorsCollector,
+        return new ProcessStarter(processParamsService,
+                indicatorsCollector,
                 marketDataProvider,
                 coreStockService,
                 positionService,
@@ -58,10 +60,8 @@ public class CoreBeansConfig {
 
     @Bean
     public TrendProvider trendProvider(ProcessParamsService processParamsService,
-                                       CoreStockService coreStockService,
                                        StocksDivider stocksDivider) {
         return new AveragePriceTrendProvider(processParamsService,
-                coreStockService,
                 stocksDivider);
     }
 
@@ -77,7 +77,6 @@ public class CoreBeansConfig {
                                                    SimpleMovingAverage simpleMovingAverage,
                                                    StandardDerivatives standardDerivatives,
                                                    CacheDepthProvider cacheDepthProvider,
-                                                   CoreStockService coreStockService,
                                                    IndicatorsSaver indicatorsSaver,
                                                    BollingerBands bollingerBands) {
         return new IndicatorsCollector(relativeStrengthIndicator,
@@ -86,7 +85,6 @@ public class CoreBeansConfig {
                 simpleMovingAverage,
                 standardDerivatives,
                 cacheDepthProvider,
-                coreStockService,
                 indicatorsSaver,
                 bollingerBands);
     }
