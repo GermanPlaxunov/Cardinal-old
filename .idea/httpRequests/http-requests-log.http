@@ -1,3 +1,35 @@
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 132
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_MAX_ACCOUNT_BALANCE_SHARE_FOR_OPEN",
+    "numberValue": 0.3,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
+POST http://localhost:8080/gate/addProcessParam
+Content-Type: application/json
+Content-Length: 122
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "name": "BTC/USD_SHORT_TREND_CACHE_DEPTH",
+    "numberValue": 5000,
+    "stringValue": null,
+    "dateValue": null
+}
+
+###
+
 POST http://localhost:8083/neural/train
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 14
