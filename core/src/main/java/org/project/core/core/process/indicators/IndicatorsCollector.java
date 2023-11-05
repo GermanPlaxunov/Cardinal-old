@@ -3,9 +3,8 @@ package org.project.core.core.process.indicators;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.data.cache.CacheDepthProvider;
-import org.project.model.ProcessVars;
 import org.project.data.entities.CoreStockEntity;
-import org.project.data.services.interfaces.CoreStockService;
+import org.project.model.ProcessVars;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,14 +19,12 @@ public class IndicatorsCollector {
     private final SimpleMovingAverage simpleMovingAverage;
     private final StandardDerivatives standardDerivatives;
     private final CacheDepthProvider cacheDepthProvider;
-    private final CoreStockService coreStockService;
     private final IndicatorsSaver indicatorsSaver;
     private final BollingerBands bollingerBands;
 
-    public ProcessVars collect(String symbol) {
+    public ProcessVars collect(String symbol, List<CoreStockEntity> stocks) {
         ProcessVars processVars = null;
         var depths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
-        var stocks = coreStockService.findCache(symbol, depths.getMaxDepth());
         if (stocks.size() > 10) {
             log.info("Amount of stocks to collect indexes: {}", stocks.size());
             var apo = absolutePriceOscillator.calculateApo(stocks, depths.getApoDepth());

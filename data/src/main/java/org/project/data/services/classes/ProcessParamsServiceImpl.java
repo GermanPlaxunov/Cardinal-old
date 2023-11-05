@@ -6,6 +6,7 @@ import org.project.data.repositories.ProcessParamsRepository;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -94,6 +95,18 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         var name = getMaxAccountBalanceShareToOpenNewPositionName(symbol);
         return repository.findByName(name)
                 .map(ProcessParamsEntity::getNumberValue)
+                .orElse(null);
+    }
+
+    @Override
+    public Long getMaximumCacheDepth(String symbol) {
+        var names = new ArrayList<String>();
+        names.add(getShortTrendCacheDepthName(symbol));
+        return repository.findAllByNameIn(names)
+                .stream()
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .max(Long::compareTo)
                 .orElse(null);
     }
 

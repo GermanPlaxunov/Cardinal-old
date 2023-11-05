@@ -26,4 +26,6 @@ public interface ProcessParamsService {
     Long getNumberOfPeriodsToFindTrend(String symbol);
 
     Double getMaxAccountBalanceShareToOpenNewPosition(String symbol);
+
+    Long getMaximumCacheDepth(String symbol);
 }

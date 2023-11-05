@@ -14,7 +14,6 @@ import java.util.List;
 public class AveragePriceTrendProvider implements TrendProvider {
 
     private final ProcessParamsService processParamsService;
-    private final CoreStockService coreStockService;
     private final StocksDivider stocksDivider;
 
     /**
@@ -24,9 +23,9 @@ public class AveragePriceTrendProvider implements TrendProvider {
      * @return trend data.
      */
     @Override
-    public TrendData getTrend(String symbol) {
+    public TrendData getTrend(String symbol, List<CoreStockEntity> stocks) {
         var cacheDepth = processParamsService.getShortTrendCacheDepth(symbol);
-        var stocks = coreStockService.findCache(symbol, cacheDepth);
+
         var periods = stocksDivider.divideStocksOnPeriods(symbol, stocks);
         var averages = new ArrayList<Double>();
         for (var i = 0; i < periods.size(); i++) {
