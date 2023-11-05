@@ -3,8 +3,8 @@ POST http://localhost:8080/gate/addProcessParam
 Content-Type: application/json
 
 {
-    "name": "BTC/USD_MAX_ACCOUNT_BALANCE_SHARE_FOR_OPEN",
-    "numberValue": 0.3,
+    "name": "BTC/USD_CACHE_DEPTH",
+    "numberValue": 5000,
     "stringValue": null,
     "dateValue": null
 }

@@ -2,7 +2,7 @@ package org.project.core.core.process.indicators;
 
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.MathUtils;
-import org.project.model.indicators.Rsi;
+import org.project.core.core.process.indicators.model.Rsi;
 import org.project.data.entities.CoreStockEntity;
 
 import java.util.ArrayList;

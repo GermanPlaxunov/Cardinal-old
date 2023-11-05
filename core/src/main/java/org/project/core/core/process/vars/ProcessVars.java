@@ -1,9 +1,8 @@
-package org.project.model;
+package org.project.core.core.process.vars;
 
 import lombok.Data;
-import org.project.model.indicators.Bband;
-import org.project.model.indicators.Rsi;
-import org.project.model.trend.TrendData;
+import org.project.core.core.process.indicators.model.Bband;
+import org.project.core.core.process.indicators.model.Rsi;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -21,8 +20,8 @@ public class ProcessVars {
     private Double ema;
     private Double sma;
     private Double std;
+    private BasicStrategyResult basicStrategyResult;
     private Long depth;
     private LocalDateTime date;
     private Map<String, Double> priceChangePredictions;
-    private TrendData trendData;
 }
