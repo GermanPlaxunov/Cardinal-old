@@ -1,7 +1,8 @@
 package org.project.core.core.process.strategy;
 
 import lombok.RequiredArgsConstructor;
-import org.project.core.core.process.vars.ProcessVars;
+import org.project.model.ProcessVars;
+import org.project.model.strategy.MainStrategyResult;
 
 @RequiredArgsConstructor
 public class MainStrategy {

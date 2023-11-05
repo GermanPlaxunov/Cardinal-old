@@ -21,6 +21,9 @@ public interface ProcessParamsService {
 
     Long getStepBackSeconds(String symbol, Indicators indicator);
 
-    Double getMaxAccountBalanceShareToOpenNewPosition(String symbol);
+    Long getShortTrendCacheDepth(String symbol);
 
+    Long getNumberOfPeriodsToFindTrend(String symbol);
+
+    Double getMaxAccountBalanceShareToOpenNewPosition(String symbol);
 }

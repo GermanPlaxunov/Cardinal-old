@@ -3,7 +3,7 @@ package org.project.core.core.process.indicators;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.MathUtils;
-import org.project.core.core.process.indicators.model.Bband;
+import org.project.model.indicators.Bband;
 import org.project.data.entities.CoreStockEntity;
 
 import java.util.List;
