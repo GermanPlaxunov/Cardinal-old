@@ -1,6 +1,8 @@
 package org.project.core.core.process.decision;
 
 import lombok.RequiredArgsConstructor;
+import org.project.data.entities.CoreStockEntity;
+import org.project.model.ProcessVars;
 import org.project.model.decision.DecisionResult;
 
 @RequiredArgsConstructor
@@ -12,7 +14,7 @@ public class DecisionStarter {
      *
      * @return decision.
      */
-    public DecisionResult ifNewPositionShouldBeOpened(String symbol) {
+    public DecisionResult ifNewPositionShouldBeOpened(ProcessVars<CoreStockEntity> processVars) {
         return new DecisionResult();
     }
 
@@ -21,7 +23,7 @@ public class DecisionStarter {
      *
      * @return decision.
      */
-    public DecisionResult ifCurrentPositionShouldBeClosed(String symbol) {
+    public DecisionResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStockEntity> processVars) {
         return new DecisionResult();
     }
 
