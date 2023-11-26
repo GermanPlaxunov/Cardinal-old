@@ -1,11 +1,14 @@
 package org.project.core.core.process.strategy;
 
 import lombok.RequiredArgsConstructor;
+import org.project.core.core.process.decision.DecisionStarter;
 import org.project.model.ProcessVars;
 import org.project.model.strategy.MainStrategyResult;
 
 @RequiredArgsConstructor
 public class MainStrategy {
+
+    private final DecisionStarter decisionStarter;
 
     /**
      * Check if new position should be opened.
@@ -14,6 +17,7 @@ public class MainStrategy {
      * @return final decision.
      */
     public MainStrategyResult ifNewPositionShouldBeOpened(ProcessVars processVars) {
+
         return new MainStrategyResult();
     }
 
