@@ -11,7 +11,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class BollingerBands extends AbstractIndicator {
-    private final Double STDEV_FACTOR = 2.0;
+    private final Double STDEV_FACTOR = 2.0; //TODO: To params
     private final ExponentialMovingAverage exponentialMovingAverage;
 
     /**
