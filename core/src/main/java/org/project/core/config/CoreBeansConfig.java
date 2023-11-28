@@ -131,11 +131,6 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public DecisionStarter decisionStarter() {
-        return new DecisionStarter();
-    }
-
-    @Bean
     public MainStrategy mainStrategy(DecisionStarter decisionStarter) {
         return new MainStrategy(decisionStarter);
     }

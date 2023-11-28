@@ -5,8 +5,8 @@ import org.project.model.ProcessVars;
 
 public interface IndicatorProcessor {
 
-    Double openNewPosition(ProcessVars<CoreStockEntity> processVars);
+    Double checkOpenNewPosition(ProcessVars<CoreStockEntity> processVars);
 
-    Double closeCurrentPosition(ProcessVars<CoreStockEntity> processVars);
+    Double checkCloseCurrentPosition(ProcessVars<CoreStockEntity> processVars);
 
 }
