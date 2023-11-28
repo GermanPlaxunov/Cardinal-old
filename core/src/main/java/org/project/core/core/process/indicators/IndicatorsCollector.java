@@ -22,10 +22,9 @@ public class IndicatorsCollector {
     private final IndicatorsSaver indicatorsSaver;
     private final BollingerBands bollingerBands;
 
-    public ProcessVars collect(String symbol, List<CoreStockEntity> stocks) {
-        ProcessVars processVars = null;
+    public void collect(String symbol, List<CoreStockEntity> stocks, ProcessVars<CoreStockEntity> processVars) {
         var depths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
-        if (stocks.size() > 10) {
+        if (stocks.size() > 10) { //TODO: To params
             log.info("Amount of stocks to collect indexes: {}", stocks.size());
             var apo = absolutePriceOscillator.calculateApo(stocks, depths.getApoDepth());
             var ema = exponentialMovingAverage.calculateEma(stocks, depths.getEmaDepth());
@@ -45,7 +44,6 @@ public class IndicatorsCollector {
                     .setDepth(depths.getMaxDepth());
             indicatorsSaver.saveAllIndicators(processVars);
         }
-        return processVars;
     }
 
     private LocalDateTime getIndicatorDate(List<CoreStockEntity> stocks) {

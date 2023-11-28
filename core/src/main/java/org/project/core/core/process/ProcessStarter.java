@@ -7,6 +7,7 @@ import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
+import org.project.data.entities.CoreStockEntity;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.model.ProcessVars;
 import org.project.data.services.interfaces.CoreStockService;
@@ -36,9 +37,11 @@ public class ProcessStarter {
         var next = marketDataProvider.getNextDataPoint(symbol);
         log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
+            var processVars = new ProcessVars<CoreStockEntity>();
             var cacheDepth = processParamsService.getMaximumCacheDepth(symbol);
             var stocks = coreStockService.findCache(symbol, cacheDepth);
-            var processVars = indicatorsCollector.collect(symbol, stocks);
+            processVars.setStocks(stocks);
+            indicatorsCollector.collect(symbol, stocks, processVars);
             processVars.setTrendData(trendProvider.getTrend(symbol, stocks));
             launchStrategy(processVars);
         } else {
