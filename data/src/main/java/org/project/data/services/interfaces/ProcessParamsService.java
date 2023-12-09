@@ -28,4 +28,5 @@ public interface ProcessParamsService {
     Double getMaxAccountBalanceShareToOpenNewPosition(String symbol);
 
     Long getMaximumCacheDepth(String symbol);
+
 }

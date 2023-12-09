@@ -13,7 +13,7 @@ import java.util.Map;
 public class ProcessVars<stock> {
 
     private String symbol;
-    private Double amount;
+    private Double amountCurr;
     private Double openPrice;
     private Double currentPrice;
     private Bband bband;

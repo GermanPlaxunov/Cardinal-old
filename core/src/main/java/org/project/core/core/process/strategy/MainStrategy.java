@@ -5,6 +5,7 @@ import org.project.core.core.process.decision.DecisionStarter;
 import org.project.data.entities.CoreStockEntity;
 import org.project.model.ProcessVars;
 import org.project.model.decision.Decision;
+import org.project.model.decision.DecisionResult;
 import org.project.model.strategy.MainStrategyResult;
 
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class MainStrategy {
         var decision = decisionStarter.ifNewPositionShouldBeOpened(processVars);
         return new MainStrategyResult()
                 .setSymbol(processVars.getSymbol())
-                .setShouldNewPositionBeOpen(decision.getDecision() == Decision.DECISION_OPEN_NEW)
+                .setShouldNewPositionBeOpen(shouldNewPositionBeOpened(decision))
                 .setAmount(decision.getBuyAmountCurr());
     }
 
@@ -36,7 +37,14 @@ public class MainStrategy {
         var decision = decisionStarter.ifCurrentPositionShouldBeClosed(processVars);
         return new MainStrategyResult()
                 .setSymbol(processVars.getSymbol())
-                .setShouldCurrentPositionBeClosed(decision.getDecision() == Decision.DECISION_CLOSE_CURRENT);
+                .setShouldCurrentPositionBeClosed(shouldCurrPositionBeClosed(decision));
     }
 
+    private boolean shouldCurrPositionBeClosed(DecisionResult decisionResult) {
+        return decisionResult.getDecision() == Decision.DECISION_CLOSE_CURRENT;
+    }
+
+    private boolean shouldNewPositionBeOpened(DecisionResult decisionResult) {
+        return decisionResult.getDecision() == Decision.DECISION_OPEN_NEW;
+    }
 }
