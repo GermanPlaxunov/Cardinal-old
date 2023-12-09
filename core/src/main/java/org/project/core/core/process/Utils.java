@@ -1,21 +1,22 @@
 package org.project.core.core.process;
 
 import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 
 import java.util.List;
 
 public class Utils {
 
-    public static Double getMinClose(List<CoreStockEntity> stocks) {
+    public static Double getMinClose(List<CoreStock> stocks) {
         return stocks.stream()
-                .map(CoreStockEntity::getClose)
+                .map(CoreStock::getClose)
                 .min(Double::compareTo)
                 .orElse(null);
     }
 
-    public static Double getMaxClose(List<CoreStockEntity> stocks) {
+    public static Double getMaxClose(List<CoreStock> stocks) {
         return stocks.stream()
-                .map(CoreStockEntity::getClose)
+                .map(CoreStock::getClose)
                 .max(Double::compareTo)
                 .orElse(null);
     }

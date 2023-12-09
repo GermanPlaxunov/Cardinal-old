@@ -1,7 +1,7 @@
 package org.project.core.core.process.indicators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 
 import java.util.List;
 
@@ -13,13 +13,13 @@ public class ExponentialMovingAverage extends AbstractIndicator {
      * history equally, it places more weight on the most recent price observation and less weight
      * on the older price observations.
      *
-     * @param coreStockEntities - list of all points ordered by date
+     * @param coreStocks - list of all points ordered by date
      * @return ema
      */
-    public Double calculateEma(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
-        var symbol = coreStockEntities.get(0).getSymbol();
+    public Double calculateEma(List<CoreStock> coreStocks, Long cacheDepth) {
+        var symbol = coreStocks.get(0).getSymbol();
         log.debug("Start calculating EMA for {}", symbol);
-        var stocks = getCachedStocks(coreStockEntities, cacheDepth);
+        var stocks = getCachedStocks(coreStocks, cacheDepth);
         var depth = stocks.size();
         var ema = stocks.get(0).getClose();
         var ny = getNy(depth);

@@ -3,7 +3,7 @@ package org.project.core.core.process.indicators;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.data.cache.CacheDepthProvider;
-import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 import org.project.model.ProcessVars;
 
 import java.time.LocalDateTime;
@@ -22,7 +22,8 @@ public class IndicatorsCollector {
     private final IndicatorsSaver indicatorsSaver;
     private final BollingerBands bollingerBands;
 
-    public void collect(String symbol, List<CoreStockEntity> stocks, ProcessVars<CoreStockEntity> processVars) {
+    public void collect(String symbol, ProcessVars<CoreStock> processVars) {
+        var stocks = processVars.getStocks();
         var depths = cacheDepthProvider.getAllIndicatorsCacheDepths(symbol);
         if (stocks.size() > 10) { //TODO: To params
             log.info("Amount of stocks to collect indexes: {}", stocks.size());
@@ -46,11 +47,11 @@ public class IndicatorsCollector {
         }
     }
 
-    private LocalDateTime getIndicatorDate(List<CoreStockEntity> stocks) {
+    private LocalDateTime getIndicatorDate(List<CoreStock> stocks) {
         var size = stocks.size();
         return stocks.stream()
                 .skip(size - 1)
-                .map(CoreStockEntity::getDate)
+                .map(CoreStock::getDate)
                 .findFirst()
                 .orElse(null);
     }

@@ -1,7 +1,7 @@
 package org.project.core.core.process.indicators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 
 import java.util.List;
 
@@ -11,14 +11,14 @@ public class SimpleMovingAverage extends AbstractIndicator {
     /**
      * Simple average price over a period of time.
      *
-     * @param coreStockEntities - list of all points ordered by date
+     * @param coreStocks - list of all points ordered by date
      * @return sma
      */
-    public Double calculateSma(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
-        var symbol = coreStockEntities.get(0).getSymbol();
+    public Double calculateSma(List<CoreStock> coreStocks, Long cacheDepth) {
+        var symbol = coreStocks.get(0).getSymbol();
         log.debug("Start calculating SMA for {}", symbol);
-        var depth = coreStockEntities.size();
-        var stocks = getCachedStocks(coreStockEntities, cacheDepth);
+        var depth = coreStocks.size();
+        var stocks = getCachedStocks(coreStocks, cacheDepth);
         var prices = getPrices(stocks);
         var summ = prices.stream()
                 .reduce(0.0, Double::sum);
