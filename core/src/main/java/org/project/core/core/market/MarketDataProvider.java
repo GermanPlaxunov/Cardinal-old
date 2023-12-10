@@ -18,7 +18,7 @@ public class MarketDataProvider {
     public MarketStock getNextDataPoint(String symbols) {
         var nextStock = getNext(symbols);
         log.info("Received stock: {}", nextStock);
-        coreStockService.save(stockMapper.mapToCore(nextStock));
+        coreStockService.save(stockMapper.mapToCoreStockEntity(nextStock));
         return nextStock;
     }
 

@@ -2,19 +2,13 @@ package org.project.market.config;
 
 import org.project.data.config.DataBeansConfig;
 import org.project.data.repositories.AccountRepository;
-import org.project.data.repositories.LastProvidedStockRepository;
-import org.project.data.repositories.MarketStockRepository;
 import org.project.data.repositories.PositionRepository;
 import org.project.data.services.classes.AccountServiceImpl;
-import org.project.data.services.classes.LastProvidedStockServiceImpl;
-import org.project.data.services.classes.MarketStockServiceImpl;
 import org.project.data.services.classes.PositionServiceImpl;
-import org.project.data.services.interfaces.AccountService;
-import org.project.data.services.interfaces.LastProvidedStockService;
-import org.project.data.services.interfaces.MarketStockService;
-import org.project.data.services.interfaces.PositionService;
+import org.project.data.services.interfaces.*;
 import org.project.market.process.MarketService;
 import org.project.market.process.account.AccountProcessor;
+import org.project.market.process.account.CommissionService;
 import org.project.market.process.position.PositionProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -63,10 +57,17 @@ public class MarketConfig {
     }
 
     @Bean
-    public AccountProcessor accountProcessor(PositionService positionService,
+    public AccountProcessor accountProcessor(CommissionService commissionService,
+                                             PositionService positionService,
                                              AccountService accountService) {
-        return new AccountProcessor(positionService,
+        return new AccountProcessor(commissionService,
+                positionService,
                 accountService);
+    }
+
+    @Bean
+    public CommissionService commissionService(ProcessParamsService processParamsService) {
+        return new CommissionService(processParamsService);
     }
 
 }

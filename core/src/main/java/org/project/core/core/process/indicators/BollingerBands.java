@@ -3,8 +3,9 @@ package org.project.core.core.process.indicators;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.MathUtils;
-import org.project.model.indicators.Bband;
 import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
+import org.project.model.indicators.Bband;
 
 import java.util.List;
 
@@ -20,17 +21,17 @@ public class BollingerBands extends AbstractIndicator {
      * outside of these bands, that can be interpreted as a breakout/trend signal or an
      * overbought/sold mean reversion signal.
      *
-     * @param coreStockEntities - list of points
+     * @param coreStocks - list of points
      * @return bband
      */
-    public Bband calculateBband(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
-        var symbol = coreStockEntities.get(0).getSymbol();
-        var stocks = getCachedStocks(coreStockEntities, cacheDepth);
+    public Bband calculateBband(List<CoreStock> coreStocks, Long cacheDepth) {
+        var symbol = coreStocks.get(0).getSymbol();
+        var stocks = getCachedStocks(coreStocks, cacheDepth);
         log.debug("Start calculating BBAND for: {}", symbol);
         var std = MathUtils.standardDeviation(stocks.stream()
-                .map(CoreStockEntity::getClose)
+                .map(CoreStock::getClose)
                 .toList());
-        var middle = exponentialMovingAverage.calculateEma(coreStockEntities, cacheDepth);
+        var middle = exponentialMovingAverage.calculateEma(coreStocks, cacheDepth);
         var upper = middle + STDEV_FACTOR * std;
         var lower = middle - STDEV_FACTOR * std;
         log.debug("BBAND for {} UPPER: {}, MIDDLE: {}, LOWER: {}", symbol, upper, middle, lower);

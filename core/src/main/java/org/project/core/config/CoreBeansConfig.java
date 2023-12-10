@@ -48,6 +48,7 @@ public class CoreBeansConfig {
                                          PositionService positionService,
                                          TrendProvider trendProvider,
                                          MainStrategy mainStrategy,
+                                         StockMapper stockMapper,
                                          DealMaker dealMaker) {
         return new ProcessStarter(processParamsService,
                 indicatorsCollector,
@@ -56,6 +57,7 @@ public class CoreBeansConfig {
                 positionService,
                 trendProvider,
                 mainStrategy,
+                stockMapper,
                 dealMaker);
     }
 

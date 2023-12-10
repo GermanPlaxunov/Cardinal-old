@@ -7,11 +7,12 @@ import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
-import org.project.data.entities.CoreStockEntity;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.model.ProcessVars;
+import org.project.core.mapper.StockMapper;
 import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.PositionService;
+import org.project.data.services.interfaces.ProcessParamsService;
+import org.project.model.CoreStock;
+import org.project.model.ProcessVars;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class ProcessStarter {
     private final PositionService positionService;
     private final TrendProvider trendProvider;
     private final MainStrategy mainStrategy;
+    private final StockMapper stockMapper;
     private final DealMaker dealMaker;
 
     /**
@@ -37,11 +39,12 @@ public class ProcessStarter {
         var next = marketDataProvider.getNextDataPoint(symbol);
         log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
-            var processVars = new ProcessVars<CoreStockEntity>();
+            var processVars = new ProcessVars<CoreStock>();
             var cacheDepth = processParamsService.getMaximumCacheDepth(symbol);
-            var stocks = coreStockService.findCache(symbol, cacheDepth);
+            var coreStocks = coreStockService.findCache(symbol, cacheDepth);
+            var stocks = stockMapper.mapAllToCore(coreStocks);
             processVars.setStocks(stocks);
-            indicatorsCollector.collect(symbol, stocks, processVars);
+            indicatorsCollector.collect(symbol, processVars);
             processVars.setTrendData(trendProvider.getTrend(symbol, stocks));
             launchStrategy(processVars);
         } else {

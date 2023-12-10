@@ -2,6 +2,7 @@ package org.project.core.core.process.indicators;
 
 import lombok.extern.slf4j.Slf4j;
 import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,29 +14,29 @@ public abstract class AbstractIndicator {
     /**
      * Returns stocks with required depth.
      *
-     * @param entities   - stocks obtained using maximum
+     * @param coreStocks   - stocks obtained using maximum
      *                   cacheDepth ordered by date asc
      * @param cacheDepth - cache depth
      * @return stocks with required depth
      */
-    protected List<CoreStockEntity> getCachedStocks(List<CoreStockEntity> entities, Long cacheDepth) {
-        var earliestDate = getEarliestDate(entities, cacheDepth);
-        return entities.stream()
+    protected List<CoreStock> getCachedStocks(List<CoreStock> coreStocks, Long cacheDepth) {
+        var earliestDate = getEarliestDate(coreStocks, cacheDepth);
+        return coreStocks.stream()
                 .filter(Objects::nonNull)
                 .filter(stock -> stock.getDate().isAfter(earliestDate))
                 .toList();
     }
 
-    protected List<Double> getPrices(List<CoreStockEntity> entities) {
-        return entities.stream()
+    protected List<Double> getPrices(List<CoreStock> coreStocks) {
+        return coreStocks.stream()
                 .filter(Objects::nonNull)
-                .map(CoreStockEntity::getClose)
+                .map(CoreStock::getClose)
                 .toList();
     }
 
-    private LocalDateTime getEarliestDate(List<CoreStockEntity> stocks, Long cacheDepthInSeconds) {
+    private LocalDateTime getEarliestDate(List<CoreStock> stocks, Long cacheDepthInSeconds) {
         var latestDate = stocks.stream()
-                .map(CoreStockEntity::getDate)
+                .map(CoreStock::getDate)
                 .max(LocalDateTime::compareTo)
                 .orElse(null);
         if (latestDate != null) {

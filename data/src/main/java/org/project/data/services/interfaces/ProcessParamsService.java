@@ -28,4 +28,8 @@ public interface ProcessParamsService {
     Double getMaxAccountBalanceShareToOpenNewPosition(String symbol);
 
     Long getMaximumCacheDepth(String symbol);
+
+    Double getBuyCommissionPercentage(String symbol);
+
+    Double getSellCommissionPercentage(String symbol);
 }
