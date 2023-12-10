@@ -11,7 +11,6 @@ import java.util.Map;
 
 @Data
 public class ProcessVars<stock> {
-
     private String symbol;
     private Double amountCurr;
     private Double openPrice;
@@ -27,4 +26,6 @@ public class ProcessVars<stock> {
     private Map<String, Double> priceChangePredictions;
     private TrendData trendData;
     private List<stock> stocks;
+    private Double openPositionCommission;
+    private Double closePositionCommission;
 }

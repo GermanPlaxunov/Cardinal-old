@@ -17,6 +17,7 @@ public class AveragePriceTrendProvider implements TrendProvider {
     private final StocksDivider stocksDivider;
 
     /**
+     * Finds current trend.
      * Dummy logic.
      *
      * @param symbol - stock name.

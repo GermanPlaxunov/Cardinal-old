@@ -10,7 +10,6 @@ import org.project.core.core.process.data.trend.StocksDivider;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionStarter;
-import org.project.core.core.process.decision.commission.CommissionCalculator;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
@@ -136,11 +135,6 @@ public class CoreBeansConfig {
     @Bean
     public MainStrategy mainStrategy(DecisionStarter decisionStarter) {
         return new MainStrategy(decisionStarter);
-    }
-
-    @Bean
-    public CommissionCalculator commissionProcessor() {
-        return new CommissionCalculator();
     }
 
 }

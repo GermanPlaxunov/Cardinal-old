@@ -38,9 +38,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void updateAccount(AccountEntity account, Double change, Integer openPositions) {
+    public void updateAccount(AccountEntity account, Double income, Double commission, Integer openPositions) {
         var balance = account.getBalance();
-        account.setBalance(balance + change)
+        account.setBalance(balance + income - commission)
                 .setOpenPositionCount(openPositions);
         accountRepository.saveAndFlush(account);
     }

@@ -110,6 +110,22 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .orElse(null);
     }
 
+    @Override
+    public Double getBuyCommissionPercentage(String symbol) {
+        var name = getBuyCommissionPercentageName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .orElse(null);
+    }
+
+    @Override
+    public Double getSellCommissionPercentage(String symbol) {
+        var name = getSellCommissionPercentageName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .orElse(null);
+    }
+
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
         return symbol.toUpperCase()
                 .concat("_")
@@ -153,4 +169,13 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .concat("_MAX_ACCOUNT_BALANCE_SHARE_FOR_OPEN");
     }
 
+    private String getBuyCommissionPercentageName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_BUY_COMMISSION_PERCENTAGE");
+    }
+
+    private String getSellCommissionPercentageName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_SELL_COMMISSION_PERCENTAGE");
+    }
 }

@@ -29,4 +29,7 @@ public interface ProcessParamsService {
 
     Long getMaximumCacheDepth(String symbol);
 
+    Double getBuyCommissionPercentage(String symbol);
+
+    Double getSellCommissionPercentage(String symbol);
 }
