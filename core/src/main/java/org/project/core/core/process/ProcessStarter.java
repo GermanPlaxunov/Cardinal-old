@@ -3,6 +3,7 @@ package org.project.core.core.process;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.market.MarketDataProvider;
+import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
@@ -19,6 +20,7 @@ import org.project.model.ProcessVars;
 public class ProcessStarter {
 
     private final ProcessParamsService processParamsService;
+    private final CommissionProcessor commissionProcessor;
     private final IndicatorsCollector indicatorsCollector;
     private final MarketDataProvider marketDataProvider;
     private final CoreStockService coreStockService;
@@ -44,6 +46,8 @@ public class ProcessStarter {
             var coreStocks = coreStockService.findCache(symbol, cacheDepth);
             var stocks = stockMapper.mapAllToCore(coreStocks);
             processVars.setStocks(stocks);
+            setOpenPositionFlag(processVars);
+            commissionProcessor.calculateCommission(processVars);
             indicatorsCollector.collect(symbol, processVars);
             processVars.setTrendData(trendProvider.getTrend(symbol, stocks));
             launchStrategy(processVars);
@@ -61,7 +65,7 @@ public class ProcessStarter {
      */
     private void launchStrategy(ProcessVars processVars) {
         var symbol = processVars.getSymbol();
-        if (positionService.ifOpenPosition(symbol)) {
+        if (processVars.getIsAnyOpenPosition()) {
             var result = mainStrategy.ifCurrentPositionShouldBeClosed(processVars);
             if (result.isShouldCurrentPositionBeClosed()) {
                 dealMaker.closeLongPosition(symbol);
@@ -73,4 +77,16 @@ public class ProcessStarter {
             }
         }
     }
+
+    /**
+     * Checks if there is any open position for this symbol.
+     *
+     * @param processVars - process data
+     */
+    private void setOpenPositionFlag(ProcessVars<CoreStock> processVars) {
+        var symbol = processVars.getSymbol();
+        var isAnyOpenPosition = positionService.ifOpenPosition(symbol);
+        processVars.setIsAnyOpenPosition(isAnyOpenPosition);
+    }
+
 }
