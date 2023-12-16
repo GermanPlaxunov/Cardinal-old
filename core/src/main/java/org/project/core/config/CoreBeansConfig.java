@@ -5,6 +5,7 @@ import org.project.core.client.MarketFeignClient;
 import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
+import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
 import org.project.core.core.process.data.trend.StocksDivider;
 import org.project.core.core.process.data.trend.TrendProvider;
@@ -41,7 +42,13 @@ public class CoreBeansConfig {
     }
 
     @Bean
+    public CommissionProcessor commissionProcessor(ProcessParamsService processParamsService) {
+        return new CommissionProcessor(processParamsService);
+    }
+
+    @Bean
     public ProcessStarter processStarter(ProcessParamsService processParamsService,
+                                         CommissionProcessor commissionProcessor,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
                                          CoreStockService coreStockService,
@@ -51,6 +58,7 @@ public class CoreBeansConfig {
                                          StockMapper stockMapper,
                                          DealMaker dealMaker) {
         return new ProcessStarter(processParamsService,
+                commissionProcessor,
                 indicatorsCollector,
                 marketDataProvider,
                 coreStockService,

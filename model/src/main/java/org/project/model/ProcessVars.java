@@ -28,4 +28,5 @@ public class ProcessVars<stock> {
     private List<stock> stocks;
     private Double openPositionCommission;
     private Double closePositionCommission;
+    private Boolean isAnyOpenPosition;
 }
