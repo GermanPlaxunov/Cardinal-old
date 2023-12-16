@@ -2,8 +2,8 @@ package org.project.core.core.process.indicators;
 
 import lombok.extern.slf4j.Slf4j;
 import org.project.core.core.MathUtils;
+import org.project.model.CoreStock;
 import org.project.model.indicators.Rsi;
-import org.project.data.entities.CoreStockEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +21,13 @@ public class RelativeStrengthIndicator extends AbstractIndicator {
      * relative to the losses, or if there have been many more losses relative to the gains.
      * RSI values over 50% indicate an uptrend, while RSI values below 50% indicate a downtrend.
      *
-     * @param coreStockEntities - list of all points.
+     * @param coreStocks - list of all points.
      * @return rsi
      */
-    public Rsi calculateRsi(List<CoreStockEntity> coreStockEntities, Long cacheDepth) {
-        var symbol = coreStockEntities.get(0).getSymbol();
+    public Rsi calculateRsi(List<CoreStock> coreStocks, Long cacheDepth) {
+        var symbol = coreStocks.get(0).getSymbol();
         log.info("Start calculating RSI for {}", symbol);
-        var stocks = getCachedStocks(coreStockEntities, cacheDepth);
+        var stocks = getCachedStocks(coreStocks, cacheDepth);
         var prices = getPrices(stocks);
         var rsi = getTotalGainAndLosses(prices);
         var relativeStrength = getRelativeStrength(rsi);

@@ -5,10 +5,12 @@ import org.project.core.client.MarketFeignClient;
 import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.ProcessStarter;
+import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
 import org.project.core.core.process.data.trend.StocksDivider;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.decision.DecisionStarter;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
@@ -40,28 +42,37 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(IndicatorsCollector indicatorsCollector,
+    public CommissionProcessor commissionProcessor(ProcessParamsService processParamsService) {
+        return new CommissionProcessor(processParamsService);
+    }
+
+    @Bean
+    public ProcessStarter processStarter(ProcessParamsService processParamsService,
+                                         CommissionProcessor commissionProcessor,
+                                         IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
                                          CoreStockService coreStockService,
                                          PositionService positionService,
                                          TrendProvider trendProvider,
                                          MainStrategy mainStrategy,
+                                         StockMapper stockMapper,
                                          DealMaker dealMaker) {
-        return new ProcessStarter(indicatorsCollector,
+        return new ProcessStarter(processParamsService,
+                commissionProcessor,
+                indicatorsCollector,
                 marketDataProvider,
                 coreStockService,
                 positionService,
                 trendProvider,
                 mainStrategy,
+                stockMapper,
                 dealMaker);
     }
 
     @Bean
     public TrendProvider trendProvider(ProcessParamsService processParamsService,
-                                       CoreStockService coreStockService,
                                        StocksDivider stocksDivider) {
         return new AveragePriceTrendProvider(processParamsService,
-                coreStockService,
                 stocksDivider);
     }
 
@@ -77,7 +88,6 @@ public class CoreBeansConfig {
                                                    SimpleMovingAverage simpleMovingAverage,
                                                    StandardDerivatives standardDerivatives,
                                                    CacheDepthProvider cacheDepthProvider,
-                                                   CoreStockService coreStockService,
                                                    IndicatorsSaver indicatorsSaver,
                                                    BollingerBands bollingerBands) {
         return new IndicatorsCollector(relativeStrengthIndicator,
@@ -86,7 +96,6 @@ public class CoreBeansConfig {
                 simpleMovingAverage,
                 standardDerivatives,
                 cacheDepthProvider,
-                coreStockService,
                 indicatorsSaver,
                 bollingerBands);
     }
@@ -132,8 +141,8 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public MainStrategy mainStrategy() {
-        return new MainStrategy();
+    public MainStrategy mainStrategy(DecisionStarter decisionStarter) {
+        return new MainStrategy(decisionStarter);
     }
 
 }

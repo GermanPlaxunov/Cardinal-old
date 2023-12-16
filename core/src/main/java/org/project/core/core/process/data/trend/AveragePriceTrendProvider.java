@@ -3,8 +3,8 @@ package org.project.core.core.process.data.trend;
 import lombok.RequiredArgsConstructor;
 import org.project.core.core.process.Utils;
 import org.project.data.entities.CoreStockEntity;
-import org.project.data.services.interfaces.CoreStockService;
 import org.project.data.services.interfaces.ProcessParamsService;
+import org.project.model.CoreStock;
 import org.project.model.trend.TrendData;
 
 import java.util.ArrayList;
@@ -14,19 +14,19 @@ import java.util.List;
 public class AveragePriceTrendProvider implements TrendProvider {
 
     private final ProcessParamsService processParamsService;
-    private final CoreStockService coreStockService;
     private final StocksDivider stocksDivider;
 
     /**
+     * Finds current trend.
      * Dummy logic.
      *
      * @param symbol - stock name.
      * @return trend data.
      */
     @Override
-    public TrendData getTrend(String symbol) {
+    public TrendData getTrend(String symbol, List<CoreStock> stocks) {
         var cacheDepth = processParamsService.getShortTrendCacheDepth(symbol);
-        var stocks = coreStockService.findCache(symbol, cacheDepth);
+
         var periods = stocksDivider.divideStocksOnPeriods(symbol, stocks);
         var averages = new ArrayList<Double>();
         for (var i = 0; i < periods.size(); i++) {
@@ -48,7 +48,7 @@ public class AveragePriceTrendProvider implements TrendProvider {
      * @param stocks - the list of stocks in the period.
      * @return average value of the period.
      */
-    private Double getAverageOfPeriod(List<CoreStockEntity> stocks) {
+    private Double getAverageOfPeriod(List<CoreStock> stocks) {
         var min = Utils.getMinClose(stocks);
         var max = Utils.getMaxClose(stocks);
         var offset = (max - min) / 2;

@@ -6,6 +6,7 @@ import org.project.data.repositories.ProcessParamsRepository;
 import org.project.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -97,6 +98,34 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .orElse(null);
     }
 
+    @Override
+    public Long getMaximumCacheDepth(String symbol) {
+        var names = new ArrayList<String>();
+        names.add(getShortTrendCacheDepthName(symbol));
+        return repository.findAllByNameIn(names)
+                .stream()
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .max(Long::compareTo)
+                .orElse(null);
+    }
+
+    @Override
+    public Double getBuyCommissionPercentage(String symbol) {
+        var name = getBuyCommissionPercentageName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .orElse(null);
+    }
+
+    @Override
+    public Double getSellCommissionPercentage(String symbol) {
+        var name = getSellCommissionPercentageName(symbol);
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .orElse(null);
+    }
+
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
         return symbol.toUpperCase()
                 .concat("_")
@@ -140,4 +169,13 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .concat("_MAX_ACCOUNT_BALANCE_SHARE_FOR_OPEN");
     }
 
+    private String getBuyCommissionPercentageName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_BUY_COMMISSION_PERCENTAGE");
+    }
+
+    private String getSellCommissionPercentageName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_SELL_COMMISSION_PERCENTAGE");
+    }
 }

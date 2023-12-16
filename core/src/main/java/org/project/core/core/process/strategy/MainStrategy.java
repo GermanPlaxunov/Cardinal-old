@@ -1,11 +1,17 @@
 package org.project.core.core.process.strategy;
 
 import lombok.RequiredArgsConstructor;
+import org.project.core.core.process.decision.DecisionStarter;
+import org.project.data.entities.CoreStockEntity;
 import org.project.model.ProcessVars;
+import org.project.model.decision.Decision;
+import org.project.model.decision.DecisionResult;
 import org.project.model.strategy.MainStrategyResult;
 
 @RequiredArgsConstructor
 public class MainStrategy {
+
+    private final DecisionStarter decisionStarter;
 
     /**
      * Check if new position should be opened.
@@ -13,8 +19,12 @@ public class MainStrategy {
      * @param processVars - process data.
      * @return final decision.
      */
-    public MainStrategyResult ifNewPositionShouldBeOpened(ProcessVars processVars) {
-        return new MainStrategyResult();
+    public MainStrategyResult ifNewPositionShouldBeOpened(ProcessVars<CoreStockEntity> processVars) {
+        var decision = decisionStarter.ifNewPositionShouldBeOpened(processVars);
+        return new MainStrategyResult()
+                .setSymbol(processVars.getSymbol())
+                .setShouldNewPositionBeOpen(shouldNewPositionBeOpened(decision))
+                .setAmount(decision.getBuyAmountCurr());
     }
 
     /**
@@ -23,8 +33,18 @@ public class MainStrategy {
      * @param processVars - process data.
      * @return final decision.
      */
-    public MainStrategyResult ifCurrentPositionShouldBeClosed(ProcessVars processVars) {
-        return new MainStrategyResult();
+    public MainStrategyResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStockEntity> processVars) {
+        var decision = decisionStarter.ifCurrentPositionShouldBeClosed(processVars);
+        return new MainStrategyResult()
+                .setSymbol(processVars.getSymbol())
+                .setShouldCurrentPositionBeClosed(shouldCurrPositionBeClosed(decision));
     }
 
+    private boolean shouldCurrPositionBeClosed(DecisionResult decisionResult) {
+        return decisionResult.getDecision() == Decision.DECISION_CLOSE_CURRENT;
+    }
+
+    private boolean shouldNewPositionBeOpened(DecisionResult decisionResult) {
+        return decisionResult.getDecision() == Decision.DECISION_OPEN_NEW;
+    }
 }
