@@ -126,6 +126,13 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .orElse(null);
     }
 
+    @Override
+    public Double getMaxBalanceShareForTrade() {
+        return repository.findByName("MAX_BALANCE_SHARE_FOR_TRADE")
+                .map(ProcessParamsEntity::getNumberValue)
+                .orElse(null);
+    }
+
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
         return symbol.toUpperCase()
                 .concat("_")
