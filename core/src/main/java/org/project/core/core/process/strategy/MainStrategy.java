@@ -2,7 +2,7 @@ package org.project.core.core.process.strategy;
 
 import lombok.RequiredArgsConstructor;
 import org.project.core.core.process.decision.DecisionStarter;
-import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 import org.project.model.ProcessVars;
 import org.project.model.decision.Decision;
 import org.project.model.decision.DecisionResult;
@@ -19,7 +19,7 @@ public class MainStrategy {
      * @param processVars - process data.
      * @return final decision.
      */
-    public MainStrategyResult ifNewPositionShouldBeOpened(ProcessVars<CoreStockEntity> processVars) {
+    public MainStrategyResult ifNewPositionShouldBeOpened(ProcessVars<CoreStock> processVars) {
         var decision = decisionStarter.ifNewPositionShouldBeOpened(processVars);
         return new MainStrategyResult()
                 .setSymbol(processVars.getSymbol())
@@ -33,7 +33,7 @@ public class MainStrategy {
      * @param processVars - process data.
      * @return final decision.
      */
-    public MainStrategyResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStockEntity> processVars) {
+    public MainStrategyResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStock> processVars) {
         var decision = decisionStarter.ifCurrentPositionShouldBeClosed(processVars);
         return new MainStrategyResult()
                 .setSymbol(processVars.getSymbol())

@@ -19,7 +19,7 @@ public class MathUtils {
         return Math.sqrt(standardDeviation / inputArray.size());
     }
 
-    public static Double getSumm(List<Double> elements) {
+    public static Double getSum(List<Double> elements) {
         return elements.stream()
                 .reduce(0.0, Double::sum);
     }

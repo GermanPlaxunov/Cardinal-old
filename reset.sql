@@ -1,7 +1,8 @@
 --Delete all stocks which are later that cache depth
+-- delete from libra.core_stock cs where cs.id is not null;
 delete from libra.core_stock cs
        where cs.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
-
+--
 -- Last provided stock should be equal to last core stock
 update libra.last_provided_stock last set stock_id = 1051081,
                                           stock_date = (
@@ -14,15 +15,16 @@ delete from libra.price_diff_signal where id is not null;
 delete from libra.position where id is not null;
 
 --indexes
-delete from libra.apo where id is not null;
-delete from libra.bbands where id is not null;
-delete from libra.ema where id is not null;
-delete from libra.rsi where id is not null;
-delete from libra.sma where id is not null;
-delete from libra.std_derivs where id is not null;
+delete from libra.apo t where t.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
+delete from libra.bbands t where t.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
+delete from libra.ema t where t.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
+delete from libra.rsi t where t.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
+delete from libra.sma t where t.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
+delete from libra.std_derivs t where t.date > to_timestamp('2017-01-01 02:00:00', 'YYYY-MM-DD HH24:MI:ss');
 
 -- reset neural networks
 delete from libra.neural_network where id is not null;
+delete from libra.neural_prediction where id is not null;
 
 -- reset account
 update libra.account set balance = 5000,

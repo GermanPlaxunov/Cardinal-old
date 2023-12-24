@@ -32,4 +32,7 @@ public interface ProcessParamsService {
     Double getBuyCommissionPercentage(String symbol);
 
     Double getSellCommissionPercentage(String symbol);
+
+    Double getMaxBalanceShareForTrade();
+
 }
