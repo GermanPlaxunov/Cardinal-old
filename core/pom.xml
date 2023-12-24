@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>org.libra</groupId>
-            <artifactId>data</artifactId>
+            <artifactId>bragi</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
