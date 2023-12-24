@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(DataBeansConfig.class)
+@Import({DataBeansConfig.class})
 @ComponentScan(basePackages = {
         "org.project.data.config"
 })

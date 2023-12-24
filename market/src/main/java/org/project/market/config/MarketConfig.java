@@ -1,9 +1,7 @@
 package org.project.market.config;
 
 import org.project.data.config.DataBeansConfig;
-import org.project.data.repositories.AccountRepository;
 import org.project.data.repositories.PositionRepository;
-import org.project.data.services.classes.AccountServiceImpl;
 import org.project.data.services.classes.PositionServiceImpl;
 import org.project.data.services.interfaces.*;
 import org.project.market.process.MarketService;
@@ -22,11 +20,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "org.project.data.entities")
 @EnableJpaRepositories(basePackages = "org.project.data.repositories")
 public class MarketConfig {
-
-    @Bean
-    public AccountService accountService(AccountRepository repository) {
-        return new AccountServiceImpl(repository);
-    }
 
     @Bean
     public PositionService positionService(PositionRepository repository,

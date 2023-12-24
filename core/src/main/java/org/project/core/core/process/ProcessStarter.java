@@ -41,7 +41,7 @@ public class ProcessStarter {
         var next = marketDataProvider.getNextDataPoint(symbol);
         log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
-            var processVars = new ProcessVars<CoreStock>();
+            var processVars = initProcessVars(symbol, next.getClose());
             var cacheDepth = processParamsService.getMaximumCacheDepth(symbol);
             var coreStocks = coreStockService.findCache(symbol, cacheDepth);
             var stocks = stockMapper.mapAllToCore(coreStocks);
@@ -87,6 +87,13 @@ public class ProcessStarter {
         var symbol = processVars.getSymbol();
         var isAnyOpenPosition = positionService.ifOpenPosition(symbol);
         processVars.setIsAnyOpenPosition(isAnyOpenPosition);
+    }
+
+    private ProcessVars<CoreStock> initProcessVars(String symbol, Double currentPrice) {
+        return new ProcessVars<CoreStock>()
+                .setSymbol(symbol)
+                .setCurrentPrice(currentPrice)
+                .setAmountCurr(1.0);
     }
 
 }
