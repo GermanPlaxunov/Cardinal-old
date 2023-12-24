@@ -18,6 +18,7 @@
     <description>The system to control trading process</description>
 
     <properties>
+        <server.port>9000</server.port>
         <java.version>20</java.version>
     </properties>
 
@@ -26,26 +27,6 @@
         <dependency>
             <groupId>org.libra</groupId>
             <artifactId>data</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>gate</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>market</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>core</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>neural</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

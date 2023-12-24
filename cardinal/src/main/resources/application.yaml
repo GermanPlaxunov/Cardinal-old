@@ -1,11 +1,5 @@
 server:
-  port: 8081
-  servlet:
-    context-path: /core
-
-core:
-  account:
-    id: 9b6afcd3-8126-4ca9-a871-e66f409e1d68
+  port: @server.port@
 
 spring:
   main:
@@ -20,4 +14,3 @@ spring:
     username: ${POSTGRES_USERNAME:postgres}
     password: ${POSTGRES_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
-
