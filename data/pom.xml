@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.project</groupId>
+        <groupId>org.libra</groupId>
         <artifactId>parent</artifactId>
         <version>1.0</version>
         <relativePath>../parent/pom.xml</relativePath>
@@ -23,7 +23,7 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.project</groupId>
+            <groupId>org.libra</groupId>
             <artifactId>model</artifactId>
             <version>1.0</version>
         </dependency>

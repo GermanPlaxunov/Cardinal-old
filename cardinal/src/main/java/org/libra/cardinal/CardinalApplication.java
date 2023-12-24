@@ -1,13 +1,13 @@
-package org.project.core;
+package org.libra.cardinal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CoreApplication {
+public class CardinalApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CoreApplication.class, args);
+        SpringApplication.run(CardinalApplication.class, args);
     }
 
 }
