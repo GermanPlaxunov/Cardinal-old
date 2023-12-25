@@ -11,7 +11,7 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>bragi</artifactId>
+    <artifactId>data</artifactId>
 
     <dependencies>
         <dependency>
