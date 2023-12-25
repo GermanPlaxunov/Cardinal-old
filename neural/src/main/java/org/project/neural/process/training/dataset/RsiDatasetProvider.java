@@ -1,10 +1,10 @@
 package org.project.neural.process.training.dataset;
 
 import lombok.RequiredArgsConstructor;
-import org.project.data.entities.CoreStockEntity;
-import org.project.data.entities.indicators.RelativeStrengthEntityDataItem;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.RelativeStrengthIndicatorService;
+import org.libra.bragi.entities.CoreStockEntity;
+import org.libra.bragi.entities.indicators.RelativeStrengthEntityDataItem;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.indicators.RelativeStrengthIndicatorService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 import org.project.neural.process.training.dataset.splitters.DataDateSplitter;

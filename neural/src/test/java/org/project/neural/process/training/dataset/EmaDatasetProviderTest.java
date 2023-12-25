@@ -2,9 +2,9 @@ package org.project.neural.process.training.dataset;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.ExponentialMovingAverageEntity;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.ExponentialMovingAverageService;
+import org.libra.bragi.entities.indicators.ExponentialMovingAverageEntity;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.indicators.ExponentialMovingAverageService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 

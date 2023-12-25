@@ -9,9 +9,9 @@ import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
-import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.PositionService;
-import org.project.data.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.CoreStockService;
+import org.libra.bragi.services.interfaces.PositionService;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
 import org.project.model.CoreStock;
 import org.project.model.ProcessVars;
 

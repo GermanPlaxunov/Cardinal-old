@@ -2,9 +2,9 @@ package org.project.neural.process.training.dataset;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.SimpleMovingAverageEntity;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.SimpleMovingAverageService;
+import org.libra.bragi.entities.indicators.SimpleMovingAverageEntity;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.indicators.SimpleMovingAverageService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 

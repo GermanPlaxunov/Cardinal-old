@@ -20,6 +20,10 @@
     <properties>
         <server.port>9000</server.port>
         <java.version>20</java.version>
+
+        <!-- Starters version -->
+        <bragi.version>1.0</bragi.version>
+        <heimdall.version>1.0</heimdall.version>
     </properties>
 
     <dependencies>
@@ -27,7 +31,12 @@
         <dependency>
             <groupId>org.libra</groupId>
             <artifactId>bragi</artifactId>
-            <version>1.0</version>
+            <version>${bragi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>heimdall</artifactId>
+            <version>${heimdall.version}</version>
         </dependency>
     </dependencies>
 

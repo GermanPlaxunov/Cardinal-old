@@ -2,9 +2,9 @@ package org.project.neural.process.training.dataset;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.AbsolutePriceOscillatorEntity;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.AbsolutePriceOscillatorService;
+import org.libra.bragi.entities.indicators.AbsolutePriceOscillatorEntity;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.indicators.AbsolutePriceOscillatorService;
 import org.project.neural.TestDataProvider;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 

@@ -1,6 +1,6 @@
 package org.project.neural.process.training.dataset.delta;
 
-import org.project.data.entities.CoreStockEntity;
+import org.libra.bragi.entities.CoreStockEntity;
 
 import java.util.ArrayList;
 import java.util.List;

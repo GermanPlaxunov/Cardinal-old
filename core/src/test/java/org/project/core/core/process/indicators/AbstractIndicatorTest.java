@@ -1,6 +1,6 @@
 package org.project.core.core.process.indicators;
 
-import org.project.data.entities.CoreStockEntity;
+import org.libra.bragi.entities.CoreStockEntity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,3 +8,18 @@ Content-Type: application/json
     "stringValue": null,
     "dateValue": null
 }
+
+### Add job
+POST http://localhost:9000/addNewJob
+Content-Type: application/json
+
+{
+  "name" : "BTC/USD_TRADE",
+  "intervalMillis" : 2000.0,
+  "stockName": "BTC/USD",
+  "jobClassName": "org.project.gate.job.TradingJob",
+  "description": "Main trading job",
+  "isActive": true,
+  "triggerName": "BTC/USD_TRADE_TRIGGER",
+  "triggerDescription": "Trigger for trade BTC/USD"
+}
