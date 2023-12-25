@@ -10,7 +10,7 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>heimdall</artifactId>
+    <artifactId>gate</artifactId>
 
     <dependencies>
         <dependency>
@@ -52,7 +52,7 @@
         </dependency>
         <dependency>
             <groupId>org.libra</groupId>
-            <artifactId>bragi</artifactId>
+            <artifactId>data</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

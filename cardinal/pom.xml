@@ -30,12 +30,12 @@
         <!-- Libra dependencies -->
         <dependency>
             <groupId>org.libra</groupId>
-            <artifactId>bragi</artifactId>
+            <artifactId>data</artifactId>
             <version>${bragi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.libra</groupId>
-            <artifactId>heimdall</artifactId>
+            <artifactId>gate</artifactId>
             <version>${heimdall.version}</version>
         </dependency>
     </dependencies>
