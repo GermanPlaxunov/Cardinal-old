@@ -4,16 +4,16 @@ import org.project.core.client.NeuralClient;
 import org.project.core.core.process.decision.BuyAmountCurrencyProcessor;
 import org.project.core.core.process.decision.DecisionStarter;
 import org.project.core.core.process.decision.indicators.*;
-import org.project.data.config.DataBeansConfig;
-import org.project.data.services.interfaces.AccountService;
-import org.project.data.services.interfaces.ProcessParamsService;
+import org.libra.bragi.config.BragiBeansConfig;
+import org.libra.bragi.services.interfaces.AccountService;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({DataBeansConfig.class})
+@Import({BragiBeansConfig.class})
 @ComponentScan(basePackages = {
         "org.project.data.config"
 })

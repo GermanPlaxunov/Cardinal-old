@@ -1,5 +1,6 @@
 package org.project.core.config;
 
+import org.libra.bragi.services.interfaces.indicators.*;
 import org.project.core.client.MarketClient;
 import org.project.core.client.MarketFeignClient;
 import org.project.core.client.NeuralFeignClient;
@@ -14,14 +15,13 @@ import org.project.core.core.process.decision.DecisionStarter;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
-import org.project.data.cache.CacheDepthMapper;
-import org.project.data.cache.CacheDepthProvider;
-import org.project.data.cache.CacheDepthProviderImpl;
-import org.project.data.config.DataBeansConfig;
-import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.PositionService;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.*;
+import org.libra.bragi.cache.CacheDepthMapper;
+import org.libra.bragi.cache.CacheDepthProvider;
+import org.libra.bragi.cache.CacheDepthProviderImpl;
+import org.libra.bragi.config.BragiBeansConfig;
+import org.libra.bragi.services.interfaces.CoreStockService;
+import org.libra.bragi.services.interfaces.PositionService;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(DataBeansConfig.class)
+@Import(BragiBeansConfig.class)
 @EnableFeignClients(clients = {
         MarketFeignClient.class, NeuralFeignClient.class
 })

@@ -1,7 +1,7 @@
 package org.project.core.core.process.data.trend;
 
 import lombok.RequiredArgsConstructor;
-import org.project.data.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
 import org.project.model.CoreStock;
 
 import java.time.LocalDateTime;

@@ -1,10 +1,10 @@
 package org.project.core.core.process.indicators;
 
 import lombok.RequiredArgsConstructor;
+import org.libra.bragi.entities.indicators.*;
+import org.libra.bragi.services.interfaces.indicators.*;
 import org.project.model.indicators.Bband;
 import org.project.model.ProcessVars;
-import org.project.data.entities.indicators.*;
-import org.project.data.services.interfaces.indicators.*;
 
 import java.time.LocalDateTime;
 

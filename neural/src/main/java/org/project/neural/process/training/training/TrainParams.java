@@ -1,7 +1,7 @@
 package org.project.neural.process.training.training;
 
 import lombok.Data;
-import org.project.data.entities.CoreStockEntity;
+import org.libra.bragi.entities.CoreStockEntity;
 import org.project.model.Indicators;
 
 import java.time.LocalDateTime;

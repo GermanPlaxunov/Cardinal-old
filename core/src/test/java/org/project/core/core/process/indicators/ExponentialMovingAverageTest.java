@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.project.core.mapper.StockMapper;
 import org.project.core.mapper.StockMapperImpl;
-import org.project.data.services.interfaces.CoreStockService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

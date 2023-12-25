@@ -2,7 +2,7 @@ package org.project.neural.process.training.dataset.splitters;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.project.data.entities.indicators.AbsolutePriceOscillatorEntity;
+import org.libra.bragi.entities.indicators.AbsolutePriceOscillatorEntity;
 import org.project.neural.TestDataProvider;
 
 import static org.junit.jupiter.api.Assertions.*;

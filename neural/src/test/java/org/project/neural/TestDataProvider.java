@@ -1,7 +1,7 @@
 package org.project.neural;
 
-import org.project.data.entities.CoreStockEntity;
-import org.project.data.entities.indicators.*;
+import org.libra.bragi.entities.CoreStockEntity;
+import org.libra.bragi.entities.indicators.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

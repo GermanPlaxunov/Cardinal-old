@@ -2,9 +2,9 @@ package org.project.market.process.account;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.data.entities.PositionEntity;
-import org.project.data.services.interfaces.AccountService;
-import org.project.data.services.interfaces.PositionService;
+import org.libra.bragi.entities.PositionEntity;
+import org.libra.bragi.services.interfaces.AccountService;
+import org.libra.bragi.services.interfaces.PositionService;
 
 @Slf4j
 @RequiredArgsConstructor

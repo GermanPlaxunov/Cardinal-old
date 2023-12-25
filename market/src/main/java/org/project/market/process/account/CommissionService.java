@@ -2,7 +2,7 @@ package org.project.market.process.account;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.data.services.interfaces.ProcessParamsService;
+import org.libra.bragi.services.interfaces.ProcessParamsService;
 
 @Slf4j
 @RequiredArgsConstructor

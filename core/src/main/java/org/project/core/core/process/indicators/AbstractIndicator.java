@@ -1,7 +1,6 @@
 package org.project.core.core.process.indicators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.project.data.entities.CoreStockEntity;
 import org.project.model.CoreStock;
 
 import java.time.LocalDateTime;
