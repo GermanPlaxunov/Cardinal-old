@@ -1,11 +1,11 @@
 package org.project.core.config;
 
-import org.libra.bragi.services.interfaces.indicators.*;
+import org.libra.data.services.interfaces.indicators.*;
 import org.project.core.client.MarketClient;
 import org.project.core.client.MarketFeignClient;
 import org.project.core.client.NeuralFeignClient;
 import org.project.core.core.market.MarketDataProvider;
-import org.project.core.core.process.ProcessStarter;
+import org.project.core.core.process.TradeProcessStarter;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
 import org.project.core.core.process.data.trend.StocksDivider;
@@ -15,13 +15,14 @@ import org.project.core.core.process.decision.DecisionStarter;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
-import org.libra.bragi.cache.CacheDepthMapper;
-import org.libra.bragi.cache.CacheDepthProvider;
-import org.libra.bragi.cache.CacheDepthProviderImpl;
-import org.libra.bragi.config.BragiBeansConfig;
-import org.libra.bragi.services.interfaces.CoreStockService;
-import org.libra.bragi.services.interfaces.PositionService;
-import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.data.cache.CacheDepthMapper;
+import org.libra.data.cache.CacheDepthProvider;
+import org.libra.data.cache.CacheDepthProviderImpl;
+import org.libra.data.config.DataBeansConfig;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.PositionService;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.project.model.job.ProcessStarter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(BragiBeansConfig.class)
+@Import({DataBeansConfig.class, IndicatorsConfig.class, DecisionConfig.class})
 @EnableFeignClients(clients = {
         MarketFeignClient.class, NeuralFeignClient.class
 })
@@ -57,7 +58,7 @@ public class CoreBeansConfig {
                                          MainStrategy mainStrategy,
                                          StockMapper stockMapper,
                                          DealMaker dealMaker) {
-        return new ProcessStarter(processParamsService,
+        return new TradeProcessStarter(processParamsService,
                 commissionProcessor,
                 indicatorsCollector,
                 marketDataProvider,

@@ -1,11 +1,11 @@
 package org.project.neural.process.predictions.predictors;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.bragi.entities.CoreStockEntity;
-import org.libra.bragi.entities.NeuralPredictionEntity;
-import org.libra.bragi.services.interfaces.CoreStockService;
-import org.libra.bragi.services.interfaces.NeuralPredictionService;
-import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.data.entities.CoreStockEntity;
+import org.libra.data.entities.NeuralPredictionEntity;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.NeuralPredictionService;
+import org.libra.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
 
 @RequiredArgsConstructor

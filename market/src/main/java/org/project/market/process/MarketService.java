@@ -1,9 +1,9 @@
 package org.project.market.process;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.bragi.entities.MarketStockEntity;
-import org.libra.bragi.services.interfaces.LastProvidedStockService;
-import org.libra.bragi.services.interfaces.MarketStockService;
+import org.libra.data.entities.MarketStockEntity;
+import org.libra.data.services.interfaces.LastProvidedStockService;
+import org.libra.data.services.interfaces.MarketStockService;
 import org.project.market.process.account.AccountProcessor;
 import org.project.market.process.position.PositionProcessor;
 

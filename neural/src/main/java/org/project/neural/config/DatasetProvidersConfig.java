@@ -1,7 +1,7 @@
 package org.project.neural.config;
 
-import org.libra.bragi.services.interfaces.ProcessParamsService;
-import org.libra.bragi.services.interfaces.indicators.*;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.indicators.*;
 import org.project.neural.process.training.dataset.*;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 import org.project.neural.process.training.dataset.splitters.DataDateSplitter;

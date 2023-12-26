@@ -1,10 +1,10 @@
 package org.project.neural.process.training.dataset;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.bragi.entities.CoreStockEntity;
-import org.libra.bragi.entities.indicators.ExponentialMovingAverageEntity;
-import org.libra.bragi.services.interfaces.ProcessParamsService;
-import org.libra.bragi.services.interfaces.indicators.ExponentialMovingAverageService;
+import org.libra.data.entities.CoreStockEntity;
+import org.libra.data.entities.indicators.ExponentialMovingAverageEntity;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.indicators.ExponentialMovingAverageService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.dataset.delta.PriceChangeCalculator;
 import org.project.neural.process.training.dataset.splitters.DataDateSplitter;
