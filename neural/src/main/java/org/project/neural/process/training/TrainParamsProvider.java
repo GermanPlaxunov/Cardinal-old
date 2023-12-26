@@ -1,9 +1,9 @@
 package org.project.neural.process.training;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.bragi.cache.CacheDepthProvider;
-import org.libra.bragi.entities.CoreStockEntity;
-import org.libra.bragi.services.interfaces.CoreStockService;
+import org.libra.data.cache.CacheDepthProvider;
+import org.libra.data.entities.CoreStockEntity;
+import org.libra.data.services.interfaces.CoreStockService;
 import org.project.neural.process.training.training.TrainParams;
 
 import java.time.LocalDateTime;

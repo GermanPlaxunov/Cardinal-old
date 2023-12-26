@@ -2,7 +2,7 @@ package org.libra.cardinal.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.libra.bragi.services.interfaces.JobService;
+import org.libra.data.services.interfaces.JobService;
 import org.project.model.job.AddJobData;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

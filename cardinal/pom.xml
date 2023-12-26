@@ -22,8 +22,9 @@
         <java.version>20</java.version>
 
         <!-- Starters version -->
-        <bragi.version>1.0</bragi.version>
-        <heimdall.version>1.0</heimdall.version>
+        <data.version>1.0</data.version>
+        <gate.version>1.0</gate.version>
+        <core.version>1.0</core.version>
     </properties>
 
     <dependencies>
@@ -31,12 +32,17 @@
         <dependency>
             <groupId>org.libra</groupId>
             <artifactId>data</artifactId>
-            <version>${bragi.version}</version>
+            <version>${data.version}</version>
         </dependency>
         <dependency>
             <groupId>org.libra</groupId>
             <artifactId>gate</artifactId>
-            <version>${heimdall.version}</version>
+            <version>${gate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>core</artifactId>
+            <version>${core.version}</version>
         </dependency>
     </dependencies>
 

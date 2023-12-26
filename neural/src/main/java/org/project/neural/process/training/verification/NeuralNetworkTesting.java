@@ -1,8 +1,8 @@
 package org.project.neural.process.training.verification;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.bragi.services.interfaces.CoreStockService;
-import org.libra.bragi.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
 import org.project.neural.process.Utils;
 import org.project.neural.process.network.NetworkStore;

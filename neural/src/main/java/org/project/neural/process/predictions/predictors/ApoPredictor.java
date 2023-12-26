@@ -1,9 +1,9 @@
 package org.project.neural.process.predictions.predictors;
 
-import org.libra.bragi.services.interfaces.CoreStockService;
-import org.libra.bragi.services.interfaces.NeuralPredictionService;
-import org.libra.bragi.services.interfaces.ProcessParamsService;
-import org.libra.bragi.services.interfaces.indicators.AbsolutePriceOscillatorService;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.NeuralPredictionService;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.indicators.AbsolutePriceOscillatorService;
 import org.project.model.Indicators;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.predictions.Predictor;

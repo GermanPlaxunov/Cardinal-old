@@ -1,8 +1,8 @@
 package org.project.core.core.process.indicators;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.bragi.entities.indicators.*;
-import org.libra.bragi.services.interfaces.indicators.*;
+import org.libra.data.entities.indicators.*;
+import org.libra.data.services.interfaces.indicators.*;
 import org.project.model.indicators.Bband;
 import org.project.model.ProcessVars;
 
