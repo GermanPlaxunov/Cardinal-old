@@ -25,6 +25,8 @@
         <data.version>1.0</data.version>
         <gate.version>1.0</gate.version>
         <core.version>1.0</core.version>
+        <neural.version>1.0</neural.version>
+        <market.version>1.0</market.version>
     </properties>
 
     <dependencies>
@@ -43,6 +45,16 @@
             <groupId>org.libra</groupId>
             <artifactId>core</artifactId>
             <version>${core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>neural</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>market</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

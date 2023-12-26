@@ -2,13 +2,13 @@ package org.project.core.core.process.deal;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.core.client.MarketClient;
+import org.project.market.process.MarketService;
 
 @Slf4j
 @RequiredArgsConstructor
 public class DealMaker {
 
-    private final MarketClient marketClient;
+    private final MarketService marketService;
 
     /**
      * Sends signal to market to
@@ -18,7 +18,7 @@ public class DealMaker {
      */
     public void openLongPosition(String symbol, Double amountCurr) {
         log.info("Open position symbol: {} amount: {}", symbol, amountCurr);
-        marketClient.openLongPosition(symbol, amountCurr);
+        marketService.openLongPosition(symbol, amountCurr);
     }
 
     /**
@@ -29,7 +29,7 @@ public class DealMaker {
      */
     public void closeLongPosition(String symbol) {
         log.info("Close position symbol: {}", symbol);
-        marketClient.closeLongPosition(symbol);
+        marketService.closeLongPosition(symbol);
     }
 
 }

@@ -22,7 +22,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(DataBeansConfig.class)
+@Import({DataBeansConfig.class,
+        DatasetProvidersConfig.class,
+        PredictionConfig.class,
+        TrainersConfig.class})
 @EntityScan(basePackages = "org.project.data.entities")
 public class NeuralBeansConfig {
 
