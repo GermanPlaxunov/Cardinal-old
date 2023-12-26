@@ -1,12 +1,12 @@
 package org.project.core.config;
 
-import org.project.core.client.NeuralClient;
-import org.project.core.core.process.decision.BuyAmountCurrencyProcessor;
-import org.project.core.core.process.decision.DecisionStarter;
-import org.project.core.core.process.decision.indicators.*;
 import org.libra.data.config.DataBeansConfig;
 import org.libra.data.services.interfaces.AccountService;
 import org.libra.data.services.interfaces.ProcessParamsService;
+import org.project.core.core.process.decision.BuyAmountCurrencyProcessor;
+import org.project.core.core.process.decision.DecisionStarter;
+import org.project.core.core.process.decision.indicators.*;
+import org.project.neural.process.NeuralProcessStarter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,33 +34,33 @@ public class DecisionConfig {
     }
 
     @Bean
-    public ApoProcessor apoProcessor(NeuralClient neuralClient) {
-        return new ApoProcessor(neuralClient);
+    public ApoProcessor apoProcessor(NeuralProcessStarter neuralProcessStarter) {
+        return new ApoProcessor(neuralProcessStarter);
     }
 
     @Bean
-    public BbandProcessor bbandProcessor(NeuralClient neuralClient) {
-        return new BbandProcessor(neuralClient);
+    public BbandProcessor bbandProcessor(NeuralProcessStarter neuralProcessStarter) {
+        return new BbandProcessor(neuralProcessStarter);
     }
 
     @Bean
-    public EmaProcessor emaProcessor(NeuralClient neuralClient) {
-        return new EmaProcessor(neuralClient);
+    public EmaProcessor emaProcessor(NeuralProcessStarter neuralProcessStarter) {
+        return new EmaProcessor(neuralProcessStarter);
     }
 
     @Bean
-    public RsiProcessor rsiProcessor(NeuralClient neuralClient) {
-        return new RsiProcessor(neuralClient);
+    public RsiProcessor rsiProcessor(NeuralProcessStarter neuralProcessStarter) {
+        return new RsiProcessor(neuralProcessStarter);
     }
 
     @Bean
-    public SmaProcessor smaProcessor(NeuralClient neuralClient) {
-        return new SmaProcessor(neuralClient);
+    public SmaProcessor smaProcessor(NeuralProcessStarter neuralProcessStarter) {
+        return new SmaProcessor(neuralProcessStarter);
     }
 
     @Bean
-    public StdProcessor stdProcessor(NeuralClient neuralClient) {
-        return new StdProcessor(neuralClient);
+    public StdProcessor stdProcessor(NeuralProcessStarter neuralProcessStarter) {
+        return new StdProcessor(neuralProcessStarter);
     }
 
     @Bean
