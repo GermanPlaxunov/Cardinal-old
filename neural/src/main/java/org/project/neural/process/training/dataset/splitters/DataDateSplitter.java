@@ -1,6 +1,6 @@
 package org.project.neural.process.training.dataset.splitters;
 
-import org.project.data.entities.indicators.DateDataItem;
+import org.libra.data.entities.indicators.DateDataItem;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

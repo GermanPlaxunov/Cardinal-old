@@ -1,15 +1,15 @@
 package org.project.core.core.process.decision.indicators;
 
 import lombok.RequiredArgsConstructor;
-import org.project.core.client.NeuralClient;
-import org.project.data.entities.CoreStockEntity;
+import org.project.model.CoreStock;
 import org.project.model.Indicators;
 import org.project.model.ProcessVars;
+import org.project.neural.process.NeuralProcessStarter;
 
 @RequiredArgsConstructor
 public class RsiProcessor implements IndicatorProcessor {
 
-    private final NeuralClient neuralClient;
+    private final NeuralProcessStarter neuralProcessStarter;
 
     /**
      * Returns the score of opening new position. (0-1000)
@@ -20,9 +20,9 @@ public class RsiProcessor implements IndicatorProcessor {
      * @return score
      */
     @Override
-    public Double checkOpenNewPosition(ProcessVars<CoreStockEntity> processVars) {
+    public Double checkOpenNewPosition(ProcessVars<CoreStock> processVars) {
         var symbol = processVars.getSymbol();
-        var prediction = neuralClient.predict(symbol, Indicators.APO.name());
+        var prediction = neuralProcessStarter.predict(symbol, Indicators.APO.name());
         Double score = 0.0;
         if (prediction > 0) {
             score = 1000.0;
@@ -39,9 +39,9 @@ public class RsiProcessor implements IndicatorProcessor {
      * @return score
      */
     @Override
-    public Double checkCloseCurrentPosition(ProcessVars<CoreStockEntity> processVars) {
+    public Double checkCloseCurrentPosition(ProcessVars<CoreStock> processVars) {
         var symbol = processVars.getSymbol();
-        var prediction = neuralClient.predict(symbol, Indicators.APO.name());
+        var prediction = neuralProcessStarter.predict(symbol, Indicators.APO.name());
         Double score = 0.0;
         if (prediction <= 0) {
             score = 1000.0;

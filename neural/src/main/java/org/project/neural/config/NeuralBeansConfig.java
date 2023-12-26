@@ -1,10 +1,10 @@
 package org.project.neural.config;
 
-import org.project.data.cache.CacheDepthProvider;
-import org.project.data.config.DataBeansConfig;
-import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.neural.NeuralNetworkService;
+import org.libra.data.cache.CacheDepthProvider;
+import org.libra.data.config.DataBeansConfig;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.neural.process.NeuralProcessStarter;
 import org.project.neural.process.network.NetworkDao;
 import org.project.neural.process.network.NetworkStore;
@@ -22,7 +22,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(DataBeansConfig.class)
+@Import({DataBeansConfig.class,
+        DatasetProvidersConfig.class,
+        PredictionConfig.class,
+        TrainersConfig.class})
 @EntityScan(basePackages = "org.project.data.entities")
 public class NeuralBeansConfig {
 

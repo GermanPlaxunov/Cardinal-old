@@ -2,12 +2,12 @@ package org.project.market.process.position;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.data.entities.MarketStockEntity;
-import org.project.data.entities.PositionEntity;
-import org.project.data.services.interfaces.AccountService;
-import org.project.data.services.interfaces.LastProvidedStockService;
-import org.project.data.services.interfaces.MarketStockService;
-import org.project.data.services.interfaces.PositionService;
+import org.libra.data.entities.MarketStockEntity;
+import org.libra.data.entities.PositionEntity;
+import org.libra.data.services.interfaces.AccountService;
+import org.libra.data.services.interfaces.LastProvidedStockService;
+import org.libra.data.services.interfaces.MarketStockService;
+import org.libra.data.services.interfaces.PositionService;
 import org.project.model.Constants;
 
 @Slf4j

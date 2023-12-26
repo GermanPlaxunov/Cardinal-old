@@ -1,9 +1,9 @@
 package org.project.neural.config;
 
-import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.NeuralPredictionService;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.*;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.NeuralPredictionService;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.indicators.*;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.predictions.PredictorsStore;
 import org.project.neural.process.predictions.predictors.*;

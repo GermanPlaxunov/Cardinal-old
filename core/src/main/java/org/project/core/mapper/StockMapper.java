@@ -1,7 +1,7 @@
 package org.project.core.mapper;
 
 import org.mapstruct.Mapper;
-import org.project.data.entities.CoreStockEntity;
+import org.libra.data.entities.CoreStockEntity;
 import org.project.model.CoreStock;
 import org.project.model.MarketStock;
 

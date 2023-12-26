@@ -1,21 +1,21 @@
 package org.project.gate.job;
 
 import lombok.RequiredArgsConstructor;
-import org.project.gate.client.CoreClient;
-import org.project.gate.client.NeuralClient;
+import lombok.extern.slf4j.Slf4j;
+import org.project.model.job.ProcessStarter;
 
+@Slf4j
 @RequiredArgsConstructor
 public class ScheduledJobExecutor {
 
-    private final NeuralClient neuralClient;
-    private final CoreClient coreClient;
+    private final ProcessStarter processStarter;
 
     public void trade() {
-        coreClient.startProcess("BTC/USD");
+        processStarter.startProcess("BTC/USD");
     }
 
     public void train() {
-        neuralClient.train("BTC/USD");
+        log.info("train");
     }
 
 }

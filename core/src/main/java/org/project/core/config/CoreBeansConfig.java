@@ -1,10 +1,15 @@
 package org.project.core.config;
 
-import org.project.core.client.MarketClient;
-import org.project.core.client.MarketFeignClient;
-import org.project.core.client.NeuralFeignClient;
+import org.libra.data.cache.CacheDepthMapper;
+import org.libra.data.cache.CacheDepthProvider;
+import org.libra.data.cache.CacheDepthProviderImpl;
+import org.libra.data.config.DataBeansConfig;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.PositionService;
+import org.libra.data.services.interfaces.ProcessParamsService;
+import org.libra.data.services.interfaces.indicators.*;
 import org.project.core.core.market.MarketDataProvider;
-import org.project.core.core.process.ProcessStarter;
+import org.project.core.core.process.TradeProcessStarter;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
 import org.project.core.core.process.data.trend.StocksDivider;
@@ -14,31 +19,25 @@ import org.project.core.core.process.decision.DecisionStarter;
 import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
-import org.project.data.cache.CacheDepthMapper;
-import org.project.data.cache.CacheDepthProvider;
-import org.project.data.cache.CacheDepthProviderImpl;
-import org.project.data.config.DataBeansConfig;
-import org.project.data.services.interfaces.CoreStockService;
-import org.project.data.services.interfaces.PositionService;
-import org.project.data.services.interfaces.ProcessParamsService;
-import org.project.data.services.interfaces.indicators.*;
+import org.project.core.mapper.StockMapperImpl;
+import org.project.market.config.MarketConfig;
+import org.project.market.process.MarketService;
+import org.project.model.job.ProcessStarter;
+import org.project.neural.config.NeuralBeansConfig;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(DataBeansConfig.class)
-@EnableFeignClients(clients = {
-        MarketFeignClient.class, NeuralFeignClient.class
-})
+@Import({DataBeansConfig.class, IndicatorsConfig.class, 
+        DecisionConfig.class, MarketConfig.class, NeuralBeansConfig.class})
 @EntityScan(basePackages = "org.project.data.entities")
 public class CoreBeansConfig {
 
     @Bean
-    public DealMaker dealMaker(MarketClient marketClient) {
-        return new DealMaker(marketClient);
+    public DealMaker dealMaker(MarketService marketService) {
+        return new DealMaker(marketService);
     }
 
     @Bean
@@ -57,7 +56,7 @@ public class CoreBeansConfig {
                                          MainStrategy mainStrategy,
                                          StockMapper stockMapper,
                                          DealMaker dealMaker) {
-        return new ProcessStarter(processParamsService,
+        return new TradeProcessStarter(processParamsService,
                 commissionProcessor,
                 indicatorsCollector,
                 marketDataProvider,
@@ -118,12 +117,23 @@ public class CoreBeansConfig {
     }
 
     @Bean
+    public StockMapper coreStockMapper() {
+        return new StockMapperImpl();
+    }
+
+    @Bean
+    public org.project.market.mapper.StockMapper marketStockMapper() {
+        return new org.project.market.mapper.StockMapperImpl();
+    }
+
+    @Bean
     public MarketDataProvider marketDataProvider(CoreStockService coreStockService,
-                                                 MarketClient marketClient,
-                                                 StockMapper stockMapper) {
-        return new MarketDataProvider(coreStockService,
-                marketClient,
-                stockMapper);
+                                                 MarketService marketService,
+                                                 org.project.market.mapper.StockMapper marketStockMapper,
+                                                 StockMapper coreStockMapper) {
+        return new MarketDataProvider(marketService, marketStockMapper,
+                coreStockService,
+                coreStockMapper);
     }
 
     @Bean

@@ -1,6 +1,6 @@
 package org.project.core.core.process;
 
-import org.project.data.entities.CoreStockEntity;
+import org.libra.data.entities.CoreStockEntity;
 import org.project.model.CoreStock;
 
 import java.util.List;

@@ -1,11 +1,9 @@
 package org.project.market.config;
 
-import org.project.data.config.DataBeansConfig;
-import org.project.data.repositories.AccountRepository;
-import org.project.data.repositories.PositionRepository;
-import org.project.data.services.classes.AccountServiceImpl;
-import org.project.data.services.classes.PositionServiceImpl;
-import org.project.data.services.interfaces.*;
+import org.libra.data.config.DataBeansConfig;
+import org.libra.data.repositories.PositionRepository;
+import org.libra.data.services.classes.PositionServiceImpl;
+import org.libra.data.services.interfaces.*;
 import org.project.market.process.MarketService;
 import org.project.market.process.account.AccountProcessor;
 import org.project.market.process.account.CommissionService;
@@ -20,17 +18,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @Import(DataBeansConfig.class)
 @EntityScan(basePackages = "org.project.data.entities")
-@EnableJpaRepositories(basePackages = "org.project.data.repositories")
+@EnableJpaRepositories(basePackages = "org.libra.data.repositories")
 public class MarketConfig {
 
     @Bean
-    public AccountService accountService(AccountRepository repository) {
-        return new AccountServiceImpl(repository);
-    }
-
-    @Bean
     public PositionService positionService(PositionRepository repository,
-                                           @Value("${market.account.id}") String accountId) {
+                                           @Value("9b6afcd3-8126-4ca9-a871-e66f409e1d68") String accountId) {
         return new PositionServiceImpl(repository, accountId);
     }
 

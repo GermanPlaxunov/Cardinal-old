@@ -41,8 +41,8 @@ public class RelativeStrengthIndicator extends AbstractIndicator {
     }
 
     private Double getRelativeStrength(Rsi rsi) {
-        var gainSum = MathUtils.getSumm(rsi.getGainList());
-        var lossSum = MathUtils.getSumm(rsi.getLossList());
+        var gainSum = MathUtils.getSum(rsi.getGainList());
+        var lossSum = MathUtils.getSum(rsi.getLossList());
         rsi.setGainSumm(gainSum)
                 .setLossSumm(lossSum);
         var num = rsi.getNumberOfPeriods();

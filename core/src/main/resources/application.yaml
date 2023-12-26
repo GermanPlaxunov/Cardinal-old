@@ -7,7 +7,6 @@ core:
   account:
     id: 9b6afcd3-8126-4ca9-a871-e66f409e1d68
 
-
 spring:
   main:
     allow-bean-definition-overriding: true
