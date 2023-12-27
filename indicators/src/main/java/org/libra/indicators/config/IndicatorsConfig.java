@@ -1,6 +1,6 @@
-package org.project.core.config;
+package org.libra.indicators.config;
 
-import org.project.core.core.process.indicators.*;
+import org.libra.indicators.indicators.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

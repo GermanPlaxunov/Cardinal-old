@@ -1,4 +1,4 @@
-package org.project.core.core.process.indicators;
+package org.project.core.core.process;
 
 import lombok.RequiredArgsConstructor;
 import org.libra.data.entities.indicators.*;

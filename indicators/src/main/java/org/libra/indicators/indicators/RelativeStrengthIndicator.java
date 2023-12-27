@@ -1,7 +1,6 @@
-package org.project.core.core.process.indicators;
+package org.libra.indicators.indicators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.project.core.core.MathUtils;
 import org.project.model.CoreStock;
 import org.project.model.indicators.Rsi;
 
@@ -41,8 +40,8 @@ public class RelativeStrengthIndicator extends AbstractIndicator {
     }
 
     private Double getRelativeStrength(Rsi rsi) {
-        var gainSum = MathUtils.getSum(rsi.getGainList());
-        var lossSum = MathUtils.getSum(rsi.getLossList());
+        var gainSum = getSum(rsi.getGainList());
+        var lossSum = getSum(rsi.getLossList());
         rsi.setGainSumm(gainSum)
                 .setLossSumm(lossSum);
         var num = rsi.getNumberOfPeriods();

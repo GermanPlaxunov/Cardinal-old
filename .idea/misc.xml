@@ -9,11 +9,11 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/cardinal/pom.xml" />
+        <option value="$PROJECT_DIR$/indicators/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/indicators/pom.xml" />
         <option value="$PROJECT_DIR$/trading/pom.xml" />
       </set>
     </option>

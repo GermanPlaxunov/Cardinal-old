@@ -1,4 +1,4 @@
-package org.project.core.core.process.indicators;
+package org.libra.indicators.indicators;
 
 import lombok.extern.slf4j.Slf4j;
 import org.project.model.CoreStock;
@@ -13,7 +13,7 @@ public abstract class AbstractIndicator {
     /**
      * Returns stocks with required depth.
      *
-     * @param coreStocks   - stocks obtained using maximum
+     * @param coreStocks - stocks obtained using maximum
      *                   cacheDepth ordered by date asc
      * @param cacheDepth - cache depth
      * @return stocks with required depth
@@ -31,6 +31,24 @@ public abstract class AbstractIndicator {
                 .filter(Objects::nonNull)
                 .map(CoreStock::getClose)
                 .toList();
+    }
+
+    protected Double standardDeviation(List<Double> inputArray) {
+        var sum = 0.0;
+        for (var num : inputArray) {
+            sum += num;
+        }
+        var mean = sum / inputArray.size();
+        var standardDeviation = 0.0;
+        for (var num : inputArray) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+        return Math.sqrt(standardDeviation / inputArray.size());
+    }
+
+    protected Double getSum(List<Double> elements) {
+        return elements.stream()
+                .reduce(0.0, Double::sum);
     }
 
     private LocalDateTime getEarliestDate(List<CoreStock> stocks, Long cacheDepthInSeconds) {

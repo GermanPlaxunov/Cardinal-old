@@ -1,8 +1,7 @@
-package org.project.core.core.process.indicators;
+package org.libra.indicators.indicators;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.core.core.MathUtils;
 import org.project.model.CoreStock;
 import org.project.model.indicators.Bband;
 
@@ -27,7 +26,7 @@ public class BollingerBands extends AbstractIndicator {
         var symbol = coreStocks.get(0).getSymbol();
         var stocks = getCachedStocks(coreStocks, cacheDepth);
         log.debug("Start calculating BBAND for: {}", symbol);
-        var std = MathUtils.standardDeviation(stocks.stream()
+        var std = standardDeviation(stocks.stream()
                 .map(CoreStock::getClose)
                 .toList());
         var middle = exponentialMovingAverage.calculateEma(coreStocks, cacheDepth);

@@ -8,7 +8,11 @@ import org.libra.data.services.interfaces.CoreStockService;
 import org.libra.data.services.interfaces.PositionService;
 import org.libra.data.services.interfaces.ProcessParamsService;
 import org.libra.data.services.interfaces.indicators.*;
+import org.libra.indicators.config.IndicatorsConfig;
+import org.libra.indicators.indicators.*;
 import org.project.core.core.market.MarketDataProvider;
+import org.project.core.core.process.IndicatorsCollector;
+import org.project.core.core.process.IndicatorsSaver;
 import org.project.core.core.process.TradeProcessStarter;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
@@ -16,7 +20,6 @@ import org.project.core.core.process.data.trend.StocksDivider;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.DecisionStarter;
-import org.project.core.core.process.indicators.*;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
 import org.project.core.mapper.StockMapperImpl;
@@ -30,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({DataBeansConfig.class, IndicatorsConfig.class, 
+@Import({DataBeansConfig.class, IndicatorsConfig.class,
         DecisionConfig.class, MarketConfig.class, NeuralBeansConfig.class})
 @EntityScan(basePackages = "org.project.data.entities")
 public class CoreBeansConfig {

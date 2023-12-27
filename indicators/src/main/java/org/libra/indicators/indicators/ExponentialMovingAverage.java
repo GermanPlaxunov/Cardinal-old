@@ -1,4 +1,4 @@
-package org.project.core.core.process.indicators;
+package org.libra.indicators.indicators;
 
 import lombok.extern.slf4j.Slf4j;
 import org.project.model.CoreStock;
