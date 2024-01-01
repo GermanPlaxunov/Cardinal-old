@@ -6,7 +6,6 @@ import org.project.model.CoreStock;
 import org.project.model.Indicators;
 import org.project.model.ProcessVars;
 import org.project.model.decision.Decision;
-import org.project.model.decision.DecisionResult;
 
 @RequiredArgsConstructor
 public class DecisionStarter {
@@ -20,7 +19,7 @@ public class DecisionStarter {
      *
      * @return decision.
      */
-    public DecisionResult ifNewPositionShouldBeOpened(ProcessVars<CoreStock> processVars) {
+    public void ifNewPositionShouldBeOpened(ProcessVars<CoreStock> processVars) {
         Double finalScore = 0.0;
         for (var indicator : Indicators.values()) {
             var processor = indicatorProcessorsStore.get(indicator);
@@ -28,9 +27,7 @@ public class DecisionStarter {
         }
         processVars.setScore(finalScore);
         processVars.setAmountCurr(buyAmountCurrencyProcessor.getBuyAmountCurrency(processVars));
-        return new DecisionResult()
-                .setDecision(evaluateDecision(finalScore, true))
-                .setBuyAmountCurr(processVars.getAmountCurr());
+        processVars.setDecision(evaluateDecision(finalScore, true));
     }
 
     /**
@@ -39,13 +36,13 @@ public class DecisionStarter {
      *
      * @return decision.
      */
-    public DecisionResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStock> processVars) {
+    public void ifCurrentPositionShouldBeClosed(ProcessVars<CoreStock> processVars) {
         Double finalScore = 0.0;
         for (var indicator : Indicators.values()) {
             var processor = indicatorProcessorsStore.get(indicator);
             finalScore += processor.checkCloseCurrentPosition(processVars);
         }
-        return new DecisionResult()
+        processVars.setScore(finalScore)
                 .setDecision(evaluateDecision(finalScore, false));
     }
 
