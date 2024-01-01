@@ -1,6 +1,7 @@
 package org.project.model;
 
 import lombok.Data;
+import org.project.model.decision.Decision;
 import org.project.model.indicators.Bband;
 import org.project.model.indicators.Rsi;
 import org.project.model.trend.TrendData;
@@ -31,4 +32,5 @@ public class ProcessVars<stock> {
     private Boolean isAnyOpenPosition;
     private Double score;
     private Map<Indicators, Double> indicatorsPredictions;
+    private Decision decision;
 }

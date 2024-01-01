@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>data</artifactId>
+    <description>Contains all DB repositories</description>
 
     <dependencies>
         <dependency>

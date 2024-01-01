@@ -1,8 +1,8 @@
 package org.libra.data.services.classes;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.data.repositories.ProcessParamsRepository;
 import org.libra.data.entities.ProcessParamsEntity;
+import org.libra.data.repositories.ProcessParamsRepository;
 import org.libra.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
 
@@ -91,14 +91,6 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
     }
 
     @Override
-    public Double getMaxAccountBalanceShareToOpenNewPosition(String symbol) {
-        var name = getMaxAccountBalanceShareToOpenNewPositionName(symbol);
-        return repository.findByName(name)
-                .map(ProcessParamsEntity::getNumberValue)
-                .orElse(null);
-    }
-
-    @Override
     public Long getMaximumCacheDepth(String symbol) {
         var names = new ArrayList<String>();
         names.add(getShortTrendCacheDepthName(symbol));
@@ -169,11 +161,6 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
     private String getNumberOfPeriodsToFindTrendName(String symbol) {
         return symbol.toUpperCase()
                 .concat("_NUMBER_OF_PERIODS_TO_FIND_TREND");
-    }
-
-    private String getMaxAccountBalanceShareToOpenNewPositionName(String symbol) {
-        return symbol.toUpperCase()
-                .concat("_MAX_ACCOUNT_BALANCE_SHARE_FOR_OPEN");
     }
 
     private String getBuyCommissionPercentageName(String symbol) {

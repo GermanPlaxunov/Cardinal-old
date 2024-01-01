@@ -20,11 +20,11 @@ public class MainStrategy {
      * @return final decision.
      */
     public MainStrategyResult ifNewPositionShouldBeOpened(ProcessVars<CoreStock> processVars) {
-        var decision = decisionStarter.ifNewPositionShouldBeOpened(processVars);
+        decisionStarter.ifNewPositionShouldBeOpened(processVars);
         return new MainStrategyResult()
                 .setSymbol(processVars.getSymbol())
-                .setShouldNewPositionBeOpen(shouldNewPositionBeOpened(decision))
-                .setAmount(decision.getBuyAmountCurr());
+                .setShouldNewPositionBeOpen(shouldNewPositionBeOpened(processVars.getDecision()))
+                .setAmount(processVars.getAmountCurr());
     }
 
     /**
@@ -34,17 +34,17 @@ public class MainStrategy {
      * @return final decision.
      */
     public MainStrategyResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStock> processVars) {
-        var decision = decisionStarter.ifCurrentPositionShouldBeClosed(processVars);
+        decisionStarter.ifCurrentPositionShouldBeClosed(processVars);
         return new MainStrategyResult()
                 .setSymbol(processVars.getSymbol())
-                .setShouldCurrentPositionBeClosed(shouldCurrPositionBeClosed(decision));
+                .setShouldCurrentPositionBeClosed(shouldCurrPositionBeClosed(processVars.getDecision()));
     }
 
-    private boolean shouldCurrPositionBeClosed(DecisionResult decisionResult) {
-        return decisionResult.getDecision() == Decision.DECISION_CLOSE_CURRENT;
+    private boolean shouldCurrPositionBeClosed(Decision decision) {
+        return decision == Decision.DECISION_CLOSE_CURRENT;
     }
 
-    private boolean shouldNewPositionBeOpened(DecisionResult decisionResult) {
-        return decisionResult.getDecision() == Decision.DECISION_OPEN_NEW;
+    private boolean shouldNewPositionBeOpened(Decision decision) {
+        return decision == Decision.DECISION_OPEN_NEW;
     }
 }

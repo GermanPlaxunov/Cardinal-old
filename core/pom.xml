@@ -13,6 +13,7 @@
     <artifactId>core</artifactId>
 
     <dependencies>
+        <!-- Cardinal Dependencies -->
         <dependency>
             <groupId>org.libra</groupId>
             <artifactId>market</artifactId>
@@ -28,6 +29,23 @@
             <artifactId>indicators</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>data</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.libra</groupId>
+            <artifactId>decision</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- Spring Boot Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -59,21 +77,6 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>model</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>data</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>decision</artifactId>
-            <version>1.0</version>
         </dependency>
     </dependencies>
 
