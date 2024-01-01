@@ -4,10 +4,15 @@ import org.libra.data.cache.CacheDepthMapper;
 import org.libra.data.cache.CacheDepthProvider;
 import org.libra.data.cache.CacheDepthProviderImpl;
 import org.libra.data.config.DataBeansConfig;
+import org.libra.data.services.interfaces.AccountService;
 import org.libra.data.services.interfaces.CoreStockService;
 import org.libra.data.services.interfaces.PositionService;
 import org.libra.data.services.interfaces.ProcessParamsService;
 import org.libra.data.services.interfaces.indicators.*;
+import org.libra.decision.config.DecisionConfig;
+import org.libra.decision.processor.indicators.IndicatorProcessorsStore;
+import org.libra.indicators.config.IndicatorsConfig;
+import org.libra.indicators.indicators.*;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.TradeProcessStarter;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
@@ -15,8 +20,11 @@ import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
 import org.project.core.core.process.data.trend.StocksDivider;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.decision.BuyAmountCurrencyProcessor;
 import org.project.core.core.process.decision.DecisionStarter;
-import org.project.core.core.process.indicators.*;
+import org.project.core.core.process.indicators.IndicatorsCollector;
+import org.project.core.core.process.indicators.IndicatorsPredictionsCollector;
+import org.project.core.core.process.indicators.IndicatorsSaver;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
 import org.project.core.mapper.StockMapperImpl;
@@ -24,16 +32,24 @@ import org.project.market.config.MarketConfig;
 import org.project.market.process.MarketService;
 import org.project.model.job.ProcessStarter;
 import org.project.neural.config.NeuralBeansConfig;
+import org.project.neural.process.NeuralProcessStarter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({DataBeansConfig.class, IndicatorsConfig.class, 
-        DecisionConfig.class, MarketConfig.class, NeuralBeansConfig.class})
+@Import({DataBeansConfig.class, IndicatorsConfig.class,
+        DecisionConfig.class, MarketConfig.class,
+        NeuralBeansConfig.class})
 @EntityScan(basePackages = "org.project.data.entities")
 public class CoreBeansConfig {
+
+    @Bean
+    public IndicatorsPredictionsCollector indicatorsPredictionsCollector(
+            NeuralProcessStarter neuralProcessStarter) {
+        return new IndicatorsPredictionsCollector(neuralProcessStarter);
+    }
 
     @Bean
     public DealMaker dealMaker(MarketService marketService) {
@@ -46,7 +62,8 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(ProcessParamsService processParamsService,
+    public ProcessStarter processStarter(IndicatorsPredictionsCollector indicatorsPredictionsCollector,
+                                         ProcessParamsService processParamsService,
                                          CommissionProcessor commissionProcessor,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
@@ -56,7 +73,8 @@ public class CoreBeansConfig {
                                          MainStrategy mainStrategy,
                                          StockMapper stockMapper,
                                          DealMaker dealMaker) {
-        return new TradeProcessStarter(processParamsService,
+        return new TradeProcessStarter(indicatorsPredictionsCollector,
+                processParamsService,
                 commissionProcessor,
                 indicatorsCollector,
                 marketDataProvider,
@@ -153,6 +171,20 @@ public class CoreBeansConfig {
     @Bean
     public MainStrategy mainStrategy(DecisionStarter decisionStarter) {
         return new MainStrategy(decisionStarter);
+    }
+
+    @Bean
+    public DecisionStarter decisionStarter(BuyAmountCurrencyProcessor buyAmountCurrencyProcessor,
+                                           IndicatorProcessorsStore indicatorProcessorsStore) {
+        return new DecisionStarter(buyAmountCurrencyProcessor,
+                indicatorProcessorsStore);
+    }
+
+    @Bean
+    public BuyAmountCurrencyProcessor buyAmountCurrencyProcessor(ProcessParamsService processParamsService,
+                                                                 AccountService accountService) {
+        return new BuyAmountCurrencyProcessor(processParamsService,
+                accountService);
     }
 
 }
