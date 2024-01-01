@@ -2,16 +2,17 @@ package org.project.core.core.process;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.libra.data.services.interfaces.CoreStockService;
+import org.libra.data.services.interfaces.PositionService;
+import org.libra.data.services.interfaces.ProcessParamsService;
 import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.indicators.IndicatorsCollector;
+import org.project.core.core.process.indicators.IndicatorsPredictionsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
-import org.libra.data.services.interfaces.CoreStockService;
-import org.libra.data.services.interfaces.PositionService;
-import org.libra.data.services.interfaces.ProcessParamsService;
 import org.project.model.CoreStock;
 import org.project.model.ProcessVars;
 import org.project.model.job.ProcessStarter;
@@ -20,6 +21,7 @@ import org.project.model.job.ProcessStarter;
 @RequiredArgsConstructor
 public class TradeProcessStarter implements ProcessStarter {
 
+    private final IndicatorsPredictionsCollector indicatorsPredictionsCollector;
     private final ProcessParamsService processParamsService;
     private final CommissionProcessor commissionProcessor;
     private final IndicatorsCollector indicatorsCollector;
@@ -41,7 +43,6 @@ public class TradeProcessStarter implements ProcessStarter {
     @Override
     public void startProcess(String symbol) {
         var next = marketDataProvider.getNextDataPoint(symbol);
-        log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
             var processVars = initProcessVars(symbol, next.getClose());
             var cacheDepth = processParamsService.getMaximumCacheDepth(symbol);
@@ -51,6 +52,7 @@ public class TradeProcessStarter implements ProcessStarter {
             setOpenPositionFlag(processVars);
             commissionProcessor.calculateCommission(processVars);
             indicatorsCollector.collect(symbol, processVars);
+            indicatorsPredictionsCollector.collectPredictions(processVars);
             processVars.setTrendData(trendProvider.getTrend(symbol, stocks));
             launchStrategy(processVars);
         } else {
@@ -91,6 +93,13 @@ public class TradeProcessStarter implements ProcessStarter {
         processVars.setIsAnyOpenPosition(isAnyOpenPosition);
     }
 
+    /**
+     * Creates processVars with initial data.
+     *
+     * @param symbol       - name of the stock
+     * @param currentPrice - current stock price
+     * @return processVars
+     */
     private ProcessVars<CoreStock> initProcessVars(String symbol, Double currentPrice) {
         return new ProcessVars<CoreStock>()
                 .setSymbol(symbol)

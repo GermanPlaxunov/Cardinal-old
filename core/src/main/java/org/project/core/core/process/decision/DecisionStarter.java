@@ -1,7 +1,7 @@
 package org.project.core.core.process.decision;
 
 import lombok.RequiredArgsConstructor;
-import org.project.core.core.process.decision.indicators.IndicatorProcessorsStore;
+import org.libra.decision.processor.indicators.IndicatorProcessorsStore;
 import org.project.model.CoreStock;
 import org.project.model.Indicators;
 import org.project.model.ProcessVars;
@@ -22,7 +22,7 @@ public class DecisionStarter {
      */
     public DecisionResult ifNewPositionShouldBeOpened(ProcessVars<CoreStock> processVars) {
         Double finalScore = 0.0;
-        for(var indicator : Indicators.values()){
+        for (var indicator : Indicators.values()) {
             var processor = indicatorProcessorsStore.get(indicator);
             finalScore += processor.checkOpenNewPosition(processVars);
         }
@@ -41,7 +41,7 @@ public class DecisionStarter {
      */
     public DecisionResult ifCurrentPositionShouldBeClosed(ProcessVars<CoreStock> processVars) {
         Double finalScore = 0.0;
-        for(var indicator : Indicators.values()){
+        for (var indicator : Indicators.values()) {
             var processor = indicatorProcessorsStore.get(indicator);
             finalScore += processor.checkCloseCurrentPosition(processVars);
         }
