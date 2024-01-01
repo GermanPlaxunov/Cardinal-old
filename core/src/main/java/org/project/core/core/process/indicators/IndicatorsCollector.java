@@ -1,4 +1,4 @@
-package org.project.core.core.process;
+package org.project.core.core.process.indicators;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

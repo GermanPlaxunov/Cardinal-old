@@ -9,6 +9,8 @@ import org.project.core.core.market.MarketDataProvider;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.indicators.IndicatorsCollector;
+import org.project.core.core.process.indicators.IndicatorsPredictionsCollector;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
 import org.project.model.CoreStock;
@@ -19,6 +21,7 @@ import org.project.model.job.ProcessStarter;
 @RequiredArgsConstructor
 public class TradeProcessStarter implements ProcessStarter {
 
+    private final IndicatorsPredictionsCollector indicatorsPredictionsCollector;
     private final ProcessParamsService processParamsService;
     private final CommissionProcessor commissionProcessor;
     private final IndicatorsCollector indicatorsCollector;
@@ -49,6 +52,7 @@ public class TradeProcessStarter implements ProcessStarter {
             setOpenPositionFlag(processVars);
             commissionProcessor.calculateCommission(processVars);
             indicatorsCollector.collect(symbol, processVars);
+            indicatorsPredictionsCollector.collectPredictions(processVars);
             processVars.setTrendData(trendProvider.getTrend(symbol, stocks));
             launchStrategy(processVars);
         } else {

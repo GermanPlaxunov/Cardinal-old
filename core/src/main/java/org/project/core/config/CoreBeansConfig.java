@@ -14,8 +14,6 @@ import org.libra.decision.processor.indicators.IndicatorProcessorsStore;
 import org.libra.indicators.config.IndicatorsConfig;
 import org.libra.indicators.indicators.*;
 import org.project.core.core.market.MarketDataProvider;
-import org.project.core.core.process.IndicatorsCollector;
-import org.project.core.core.process.IndicatorsSaver;
 import org.project.core.core.process.TradeProcessStarter;
 import org.project.core.core.process.broker.commission.CommissionProcessor;
 import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
@@ -24,6 +22,9 @@ import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
 import org.project.core.core.process.decision.BuyAmountCurrencyProcessor;
 import org.project.core.core.process.decision.DecisionStarter;
+import org.project.core.core.process.indicators.IndicatorsCollector;
+import org.project.core.core.process.indicators.IndicatorsPredictionsCollector;
+import org.project.core.core.process.indicators.IndicatorsSaver;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
 import org.project.core.mapper.StockMapperImpl;
@@ -31,6 +32,7 @@ import org.project.market.config.MarketConfig;
 import org.project.market.process.MarketService;
 import org.project.model.job.ProcessStarter;
 import org.project.neural.config.NeuralBeansConfig;
+import org.project.neural.process.NeuralProcessStarter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +46,12 @@ import org.springframework.context.annotation.Import;
 public class CoreBeansConfig {
 
     @Bean
+    public IndicatorsPredictionsCollector indicatorsPredictionsCollector(
+            NeuralProcessStarter neuralProcessStarter) {
+        return new IndicatorsPredictionsCollector(neuralProcessStarter);
+    }
+
+    @Bean
     public DealMaker dealMaker(MarketService marketService) {
         return new DealMaker(marketService);
     }
@@ -54,7 +62,8 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public ProcessStarter processStarter(ProcessParamsService processParamsService,
+    public ProcessStarter processStarter(IndicatorsPredictionsCollector indicatorsPredictionsCollector,
+                                         ProcessParamsService processParamsService,
                                          CommissionProcessor commissionProcessor,
                                          IndicatorsCollector indicatorsCollector,
                                          MarketDataProvider marketDataProvider,
@@ -64,7 +73,8 @@ public class CoreBeansConfig {
                                          MainStrategy mainStrategy,
                                          StockMapper stockMapper,
                                          DealMaker dealMaker) {
-        return new TradeProcessStarter(processParamsService,
+        return new TradeProcessStarter(indicatorsPredictionsCollector,
+                processParamsService,
                 commissionProcessor,
                 indicatorsCollector,
                 marketDataProvider,
