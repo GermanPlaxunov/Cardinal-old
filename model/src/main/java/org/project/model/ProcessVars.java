@@ -30,4 +30,5 @@ public class ProcessVars<stock> {
     private Double closePositionCommission;
     private Boolean isAnyOpenPosition;
     private Double score;
+    private Map<Indicators, Double> indicatorsPredictions;
 }

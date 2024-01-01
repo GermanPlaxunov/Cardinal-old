@@ -19,6 +19,7 @@
         <module>neural</module>
         <module>cardinal</module>
         <module>indicators</module>
+        <module>decision</module>
     </modules>
 
 </project>

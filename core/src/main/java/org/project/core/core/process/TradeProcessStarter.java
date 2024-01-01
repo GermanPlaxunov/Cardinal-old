@@ -40,7 +40,6 @@ public class TradeProcessStarter implements ProcessStarter {
     @Override
     public void startProcess(String symbol) {
         var next = marketDataProvider.getNextDataPoint(symbol);
-        log.info("Received stock: {}", next);
         if (coreStockService.checkCacheExists(symbol)) {
             var processVars = initProcessVars(symbol, next.getClose());
             var cacheDepth = processParamsService.getMaximumCacheDepth(symbol);
@@ -90,6 +89,13 @@ public class TradeProcessStarter implements ProcessStarter {
         processVars.setIsAnyOpenPosition(isAnyOpenPosition);
     }
 
+    /**
+     * Creates processVars with initial data.
+     *
+     * @param symbol       - name of the stock
+     * @param currentPrice - current stock price
+     * @return processVars
+     */
     private ProcessVars<CoreStock> initProcessVars(String symbol, Double currentPrice) {
         return new ProcessVars<CoreStock>()
                 .setSymbol(symbol)

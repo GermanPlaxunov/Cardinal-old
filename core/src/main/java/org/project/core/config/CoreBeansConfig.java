@@ -4,10 +4,13 @@ import org.libra.data.cache.CacheDepthMapper;
 import org.libra.data.cache.CacheDepthProvider;
 import org.libra.data.cache.CacheDepthProviderImpl;
 import org.libra.data.config.DataBeansConfig;
+import org.libra.data.services.interfaces.AccountService;
 import org.libra.data.services.interfaces.CoreStockService;
 import org.libra.data.services.interfaces.PositionService;
 import org.libra.data.services.interfaces.ProcessParamsService;
 import org.libra.data.services.interfaces.indicators.*;
+import org.libra.decision.config.DecisionConfig;
+import org.libra.decision.processor.indicators.IndicatorProcessorsStore;
 import org.libra.indicators.config.IndicatorsConfig;
 import org.libra.indicators.indicators.*;
 import org.project.core.core.market.MarketDataProvider;
@@ -19,6 +22,7 @@ import org.project.core.core.process.data.trend.AveragePriceTrendProvider;
 import org.project.core.core.process.data.trend.StocksDivider;
 import org.project.core.core.process.data.trend.TrendProvider;
 import org.project.core.core.process.deal.DealMaker;
+import org.project.core.core.process.decision.BuyAmountCurrencyProcessor;
 import org.project.core.core.process.decision.DecisionStarter;
 import org.project.core.core.process.strategy.MainStrategy;
 import org.project.core.mapper.StockMapper;
@@ -34,7 +38,8 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({DataBeansConfig.class, IndicatorsConfig.class,
-        DecisionConfig.class, MarketConfig.class, NeuralBeansConfig.class})
+        DecisionConfig.class, MarketConfig.class,
+        NeuralBeansConfig.class})
 @EntityScan(basePackages = "org.project.data.entities")
 public class CoreBeansConfig {
 
@@ -156,6 +161,20 @@ public class CoreBeansConfig {
     @Bean
     public MainStrategy mainStrategy(DecisionStarter decisionStarter) {
         return new MainStrategy(decisionStarter);
+    }
+
+    @Bean
+    public DecisionStarter decisionStarter(BuyAmountCurrencyProcessor buyAmountCurrencyProcessor,
+                                           IndicatorProcessorsStore indicatorProcessorsStore) {
+        return new DecisionStarter(buyAmountCurrencyProcessor,
+                indicatorProcessorsStore);
+    }
+
+    @Bean
+    public BuyAmountCurrencyProcessor buyAmountCurrencyProcessor(ProcessParamsService processParamsService,
+                                                                 AccountService accountService) {
+        return new BuyAmountCurrencyProcessor(processParamsService,
+                accountService);
     }
 
 }
