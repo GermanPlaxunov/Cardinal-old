@@ -2,9 +2,10 @@ package org.cardinal.core.process;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.cardinal.core.strategy.MainStrategy;
+import org.cardinal.core.deal.DealMaker;
+import org.cardinal.core.process.market.MarketDataProvider;
+import org.cardinal.core.process.strategy.MainStrategy;
 import org.cardinal.data.services.interfaces.CoreStockService;
-import org.cardinal.core.market.MarketDataProvider;
 import org.project.model.CoreStock;
 import org.project.model.ProcessVars;
 import org.project.model.job.ProcessStarter;
@@ -16,6 +17,7 @@ public class CoreProcessStarter implements ProcessStarter {
     private final MarketDataProvider marketDataProvider;
     private final CoreStockService coreStockService;
     private final MainStrategy mainStrategy;
+    private final DealMaker dealMaker;
 
     /**
      * Entry point of trading process.
@@ -26,9 +28,10 @@ public class CoreProcessStarter implements ProcessStarter {
     @Override
     public void startProcess(String symbol) {
         if (marketDataProvider.hasNextStock(symbol)) {
-            marketDataProvider.saveNextDataPoint(symbol);
+            var nextStock = marketDataProvider.getNextDataPoint(symbol);
             if (coreStockService.checkCacheExists(symbol)) {
-                launchProcess(symbol);
+                var processVars = initProcessVars(symbol, nextStock);
+                launchProcess(processVars);
             } else {
                 log.info("Not enough cache to process data");
             }
@@ -37,14 +40,29 @@ public class CoreProcessStarter implements ProcessStarter {
         }
     }
 
-    private void launchProcess(String symbol) {
-        var processVars = initProcessVars(symbol);
+    /**
+     * Launches main strategy and Core Decision System (CDS).
+     * After all analyze is done act to market.
+     *
+     * @param processVars - process data
+     */
+    private void launchProcess(ProcessVars<CoreStock> processVars) {
+        var symbol = processVars.getSymbol();
         mainStrategy.launchStrategy(processVars);
+        var strategyResult = processVars.getMainStrategyResult();
+        if (strategyResult.isShouldNewPositionBeOpen()) {
+            var amountCurrency = processVars.getAmountCurr();
+            dealMaker.openLongPosition(symbol, amountCurrency);
+        }
+        if (strategyResult.isShouldCurrentPositionBeClosed()) {
+            dealMaker.closeLongPosition(symbol);
+        }
     }
 
-    private ProcessVars<CoreStock> initProcessVars(String symbol) {
+    private ProcessVars<CoreStock> initProcessVars(String symbol, CoreStock lastStock) {
         return new ProcessVars<CoreStock>()
-                .setSymbol(symbol);
+                .setSymbol(symbol)
+                .setLastProvidedStock(lastStock);
     }
 
 }

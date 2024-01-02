@@ -125,6 +125,15 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .orElse(null);
     }
 
+    @Override
+    public Long getMaxIntervalInSecondsOfOpeningNewPosition(String symbol) {
+        var paramName = getMaxIntervalOfOpeningNewPositionName(symbol);
+        return repository.findByName(paramName)
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(0L);
+    }
+
     private String getStepBackSecondsParamName(String symbol, Indicators indicator) {
         return symbol.toUpperCase()
                 .concat("_")
@@ -172,4 +181,10 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return symbol.toUpperCase()
                 .concat("_SELL_COMMISSION_PERCENTAGE");
     }
+
+    private String getMaxIntervalOfOpeningNewPositionName(String symbol) {
+        return symbol.toUpperCase()
+                .concat("_MAX_INTERVAL_OF_OPENING_NEW_POSITION");
+    }
+
 }

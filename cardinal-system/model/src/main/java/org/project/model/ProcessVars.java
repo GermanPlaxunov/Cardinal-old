@@ -4,6 +4,7 @@ import lombok.Data;
 import org.project.model.decision.Decision;
 import org.project.model.indicators.Bband;
 import org.project.model.indicators.Rsi;
+import org.project.model.strategy.MainStrategyResult;
 import org.project.model.trend.TrendData;
 
 import java.time.LocalDateTime;
@@ -33,4 +34,6 @@ public class ProcessVars<stock> {
     private Double score;
     private Map<Indicators, Double> indicatorsPredictions;
     private Decision decision;
+    private stock lastProvidedStock;
+    private MainStrategyResult mainStrategyResult;
 }

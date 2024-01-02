@@ -1,15 +1,16 @@
 package org.cardinal.core.config;
 
-import org.cardinal.core.commission.CommissionProcessor;
 import org.cardinal.core.deal.DealMaker;
+import org.cardinal.core.decision.BuyAmountCurrencyProcessor;
+import org.cardinal.core.decision.DecisionStarter;
 import org.cardinal.core.indicators.IndicatorsCollector;
 import org.cardinal.core.indicators.IndicatorsPredictionsCollector;
 import org.cardinal.core.indicators.IndicatorsSaver;
 import org.cardinal.core.mapper.CoreStockMapper;
 import org.cardinal.core.mapper.CoreStockMapperImpl;
-import org.cardinal.core.market.MarketDataProvider;
 import org.cardinal.core.process.CoreProcessStarter;
-import org.cardinal.core.strategy.MainStrategy;
+import org.cardinal.core.process.market.MarketDataProvider;
+import org.cardinal.core.process.strategy.MainStrategy;
 import org.cardinal.core.trend.AveragePriceTrendProvider;
 import org.cardinal.core.trend.StocksDivider;
 import org.cardinal.core.trend.TrendProvider;
@@ -28,8 +29,6 @@ import org.cardinal.indicators.config.IndicatorsConfig;
 import org.cardinal.indicators.indicators.*;
 import org.cardinal.neural.config.NeuralBeansConfig;
 import org.cardinal.neural.process.NeuralProcessStarter;
-import org.cardinal.core.decision.BuyAmountCurrencyProcessor;
-import org.cardinal.core.decision.DecisionStarter;
 import org.project.market.config.MarketConfig;
 import org.project.market.process.MarketService;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -61,17 +60,14 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public CommissionProcessor commissionProcessor(ProcessParamsService processParamsService) {
-        return new CommissionProcessor(processParamsService);
-    }
-
-    @Bean
     public CoreProcessStarter coreProcessStarter(MarketDataProvider marketDataProvider,
                                                  CoreStockService coreStockService,
-                                                 MainStrategy mainStrategy) {
+                                                 MainStrategy mainStrategy,
+                                                 DealMaker dealMaker) {
         return new CoreProcessStarter(marketDataProvider,
                 coreStockService,
-                mainStrategy);
+                mainStrategy,
+                dealMaker);
     }
 
     @Bean
@@ -152,8 +148,12 @@ public class CoreBeansConfig {
     }
 
     @Bean
-    public MainStrategy mainStrategy(PositionService positionService) {
-        return new MainStrategy(positionService);
+    public MainStrategy mainStrategy(BuyAmountCurrencyProcessor buyAmountCurrencyProcessor,
+                                     ProcessParamsService processParamsService,
+                                     PositionService positionService) {
+        return new MainStrategy(buyAmountCurrencyProcessor,
+                processParamsService,
+                positionService);
     }
 
     @Bean

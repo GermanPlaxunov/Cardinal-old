@@ -29,11 +29,12 @@ public class PositionEntity {
     private Double closePrice;
     @Column(name = "PROFIT")
     private Double profit;
-    /**
-     * Account balance before opening position.
-     */
-    @Column(name = "ACCOUNT_BALANCE")
+    @Column(name = "ACCOUNT_BALANCE_BEFORE_OPENING")
     private Double accountBalance;
+    @Column(name = "OPEN_COMMISSION")
+    private Double openCommission;
+    @Column(name = "CLOSE_COMMISSION")
+    private Double closeCommission;
     @Column(name = "OPEN_DATE")
     private LocalDateTime openDate;
     @Column(name = "CLOSE_DATE")

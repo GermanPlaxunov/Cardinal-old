@@ -33,4 +33,6 @@ public interface ProcessParamsService {
 
     Double getMaxBalanceShareForTrade();
 
+    Long getMaxIntervalInSecondsOfOpeningNewPosition(String symbol);
+
 }

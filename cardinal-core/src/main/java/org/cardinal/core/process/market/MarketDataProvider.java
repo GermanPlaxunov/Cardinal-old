@@ -1,10 +1,11 @@
-package org.cardinal.core.market;
+package org.cardinal.core.process.market;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cardinal.core.mapper.CoreStockMapper;
 import org.cardinal.data.services.interfaces.CoreStockService;
 import org.project.market.process.MarketService;
+import org.project.model.CoreStock;
 import org.project.model.MarketStock;
 
 @Slf4j
@@ -34,11 +35,12 @@ public class MarketDataProvider {
      * @param symbols - the name of the stock
      * @return next stock
      */
-    public void saveNextDataPoint(String symbols) {
+    public CoreStock getNextDataPoint(String symbols) {
         var nextStock = getNext(symbols);
         log.info("Received stock: {}", nextStock);
         var stock = coreStockMapper.mapToCoreStockEntity(nextStock);
         coreStockService.save(stock);
+        return coreStockMapper.mapToCore(stock);
     }
 
     private MarketStock getNext(String symbol) {

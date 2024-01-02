@@ -13,7 +13,9 @@ import org.project.model.Constants;
 @Slf4j
 @RequiredArgsConstructor
 public class PositionProcessor {
+
     private final LastProvidedStockService lastProvidedStockService;
+    private final CommissionProcessor commissionProcessor;
     private final MarketStockService marketStockService;
     private final PositionService positionService;
     private final AccountService accountService;

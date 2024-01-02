@@ -7,6 +7,7 @@ import org.cardinal.data.services.interfaces.*;
 import org.project.market.process.MarketService;
 import org.project.market.process.account.AccountProcessor;
 import org.project.market.process.account.CommissionService;
+import org.project.market.process.position.CommissionProcessor;
 import org.project.market.process.position.PositionProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -39,11 +40,18 @@ public class MarketConfig {
     }
 
     @Bean
+    public CommissionProcessor commissionProcessor(ProcessParamsService processParamsService) {
+        return new CommissionProcessor(processParamsService);
+    }
+
+    @Bean
     public PositionProcessor positionProcessor(LastProvidedStockService lastProvidedStockService,
+                                               CommissionProcessor commissionProcessor,
                                                MarketStockService marketStockService,
                                                PositionService positionService,
                                                AccountService accountService) {
         return new PositionProcessor(lastProvidedStockService,
+                commissionProcessor,
                 marketStockService,
                 positionService,
                 accountService);
