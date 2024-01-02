@@ -4,22 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.libra</groupId>
-    <artifactId>libra</artifactId>
+    <groupId>org.cardinal</groupId>
+    <artifactId>cardinal</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>parent</module>
-        <module>gate</module>
-        <module>core</module>
-        <module>model</module>
-        <module>market</module>
-        <module>data</module>
-        <module>neural</module>
-        <module>cardinal</module>
-        <module>indicators</module>
-        <module>decision</module>
+        <module>cardinal-app</module>
+        <module>cardinal-core</module>
+        <module>cardinal-gate</module>
+        <module>cardinal-market</module>
+        <module>cardinal-neural</module>
+        <module>cardinal-system</module>
     </modules>
 
 </project>

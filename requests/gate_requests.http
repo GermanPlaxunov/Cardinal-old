@@ -17,7 +17,7 @@ Content-Type: application/json
   "name" : "BTC/USD_TRADE",
   "intervalMillis" : 2000.0,
   "stockName": "BTC/USD",
-  "jobClassName": "org.project.gate.job.TradingJob",
+  "jobClassName": "job.org.cardinal.gate.TradingJob",
   "description": "Main trading job",
   "isActive": true,
   "triggerName": "BTC/USD_TRADE_TRIGGER",

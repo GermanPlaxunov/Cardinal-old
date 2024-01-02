@@ -1,5 +1,0 @@
-###Start process
-POST http://localhost:8081/core/startProcess
-Content-Type: application/x-www-form-urlencoded
-
-symbol=BTC/USD
