@@ -1,11 +1,11 @@
 package org.project.neural.process.predictions.predictors;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.data.entities.CoreStockEntity;
-import org.libra.data.entities.NeuralPredictionEntity;
-import org.libra.data.services.interfaces.CoreStockService;
-import org.libra.data.services.interfaces.NeuralPredictionService;
-import org.libra.data.services.interfaces.ProcessParamsService;
+import org.cardinal.data.entities.CoreStockEntity;
+import org.cardinal.data.entities.NeuralPredictionEntity;
+import org.cardinal.data.services.interfaces.CoreStockService;
+import org.cardinal.data.services.interfaces.NeuralPredictionService;
+import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.project.model.Indicators;
 
 @RequiredArgsConstructor

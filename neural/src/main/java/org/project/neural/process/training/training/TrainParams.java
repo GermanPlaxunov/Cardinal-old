@@ -1,7 +1,7 @@
 package org.project.neural.process.training.training;
 
 import lombok.Data;
-import org.libra.data.entities.CoreStockEntity;
+import org.cardinal.data.entities.CoreStockEntity;
 import org.project.model.Indicators;
 
 import java.time.LocalDateTime;

@@ -1,9 +1,9 @@
 package org.project.neural.process.predictions.predictors;
 
-import org.libra.data.services.interfaces.CoreStockService;
-import org.libra.data.services.interfaces.NeuralPredictionService;
-import org.libra.data.services.interfaces.ProcessParamsService;
-import org.libra.data.services.interfaces.indicators.BollingerBandsService;
+import org.cardinal.data.services.interfaces.CoreStockService;
+import org.cardinal.data.services.interfaces.NeuralPredictionService;
+import org.cardinal.data.services.interfaces.ProcessParamsService;
+import org.cardinal.data.services.interfaces.indicators.BollingerBandsService;
 import org.project.model.Indicators;
 import org.project.neural.process.network.NetworkStore;
 import org.project.neural.process.predictions.Predictor;

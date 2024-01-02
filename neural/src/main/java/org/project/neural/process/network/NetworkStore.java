@@ -1,7 +1,7 @@
 package org.project.neural.process.network;
 
 import lombok.extern.slf4j.Slf4j;
-import org.libra.data.services.interfaces.neural.NeuralNetworkService;
+import org.cardinal.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.model.Indicators;
 import org.project.neural.process.training.NetworkVectorProcessor;
 

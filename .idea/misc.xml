@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/cardinal/pom.xml" />
         <option value="$PROJECT_DIR$/indicators/pom.xml" />
         <option value="$PROJECT_DIR$/strategy/pom.xml" />
+        <option value="$PROJECT_DIR$/cardinal-core/pom.xml" />
+        <option value="$PROJECT_DIR$/cardinal-app/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

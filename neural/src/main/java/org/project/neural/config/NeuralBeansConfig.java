@@ -1,10 +1,10 @@
 package org.project.neural.config;
 
-import org.libra.data.cache.CacheDepthProvider;
-import org.libra.data.config.DataBeansConfig;
-import org.libra.data.services.interfaces.CoreStockService;
-import org.libra.data.services.interfaces.ProcessParamsService;
-import org.libra.data.services.interfaces.neural.NeuralNetworkService;
+import org.cardinal.data.cache.CacheDepthProvider;
+import org.cardinal.data.config.DataBeansConfig;
+import org.cardinal.data.services.interfaces.CoreStockService;
+import org.cardinal.data.services.interfaces.ProcessParamsService;
+import org.cardinal.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.neural.process.NeuralProcessStarter;
 import org.project.neural.process.network.NetworkDao;
 import org.project.neural.process.network.NetworkStore;

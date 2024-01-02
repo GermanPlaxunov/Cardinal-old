@@ -1,7 +1,7 @@
 package org.project.neural.process.network;
 
 import lombok.RequiredArgsConstructor;
-import org.libra.data.services.interfaces.neural.NeuralNetworkService;
+import org.cardinal.data.services.interfaces.neural.NeuralNetworkService;
 import org.project.neural.process.training.NetworkVectorProcessor;
 
 import java.util.ArrayList;

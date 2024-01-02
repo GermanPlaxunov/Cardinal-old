@@ -4,13 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.libra</groupId>
-        <artifactId>parent</artifactId>
+        <groupId>org.cardinal</groupId>
+        <artifactId>cardinal-parent</artifactId>
         <version>1.0</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <relativePath>../cardinal-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>neural</artifactId>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -46,13 +47,13 @@
             <artifactId>mapstruct</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.libra</groupId>
+            <groupId>org.cardinal</groupId>
             <artifactId>model</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.libra</groupId>
-            <artifactId>data</artifactId>
+            <groupId>org.cardinal</groupId>
+            <artifactId>cardinal-data</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
