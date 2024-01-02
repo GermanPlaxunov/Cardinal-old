@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/neural" />
+    <file type="web" url="file://$PROJECT_DIR$/cardinal-neural" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/strategy/pom.xml" />
         <option value="$PROJECT_DIR$/cardinal-core/pom.xml" />
         <option value="$PROJECT_DIR$/cardinal-app/pom.xml" />
+        <option value="$PROJECT_DIR$/cardinal-system/model/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

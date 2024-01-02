@@ -7,24 +7,19 @@
         <groupId>org.cardinal</groupId>
         <artifactId>cardinal-parent</artifactId>
         <version>1.0</version>
-        <relativePath>../cardinal-parent/pom.xml</relativePath>
+        <relativePath>../../cardinal-parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>cardinal-market</artifactId>
+    <groupId>org.cardinal</groupId>
+    <artifactId>cardinal-indicators</artifactId>
+    <version>1.0</version>
+    <name>indicators</name>
+    <description>indicators</description>
 
     <dependencies>
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.cardinal</groupId>
             <artifactId>model</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.cardinal</groupId>
-            <artifactId>cardinal-data</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
@@ -34,10 +29,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

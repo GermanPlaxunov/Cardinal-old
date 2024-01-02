@@ -10,15 +10,11 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cardinal-app</module>
         <module>cardinal-core</module>
-        <module>cardinal-parent</module>
         <module>cardinal-gate</module>
-        <module>model</module>
         <module>cardinal-market</module>
-        <module>cardinal-data</module>
-        <module>neural</module>
-        <module>cardinal-indicators</module>
-        <module>cardinal-decision</module>
+        <module>cardinal-neural</module>
         <module>cardinal-system</module>
     </modules>
 

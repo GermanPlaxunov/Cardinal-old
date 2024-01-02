@@ -14,13 +14,22 @@
     <file url="file://$PROJECT_DIR$/cardinal-indicators/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cardinal-market/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cardinal-market/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-neural/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-neural/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cardinal-parent/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cardinal-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/cardinal-data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/cardinal-decision/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/cardinal-indicators/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/cardinal-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/cardinal-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cardinal-system/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cardinal/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/model/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/model/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/neural/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/neural/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/trading/src/main/java" charset="UTF-8" />
