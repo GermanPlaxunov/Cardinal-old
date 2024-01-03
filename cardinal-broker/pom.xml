@@ -48,6 +48,19 @@
             <artifactId>java-sdk-core</artifactId>
             <version>1.5</version>
         </dependency>
+
+        <!-- Cardinal Dependencies -->
+        <dependency>
+            <groupId>org.cardinal</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- Java Tools Dependencies -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
