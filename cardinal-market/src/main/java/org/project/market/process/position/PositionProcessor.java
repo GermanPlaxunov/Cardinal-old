@@ -45,22 +45,29 @@ public class PositionProcessor {
     }
 
     private PositionEntity createEntity(MarketStockEntity stock, String type, Double currAmt) {
+        var symbol = stock.getSymbol();
         var account = accountService.findActiveAccount();
+        var openCommission = commissionProcessor.calculateCommissionOnBuy(symbol, stock.getClose(), currAmt);
         return new PositionEntity()
                 .setType(type)
                 .setAccountId(account.getAccountId())
-                .setSymbol(stock.getSymbol())
+                .setSymbol(symbol)
                 .setCurrAmt(currAmt)
                 .setOpenPrice(stock.getClose())
+                .setOpenCommission(openCommission)
                 .setOpenDate(stock.getDate())
                 .setAccountBalance(account.getBalance())
                 .setIsOpen(Boolean.TRUE);
     }
 
     private PositionEntity updatePosition(PositionEntity entity, MarketStockEntity lastStock, Double profit) {
-        entity.setClosePrice(lastStock.getClose())
+        var symbol = lastStock.getSymbol();
+        var currentPrice = lastStock.getClose();
+        var closeCommission = commissionProcessor.calculateCommissionOnSell(symbol, currentPrice, entity.getCurrAmt());
+        entity.setClosePrice(closeCommission)
                 .setCloseDate(lastStock.getDate())
                 .setProfit(profit)
+                .setCloseCommission(closeCommission)
                 .setIsOpen(Boolean.FALSE);
         return entity;
     }

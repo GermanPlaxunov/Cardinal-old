@@ -13,44 +13,30 @@ public class CommissionProcessor {
     private final ProcessParamsService processParamsService;
 
     /**
-     * Calculates commission amount for current operation
-     * and set this value to the target field.
-     *
-     * @param processVars - process data
-     */
-    public void calculateCommission(ProcessVars<CoreStock> processVars) {
-        if (processVars.getIsAnyOpenPosition()) {
-            var commission = calculateCommissionOnSell(processVars);
-            processVars.setClosePositionCommission(commission);
-        } else {
-            var commission = calculateCommissionOnBuy(processVars);
-            processVars.setOpenPositionCommission(commission);
-        }
-    }
-
-    /**
      * Calculates commission for opening new position.
      *
-     * @param processVars - process data
+     * @param symbol                 - stock name
+     * @param currentPriceOfTheStock - last obtained stock price
+     * @param amount                 - amount of stocks in deal
      * @return commission size
      */
-    private Double calculateCommissionOnBuy(ProcessVars<CoreStock> processVars) {
-        var symbol = processVars.getSymbol();
+    public Double calculateCommissionOnBuy(String symbol, Double currentPriceOfTheStock, Double amount) {
         var percent = processParamsService.getBuyCommissionPercentage(symbol);
-        var dealPrice = processVars.getCurrentPrice() * processVars.getAmountCurr();
+        var dealPrice = currentPriceOfTheStock * amount;
         return dealPrice * percent;
     }
 
     /**
      * Calculates commission for closing current position.
      *
-     * @param processVars - process data
+     * @param symbol                 - stock price
+     * @param currentPriceOfTheStock - last obtained stock price
+     * @param amount                 - amount of stocks in deal
      * @return commission size
      */
-    private Double calculateCommissionOnSell(ProcessVars<CoreStock> processVars) {
-        var symbol = processVars.getSymbol();
+    public Double calculateCommissionOnSell(String symbol, Double currentPriceOfTheStock, Double amount) {
         var percent = processParamsService.getSellCommissionPercentage(symbol);
-        var dealPrice = processVars.getCurrentPrice() * processVars.getAmountCurr();
+        var dealPrice = currentPriceOfTheStock * amount;
         return dealPrice * percent;
     }
 
