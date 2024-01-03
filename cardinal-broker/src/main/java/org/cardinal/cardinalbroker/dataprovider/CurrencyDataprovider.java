@@ -7,6 +7,9 @@ import ru.tinkoff.piapi.core.InvestApi;
 
 import java.util.List;
 
+/**
+ * Получение данных по валютам
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class CurrencyDataprovider {
@@ -14,9 +17,9 @@ public class CurrencyDataprovider {
     private final InvestApi investApi;
 
     /**
-     * Return currency by it`s name.
+     * Находит валюту по имени
      *
-     * @return currency
+     * @return валюта
      */
     public Currency getCurrency(String currencyName) {
         return investApi.getInstrumentsService()
@@ -28,15 +31,18 @@ public class CurrencyDataprovider {
     }
 
     /**
-     * Returns the list of currencies names.
+     * Возвращает список названий всех доступных валют
      *
-     * @return list of names
+     * @return список имен валют
      */
     public List<String> getAllCurrenciesNames() {
         return investApi.getInstrumentsService()
                 .getAllCurrenciesSync()
                 .stream()
-                .map(Currency::getName)
+                .map(currency -> {
+                    log.info("{}", currency);
+                    return currency.getName();
+                })
                 .toList();
     }
 

@@ -1,6 +1,7 @@
 package org.cardinal.cardinalbroker.config;
 
 import org.cardinal.cardinalbroker.account.SandBoxInvestApiProvider;
+import org.cardinal.cardinalbroker.dataprovider.BondsDataprovider;
 import org.cardinal.cardinalbroker.dataprovider.CurrencyDataprovider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,11 @@ public class BrokerBeansConfig {
     @Bean
     public CurrencyDataprovider currencyDataprovider(InvestApi investApi) {
         return new CurrencyDataprovider(investApi);
+    }
+
+    @Bean
+    public BondsDataprovider bondsDataprovider(InvestApi investApi) {
+        return new BondsDataprovider(investApi);
     }
 
 }
