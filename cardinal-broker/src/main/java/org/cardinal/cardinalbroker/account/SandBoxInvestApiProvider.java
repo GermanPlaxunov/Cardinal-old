@@ -4,14 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ru.tinkoff.piapi.core.InvestApi;
 
-import java.util.concurrent.ExecutionException;
-
 @Slf4j
 @RequiredArgsConstructor
-public class SandBoxAccess {
+public class SandBoxInvestApiProvider {
 
     private final String accessToken;
 
+    /**
+     * Creates new connection to sandbox API.
+     *
+     * @return investAPI
+     */
     public InvestApi getSandBoxConnection() {
         var api = InvestApi.createSandbox(accessToken);
         if (ifNoExistingAccount(api)) {
@@ -22,18 +25,12 @@ public class SandBoxAccess {
     }
 
     private boolean ifNoExistingAccount(InvestApi api) {
-        try {
-            var accounts = api.getSandboxService()
-                    .getAccounts()
-                    .get();
-            for (var account : accounts) {
-                log.info("sandbox account id: {}, access level: {}", account.getId(), account.getAccessLevel().name());
-            }
-            return accounts.size() == 0;
-        } catch (ExecutionException | InterruptedException e) {
-            log.error("Error while getting sandbox accounts list", e);
+        var accounts = api.getSandboxService()
+                .getAccountsSync();
+        for (var account : accounts) {
+            log.info("sandbox account id: {}, access level: {}", account.getId(), account.getAccessLevel().name());
         }
-        return false;
+        return accounts.size() == 0;
     }
 
 }

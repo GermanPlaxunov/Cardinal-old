@@ -1,2 +1,11 @@
-### Check
-GET http://localhost:9000/openNewAccount
+### Get currency info
+POST http://localhost:9000/broker/find-currency-info
+Content-Type: application/json
+
+{
+  "currencyName": "Доллар США"
+}
+
+### Get list of currencies
+GET http://localhost:9000/broker/find-all-available-currencies
+Content-Type: application/json
