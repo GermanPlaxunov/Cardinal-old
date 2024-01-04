@@ -7,32 +7,37 @@ import ru.tinkoff.piapi.core.InvestApi;
 
 import java.util.List;
 
+/**
+ * Получение данных по валютам
+ */
 @Slf4j
 @RequiredArgsConstructor
-public class CurrencyDataprovider {
+public class CurrencyDataprovider implements Dataprovider<Currency> {
 
     private final InvestApi investApi;
 
     /**
-     * Return currency by it`s name.
+     * Получение валюты по имени
      *
-     * @return currency
+     * @return валюта
      */
-    public Currency getCurrency(String currencyName) {
+    @Override
+    public Currency getByName(String name) {
         return investApi.getInstrumentsService()
                 .getAllCurrenciesSync()
                 .stream()
-                .filter(currency -> currency.getName().equalsIgnoreCase(currencyName))
+                .filter(currency -> currency.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }
 
     /**
-     * Returns the list of currencies names.
+     * Возвращает список названий всех доступных валют
      *
-     * @return list of names
+     * @return список имен валют
      */
-    public List<String> getAllCurrenciesNames() {
+    @Override
+    public List<String> getAllNames() {
         return investApi.getInstrumentsService()
                 .getAllCurrenciesSync()
                 .stream()

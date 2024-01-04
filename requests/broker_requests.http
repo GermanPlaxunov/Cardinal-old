@@ -9,3 +9,16 @@ Content-Type: application/json
 ### Get list of currencies
 GET http://localhost:9000/broker/find-all-available-currencies
 Content-Type: application/json
+
+
+### Get bonds info
+POST http://localhost:9000/broker/find-bond-info
+Content-Type: application/json
+
+{
+  "bondName": "Republic of Romania"
+}
+
+### Get list of bonds
+GET http://localhost:9000/broker/find-all-available-bonds
+Content-Type: application/json
