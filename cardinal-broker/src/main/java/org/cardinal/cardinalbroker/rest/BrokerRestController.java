@@ -35,7 +35,7 @@ public class BrokerRestController implements BrokerController {
     @Override
     @GetMapping(path = "/find-all-available-currencies")
     public List<String> findAllAvailableCurrencies() {
-        return currencyDataprovider.getAllCurrenciesNames();
+        return currencyDataprovider.getAllNames();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class BrokerRestController implements BrokerController {
             consumes = CONSUMES, produces = PRODUCES)
     public CurrencyInfo findCurrencyInfo(@RequestBody CurrencyRequest currencyRequest) {
         var currencyName = currencyRequest.getCurrencyName();
-        var currency = currencyDataprovider.getCurrency(currencyName);
+        var currency = currencyDataprovider.getByName(currencyName);
         log.info("Currency: {}", currency);
         return currencyMapper.map(currency);
     }
@@ -52,7 +52,7 @@ public class BrokerRestController implements BrokerController {
     @GetMapping(path = "/find-all-available-bonds",
             consumes = CONSUMES, produces = PRODUCES)
     public List<String> findAllAvailableBonds() {
-        return bondsDataprovider.getAllBondsNames();
+        return bondsDataprovider.getAllNames();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class BrokerRestController implements BrokerController {
             consumes = CONSUMES, produces = PRODUCES)
     public BondInfo findBondInfo(@RequestBody BondRequest bondRequest) {
         var bondName = bondRequest.getBondName();
-        var bond = bondsDataprovider.getBondByName(bondName);
+        var bond = bondsDataprovider.getByName(bondName);
         log.info("Bond: {}", bond);
         return bondMapper.map(bond);
     }

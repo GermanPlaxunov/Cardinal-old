@@ -12,20 +12,21 @@ import java.util.List;
  */
 @Slf4j
 @RequiredArgsConstructor
-public class CurrencyDataprovider {
+public class CurrencyDataprovider implements Dataprovider<Currency> {
 
     private final InvestApi investApi;
 
     /**
-     * Находит валюту по имени
+     * Получение валюты по имени
      *
      * @return валюта
      */
-    public Currency getCurrency(String currencyName) {
+    @Override
+    public Currency getByName(String name) {
         return investApi.getInstrumentsService()
                 .getAllCurrenciesSync()
                 .stream()
-                .filter(currency -> currency.getName().equalsIgnoreCase(currencyName))
+                .filter(currency -> currency.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }
@@ -35,14 +36,12 @@ public class CurrencyDataprovider {
      *
      * @return список имен валют
      */
-    public List<String> getAllCurrenciesNames() {
+    @Override
+    public List<String> getAllNames() {
         return investApi.getInstrumentsService()
                 .getAllCurrenciesSync()
                 .stream()
-                .map(currency -> {
-                    log.info("{}", currency);
-                    return currency.getName();
-                })
+                .map(Currency::getName)
                 .toList();
     }
 

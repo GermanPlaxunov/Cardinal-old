@@ -12,26 +12,34 @@ import java.util.List;
  */
 @Slf4j
 @RequiredArgsConstructor
-public class BondsDataprovider {
+public class BondsDataprovider implements Dataprovider<Bond> {
 
     private final InvestApi investApi;
 
-    public List<String> getAllBondsNames() {
+    /**
+     * Получение списка названий всех облигаций
+     * @return список имен
+     */
+    @Override
+    public List<String> getAllNames() {
         return investApi.getInstrumentsService()
                 .getAllBondsSync()
                 .stream()
-                .map(bond -> {
-                    log.info("{}", bond);
-                    return bond.getName();
-                })
+                .map(Bond::getName)
                 .toList();
     }
 
-    public Bond getBondByName(String bondName) {
+    /**
+     * Получение облигации по имени
+     * @param name - имя облигации
+     * @return облигации
+     */
+    @Override
+    public Bond getByName(String name) {
         return investApi.getInstrumentsService()
                 .getAllBondsSync()
                 .stream()
-                .filter(bond -> bond.getName().equalsIgnoreCase(bondName))
+                .filter(bond -> bond.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }
