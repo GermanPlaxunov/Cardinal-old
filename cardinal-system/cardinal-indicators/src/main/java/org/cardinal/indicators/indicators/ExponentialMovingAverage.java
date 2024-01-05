@@ -1,7 +1,7 @@
 package org.cardinal.indicators.indicators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.project.model.CoreStock;
+import org.cardinal.model.CoreStock;
 
 import java.util.List;
 

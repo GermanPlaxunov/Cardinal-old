@@ -97,10 +97,4 @@ public class DatasetProvidersConfig {
                 processParamsService,
                 dataDateSplitter);
     }
-
-    @Bean
-    public PriceChangeCalculator priceChangeCalculator() {
-        return new PriceChangeCalculator();
-    }
-
 }

@@ -6,7 +6,7 @@ import org.cardinal.neural.process.predictions.PredictorsStore;
 import org.cardinal.neural.process.training.TrainParamsProvider;
 import org.cardinal.neural.process.training.TrainersStore;
 import org.cardinal.neural.process.training.verification.NeuralNetworkTesting;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 @Slf4j
 @RequiredArgsConstructor

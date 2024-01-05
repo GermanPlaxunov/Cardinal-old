@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.cardinal.data.repositories.NeuralPredictionRepository;
 import org.cardinal.data.services.interfaces.NeuralPredictionService;
 import org.cardinal.data.entities.NeuralPredictionEntity;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.Collections;
 import java.util.List;

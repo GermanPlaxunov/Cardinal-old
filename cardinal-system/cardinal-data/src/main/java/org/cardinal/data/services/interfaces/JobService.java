@@ -1,7 +1,7 @@
 package org.cardinal.data.services.interfaces;
 
 import org.cardinal.data.entities.JobEntity;
-import org.project.model.job.AddJobData;
+import org.cardinal.model.job.AddJobData;
 
 import java.util.List;
 

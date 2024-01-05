@@ -1,7 +1,7 @@
 package org.cardinal.core;
 
 import org.cardinal.data.entities.CoreStockEntity;
-import org.project.model.CoreStock;
+import org.cardinal.model.CoreStock;
 
 import java.util.List;
 

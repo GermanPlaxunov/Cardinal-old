@@ -3,7 +3,7 @@ package org.cardinal.data.cache;
 import lombok.RequiredArgsConstructor;
 import org.cardinal.data.services.interfaces.CoreStockService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.Arrays;
 

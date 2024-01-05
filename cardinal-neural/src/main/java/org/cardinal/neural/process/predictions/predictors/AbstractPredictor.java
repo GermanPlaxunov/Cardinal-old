@@ -6,7 +6,7 @@ import org.cardinal.data.entities.NeuralPredictionEntity;
 import org.cardinal.data.services.interfaces.CoreStockService;
 import org.cardinal.data.services.interfaces.NeuralPredictionService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 @RequiredArgsConstructor
 public class AbstractPredictor {

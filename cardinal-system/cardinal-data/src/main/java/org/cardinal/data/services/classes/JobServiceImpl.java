@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.cardinal.data.repositories.JobRepository;
 import org.cardinal.data.services.interfaces.JobService;
 import org.cardinal.data.entities.JobEntity;
-import org.project.model.job.AddJobData;
+import org.cardinal.model.job.AddJobData;
 
 import java.util.List;
 import java.util.Objects;

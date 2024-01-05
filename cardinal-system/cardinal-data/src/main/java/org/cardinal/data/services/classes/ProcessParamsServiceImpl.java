@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.cardinal.data.entities.ProcessParamsEntity;
 import org.cardinal.data.repositories.ProcessParamsRepository;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -185,6 +185,22 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
     private String getMaxIntervalOfOpeningNewPositionName(String symbol) {
         return symbol.toUpperCase()
                 .concat("_MAX_INTERVAL_OF_OPENING_NEW_POSITION");
+    }
+
+    /**
+     * В случае, если ранее по инструменту на собирались данные,
+     * возвращает начальную глубину исторических свечей.
+     *
+     * @param instrumentId - идентификатор инструмента
+     * @return глубина истории в секундах
+     */
+    @Override
+    public Long getInitialHistoryDepthSeconds(String instrumentId) {
+        var name = instrumentId.concat(".default.history.depth.seconds");
+        return repository.findByName(name)
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(600L);
     }
 
 }

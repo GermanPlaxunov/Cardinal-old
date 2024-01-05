@@ -2,7 +2,7 @@ package org.cardinal.core.trend;
 
 import lombok.RequiredArgsConstructor;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.CoreStock;
+import org.cardinal.model.CoreStock;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

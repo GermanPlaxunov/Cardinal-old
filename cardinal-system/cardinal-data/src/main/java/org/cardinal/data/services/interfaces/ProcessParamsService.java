@@ -1,7 +1,7 @@
 package org.cardinal.data.services.interfaces;
 
 import org.cardinal.data.entities.ProcessParamsEntity;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.List;
 
@@ -34,5 +34,8 @@ public interface ProcessParamsService {
     Double getMaxBalanceShareForTrade();
 
     Long getMaxIntervalInSecondsOfOpeningNewPosition(String symbol);
+
+    //Ver 2
+    Long getInitialHistoryDepthSeconds(String instrumentId);
 
 }

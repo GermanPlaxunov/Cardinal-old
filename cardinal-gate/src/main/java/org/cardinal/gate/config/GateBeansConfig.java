@@ -4,7 +4,7 @@ import org.cardinal.data.config.DataBeansConfig;
 import org.cardinal.gate.job.ScheduledJobExecutor;
 import org.cardinal.gate.job.TradingJob;
 import org.cardinal.gate.job.TrainingJob;
-import org.project.model.job.ProcessStarter;
+import org.cardinal.model.job.ProcessStarter;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;

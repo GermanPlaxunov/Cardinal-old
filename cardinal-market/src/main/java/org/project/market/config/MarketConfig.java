@@ -19,14 +19,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @Import(DataBeansConfig.class)
 @EntityScan(basePackages = "org.project.data.entities")
-@EnableJpaRepositories(basePackages = "org.cardinal.data.repositories")
+//@EnableJpaRepositories(basePackages = "org.cardinal.data.repositories")
 public class MarketConfig {
 
-    @Bean
-    public PositionService positionService(PositionRepository repository,
-                                           @Value("9b6afcd3-8126-4ca9-a871-e66f409e1d68") String accountId) {
-        return new PositionServiceImpl(repository, accountId);
-    }
+//    @Bean
+//    public PositionService positionService(PositionRepository repository,
+//                                           @Value("9b6afcd3-8126-4ca9-a871-e66f409e1d68") String accountId) {
+//        return new PositionServiceImpl(repository, accountId);
+//    }
 
     @Bean
     public MarketService marketService(LastProvidedStockService lastProvidedStockService,

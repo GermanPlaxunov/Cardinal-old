@@ -1,8 +1,8 @@
 package org.cardinal.core.indicators;
 
 import lombok.RequiredArgsConstructor;
-import org.project.model.Indicators;
-import org.project.model.ProcessVars;
+import org.cardinal.model.Indicators;
+import org.cardinal.model.ProcessVars;
 import org.cardinal.neural.process.NeuralProcessStarter;
 
 import java.util.HashMap;

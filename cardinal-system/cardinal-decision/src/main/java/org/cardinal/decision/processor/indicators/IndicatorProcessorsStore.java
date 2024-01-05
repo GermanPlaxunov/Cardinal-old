@@ -1,7 +1,7 @@
 package org.cardinal.decision.processor.indicators;
 
 import lombok.RequiredArgsConstructor;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.HashMap;
 import java.util.Map;

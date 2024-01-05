@@ -3,8 +3,8 @@ package org.cardinal.core.decision;
 import lombok.RequiredArgsConstructor;
 import org.cardinal.data.services.interfaces.AccountService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.CoreStock;
-import org.project.model.ProcessVars;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.ProcessVars;
 
 @RequiredArgsConstructor
 public class BuyAmountCurrencyProcessor {

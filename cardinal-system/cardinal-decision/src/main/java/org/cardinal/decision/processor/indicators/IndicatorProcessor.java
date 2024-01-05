@@ -1,7 +1,7 @@
 package org.cardinal.decision.processor.indicators;
 
-import org.project.model.CoreStock;
-import org.project.model.ProcessVars;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.ProcessVars;
 
 public interface IndicatorProcessor {
 

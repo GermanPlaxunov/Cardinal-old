@@ -3,7 +3,7 @@ package org.cardinal.neural.process.training.trainers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cardinal.neural.process.training.training.TrainParams;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 import org.cardinal.neural.process.network.NetworkStore;
 import org.cardinal.neural.process.training.NetworkTrainer;
 import org.cardinal.neural.process.training.dataset.DatasetProviders;

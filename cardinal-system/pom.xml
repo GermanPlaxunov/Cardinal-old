@@ -23,6 +23,7 @@
         <module>cardinal-decision</module>
         <module>cardinal-indicators</module>
         <module>cardinal-parent</module>
+        <module>cardinal-model</module>
     </modules>
 
 </project>

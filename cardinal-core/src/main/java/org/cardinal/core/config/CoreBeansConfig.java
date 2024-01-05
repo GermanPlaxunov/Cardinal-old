@@ -1,5 +1,6 @@
 package org.cardinal.core.config;
 
+import org.cardinal.cardinalutils.config.UtilsConfig;
 import org.cardinal.core.deal.DealMaker;
 import org.cardinal.core.decision.BuyAmountCurrencyProcessor;
 import org.cardinal.core.decision.DecisionStarter;
@@ -8,7 +9,6 @@ import org.cardinal.core.indicators.IndicatorsPredictionsCollector;
 import org.cardinal.core.indicators.IndicatorsSaver;
 import org.cardinal.core.mapper.CoreStockMapper;
 import org.cardinal.core.mapper.CoreStockMapperImpl;
-import org.cardinal.core.process.CoreProcessStarter;
 import org.cardinal.core.process.market.MarketDataProvider;
 import org.cardinal.core.process.strategy.MainStrategy;
 import org.cardinal.core.trend.AveragePriceTrendProvider;
@@ -39,7 +39,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({DataBeansConfig.class, IndicatorsConfig.class,
         DecisionConfig.class, MarketConfig.class,
-        NeuralBeansConfig.class})
+        NeuralBeansConfig.class, UtilsConfig.class})
 @EntityScan(basePackages = "org.cardinal.data.entities")
 public class CoreBeansConfig {
 
@@ -57,17 +57,6 @@ public class CoreBeansConfig {
     @Bean
     public DealMaker dealMaker(MarketService marketService) {
         return new DealMaker(marketService);
-    }
-
-    @Bean
-    public CoreProcessStarter coreProcessStarter(MarketDataProvider marketDataProvider,
-                                                 CoreStockService coreStockService,
-                                                 MainStrategy mainStrategy,
-                                                 DealMaker dealMaker) {
-        return new CoreProcessStarter(marketDataProvider,
-                coreStockService,
-                mainStrategy,
-                dealMaker);
     }
 
     @Bean
@@ -131,20 +120,6 @@ public class CoreBeansConfig {
         return new MarketDataProvider(marketService, marketStockMapper,
                 coreStockService,
                 coreStockMapper);
-    }
-
-    @Bean
-    public CacheDepthMapper cacheDepthMapper() {
-        return new CacheDepthMapper();
-    }
-
-    @Bean
-    public CacheDepthProvider cacheDepthProvider(ProcessParamsService processParamsService,
-                                                 CacheDepthMapper cacheDepthMapper,
-                                                 CoreStockService coreStockService) {
-        return new CacheDepthProviderImpl(processParamsService,
-                cacheDepthMapper,
-                coreStockService);
     }
 
     @Bean
