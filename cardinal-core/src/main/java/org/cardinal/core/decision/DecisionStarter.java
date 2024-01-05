@@ -2,10 +2,10 @@ package org.cardinal.core.decision;
 
 import lombok.RequiredArgsConstructor;
 import org.cardinal.decision.processor.indicators.IndicatorProcessorsStore;
-import org.project.model.CoreStock;
-import org.project.model.Indicators;
-import org.project.model.ProcessVars;
-import org.project.model.decision.Decision;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.Indicators;
+import org.cardinal.model.ProcessVars;
+import org.cardinal.model.decision.Decision;
 
 @RequiredArgsConstructor
 public class DecisionStarter {

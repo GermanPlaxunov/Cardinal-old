@@ -5,7 +5,7 @@ import org.cardinal.data.entities.CoreStockEntity;
 import org.cardinal.data.entities.indicators.AbsolutePriceOscillatorEntity;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.data.services.interfaces.indicators.AbsolutePriceOscillatorService;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 import org.cardinal.neural.process.training.dataset.delta.PriceChangeCalculator;
 import org.cardinal.neural.process.training.dataset.splitters.DataDateSplitter;
 

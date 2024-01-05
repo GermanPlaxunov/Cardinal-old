@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.project.market.mapper.StockMapper;
 import org.project.market.process.MarketService;
-import org.project.model.MarketStock;
+import org.cardinal.model.MarketStock;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

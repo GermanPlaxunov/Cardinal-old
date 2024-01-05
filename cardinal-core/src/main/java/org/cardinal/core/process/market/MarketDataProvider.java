@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.cardinal.core.mapper.CoreStockMapper;
 import org.cardinal.data.services.interfaces.CoreStockService;
 import org.project.market.process.MarketService;
-import org.project.model.CoreStock;
-import org.project.model.MarketStock;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.MarketStock;
 
 @Slf4j
 @RequiredArgsConstructor

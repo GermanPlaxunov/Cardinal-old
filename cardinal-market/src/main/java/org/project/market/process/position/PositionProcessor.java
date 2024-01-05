@@ -8,7 +8,7 @@ import org.cardinal.data.services.interfaces.AccountService;
 import org.cardinal.data.services.interfaces.LastProvidedStockService;
 import org.cardinal.data.services.interfaces.MarketStockService;
 import org.cardinal.data.services.interfaces.PositionService;
-import org.project.model.Constants;
+import org.cardinal.model.Constants;
 
 @Slf4j
 @RequiredArgsConstructor

@@ -1,7 +1,7 @@
 package org.cardinal.core.trend;
 
-import org.project.model.CoreStock;
-import org.project.model.trend.TrendData;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.trend.TrendData;
 
 import java.util.List;
 

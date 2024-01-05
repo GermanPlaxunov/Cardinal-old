@@ -2,7 +2,7 @@ package org.cardinal.cardinalbroker.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.project.model.broker.bond.BondInfo;
+import org.cardinal.model.broker.bond.BondInfo;
 import ru.tinkoff.piapi.contract.v1.Bond;
 
 @Mapper(componentModel = "spring")

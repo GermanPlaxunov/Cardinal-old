@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cardinal.data.cache.CacheDepthProvider;
 import org.cardinal.indicators.indicators.*;
-import org.project.model.CoreStock;
-import org.project.model.ProcessVars;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.ProcessVars;
 
 import java.time.LocalDateTime;
 import java.util.List;

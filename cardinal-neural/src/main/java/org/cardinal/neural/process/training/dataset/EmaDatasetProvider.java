@@ -7,7 +7,7 @@ import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.data.services.interfaces.indicators.ExponentialMovingAverageService;
 import org.cardinal.neural.process.training.dataset.delta.PriceChangeCalculator;
 import org.cardinal.neural.process.training.dataset.splitters.DataDateSplitter;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.ArrayList;
 import java.util.List;

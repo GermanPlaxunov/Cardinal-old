@@ -5,9 +5,9 @@ import org.cardinal.core.decision.BuyAmountCurrencyProcessor;
 import org.cardinal.data.entities.PositionEntity;
 import org.cardinal.data.services.interfaces.PositionService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.CoreStock;
-import org.project.model.ProcessVars;
-import org.project.model.strategy.MainStrategyResult;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.ProcessVars;
+import org.cardinal.model.strategy.MainStrategyResult;
 
 @RequiredArgsConstructor
 public class MainStrategy {

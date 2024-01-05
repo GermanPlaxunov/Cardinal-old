@@ -4,12 +4,15 @@ import org.cardinal.data.cache.CacheDepthMapper;
 import org.cardinal.data.cache.CacheDepthProvider;
 import org.cardinal.data.cache.CacheDepthProviderImpl;
 import org.cardinal.data.repositories.*;
+import org.cardinal.data.repositories.history.CandleRepository;
 import org.cardinal.data.repositories.indicators.*;
 import org.cardinal.data.repositories.neural.NeuralNetworkRepository;
 import org.cardinal.data.services.classes.*;
+import org.cardinal.data.services.classes.history.CandleServiceImpl;
 import org.cardinal.data.services.classes.indicators.*;
 import org.cardinal.data.services.classes.neural.NeuralNetworkServiceImpl;
 import org.cardinal.data.services.interfaces.*;
+import org.cardinal.data.services.interfaces.history.CandleService;
 import org.cardinal.data.services.interfaces.indicators.*;
 import org.cardinal.data.services.interfaces.neural.NeuralNetworkService;
 import org.springframework.beans.factory.annotation.Value;
@@ -118,6 +121,11 @@ public class DataBeansConfig {
     @Bean
     public NeuralPredictionService neuralPredictionService(NeuralPredictionRepository repository) {
         return new NeuralPredictionServiceImpl(repository);
+    }
+
+    @Bean
+    public CandleService candleService(CandleRepository candleRepository) {
+        return new CandleServiceImpl(candleRepository);
     }
 
 }

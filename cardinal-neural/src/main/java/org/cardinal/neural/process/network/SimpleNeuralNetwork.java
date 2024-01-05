@@ -2,7 +2,7 @@ package org.cardinal.neural.process.network;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,8 +2,8 @@ package org.cardinal.core.mapper;
 
 import org.mapstruct.Mapper;
 import org.cardinal.data.entities.CoreStockEntity;
-import org.project.model.CoreStock;
-import org.project.model.MarketStock;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.MarketStock;
 
 import java.util.List;
 

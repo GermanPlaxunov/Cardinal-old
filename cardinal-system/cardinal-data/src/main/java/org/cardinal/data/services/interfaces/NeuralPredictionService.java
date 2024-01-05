@@ -1,7 +1,7 @@
 package org.cardinal.data.services.interfaces;
 
 import org.cardinal.data.entities.NeuralPredictionEntity;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.List;
 

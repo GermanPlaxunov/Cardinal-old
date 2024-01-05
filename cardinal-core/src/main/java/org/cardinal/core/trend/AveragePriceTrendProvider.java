@@ -3,8 +3,8 @@ package org.cardinal.core.trend;
 import lombok.RequiredArgsConstructor;
 import org.cardinal.core.Utils;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.CoreStock;
-import org.project.model.trend.TrendData;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.trend.TrendData;
 
 import java.util.ArrayList;
 import java.util.List;

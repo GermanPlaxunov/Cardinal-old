@@ -3,8 +3,8 @@ package org.cardinal.core.indicators;
 import lombok.RequiredArgsConstructor;
 import org.cardinal.data.entities.indicators.*;
 import org.cardinal.data.services.interfaces.indicators.*;
-import org.project.model.ProcessVars;
-import org.project.model.indicators.Bband;
+import org.cardinal.model.ProcessVars;
+import org.cardinal.model.indicators.Bband;
 
 import java.time.LocalDateTime;
 

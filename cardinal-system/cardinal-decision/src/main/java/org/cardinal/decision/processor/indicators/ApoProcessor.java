@@ -1,9 +1,9 @@
 package org.cardinal.decision.processor.indicators;
 
 import lombok.RequiredArgsConstructor;
-import org.project.model.CoreStock;
-import org.project.model.Indicators;
-import org.project.model.ProcessVars;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.Indicators;
+import org.cardinal.model.ProcessVars;
 
 @RequiredArgsConstructor
 public class ApoProcessor implements IndicatorProcessor {

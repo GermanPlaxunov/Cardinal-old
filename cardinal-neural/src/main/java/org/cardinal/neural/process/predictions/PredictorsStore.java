@@ -1,7 +1,7 @@
 package org.cardinal.neural.process.predictions;
 
 import org.cardinal.neural.process.predictions.predictors.*;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.HashMap;
 

@@ -48,7 +48,7 @@
         </dependency>
         <dependency>
             <groupId>org.cardinal</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>cardinal-model</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

@@ -6,9 +6,9 @@ import org.cardinal.core.deal.DealMaker;
 import org.cardinal.core.process.market.MarketDataProvider;
 import org.cardinal.core.process.strategy.MainStrategy;
 import org.cardinal.data.services.interfaces.CoreStockService;
-import org.project.model.CoreStock;
-import org.project.model.ProcessVars;
-import org.project.model.job.ProcessStarter;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.ProcessVars;
+import org.cardinal.model.job.ProcessStarter;
 
 @Slf4j
 @RequiredArgsConstructor

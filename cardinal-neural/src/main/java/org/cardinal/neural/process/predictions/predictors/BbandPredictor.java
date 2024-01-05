@@ -4,7 +4,7 @@ import org.cardinal.data.services.interfaces.CoreStockService;
 import org.cardinal.data.services.interfaces.NeuralPredictionService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.data.services.interfaces.indicators.BollingerBandsService;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 import org.cardinal.neural.process.network.NetworkStore;
 import org.cardinal.neural.process.predictions.Predictor;
 

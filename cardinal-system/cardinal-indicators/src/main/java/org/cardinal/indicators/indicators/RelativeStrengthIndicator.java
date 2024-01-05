@@ -1,8 +1,8 @@
 package org.cardinal.indicators.indicators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.project.model.CoreStock;
-import org.project.model.indicators.Rsi;
+import org.cardinal.model.CoreStock;
+import org.cardinal.model.indicators.Rsi;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package org.cardinal.neural.process.training;
 
 import org.cardinal.neural.process.training.trainers.*;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.HashMap;
 import java.util.Map;

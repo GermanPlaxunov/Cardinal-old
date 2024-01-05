@@ -3,7 +3,7 @@ package org.cardinal.neural.process.network;
 import lombok.extern.slf4j.Slf4j;
 import org.cardinal.data.services.interfaces.neural.NeuralNetworkService;
 import org.cardinal.neural.process.training.NetworkVectorProcessor;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.HashMap;
 import java.util.Map;

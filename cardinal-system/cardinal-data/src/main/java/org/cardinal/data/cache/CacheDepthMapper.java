@@ -1,7 +1,7 @@
 package org.cardinal.data.cache;
 
 import org.cardinal.data.entities.ProcessParamsEntity;
-import org.project.model.Indicators;
+import org.cardinal.model.Indicators;
 
 import java.util.Comparator;
 import java.util.List;

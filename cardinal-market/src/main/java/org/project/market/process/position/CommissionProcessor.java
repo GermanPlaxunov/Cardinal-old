@@ -3,8 +3,6 @@ package org.project.market.process.position;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
-import org.project.model.CoreStock;
-import org.project.model.ProcessVars;
 
 @Slf4j
 @RequiredArgsConstructor
