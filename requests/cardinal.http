@@ -1,0 +1,18 @@
+###Save new process param
+POST http://localhost:9000/cardinal/save-new-process-param
+Content-Type: application/json
+
+{
+  "name": "trading.instrument.active.name",
+  "numberValue": null,
+  "dateValue": null,
+  "stringValue": "Dropbox Inc"
+}
+
+
+###Get list of instruments
+GET http://localhost:9000/cardinal/get-api-trade-available-instrument
+
+
+### Save all shares
+GET http://localhost:9000/cardinal/saveAllShares

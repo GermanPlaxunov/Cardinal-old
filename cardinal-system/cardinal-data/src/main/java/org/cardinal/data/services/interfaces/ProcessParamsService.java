@@ -38,4 +38,5 @@ public interface ProcessParamsService {
     //Ver 2
     Long getInitialHistoryDepthSeconds(String instrumentId);
 
+    String getActiveTradeInstrumentName();
 }

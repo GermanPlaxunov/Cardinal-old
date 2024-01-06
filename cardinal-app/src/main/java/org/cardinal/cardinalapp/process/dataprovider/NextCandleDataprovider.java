@@ -30,7 +30,6 @@ public class NextCandleDataprovider {
      */
     public List<HistoricCandle> getNextCandles(String instrumentId) {
         var candles = new ArrayList<HistoricCandle>();
-
         if (!lastProvidedStockService.exists(instrumentId)) {
             var historyDepth = processParamsService.getInitialHistoryDepthSeconds(instrumentId);
             candles.addAll(candlesDataprovider.getCandleToCurrent(instrumentId, historyDepth, CandleInterval.CANDLE_INTERVAL_1_MIN));
