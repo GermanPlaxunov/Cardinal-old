@@ -8,6 +8,7 @@ import ru.tinkoff.piapi.contract.v1.HistoricCandle;
 import ru.tinkoff.piapi.contract.v1.Share;
 import ru.tinkoff.piapi.core.InvestApi;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -43,15 +44,34 @@ public class BrokerApi {
     }
 
     /**
-     * Предоставляет исторические данные по инструменту.
+     * Предоставляет исторические данные по инструменту за последние
+     * depthSeconds секунд.
      *
      * @param figi         - id инструмента
      * @param depthSeconds - глубина поиска
      * @param interval     - инстервал между свечами
      * @return список свеч
      */
-    public List<HistoricCandle> getPriceHistoryToCurrent(String figi, Long depthSeconds, CandleInterval interval) {
+    public List<HistoricCandle> getPriceHistoryToCurrent(String figi,
+                                                         Long depthSeconds,
+                                                         CandleInterval interval) {
         return candlesDataprovider.getCandleToCurrent(figi, depthSeconds, interval);
+    }
+
+    /**
+     * Получение исторических данных за период from-to.
+     *
+     * @param figi
+     * @param from
+     * @param to
+     * @param interval
+     * @return
+     */
+    public List<HistoricCandle> getPriceHistory(String figi,
+                                                LocalDateTime from,
+                                                LocalDateTime to,
+                                                CandleInterval interval) {
+        return candlesDataprovider.getCandles(figi, from, to, interval);
     }
 
 }

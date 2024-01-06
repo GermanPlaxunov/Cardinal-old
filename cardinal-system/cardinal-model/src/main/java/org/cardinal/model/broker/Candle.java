@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class Candle {
 
-    private String instrumentId;
+    private String figi;
     private BigDecimal open;
     private BigDecimal low;
     private BigDecimal high;

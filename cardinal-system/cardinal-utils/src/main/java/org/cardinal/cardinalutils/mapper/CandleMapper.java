@@ -22,7 +22,7 @@ public class CandleMapper {
      */
     public CandleEntity mapToEntity(Candle candle) {
         return new CandleEntity()
-                .setInstrumentId(candle.getInstrumentId())
+                .setFigi(candle.getFigi())
                 .setOpen(candle.getOpen())
                 .setLow(candle.getLow())
                 .setHigh(candle.getHigh())

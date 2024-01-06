@@ -6,6 +6,7 @@ import org.cardinal.data.repositories.ProcessParamsRepository;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.model.Indicators;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -203,11 +204,43 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
                 .orElse(86400L);
     }
 
+    /**
+     * Имя текущего торгуемого инструмента.
+     *
+     * @return имя
+     */
     @Override
     public String getActiveTradeInstrumentName() {
         return repository.findByName("trading.instrument.active.name")
                 .map(ProcessParamsEntity::getStringValue)
                 .orElse(null);
+    }
+
+    /**
+     * В случае отсутствия локально истории цен по
+     * инструменту, возвращает дату, с которой эта
+     * история должна начинаться.
+     *
+     * @return дата начала истории
+     */
+    @Override
+    public LocalDateTime getEarliestDateToRestoreHistory() {
+        return repository.findByName("trading.instrument.history.earliest.date")
+                .map(ProcessParamsEntity::getDateValue)
+                .orElse(LocalDateTime.MIN);
+    }
+
+    /**
+     * В одном запросе может быть возвращено ограниченное
+     * количество свеч.
+     * @return максимальная величина одного периода в секундах
+     */
+    @Override
+    public Long getMaxPeriodToRestoreHistorySeconds() {
+        return repository.findByName("trading.instrument.history.restore.period.seconds")
+                .map(ProcessParamsEntity::getNumberValue)
+                .map(Double::longValue)
+                .orElse(86400L);
     }
 
 }
