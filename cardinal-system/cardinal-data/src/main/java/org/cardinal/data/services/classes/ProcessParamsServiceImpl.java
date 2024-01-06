@@ -200,7 +200,14 @@ public class ProcessParamsServiceImpl implements ProcessParamsService {
         return repository.findByName(name)
                 .map(ProcessParamsEntity::getNumberValue)
                 .map(Double::longValue)
-                .orElse(600L);
+                .orElse(86400L);
+    }
+
+    @Override
+    public String getActiveTradeInstrumentName() {
+        return repository.findByName("trading.instrument.active.name")
+                .map(ProcessParamsEntity::getStringValue)
+                .orElse(null);
     }
 
 }

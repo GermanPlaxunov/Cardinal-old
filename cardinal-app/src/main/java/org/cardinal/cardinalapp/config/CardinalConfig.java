@@ -2,11 +2,9 @@ package org.cardinal.cardinalapp.config;
 
 import org.cardinal.cardinalapp.process.MainProcessStarter;
 import org.cardinal.cardinalapp.process.dataprovider.NextCandleDataprovider;
-import org.cardinal.cardinalapp.share.ShareSaver;
 import org.cardinal.cardinalbroker.config.BrokerBeansConfig;
 import org.cardinal.cardinalbroker.dataprovider.candles.CandlesDataprovider;
 import org.cardinal.cardinalutils.mapper.CandleMapper;
-import org.cardinal.cardinalutils.mapper.ShareMapper;
 import org.cardinal.core.config.CoreBeansConfig;
 import org.cardinal.data.services.interfaces.LastProvidedStockService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
@@ -25,10 +23,14 @@ public class CardinalConfig {
 
     @Bean
     public ProcessStarter processStarter(NextCandleDataprovider nextCandleDataprovider,
+                                         ProcessParamsService processParamsService,
                                          CandleService candleService,
+                                         ShareService shareService,
                                          CandleMapper candleMapper) {
         return new MainProcessStarter(nextCandleDataprovider,
+                processParamsService,
                 candleService,
+                shareService,
                 candleMapper);
     }
 
@@ -39,13 +41,6 @@ public class CardinalConfig {
         return new NextCandleDataprovider(lastProvidedStockService,
                 processParamsService,
                 candlesDataprovider);
-    }
-
-    @Bean
-    public ShareSaver shareSaver(ShareService shareService,
-                                 ShareMapper shareMapper) {
-        return new ShareSaver(shareService,
-                shareMapper);
     }
 
 }

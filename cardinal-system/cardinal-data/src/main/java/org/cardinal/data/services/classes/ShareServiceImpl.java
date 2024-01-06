@@ -14,4 +14,10 @@ public class ShareServiceImpl implements ShareService {
     public void save(ShareEntity shareEntity) {
         shareRepository.save(shareEntity);
     }
+
+    @Override
+    public ShareEntity findByName(String name) {
+        return shareRepository.findByName(name)
+                .orElse(null);
+    }
 }

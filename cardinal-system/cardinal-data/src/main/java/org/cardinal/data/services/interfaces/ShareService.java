@@ -6,4 +6,6 @@ public interface ShareService {
 
     void save(ShareEntity shareEntity);
 
+    ShareEntity findByName(String name);
+
 }

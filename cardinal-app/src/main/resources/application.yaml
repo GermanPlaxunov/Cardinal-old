@@ -21,6 +21,6 @@ spring:
 cardinal:
   gate:
     trading:
-      active: false
+      active: true
     training:
       active: false

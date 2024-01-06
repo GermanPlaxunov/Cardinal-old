@@ -11,8 +11,7 @@ public class ScheduledJobExecutor {
     private final ProcessStarter processStarter;
 
     public void trade() {
-        var symbol = "BTC/USD";
-        processStarter.startProcess(symbol);
+        processStarter.startProcess();
     }
 
     public void train() {
