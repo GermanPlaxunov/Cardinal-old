@@ -1,6 +1,8 @@
 package org.cardinal.gate.config;
 
 import org.cardinal.data.config.DataBeansConfig;
+import org.cardinal.data.services.interfaces.ProcessParamsService;
+import org.cardinal.gate.ParamsSaver;
 import org.cardinal.gate.job.ScheduledJobExecutor;
 import org.cardinal.gate.job.TradingJob;
 import org.cardinal.gate.job.TrainingJob;
@@ -10,7 +12,9 @@ import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -23,6 +27,11 @@ public class GateBeansConfig {
     @Bean
     public ScheduledJobExecutor scheduledJobExecutor(ProcessStarter processStarter) {
         return new ScheduledJobExecutor(processStarter);
+    }
+
+    @Bean
+    public ParamsSaver paramsSaver(ProcessParamsService processParamsService) {
+        return new ParamsSaver(processParamsService);
     }
 
     @Bean
@@ -48,6 +57,7 @@ public class GateBeansConfig {
     }
 
     @Bean
+    @ConditionalOnProperty("${cardinal.gate.trading.active}")
     public Trigger tradingTrigger(@Qualifier("tradingJob") JobDetail job) {
         return TriggerBuilder.newTrigger()
                 .forJob(job)
@@ -60,6 +70,7 @@ public class GateBeansConfig {
     }
 
     @Bean
+    @ConditionalOnProperty("${cardinal.gate.training.active}")
     public Trigger trainingTrigger(@Qualifier("trainingJob") JobDetail job) {
         return TriggerBuilder.newTrigger()
                 .forJob(job)

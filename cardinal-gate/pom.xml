@@ -7,7 +7,7 @@
         <groupId>org.cardinal</groupId>
         <artifactId>cardinal-parent</artifactId>
         <version>1.0</version>
-        <relativePath>../cardinal-parent/pom.xml</relativePath>
+        <relativePath>../cardinal-system/cardinal-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>cardinal-gate</artifactId>

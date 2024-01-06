@@ -33,6 +33,16 @@ public class BrokerApi {
     }
 
     /**
+     * Возвращает список всех акций
+     *
+     * @return список акций
+     */
+    public List<Share> getAllShares() {
+        return investApi.getInstrumentsService()
+                .getAllSharesSync();
+    }
+
+    /**
      * Предоставляет исторические данные по инструменту.
      *
      * @param figi         - id инструмента

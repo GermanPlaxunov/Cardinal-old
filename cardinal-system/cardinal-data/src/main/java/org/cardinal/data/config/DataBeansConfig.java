@@ -128,4 +128,9 @@ public class DataBeansConfig {
         return new CandleServiceImpl(candleRepository);
     }
 
+    @Bean
+    public ShareService shareService(ShareRepository shareRepository) {
+        return new ShareServiceImpl(shareRepository);
+    }
+
 }
