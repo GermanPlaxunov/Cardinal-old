@@ -2,8 +2,7 @@ package org.cardinal.cardinalapp.process;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.cardinal.cardinalapp.process.dataprovider.NextCandleDataprovider;
-import org.cardinal.cardinalutils.mapper.CandleMapper;
+import org.cardinal.cardinalbroker.candle.CandleProcessor;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.data.services.interfaces.ShareService;
 import org.cardinal.data.services.interfaces.history.CandleService;
@@ -13,27 +12,38 @@ import org.cardinal.model.job.ProcessStarter;
 @RequiredArgsConstructor
 public class MainProcessStarter implements ProcessStarter {
 
-    private final NextCandleDataprovider nextCandleDataprovider;
     private final ProcessParamsService processParamsService;
+    private final CandleProcessor candleProcessor;
     private final CandleService candleService;
     private final ShareService shareService;
-    private final CandleMapper candleMapper;
 
     @Override
     public void startProcess() {
         log.info("Started main process");
-        var instrumentId = getFigiOfActiveInstrument();
-        updatePriceInfo(instrumentId);
+        var figi = getFigiOfActiveInstrument();
+        updateData(figi);
     }
 
-    private void updatePriceInfo(String instrumentId) {
-        var newCandles = nextCandleDataprovider.getNextCandles(instrumentId);
-        newCandles.stream()
-                .map(candle -> candleMapper.mapToCandle(candle))
-                .map(candle -> candleMapper.mapToEntity(candle))
-                .forEach(candle -> candleService.save(candle));
+    /**
+     * Обновляет данные по инструменту. Если данных нет, полностью
+     * восстанавливает историю, иначе тянет последние свечи.
+     *
+     * @param figi - financial instrument global identifier
+     */
+    private void updateData(String figi) {
+        if (candleService.existHistory(figi)) {
+            candleProcessor.saveTailCandles(figi);
+        } else {
+            candleProcessor.restoreHistory(figi);
+        }
     }
 
+    /**
+     * Возвращает financial instrument global identifier
+     * текущего торгуемого инструмента.
+     *
+     * @return figi
+     */
     private String getFigiOfActiveInstrument() {
         var name = processParamsService.getActiveTradeInstrumentName();
         return shareService.findByName(name)

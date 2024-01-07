@@ -3,6 +3,7 @@ package org.cardinal.data.services.interfaces;
 import org.cardinal.data.entities.ProcessParamsEntity;
 import org.cardinal.model.Indicators;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProcessParamsService {
@@ -39,4 +40,8 @@ public interface ProcessParamsService {
     Long getInitialHistoryDepthSeconds(String instrumentId);
 
     String getActiveTradeInstrumentName();
+
+    LocalDateTime getEarliestDateToRestoreHistory();
+
+    Long getMaxPeriodToRestoreHistorySeconds();
 }

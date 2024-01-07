@@ -1,8 +1,1 @@
-server:
-  port: 9000
-  servlet:
-    context-path: /broker
 
-tinkoff:
-  invest:
-    token: t.9-CGzHcP6vh523g9kCZ5zfYDs3JYJtDSDIqC1Yp5SYdpBl0bAV6lZ48SzDXBoiPsFSUvcs2lUqsKcPPiUkkUtA

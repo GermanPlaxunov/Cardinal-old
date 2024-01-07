@@ -5,6 +5,7 @@ import org.cardinal.data.entities.history.CandleEntity;
 import org.cardinal.data.repositories.history.CandleRepository;
 import org.cardinal.data.services.interfaces.history.CandleService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -21,7 +22,24 @@ public class CandleServiceImpl implements CandleService {
     }
 
     @Override
-    public List<CandleEntity> findAllByInstrumentId(String instrumentId) {
-        return candleRepository.findAllByInstrumentId(instrumentId);
+    public void saveAll(List<CandleEntity> candles) {
+        candleRepository.saveAll(candles);
+    }
+
+    @Override
+    public List<CandleEntity> findAllByInstrumentId(String figi) {
+        return candleRepository.findAllByFigi(figi);
+    }
+
+    @Override
+    public LocalDateTime findLastCandleDateByFigi(String figi) {
+        return candleRepository.findTopByFigiOrderByDateTimeDesc(figi)
+                .map(CandleEntity::getDateTime)
+                .orElse(null);
+    }
+
+    @Override
+    public boolean existHistory(String figi) {
+        return candleRepository.existsByFigi(figi);
     }
 }

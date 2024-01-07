@@ -22,7 +22,7 @@ public class CandleMapper {
      */
     public CandleEntity mapToEntity(Candle candle) {
         return new CandleEntity()
-                .setInstrumentId(candle.getInstrumentId())
+                .setFigi(candle.getFigi())
                 .setOpen(candle.getOpen())
                 .setLow(candle.getLow())
                 .setHigh(candle.getHigh())
@@ -34,11 +34,14 @@ public class CandleMapper {
     /**
      * Маппит свечу, полученную из Tinkoff API
      * в свечу модели Cardinal.
+     *
+     * @param figi           - financial instrument global identifier
      * @param historicCandle - свеча из Tinkoff
      * @return свеча модели
      */
-    public Candle mapToCandle(HistoricCandle historicCandle) {
+    public Candle mapToCandle(String figi, HistoricCandle historicCandle) {
         return new Candle()
+                .setFigi(figi)
                 .setOpen(quotationToBigDecimal(historicCandle.getOpen()))
                 .setLow(quotationToBigDecimal(historicCandle.getLow()))
                 .setHigh(quotationToBigDecimal(historicCandle.getHigh()))

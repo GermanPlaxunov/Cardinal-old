@@ -8,15 +8,17 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "CANDLE")
+@Table(name = "candle")
 public class CandleEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "instrument_id")
-    private String instrumentId;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "figi")
+    private String figi;
     @Column(name = "open")
     private BigDecimal open;
     @Column(name = "low")
