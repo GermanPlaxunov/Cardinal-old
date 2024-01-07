@@ -11,6 +11,7 @@ import org.cardinal.core.mapper.CoreStockMapper;
 import org.cardinal.core.mapper.CoreStockMapperImpl;
 import org.cardinal.core.process.market.MarketDataProvider;
 import org.cardinal.core.process.strategy.MainStrategy;
+import org.cardinal.core.strategy.MainTradingStrategy;
 import org.cardinal.core.trend.AveragePriceTrendProvider;
 import org.cardinal.core.trend.StocksDivider;
 import org.cardinal.core.trend.TrendProvider;
@@ -143,6 +144,11 @@ public class CoreBeansConfig {
                                                                  AccountService accountService) {
         return new BuyAmountCurrencyProcessor(processParamsService,
                 accountService);
+    }
+
+    @Bean
+    public MainTradingStrategy mainTradingStrategy() {
+        return new MainTradingStrategy();
     }
 
 }

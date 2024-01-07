@@ -6,7 +6,9 @@ import org.cardinal.cardinalbroker.candle.CandleProcessor;
 import org.cardinal.cardinalbroker.config.BrokerBeansConfig;
 import org.cardinal.cardinalbroker.dataprovider.candles.CandlesDataprovider;
 import org.cardinal.core.config.CoreBeansConfig;
+import org.cardinal.core.strategy.MainTradingStrategy;
 import org.cardinal.data.services.interfaces.LastProvidedStockService;
+import org.cardinal.data.services.interfaces.PositionService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.data.services.interfaces.ShareService;
 import org.cardinal.data.services.interfaces.history.CandleService;
@@ -23,10 +25,14 @@ public class CardinalConfig {
 
     @Bean
     public ProcessStarter processStarter(ProcessParamsService processParamsService,
+                                         MainTradingStrategy mainTradingStrategy,
+                                         PositionService positionService,
                                          CandleProcessor candleProcessor,
                                          CandleService candleService,
                                          ShareService shareService) {
         return new MainProcessStarter(processParamsService,
+                mainTradingStrategy,
+                positionService,
                 candleProcessor,
                 candleService,
                 shareService);
@@ -43,10 +49,14 @@ public class CardinalConfig {
 
     @Bean
     public MainProcessStarter mainProcessStarter(ProcessParamsService processParamsService,
+                                                 MainTradingStrategy mainTradingStrategy,
+                                                 PositionService positionService,
                                                  CandleProcessor candleProcessor,
                                                  CandleService candleService,
                                                  ShareService shareService) {
         return new MainProcessStarter(processParamsService,
+                mainTradingStrategy,
+                positionService,
                 candleProcessor,
                 candleService,
                 shareService);

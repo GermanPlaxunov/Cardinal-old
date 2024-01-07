@@ -3,6 +3,8 @@ package org.cardinal.cardinalapp.process;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cardinal.cardinalbroker.candle.CandleProcessor;
+import org.cardinal.core.strategy.MainTradingStrategy;
+import org.cardinal.data.services.interfaces.PositionService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
 import org.cardinal.data.services.interfaces.ShareService;
 import org.cardinal.data.services.interfaces.history.CandleService;
@@ -13,6 +15,8 @@ import org.cardinal.model.job.ProcessStarter;
 public class MainProcessStarter implements ProcessStarter {
 
     private final ProcessParamsService processParamsService;
+    private final MainTradingStrategy mainTradingStrategy;
+    private final PositionService positionService;
     private final CandleProcessor candleProcessor;
     private final CandleService candleService;
     private final ShareService shareService;
@@ -22,6 +26,41 @@ public class MainProcessStarter implements ProcessStarter {
         log.info("Started main process");
         var figi = getFigiOfActiveInstrument();
         updateData(figi);
+        positionExistenceFork(figi);
+    }
+
+    /**
+     * Процесс может идти по двум основным веткам:
+     * обработка существующей позиции или проверка
+     * возможности открытия новой позиции.
+     *
+     * @param figi - financial instrument global identifier
+     */
+    private void positionExistenceFork(String figi) {
+        if (positionService.ifOpenPosition(figi)) {
+            mainTradingStrategy.closeExistingPositionProcess(figi);
+        } else {
+            mainTradingStrategy.openNewPositionProcess(figi);
+        }
+    }
+
+    /**
+     * Запускает процесс обработки существующей позиции.
+     *
+     * @param figi - financial instrument global identifier
+     */
+    private void processCurrentPosition(String figi) {
+
+    }
+
+    /**
+     * Запускает процесс проверки риска при открытии новой
+     * позиции.
+     *
+     * @param figi - financial instrument global identifier
+     */
+    private void processNewPosition(String figi) {
+
     }
 
     /**
