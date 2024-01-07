@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "POSITION",
-        indexes = @Index(name = "POSITION_OPEN_DATE_IDX", columnList = "OPEN_DATE, SYMBOL"))
+        indexes = @Index(name = "POSITION_OPEN_DATE_IDX", columnList = "OPEN_DATE, FIGI"))
 public class PositionEntity {
 
     @Id
@@ -19,8 +19,8 @@ public class PositionEntity {
     private String type;
     @Column(name = "ACCOUNT_ID")
     private String accountId;
-    @Column(name = "SYMBOL")
-    private String symbol;
+    @Column(name = "FIGI")
+    private String figi;
     @Column(name = "CURR_AMT")
     private Double currAmt;
     @Column(name = "OPEN_PRICE")

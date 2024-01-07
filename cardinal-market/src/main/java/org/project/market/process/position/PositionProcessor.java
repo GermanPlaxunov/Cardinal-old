@@ -51,7 +51,7 @@ public class PositionProcessor {
         return new PositionEntity()
                 .setType(type)
                 .setAccountId(account.getAccountId())
-                .setSymbol(symbol)
+                .setFigi(symbol)
                 .setCurrAmt(currAmt)
                 .setOpenPrice(stock.getClose())
                 .setOpenCommission(openCommission)

@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface PositionRepository extends JpaRepository<PositionEntity, Long> {
 
-    List<PositionEntity> findBySymbolAndAccountIdAndIsOpen(String symbol, String accountId, Boolean isOpen);
+    List<PositionEntity> findByFigiAndAccountIdAndIsOpen(String symbol, String accountId, Boolean isOpen);
 
-    Optional<PositionEntity> findFirstBySymbolAndCloseDateIsNotNullOrderByCloseDateDesc(String symbol);
+    Optional<PositionEntity> findFirstByFigiAndCloseDateIsNotNullOrderByCloseDateDesc(String symbol);
 
-    Integer countBySymbolAndIsOpen(String symbol, boolean isOpen);
+    Integer countByFigiAndIsOpen(String symbol, boolean isOpen);
 }

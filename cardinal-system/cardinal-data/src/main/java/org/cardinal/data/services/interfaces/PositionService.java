@@ -4,12 +4,12 @@ import org.cardinal.data.entities.PositionEntity;
 
 public interface PositionService {
 
-    PositionEntity findOpenPosition(String symbol);
+    PositionEntity findOpenPosition(String figi);
 
-    PositionEntity findLatestClosedPosition(String symbol);
+    PositionEntity findLatestClosedPosition(String figi);
 
     void save(PositionEntity entity);
 
-    boolean ifOpenPosition(String symbol);
+    boolean ifOpenPosition(String figi);
 
 }
