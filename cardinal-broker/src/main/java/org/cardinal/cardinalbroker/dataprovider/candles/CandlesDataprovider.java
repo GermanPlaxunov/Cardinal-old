@@ -19,13 +19,14 @@ public class CandlesDataprovider {
     private final InvestApi investApi;
 
     /**
-     * Получение исторических данных.
+     * Получение исторических данных по figi с момента from до
+     * момента to с интервалом interval.
      *
-     * @param figi
-     * @param from
-     * @param to
-     * @param interval
-     * @return
+     * @param figi     - financial instrument global identifier
+     * @param from     - дата начала
+     * @param to       - дата конца
+     * @param interval - интервал между свечами
+     * @return список свечей
      */
     public List<HistoricCandle> getCandles(String figi,
                                            LocalDateTime from,

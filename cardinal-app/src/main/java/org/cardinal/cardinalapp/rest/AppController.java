@@ -6,4 +6,5 @@ public interface AppController {
 
     void saveNewParam(ParamData paramData);
 
+    void trade();
 }

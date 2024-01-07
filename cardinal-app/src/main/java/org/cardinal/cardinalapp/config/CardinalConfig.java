@@ -2,9 +2,9 @@ package org.cardinal.cardinalapp.config;
 
 import org.cardinal.cardinalapp.process.MainProcessStarter;
 import org.cardinal.cardinalapp.process.dataprovider.NextCandleDataprovider;
+import org.cardinal.cardinalbroker.candle.CandleProcessor;
 import org.cardinal.cardinalbroker.config.BrokerBeansConfig;
 import org.cardinal.cardinalbroker.dataprovider.candles.CandlesDataprovider;
-import org.cardinal.cardinalutils.mapper.CandleMapper;
 import org.cardinal.core.config.CoreBeansConfig;
 import org.cardinal.data.services.interfaces.LastProvidedStockService;
 import org.cardinal.data.services.interfaces.ProcessParamsService;
@@ -22,16 +22,14 @@ import org.springframework.context.annotation.Import;
 public class CardinalConfig {
 
     @Bean
-    public ProcessStarter processStarter(NextCandleDataprovider nextCandleDataprovider,
-                                         ProcessParamsService processParamsService,
+    public ProcessStarter processStarter(ProcessParamsService processParamsService,
+                                         CandleProcessor candleProcessor,
                                          CandleService candleService,
-                                         ShareService shareService,
-                                         CandleMapper candleMapper) {
-        return new MainProcessStarter(nextCandleDataprovider,
-                processParamsService,
+                                         ShareService shareService) {
+        return new MainProcessStarter(processParamsService,
+                candleProcessor,
                 candleService,
-                shareService,
-                candleMapper);
+                shareService);
     }
 
     @Bean
@@ -41,6 +39,17 @@ public class CardinalConfig {
         return new NextCandleDataprovider(lastProvidedStockService,
                 processParamsService,
                 candlesDataprovider);
+    }
+
+    @Bean
+    public MainProcessStarter mainProcessStarter(ProcessParamsService processParamsService,
+                                                 CandleProcessor candleProcessor,
+                                                 CandleService candleService,
+                                                 ShareService shareService) {
+        return new MainProcessStarter(processParamsService,
+                candleProcessor,
+                candleService,
+                shareService);
     }
 
 }

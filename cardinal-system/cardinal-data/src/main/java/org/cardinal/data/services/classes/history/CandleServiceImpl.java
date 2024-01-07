@@ -40,6 +40,6 @@ public class CandleServiceImpl implements CandleService {
 
     @Override
     public boolean existHistory(String figi) {
-        return false;
+        return candleRepository.existsByFigi(figi);
     }
 }

@@ -3,10 +3,10 @@ POST http://localhost:9000/cardinal/save-new-process-param
 Content-Type: application/json
 
 {
-  "name": "trading.instrument.active.name",
+  "name": "trading.instrument.history.earliest.date",
   "numberValue": null,
-  "dateValue": null,
-  "stringValue": "Dropbox Inc"
+  "dateValue": "2023-01-01T00:00:00.000000000",
+  "stringValue": null
 }
 
 
@@ -14,5 +14,5 @@ Content-Type: application/json
 GET http://localhost:9000/cardinal/get-api-trade-available-instrument
 
 
-### Save all shares
-GET http://localhost:9000/cardinal/saveAllShares
+### Launch trade step manualy
+GET http://localhost:9000/cardinal/trade
