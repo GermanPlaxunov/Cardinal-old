@@ -22,7 +22,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.version>3.2.1</spring-boot.version>
-        <postresql.version>42.6.0</postresql.version>
+        <postresql.version>42.7.2</postresql.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <openfeign.version>4.0.3</openfeign.version>
         <lombok.version>1.18.28</lombok.version>
